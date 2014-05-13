@@ -57,6 +57,9 @@ public class LiteralSubstitutionUtilTest extends TestCase {
         test("|Sum: | + |10 + 2|", "'Sum: ' + '10 + 2'");
         test("|Welcome, | + |${one}| + | to application| + ' with' + | name #{two}|",
              "'Welcome, ' + ${one} + ' to application' + ' with' + ' name ' + #{two}");
+        test("${one}", "${one}");
+        test("${one}${two}", "${one}${two}");
+        test("|${one}${two}|", "${one} + '' + ${two}");
 
     }
 
