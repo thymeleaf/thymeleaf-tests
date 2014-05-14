@@ -32,12 +32,15 @@ public class Conversion3Date extends Date {
      * computer that is execting them.
      */
 
-    private static final Pattern PATTERN;
+    private static final Pattern PATTERN_TZ_NAME;
+    private static final Pattern PATTERN_TZ_OFF;
 
 
     static {
-        String exp=".*?(?:[a-z][a-z]+).*?(?:[a-z][a-z]+).*?((?:[a-z][a-z]+))";	// Word 1
-        PATTERN = Pattern.compile(exp,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+        final String expTzName=".*?(?:[a-z][a-z]+).*?(?:[a-z][a-z]+).*?((?:[a-z][a-z]+))";	// Word 1
+        PATTERN_TZ_NAME = Pattern.compile(expTzName,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+        final String expTzOff=".*?(\\+\\d\\d:\\d\\d).*?";	// Word 1
+        PATTERN_TZ_OFF = Pattern.compile(expTzOff,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
     }
 
 
@@ -46,15 +49,26 @@ public class Conversion3Date extends Date {
         this.setTime(date.getTime());
     }
 
+
+    private static String processString(final String str) {
+        String result = str;
+        final Matcher nameMatcher = PATTERN_TZ_NAME.matcher(result);
+        if (nameMatcher.find()) {
+            final String timeZone = nameMatcher.group(1);
+            result = result.replace(" " + timeZone, "");
+        }
+        final Matcher offMatcher = PATTERN_TZ_OFF.matcher(result);
+        if (offMatcher.find()) {
+            final String timeZone = offMatcher.group(1);
+            result = result.replace(timeZone, "");
+        }
+        return result;
+    }
+
+
     @Override
     public String toString() {
-        final String standardToString = super.toString();
-        final Matcher matcher = PATTERN.matcher(standardToString);
-        if (matcher.find()) {
-            final String timeZone = matcher.group(1);
-            return standardToString.replace(" " + timeZone, "");
-        }
-        return standardToString;
+        return processString(super.toString());
     }
 
 }
