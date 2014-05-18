@@ -19,8 +19,6 @@
  */
 package org.thymeleaf.engine.springintegration.model;
 
-import java.util.Date;
-
 public class FormBean03 {
 
     private Boolean nullBool = null;

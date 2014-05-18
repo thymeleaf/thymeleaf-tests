@@ -19,6 +19,8 @@
  */
 package org.thymeleaf.engine.springintegration;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
@@ -26,8 +28,6 @@ import org.thymeleaf.engine.springintegration.context.ErrorsSpringIntegrationWeb
 import org.thymeleaf.engine.springintegration.context.SpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
-
-import java.util.Arrays;
 
 
 public class SpringIntegrationTest {
