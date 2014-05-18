@@ -82,10 +82,31 @@ public class ScriptInlineTest {
                 "   'something';",
                 "a", "something");
 
+        final java.util.Calendar calendar1 =
+                DateUtils.create(Integer.valueOf(2013),Integer.valueOf(01),Integer.valueOf(01),Integer.valueOf(14),Integer.valueOf(30));
+        final java.util.Date date1 = calendar1.getTime();
+        final java.sql.Date dateSql1 = new java.sql.Date(date1.getTime());
+
         testInlineResult(
-                "   /*[[${d}]]*/ 'prototype';",
-                "   '2013-01-01T14:30:00.000+01:00';",
-                "d", DateUtils.create(Integer.valueOf(2013),Integer.valueOf(01),Integer.valueOf(01),Integer.valueOf(14),Integer.valueOf(30)));
+                "   /*[[${calendar1}]]*/ 'prototype';",
+                // Calendar should be inlined as ISO6801 date string literal
+                // e.g.  '2013-01-01T14:30:00.000+01:00'
+                "   '" + DateUtils.formatISO(calendar1) + "';",
+                "calendar1", calendar1);
+
+        testInlineResult(
+                "   /*[[${date1}]]*/ 'prototype';",
+                // Date should be inlined as ISO6801 date string literal
+                // e.g.  '2013-01-01T14:30:00.000+01:00'
+                "   '" + DateUtils.formatISO(date1) + "';",
+                "date1", date1);
+
+        testInlineResult(
+                "   /*[[${date1}]]*/ 'prototype';",
+                // Date should be inlined as ISO6801 date string literal
+                // e.g.  '2013-01-01T14:30:00.000+01:00'
+                "   '" + DateUtils.formatISO(dateSql1) + "';",
+                "date1", dateSql1);
 
 
     }
