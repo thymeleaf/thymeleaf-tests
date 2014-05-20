@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onsuspend="${one}">..</div>
+<div th:onsuspend="'hello'">..</div>
+<div th:onsuspend="${null}">..</div>
+<div th:onsuspend="''">..</div>
+
+<div onsuspend="old" th:onsuspend="${one}">..</div>
+<div onsuspend="old" th:onsuspend="'hello'">..</div>
+<div onsuspend="old" th:onsuspend="${null}">..</div>
+<div onsuspend="old" th:onsuspend="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onsuspend="one!">..</div>
+<div onsuspend="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onsuspend="one!">..</div>
+<div onsuspend="hello">..</div>
+<div>..</div>
+<div>..</div>

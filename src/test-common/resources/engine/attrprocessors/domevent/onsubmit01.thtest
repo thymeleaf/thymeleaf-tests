@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onsubmit="${one}">..</div>
+<div th:onsubmit="'hello'">..</div>
+<div th:onsubmit="${null}">..</div>
+<div th:onsubmit="''">..</div>
+
+<div onsubmit="old" th:onsubmit="${one}">..</div>
+<div onsubmit="old" th:onsubmit="'hello'">..</div>
+<div onsubmit="old" th:onsubmit="${null}">..</div>
+<div onsubmit="old" th:onsubmit="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onsubmit="one!">..</div>
+<div onsubmit="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onsubmit="one!">..</div>
+<div onsubmit="hello">..</div>
+<div>..</div>
+<div>..</div>

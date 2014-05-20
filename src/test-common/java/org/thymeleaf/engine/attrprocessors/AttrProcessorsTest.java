@@ -202,5 +202,15 @@ public class AttrProcessorsTest {
 
     }
 
+    @Test
+    public void testDOMEvent() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:engine/attrprocessors/domevent");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
     
 }

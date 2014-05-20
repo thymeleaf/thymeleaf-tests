@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:ondrag="${one}">..</div>
+<div th:ondrag="'hello'">..</div>
+<div th:ondrag="${null}">..</div>
+<div th:ondrag="''">..</div>
+
+<div ondrag="old" th:ondrag="${one}">..</div>
+<div ondrag="old" th:ondrag="'hello'">..</div>
+<div ondrag="old" th:ondrag="${null}">..</div>
+<div ondrag="old" th:ondrag="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div ondrag="one!">..</div>
+<div ondrag="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div ondrag="one!">..</div>
+<div ondrag="hello">..</div>
+<div>..</div>
+<div>..</div>

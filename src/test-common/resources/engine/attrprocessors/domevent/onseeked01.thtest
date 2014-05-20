@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onseeked="${one}">..</div>
+<div th:onseeked="'hello'">..</div>
+<div th:onseeked="${null}">..</div>
+<div th:onseeked="''">..</div>
+
+<div onseeked="old" th:onseeked="${one}">..</div>
+<div onseeked="old" th:onseeked="'hello'">..</div>
+<div onseeked="old" th:onseeked="${null}">..</div>
+<div onseeked="old" th:onseeked="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onseeked="one!">..</div>
+<div onseeked="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onseeked="one!">..</div>
+<div onseeked="hello">..</div>
+<div>..</div>
+<div>..</div>

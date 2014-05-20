@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onhashchange="${one}">..</div>
+<div th:onhashchange="'hello'">..</div>
+<div th:onhashchange="${null}">..</div>
+<div th:onhashchange="''">..</div>
+
+<div onhashchange="old" th:onhashchange="${one}">..</div>
+<div onhashchange="old" th:onhashchange="'hello'">..</div>
+<div onhashchange="old" th:onhashchange="${null}">..</div>
+<div onhashchange="old" th:onhashchange="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onhashchange="one!">..</div>
+<div onhashchange="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onhashchange="one!">..</div>
+<div onhashchange="hello">..</div>
+<div>..</div>
+<div>..</div>

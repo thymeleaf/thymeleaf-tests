@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onselect="${one}">..</div>
+<div th:onselect="'hello'">..</div>
+<div th:onselect="${null}">..</div>
+<div th:onselect="''">..</div>
+
+<div onselect="old" th:onselect="${one}">..</div>
+<div onselect="old" th:onselect="'hello'">..</div>
+<div onselect="old" th:onselect="${null}">..</div>
+<div onselect="old" th:onselect="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onselect="one!">..</div>
+<div onselect="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onselect="one!">..</div>
+<div onselect="hello">..</div>
+<div>..</div>
+<div>..</div>

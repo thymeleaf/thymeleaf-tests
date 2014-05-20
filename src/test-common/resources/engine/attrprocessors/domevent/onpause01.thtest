@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onpause="${one}">..</div>
+<div th:onpause="'hello'">..</div>
+<div th:onpause="${null}">..</div>
+<div th:onpause="''">..</div>
+
+<div onpause="old" th:onpause="${one}">..</div>
+<div onpause="old" th:onpause="'hello'">..</div>
+<div onpause="old" th:onpause="${null}">..</div>
+<div onpause="old" th:onpause="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onpause="one!">..</div>
+<div onpause="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onpause="one!">..</div>
+<div onpause="hello">..</div>
+<div>..</div>
+<div>..</div>

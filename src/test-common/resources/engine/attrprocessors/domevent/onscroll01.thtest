@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onscroll="${one}">..</div>
+<div th:onscroll="'hello'">..</div>
+<div th:onscroll="${null}">..</div>
+<div th:onscroll="''">..</div>
+
+<div onscroll="old" th:onscroll="${one}">..</div>
+<div onscroll="old" th:onscroll="'hello'">..</div>
+<div onscroll="old" th:onscroll="${null}">..</div>
+<div onscroll="old" th:onscroll="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onscroll="one!">..</div>
+<div onscroll="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onscroll="one!">..</div>
+<div onscroll="hello">..</div>
+<div>..</div>
+<div>..</div>

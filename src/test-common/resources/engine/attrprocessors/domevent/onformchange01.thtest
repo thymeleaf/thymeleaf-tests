@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onformchange="${one}">..</div>
+<div th:onformchange="'hello'">..</div>
+<div th:onformchange="${null}">..</div>
+<div th:onformchange="''">..</div>
+
+<div onformchange="old" th:onformchange="${one}">..</div>
+<div onformchange="old" th:onformchange="'hello'">..</div>
+<div onformchange="old" th:onformchange="${null}">..</div>
+<div onformchange="old" th:onformchange="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onformchange="one!">..</div>
+<div onformchange="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onformchange="one!">..</div>
+<div onformchange="hello">..</div>
+<div>..</div>
+<div>..</div>

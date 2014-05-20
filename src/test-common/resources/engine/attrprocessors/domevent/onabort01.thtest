@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onabort="${one}">..</div>
+<div th:onabort="'hello'">..</div>
+<div th:onabort="${null}">..</div>
+<div th:onabort="''">..</div>
+
+<div onabort="old" th:onabort="${one}">..</div>
+<div onabort="old" th:onabort="'hello'">..</div>
+<div onabort="old" th:onabort="${null}">..</div>
+<div onabort="old" th:onabort="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onabort="one!">..</div>
+<div onabort="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onabort="one!">..</div>
+<div onabort="hello">..</div>
+<div>..</div>
+<div>..</div>

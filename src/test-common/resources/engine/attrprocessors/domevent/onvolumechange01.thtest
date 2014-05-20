@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onvolumechange="${one}">..</div>
+<div th:onvolumechange="'hello'">..</div>
+<div th:onvolumechange="${null}">..</div>
+<div th:onvolumechange="''">..</div>
+
+<div onvolumechange="old" th:onvolumechange="${one}">..</div>
+<div onvolumechange="old" th:onvolumechange="'hello'">..</div>
+<div onvolumechange="old" th:onvolumechange="${null}">..</div>
+<div onvolumechange="old" th:onvolumechange="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onvolumechange="one!">..</div>
+<div onvolumechange="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onvolumechange="one!">..</div>
+<div onvolumechange="hello">..</div>
+<div>..</div>
+<div>..</div>

@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onafterprint="${one}">..</div>
+<div th:onafterprint="'hello'">..</div>
+<div th:onafterprint="${null}">..</div>
+<div th:onafterprint="''">..</div>
+
+<div onafterprint="old" th:onafterprint="${one}">..</div>
+<div onafterprint="old" th:onafterprint="'hello'">..</div>
+<div onafterprint="old" th:onafterprint="${null}">..</div>
+<div onafterprint="old" th:onafterprint="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onafterprint="one!">..</div>
+<div onafterprint="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onafterprint="one!">..</div>
+<div onafterprint="hello">..</div>
+<div>..</div>
+<div>..</div>

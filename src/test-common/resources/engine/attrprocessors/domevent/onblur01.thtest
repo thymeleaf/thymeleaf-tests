@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onblur="${one}">..</div>
+<div th:onblur="'hello'">..</div>
+<div th:onblur="${null}">..</div>
+<div th:onblur="''">..</div>
+
+<div onblur="old" th:onblur="${one}">..</div>
+<div onblur="old" th:onblur="'hello'">..</div>
+<div onblur="old" th:onblur="${null}">..</div>
+<div onblur="old" th:onblur="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onblur="one!">..</div>
+<div onblur="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onblur="one!">..</div>
+<div onblur="hello">..</div>
+<div>..</div>
+<div>..</div>

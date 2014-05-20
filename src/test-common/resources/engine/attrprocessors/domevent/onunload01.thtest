@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onunload="${one}">..</div>
+<div th:onunload="'hello'">..</div>
+<div th:onunload="${null}">..</div>
+<div th:onunload="''">..</div>
+
+<div onunload="old" th:onunload="${one}">..</div>
+<div onunload="old" th:onunload="'hello'">..</div>
+<div onunload="old" th:onunload="${null}">..</div>
+<div onunload="old" th:onunload="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onunload="one!">..</div>
+<div onunload="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onunload="one!">..</div>
+<div onunload="hello">..</div>
+<div>..</div>
+<div>..</div>

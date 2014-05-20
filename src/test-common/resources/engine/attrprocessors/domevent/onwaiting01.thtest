@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onwaiting="${one}">..</div>
+<div th:onwaiting="'hello'">..</div>
+<div th:onwaiting="${null}">..</div>
+<div th:onwaiting="''">..</div>
+
+<div onwaiting="old" th:onwaiting="${one}">..</div>
+<div onwaiting="old" th:onwaiting="'hello'">..</div>
+<div onwaiting="old" th:onwaiting="${null}">..</div>
+<div onwaiting="old" th:onwaiting="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onwaiting="one!">..</div>
+<div onwaiting="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onwaiting="one!">..</div>
+<div onwaiting="hello">..</div>
+<div>..</div>
+<div>..</div>

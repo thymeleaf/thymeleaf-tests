@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onpopstate="${one}">..</div>
+<div th:onpopstate="'hello'">..</div>
+<div th:onpopstate="${null}">..</div>
+<div th:onpopstate="''">..</div>
+
+<div onpopstate="old" th:onpopstate="${one}">..</div>
+<div onpopstate="old" th:onpopstate="'hello'">..</div>
+<div onpopstate="old" th:onpopstate="${null}">..</div>
+<div onpopstate="old" th:onpopstate="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onpopstate="one!">..</div>
+<div onpopstate="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onpopstate="one!">..</div>
+<div onpopstate="hello">..</div>
+<div>..</div>
+<div>..</div>

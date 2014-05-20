@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:oncontextmenu="${one}">..</div>
+<div th:oncontextmenu="'hello'">..</div>
+<div th:oncontextmenu="${null}">..</div>
+<div th:oncontextmenu="''">..</div>
+
+<div oncontextmenu="old" th:oncontextmenu="${one}">..</div>
+<div oncontextmenu="old" th:oncontextmenu="'hello'">..</div>
+<div oncontextmenu="old" th:oncontextmenu="${null}">..</div>
+<div oncontextmenu="old" th:oncontextmenu="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div oncontextmenu="one!">..</div>
+<div oncontextmenu="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div oncontextmenu="one!">..</div>
+<div oncontextmenu="hello">..</div>
+<div>..</div>
+<div>..</div>

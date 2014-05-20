@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onmessage="${one}">..</div>
+<div th:onmessage="'hello'">..</div>
+<div th:onmessage="${null}">..</div>
+<div th:onmessage="''">..</div>
+
+<div onmessage="old" th:onmessage="${one}">..</div>
+<div onmessage="old" th:onmessage="'hello'">..</div>
+<div onmessage="old" th:onmessage="${null}">..</div>
+<div onmessage="old" th:onmessage="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onmessage="one!">..</div>
+<div onmessage="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onmessage="one!">..</div>
+<div onmessage="hello">..</div>
+<div>..</div>
+<div>..</div>

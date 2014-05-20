@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onmousewheel="${one}">..</div>
+<div th:onmousewheel="'hello'">..</div>
+<div th:onmousewheel="${null}">..</div>
+<div th:onmousewheel="''">..</div>
+
+<div onmousewheel="old" th:onmousewheel="${one}">..</div>
+<div onmousewheel="old" th:onmousewheel="'hello'">..</div>
+<div onmousewheel="old" th:onmousewheel="${null}">..</div>
+<div onmousewheel="old" th:onmousewheel="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onmousewheel="one!">..</div>
+<div onmousewheel="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onmousewheel="one!">..</div>
+<div onmousewheel="hello">..</div>
+<div>..</div>
+<div>..</div>

@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:ondurationchange="${one}">..</div>
+<div th:ondurationchange="'hello'">..</div>
+<div th:ondurationchange="${null}">..</div>
+<div th:ondurationchange="''">..</div>
+
+<div ondurationchange="old" th:ondurationchange="${one}">..</div>
+<div ondurationchange="old" th:ondurationchange="'hello'">..</div>
+<div ondurationchange="old" th:ondurationchange="${null}">..</div>
+<div ondurationchange="old" th:ondurationchange="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div ondurationchange="one!">..</div>
+<div ondurationchange="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div ondurationchange="one!">..</div>
+<div ondurationchange="hello">..</div>
+<div>..</div>
+<div>..</div>

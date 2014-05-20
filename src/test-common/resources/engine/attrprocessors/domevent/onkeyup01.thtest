@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onkeyup="${one}">..</div>
+<div th:onkeyup="'hello'">..</div>
+<div th:onkeyup="${null}">..</div>
+<div th:onkeyup="''">..</div>
+
+<div onkeyup="old" th:onkeyup="${one}">..</div>
+<div onkeyup="old" th:onkeyup="'hello'">..</div>
+<div onkeyup="old" th:onkeyup="${null}">..</div>
+<div onkeyup="old" th:onkeyup="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onkeyup="one!">..</div>
+<div onkeyup="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onkeyup="one!">..</div>
+<div onkeyup="hello">..</div>
+<div>..</div>
+<div>..</div>

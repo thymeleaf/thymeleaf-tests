@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:ontimeupdate="${one}">..</div>
+<div th:ontimeupdate="'hello'">..</div>
+<div th:ontimeupdate="${null}">..</div>
+<div th:ontimeupdate="''">..</div>
+
+<div ontimeupdate="old" th:ontimeupdate="${one}">..</div>
+<div ontimeupdate="old" th:ontimeupdate="'hello'">..</div>
+<div ontimeupdate="old" th:ontimeupdate="${null}">..</div>
+<div ontimeupdate="old" th:ontimeupdate="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div ontimeupdate="one!">..</div>
+<div ontimeupdate="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div ontimeupdate="one!">..</div>
+<div ontimeupdate="hello">..</div>
+<div>..</div>
+<div>..</div>

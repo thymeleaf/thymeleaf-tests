@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:oncanplay="${one}">..</div>
+<div th:oncanplay="'hello'">..</div>
+<div th:oncanplay="${null}">..</div>
+<div th:oncanplay="''">..</div>
+
+<div oncanplay="old" th:oncanplay="${one}">..</div>
+<div oncanplay="old" th:oncanplay="'hello'">..</div>
+<div oncanplay="old" th:oncanplay="${null}">..</div>
+<div oncanplay="old" th:oncanplay="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div oncanplay="one!">..</div>
+<div oncanplay="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div oncanplay="one!">..</div>
+<div oncanplay="hello">..</div>
+<div>..</div>
+<div>..</div>

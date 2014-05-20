@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onreset="${one}">..</div>
+<div th:onreset="'hello'">..</div>
+<div th:onreset="${null}">..</div>
+<div th:onreset="''">..</div>
+
+<div onreset="old" th:onreset="${one}">..</div>
+<div onreset="old" th:onreset="'hello'">..</div>
+<div onreset="old" th:onreset="${null}">..</div>
+<div onreset="old" th:onreset="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onreset="one!">..</div>
+<div onreset="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onreset="one!">..</div>
+<div onreset="hello">..</div>
+<div>..</div>
+<div>..</div>

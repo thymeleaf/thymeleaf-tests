@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onresize="${one}">..</div>
+<div th:onresize="'hello'">..</div>
+<div th:onresize="${null}">..</div>
+<div th:onresize="''">..</div>
+
+<div onresize="old" th:onresize="${one}">..</div>
+<div onresize="old" th:onresize="'hello'">..</div>
+<div onresize="old" th:onresize="${null}">..</div>
+<div onresize="old" th:onresize="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onresize="one!">..</div>
+<div onresize="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onresize="one!">..</div>
+<div onresize="hello">..</div>
+<div>..</div>
+<div>..</div>

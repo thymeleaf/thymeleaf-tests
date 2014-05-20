@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:oninvalid="${one}">..</div>
+<div th:oninvalid="'hello'">..</div>
+<div th:oninvalid="${null}">..</div>
+<div th:oninvalid="''">..</div>
+
+<div oninvalid="old" th:oninvalid="${one}">..</div>
+<div oninvalid="old" th:oninvalid="'hello'">..</div>
+<div oninvalid="old" th:oninvalid="${null}">..</div>
+<div oninvalid="old" th:oninvalid="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div oninvalid="one!">..</div>
+<div oninvalid="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div oninvalid="one!">..</div>
+<div oninvalid="hello">..</div>
+<div>..</div>
+<div>..</div>

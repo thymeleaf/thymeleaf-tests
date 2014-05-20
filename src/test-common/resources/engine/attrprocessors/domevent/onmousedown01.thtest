@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onmousedown="${one}">..</div>
+<div th:onmousedown="'hello'">..</div>
+<div th:onmousedown="${null}">..</div>
+<div th:onmousedown="''">..</div>
+
+<div onmousedown="old" th:onmousedown="${one}">..</div>
+<div onmousedown="old" th:onmousedown="'hello'">..</div>
+<div onmousedown="old" th:onmousedown="${null}">..</div>
+<div onmousedown="old" th:onmousedown="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onmousedown="one!">..</div>
+<div onmousedown="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onmousedown="one!">..</div>
+<div onmousedown="hello">..</div>
+<div>..</div>
+<div>..</div>

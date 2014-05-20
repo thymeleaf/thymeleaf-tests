@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onfocus="${one}">..</div>
+<div th:onfocus="'hello'">..</div>
+<div th:onfocus="${null}">..</div>
+<div th:onfocus="''">..</div>
+
+<div onfocus="old" th:onfocus="${one}">..</div>
+<div onfocus="old" th:onfocus="'hello'">..</div>
+<div onfocus="old" th:onfocus="${null}">..</div>
+<div onfocus="old" th:onfocus="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onfocus="one!">..</div>
+<div onfocus="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onfocus="one!">..</div>
+<div onfocus="hello">..</div>
+<div>..</div>
+<div>..</div>

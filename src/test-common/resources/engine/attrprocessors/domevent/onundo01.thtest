@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onundo="${one}">..</div>
+<div th:onundo="'hello'">..</div>
+<div th:onundo="${null}">..</div>
+<div th:onundo="''">..</div>
+
+<div onundo="old" th:onundo="${one}">..</div>
+<div onundo="old" th:onundo="'hello'">..</div>
+<div onundo="old" th:onundo="${null}">..</div>
+<div onundo="old" th:onundo="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onundo="one!">..</div>
+<div onundo="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onundo="one!">..</div>
+<div onundo="hello">..</div>
+<div>..</div>
+<div>..</div>

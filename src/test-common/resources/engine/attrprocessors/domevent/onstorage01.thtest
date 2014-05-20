@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onstorage="${one}">..</div>
+<div th:onstorage="'hello'">..</div>
+<div th:onstorage="${null}">..</div>
+<div th:onstorage="''">..</div>
+
+<div onstorage="old" th:onstorage="${one}">..</div>
+<div onstorage="old" th:onstorage="'hello'">..</div>
+<div onstorage="old" th:onstorage="${null}">..</div>
+<div onstorage="old" th:onstorage="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onstorage="one!">..</div>
+<div onstorage="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onstorage="one!">..</div>
+<div onstorage="hello">..</div>
+<div>..</div>
+<div>..</div>

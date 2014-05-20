@@ -1,0 +1,26 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = 'one!'
+# ------------------------------------------------------------
+%INPUT
+<div th:onloadedmetadata="${one}">..</div>
+<div th:onloadedmetadata="'hello'">..</div>
+<div th:onloadedmetadata="${null}">..</div>
+<div th:onloadedmetadata="''">..</div>
+
+<div onloadedmetadata="old" th:onloadedmetadata="${one}">..</div>
+<div onloadedmetadata="old" th:onloadedmetadata="'hello'">..</div>
+<div onloadedmetadata="old" th:onloadedmetadata="${null}">..</div>
+<div onloadedmetadata="old" th:onloadedmetadata="''">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onloadedmetadata="one!">..</div>
+<div onloadedmetadata="hello">..</div>
+<div>..</div>
+<div>..</div>
+
+<div onloadedmetadata="one!">..</div>
+<div onloadedmetadata="hello">..</div>
+<div>..</div>
+<div>..</div>
