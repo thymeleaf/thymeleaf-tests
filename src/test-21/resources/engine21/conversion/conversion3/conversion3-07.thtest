@@ -10,5 +10,5 @@ num = @java.lang.Long@valueOf(123456789)
 <a th:href="@{/something(param0=${{obj.date}},param1=${{num}})}">...</a>
 # ------------------------------------------------------------
 %OUTPUT
-<a href="/testing/something?param0=2006-05-23&amp;param1=123%2C456%2C789">...</a>
+<a href="/testing/something?param0=2006-05-23&amp;param1=123,456,789">...</a>
 

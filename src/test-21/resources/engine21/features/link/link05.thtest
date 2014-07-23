@@ -17,7 +17,7 @@ twovar='Other text (second)'
 <a href="/testing/order/details/3/show_all">go</a>
 <a href="/testing/order/details/3,5/show_all">go</a>
 <a href="/testing/order/details/Some%20text%20over%20here">go</a>
-<a href="/testing/order/details?o=Some+text+over+here">go</a>
-<a href="/testing/order/details?o=Some+text+over+here&amp;two=Other+text+%28second%29">go</a>
-<a href="/testing/order/details/Some%20text%20over%20here/personal?two=Other+text+%28second%29">go</a>
-<a href="/testing/order/details/Some%20text%20over%20here,hello/personal?two=Other+text+%28second%29">go</a>
+<a href="/testing/order/details?o=Some%20text%20over%20here">go</a>
+<a href="/testing/order/details?o=Some%20text%20over%20here&amp;two=Other%20text%20(second)">go</a>
+<a href="/testing/order/details/Some%20text%20over%20here/personal?two=Other%20text%20(second)">go</a>
+<a href="/testing/order/details/Some%20text%20over%20here,hello/personal?two=Other%20text%20(second)">go</a>

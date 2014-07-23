@@ -129,8 +129,8 @@ public class ExpressionTest extends TestCase {
         test("@{http://a.b.com}", "http://a.b.com");
         test("@{http://a.b.com/xx}", "http://a.b.com/xx");
         test("@{http://a.b.com/xx/yy(p1='zz')}", "http://a.b.com/xx/yy?p1=zz");
-        test("@{http://a.b.com/xx/yy(p1='zz', p2=${pamerica.name})}", "http://a.b.com/xx/yy?p1=zz&amp;p2=Petronila+America");
-        test("@{http://a.b.com/xx/yy#frag(p1='zz', p2=${pamerica.name})}", "http://a.b.com/xx/yy?p1=zz&amp;p2=Petronila+America#frag");
+        test("@{http://a.b.com/xx/yy(p1='zz', p2=${pamerica.name})}", "http://a.b.com/xx/yy?p1=zz&amp;p2=Petronila%20America");
+        test("@{http://a.b.com/xx/yy#frag(p1='zz', p2=${pamerica.name})}", "http://a.b.com/xx/yy?p1=zz&amp;p2=Petronila%20America#frag");
         test("${loceania.permissions[0]}","Event Organizer");
         test("${loceania.permissions[3 - 2]}", "Marketing Worldwide Head");
         test("${loceania.permissions[__3.3 - 1.3__]}", "Office Master");
@@ -216,16 +216,16 @@ public class ExpressionTest extends TestCase {
         
 
         test("@{http://a.b.com/xx/yy(p1)}", "http://a.b.com/xx/yy?p1");
-        test("@{http://a.b.com/xx/yy(p1, p2=${pamerica.name})}", "http://a.b.com/xx/yy?p1&amp;p2=Petronila+America");
+        test("@{http://a.b.com/xx/yy(p1, p2=${pamerica.name})}", "http://a.b.com/xx/yy?p1&amp;p2=Petronila%20America");
         test("@{http://a.b.com/xx/yy(p1='zz', p2)}", "http://a.b.com/xx/yy?p1=zz&amp;p2");
         test("@{http://a.b.com/xx/yy(p1, p2)}", "http://a.b.com/xx/yy?p1&amp;p2");
         test("@{~/xx/yy}", "/xx/yy");
         test("@{~/xx/yy(p1)}", "/xx/yy?p1");
-        test("@{~/xx/yy(p1, p2=${pamerica.name})}", "/xx/yy?p1&amp;p2=Petronila+America");
-        test("@{~/xx/yy(a[0]=${pamerica.name},a[1]=${pamerica.name})}", "/xx/yy?a%5B0%5D=Petronila+America&amp;a%5B1%5D=Petronila+America");
+        test("@{~/xx/yy(p1, p2=${pamerica.name})}", "/xx/yy?p1&amp;p2=Petronila%20America");
+        test("@{~/xx/yy(a[0]=${pamerica.name},a[1]=${pamerica.name})}", "/xx/yy?a%5B0%5D=Petronila%20America&amp;a%5B1%5D=Petronila%20America");
         test("@{~/xx/yy(login=${logins})}", "/xx/yy?login=loceania&amp;login=meurope&amp;login=jafrica&amp;login=pamerica");
         test("@{~/xx/yy(login=${loginsArray})}", "/xx/yy?login=loceania&amp;login=meurope&amp;login=jafrica&amp;login=pamerica");
-        test("@{~/xx/yy(a[0]=${pamerica.name},a[0]=${pamerica.name})}", "/xx/yy?a%5B0%5D=Petronila+America&amp;a%5B0%5D=Petronila+America");
+        test("@{~/xx/yy(a[0]=${pamerica.name},a[0]=${pamerica.name})}", "/xx/yy?a%5B0%5D=Petronila%20America&amp;a%5B0%5D=Petronila%20America");
         test("${size}", "Size is 5");
         test("${'x' + size}", "xSize is 5");
         test("${size + 'y'}", "Size is 5y");

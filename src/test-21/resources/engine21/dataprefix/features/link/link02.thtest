@@ -12,8 +12,8 @@
 %OUTPUT
 <a href="/testing/url0/url1">go</a>
 <a href="/testing/url0/url1?param1=one&amp;param2=two">go</a>
-<a href="/testing/url0/url1?param1=one+and+two">go</a>
+<a href="/testing/url0/url1?param1=one%20and%20two">go</a>
 <a href="/testing/url0/url1?param1=one%3Dtwo">go</a>
 <a href="/testing/url0/url1?param=one&amp;param=two">go</a>
-<a href="/testing/url0/url1?param=one&amp;name=John+Apricot">go</a>
-<a href="/testing/url0/url1?name=The+name+is+John+Apricot">go</a>
+<a href="/testing/url0/url1?param=one&amp;name=John%20Apricot">go</a>
+<a href="/testing/url0/url1?name=The%20name%20is%20John%20Apricot">go</a>
