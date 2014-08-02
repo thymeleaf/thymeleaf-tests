@@ -28,6 +28,7 @@
 ../attrprocessors/include/include14.thtest
 ../attrprocessors/include/include15.thtest
 ../attrprocessors/inline
+../attrprocessors/object/object05.thtest
 ../attrprocessors/remove/remove02.thtest
 ../attrprocessors/remove/remove05.thtest
 ../attrprocessors/remove/remove06.thtest
