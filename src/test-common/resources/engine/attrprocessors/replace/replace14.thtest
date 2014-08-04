@@ -1,0 +1,34 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+foo = #{ 'class' : 'fooCLASS' }
+bar = #{ 'class' : 'barCLASS' }
+# ------------------------------------------------------------
+%INPUT
+<div th:replace="someTemplate::table(foo=${foo}, bar=${bar})">
+    Content of someTemplate
+</div>
+# ------------------------------------------------------------
+%INPUT[someTemplate]
+<table th:fragment="table(bar, foo)" th:if="${foo}" th:object="${foo}">
+    <tr th:replace="otherTemplate::table(bar=${bar})">
+        <th>A header</th>
+        <td>Some data</td>
+    </tr>
+</table>
+# ------------------------------------------------------------
+%INPUT[otherTemplate]
+<table th:fragment="table(bar)" th:if="${bar}" th:object="${bar}" th:remove="tag">
+    <tr>
+        <th>Some other header</th>
+        <td th:text="*{class}">Should be bar.class but is foo.class</td>
+    </tr>
+</table>
+# ------------------------------------------------------------
+%OUTPUT
+<table>
+    <tr>
+        <th>Some other header</th>
+        <td>barCLASS</td>
+    </tr>
+</table>
