@@ -113,4 +113,15 @@ public class AttrProcessors21Test {
     }
 
 
+    @Test
+    public void testInline() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:engine21/attrprocessors/inline");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
 }
