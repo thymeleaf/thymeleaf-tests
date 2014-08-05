@@ -2,11 +2,16 @@
 # ------------------------------------------------------------
 %CONTEXT
 foo = #{ 'class' : 'fooCLASS' }
+bar = #{ 'class' : 'barCLASS' }
 # ------------------------------------------------------------
 %INPUT
-<div th:object="${foo}" th:remove="tag">
+<div th:object="${bar}">
+  <div th:object="${foo}" th:remove="tag">
     <span th:text="*{class}">...</span>
+  </div>
 </div>
 # ------------------------------------------------------------
 %OUTPUT
-<span>fooCLASS</span>
+<div>
+  <span>fooCLASS</span>
+</div>

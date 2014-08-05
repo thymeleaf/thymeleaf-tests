@@ -4,8 +4,8 @@
 foo = #{ 'class' : 'fooCLASS' }
 # ------------------------------------------------------------
 %INPUT
-<div th:with="a=${foo}" th:remove="tag">
-    <span th:text="${a.class}">...</span>
+<div th:object="${foo}" th:remove="tag">
+    <span th:text="*{class}">...</span>
 </div>
 # ------------------------------------------------------------
 %OUTPUT
