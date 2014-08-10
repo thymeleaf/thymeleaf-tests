@@ -290,7 +290,7 @@
         </plugins>
       </build>
       <properties>
-        <thymeleaf.version>2.0.21-SNAPSHOT</thymeleaf.version>
+        <thymeleaf.version>2.0.22-SNAPSHOT</thymeleaf.version>
         <thymeleaf-testing.version>2.0.10-SNAPSHOT</thymeleaf-testing.version>
         <thymeleaf-extras-springsecurity3.version>2.0.3-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
         <thymeleaf-extras-tiles2.version>2.0.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
@@ -375,7 +375,7 @@
         </plugins>
       </build>
       <properties>
-        <thymeleaf.version>2.0.21-SNAPSHOT</thymeleaf.version>
+        <thymeleaf.version>2.0.22-SNAPSHOT</thymeleaf.version>
         <thymeleaf-testing.version>2.0.10-SNAPSHOT</thymeleaf-testing.version>
         <thymeleaf-extras-springsecurity3.version>2.0.3-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
         <thymeleaf-extras-tiles2.version>2.0.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
