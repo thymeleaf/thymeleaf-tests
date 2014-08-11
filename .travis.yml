@@ -13,6 +13,9 @@ env:
     - PROFILE=2.1-spring3
     - PROFILE=2.1-spring31
     - PROFILE=2.1-spring4
+    - PROFILE=3.0-spring3
+    - PROFILE=3.0-spring31
+    - PROFILE=3.0-spring4
 
 install: true
 script: "mvn -P ${PROFILE} clean compile test"
