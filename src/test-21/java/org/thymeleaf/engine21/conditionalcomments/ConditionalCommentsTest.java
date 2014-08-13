@@ -44,7 +44,7 @@ public class ConditionalCommentsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine/conditionalcomments");
+        executor.execute("classpath:engine21/conditionalcomments");
         
         Assert.assertTrue(executor.isAllOK());
         
