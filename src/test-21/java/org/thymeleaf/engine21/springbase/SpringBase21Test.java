@@ -54,7 +54,24 @@ public class SpringBase21Test {
         
         
     }
-    
+
+
+    @Test
+    public void testSpringBaseConditionalComments() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation(null);
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(), new ConditionalCommentsDialect() }));
+        executor.execute("classpath:engine21/springbase/springbaseconditionalcomments.thindex");
+
+        Assert.assertTrue(executor.isAllOK());
+
+
+    }
+
     
     
 }
