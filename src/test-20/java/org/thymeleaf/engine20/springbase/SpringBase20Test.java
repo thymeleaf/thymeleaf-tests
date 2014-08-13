@@ -30,10 +30,10 @@ import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class SpringBaseTest {
+public class SpringBase20Test {
 
 
-    public SpringBaseTest() {
+    public SpringBase20Test() {
         super();
     }
 
