@@ -4,4 +4,4 @@
 \uFEFFThis contains a BOM (Byte Order Mark) Symbol, which should be ignored up to 2.1
 # ------------------------------------------------------------
 %OUTPUT
-This contains a BOM (Byte Order Mark) Symbol, which should be ignored in up to 2.1
+This contains a BOM (Byte Order Mark) Symbol, which should be ignored up to 2.1
