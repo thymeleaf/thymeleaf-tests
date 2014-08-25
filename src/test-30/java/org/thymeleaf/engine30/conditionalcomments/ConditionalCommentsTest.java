@@ -52,11 +52,11 @@ public class ConditionalCommentsTest {
 
 
     @Test
-    public void testConditionalComments03() throws Exception {
+    public void testConditionalComments01() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine30/conditionalcomments/conditionalcomments03.thtest");
+        executor.execute("classpath:engine30/conditionalcomments/conditionalcomments01.thtest");
 
         Assert.assertTrue(executor.isAllOK());
 
