@@ -9,7 +9,7 @@ logo=Good Thymes Virtual Grocery logo
 date.format=MMMM dd'','' yyyy
 # ------------------------------------------------------------
 %INPUT
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
@@ -50,7 +50,7 @@ date.format=MMMM dd'','' yyyy
 </html>
 # ------------------------------------------------------------
 %OUTPUT 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -75,10 +75,10 @@ date.format=MMMM dd'','' yyyy
     
     <p>Please select an option</p>
     <ol>
-      <li><a href="/testing/product/list" shape="rect">Product List</a></li>
-      <li><a href="/testing/order/list" shape="rect">Order List</a></li>
-      <li><a href="/testing/subscribe" shape="rect">Subscribe to our Newsletter</a></li>
-      <li><a href="/testing/userprofile" shape="rect">See User Profile</a></li>
+      <li><a href="/testing/product/list">Product List</a></li>
+      <li><a href="/testing/order/list">Order List</a></li>
+      <li><a href="/testing/subscribe">Subscribe to our Newsletter</a></li>
+      <li><a href="/testing/userprofile">See User Profile</a></li>
     </ol>
       
     <p>Now you are looking at a <span>working web application</span>.</p>

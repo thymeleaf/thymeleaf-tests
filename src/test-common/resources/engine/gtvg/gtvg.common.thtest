@@ -1,4 +1,4 @@
-%TEMPLATE_MODE XHTML
+%TEMPLATE_MODE HTML5
 %CONTEXT
 session.user = #{ 'name':'John Apricot',\
                   'firstName':'John',\
@@ -99,7 +99,7 @@ true=yes
 false=no
 # ------------------------------------------------------------
 %INPUT[footer]
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">

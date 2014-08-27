@@ -17,20 +17,17 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine.gtvg;
+package org.thymeleaf.engine21.gtvg;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
+public class GTVG21Test {
 
 
-
-public class GTVGTest {
-    
-    
-    public GTVGTest() {
+    public GTVG21Test() {
         super();
     }
     
@@ -38,10 +35,10 @@ public class GTVGTest {
     
     
     @Test
-    public void testGTVG() throws Exception {
+    public void testGTVG21() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.execute("classpath:engine/gtvg");
+        executor.execute("classpath:engine21/gtvg");
         
         Assert.assertTrue(executor.isAllOK());
         
