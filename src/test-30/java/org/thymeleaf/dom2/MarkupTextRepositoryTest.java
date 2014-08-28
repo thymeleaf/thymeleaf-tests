@@ -29,7 +29,7 @@ public final class MarkupTextRepositoryTest {
     @Test
     public void test() throws Exception {
 
-        final IMarkupTextRepository repository = new MarkupTextRepository(7, new String[0]);
+        final IMarkupTextRepository repository = new MarkupTextRepository(8, new String[] { "Siblings" });
 
         testTextStr(repository, "Teheran");
         testTextStr(repository, "Siblings");
