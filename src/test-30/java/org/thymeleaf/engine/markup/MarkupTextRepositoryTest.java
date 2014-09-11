@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.dom2;
+package org.thymeleaf.engine.markup;
 
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public final class MarkupTextRepositoryTest {
     @Test
     public void test() throws Exception {
 
-        final IMarkupTextRepository repository = new MarkupTextRepository(8, new String[] { "Siblings" });
+        final IMarkupTextRepository repository = new StandardMarkupTextRepository(8, new String[] { "Siblings" });
 
         testTextStr(repository, "Teheran");
         testTextStr(repository, "Siblings");
