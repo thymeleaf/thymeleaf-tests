@@ -34,20 +34,26 @@ public final class AttributeDefinitionsTest {
         Assert.assertEquals(standardSize, AttributeDefinitions.ALL_STANDARD_ATTRIBUTE_NAMES.size());
 
         for (final String name : AttributeDefinitions.ALL_STANDARD_ATTRIBUTE_NAMES) {
-            final AttributeDefinition def1 = AttributeDefinitions.forName(name);
-            final AttributeDefinition def2 = AttributeDefinitions.forName(name);
-            final AttributeDefinition def3 = AttributeDefinitions.forName(name.toUpperCase());
+            final AttributeDefinition def1 = AttributeDefinitions.forName(false, name);
+            final AttributeDefinition def2 = AttributeDefinitions.forName(false, name);
+            final AttributeDefinition def3 = AttributeDefinitions.forName(false, name.toUpperCase());
             Assert.assertSame(def1, def2);
             Assert.assertSame(def2, def3);
         }
 
-        final AttributeDefinition new1 = AttributeDefinitions.forName("NEW");
+        final AttributeDefinition new1 = AttributeDefinitions.forName(false, "NEW");
         Assert.assertNotNull(new1);
-        Assert.assertEquals("new", new1.getNormalizedName());
-        final AttributeDefinition new2 = AttributeDefinitions.forName("new");
+        Assert.assertEquals("new", new1.getName());
+        final AttributeDefinition new2 = AttributeDefinitions.forName(false, "new");
         Assert.assertSame(new1, new2);
-        final AttributeDefinition new3 = AttributeDefinitions.forName("NeW");
+        final AttributeDefinition new3 = AttributeDefinitions.forName(false, "NeW");
         Assert.assertSame(new1, new3);
+        final AttributeDefinition new4 = AttributeDefinitions.forName(true, "NeW");
+        Assert.assertNotSame(new1, new4);
+        final AttributeDefinition new5 = AttributeDefinitions.forName(true, "new");
+        Assert.assertSame(new1, new5);
+        final AttributeDefinition new6 = AttributeDefinitions.forName(false, "new");
+        Assert.assertSame(new1, new6);
 
         Assert.assertEquals(standardSize, AttributeDefinitions.ALL_STANDARD_ATTRIBUTES.size());
         Assert.assertEquals(standardSize, AttributeDefinitions.ALL_STANDARD_ATTRIBUTE_NAMES.size());
