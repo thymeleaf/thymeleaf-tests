@@ -79,7 +79,7 @@ public class MarkupSelectorItemTest extends TestCase {
 
     private static void check(final boolean caseSensitive, final String blockSelector, final String expected) throws Exception{
 
-        final List<MarkupSelectorItem> items = MarkupSelectorItem.parseSelector(caseSensitive, blockSelector);
+        final List<MarkupSelectorItem> items = MarkupSelectorItems.parseSelector(caseSensitive, blockSelector);
         final String result = StringUtils.join(items, "");
         assertEquals(expected, result);
 
