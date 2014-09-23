@@ -62,6 +62,8 @@ public class BlockSelectorMarkupHandlerTest extends TestCase {
 
         final MarkupEngineConfiguration config = MarkupEngineConfiguration.createBaseConfiguration();
 
+        final IMarkupSelectorReferenceResolver referenceResolver = new TestingFragmentReferenceResolver();
+
         final URL resourcesFolderURL = Thread.currentThread().getContextClassLoader().getResource(RESOURCES_FOLDER);
         assertNotNull(resourcesFolderURL);
 
@@ -101,7 +103,7 @@ public class BlockSelectorMarkupHandlerTest extends TestCase {
             resultFileLines.remove(0);
             final String resultFileContents = StringUtils.join(resultFileLines,'\n');
 
-            check(config, testFile.getName(), testFileContents, resultFileContents, blockSelector);
+            check(config, testFile.getName(), testFileContents, resultFileContents, blockSelector, referenceResolver);
 
         }
 
@@ -112,13 +114,15 @@ public class BlockSelectorMarkupHandlerTest extends TestCase {
 
 
 
-    private static void check(final MarkupEngineConfiguration config, final String templateName, final String input, final String output, final String blockSelector) throws Exception{
+    private static void check(
+            final MarkupEngineConfiguration config, final String templateName, final String input, final String output, final String blockSelector,
+            final IMarkupSelectorReferenceResolver referenceResolver) throws Exception{
 
         final StringReader reader = new StringReader(input);
         final StringWriter writer = new StringWriter();
 
         final IMarkupHandler directOutputHandler = new DirectOutputMarkupHandler(templateName, writer);
-        final BlockSelectorMarkupHandler handler = new BlockSelectorMarkupHandler(directOutputHandler, blockSelector, false);
+        final BlockSelectorMarkupHandler handler = new BlockSelectorMarkupHandler(directOutputHandler, blockSelector, false, referenceResolver);
 
         config.getParser().parseTemplate(config, handler, templateName, reader);
 
@@ -127,6 +131,13 @@ public class BlockSelectorMarkupHandlerTest extends TestCase {
     }
     
     
-    
+
+
+    static final class TestingFragmentReferenceResolver implements IMarkupSelectorReferenceResolver {
+
+        public String resolveSelectorFromReference(final String reference) {
+            return "/[th:fragment='" + reference + "' or data-th-fragment='" + reference + "']";
+        }
+    }
 
 }
