@@ -37,9 +37,6 @@ import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.thymeleaf.engine.markup.MarkupEngineConfiguration;
-import org.thymeleaf.engine.markup.handler.BlockSelectorMarkupHandler;
-import org.thymeleaf.engine.markup.handler.DirectOutputMarkupHandler;
-import org.thymeleaf.engine.markup.handler.IMarkupHandler;
 
 /**
  * 
@@ -48,11 +45,11 @@ import org.thymeleaf.engine.markup.handler.IMarkupHandler;
  * @since 1.1
  *
  */
-public class BlockSelectorMarkupHandlerTest extends TestCase {
+public class BlockSelectorWithAttributeMarkupHandlerTest extends TestCase {
 
-    private static final String RESOURCES_FOLDER = "blockselector/";
+    private static final String RESOURCES_FOLDER = "blockselectorwithattribute/";
 
-    public BlockSelectorMarkupHandlerTest() {
+    public BlockSelectorWithAttributeMarkupHandlerTest() {
         super();
     }
     
@@ -123,7 +120,7 @@ public class BlockSelectorMarkupHandlerTest extends TestCase {
         final StringWriter writer = new StringWriter();
 
         final IMarkupHandler directOutputHandler = new DirectOutputMarkupHandler(templateName, writer);
-        final ISelectedSelectorEventHandler selectedEventHandler = new DelegatingSelectedSelectorEventHandler();
+        final ISelectedSelectorEventHandler selectedEventHandler = new AttributeMarkingSelectedSelectorEventHandler();
         final INonSelectedSelectorEventHandler nonSelectedEventHandler = new NoOpNonSelectedSelectorEventHandler();
 
         final BlockSelectorMarkupHandler handler =
