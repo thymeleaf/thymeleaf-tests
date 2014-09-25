@@ -29,9 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
@@ -120,8 +118,8 @@ public class BlockSelectorWithAttributeMarkupHandlerTest extends TestCase {
         final StringWriter writer = new StringWriter();
 
         final IMarkupHandler directOutputHandler = new DirectOutputMarkupHandler(templateName, writer);
-        final ISelectedSelectorEventHandler selectedEventHandler = new AttributeMarkingSelectedSelectorEventHandler();
-        final INonSelectedSelectorEventHandler nonSelectedEventHandler = new NoOpNonSelectedSelectorEventHandler();
+        final ISelectedSelectorEventHandler selectedEventHandler = new OpenCloseAttributeMarkingSelectedSelectorEventHandler();
+        final INonSelectedSelectorEventHandler nonSelectedEventHandler = new DiscardingNonSelectedSelectorEventHandler();
 
         final BlockSelectorMarkupHandler handler =
                 new BlockSelectorMarkupHandler(directOutputHandler, selectedEventHandler, nonSelectedEventHandler,
