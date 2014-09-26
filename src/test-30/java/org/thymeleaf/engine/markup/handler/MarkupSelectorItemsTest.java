@@ -93,6 +93,38 @@ public class MarkupSelectorItemsTest extends TestCase {
         checkNoRef(false, "html//p","//html//p");
         check(false, "html//p[2]","(//html || //*[th:fragment='html' OR data-th-fragment='html'])(//p[2] || //*[th:fragment='p' OR data-th-fragment='p'][2])");
         checkNoRef(false, "html//p[2]","//html//p[2]");
+        checkNoRef(false, "html/comment()","//html/comment()");
+        checkNoRef(false, "comment()","//comment()");
+        checkNoRef(false, "p//comment()","//p//comment()");
+        check(false, "p//comment()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//comment()");
+        checkNoRef(false, "p//comment()[2]","//p//comment()[2]");
+        checkNoRef(false, "p//comment()[even()]","//p//comment()[even()]");
+        checkNoRef(false, "p//text()[2]","//p//text()[2]");
+        checkNoRef(false, "p//text()[even()]","//p//text()[even()]");
+        checkNoRef(false, "html/cdata()","//html/cdata()");
+        checkNoRef(false, "cdata()","//cdata()");
+        checkNoRef(false, "p//cdata()","//p//cdata()");
+        check(false, "p//cdata()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//cdata()");
+        checkNoRef(false, "p//cdata()[2]","//p//cdata()[2]");
+        checkNoRef(false, "p//cdata()[even()]","//p//cdata()[even()]");
+        checkNoRef(false, "html/doctype()","//html/doctype()");
+        checkNoRef(false, "doctype()","//doctype()");
+        checkNoRef(false, "p//doctype()","//p//doctype()");
+        check(false, "p//doctype()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//doctype()");
+        checkNoRef(false, "p//doctype()[2]","//p//doctype()[2]");
+        checkNoRef(false, "p//doctype()[even()]","//p//doctype()[even()]");
+        checkNoRef(false, "html/xmldecl()","//html/xmldecl()");
+        checkNoRef(false, "xmldecl()","//xmldecl()");
+        checkNoRef(false, "p//xmldecl()","//p//xmldecl()");
+        check(false, "p//xmldecl()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//xmldecl()");
+        checkNoRef(false, "p//xmldecl()[2]","//p//xmldecl()[2]");
+        checkNoRef(false, "p//xmldecl()[even()]","//p//xmldecl()[even()]");
+        checkNoRef(false, "html/procinstr()","//html/procinstr()");
+        checkNoRef(false, "procinstr()","//procinstr()");
+        checkNoRef(false, "p//procinstr()","//p//procinstr()");
+        check(false, "p//procinstr()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//procinstr()");
+        checkNoRef(false, "p//procinstr()[2]","//p//procinstr()[2]");
+        checkNoRef(false, "p//procinstr()[even()]","//p//procinstr()[even()]");
     }
     
 
