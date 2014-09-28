@@ -42,106 +42,106 @@ public class MarkupSelectorItemsTest extends TestCase {
     
     public void test() throws Exception {
 
-        check(false, "//div", "(//div || //*[th:fragment='div' OR data-th-fragment='div'])");
-        check(false, "//DIV", "(//div || //*[th:fragment='DIV' OR data-th-fragment='DIV'])");
-        check(true, "//DIV", "(//DIV || //*[th:fragment='DIV' OR data-th-fragment='DIV'])");
-        checkNoRef(false, "//div", "//div");
-        check(false, ".main", "//*[class='main']");
-        check(false, "#main", "//*[id='main']");
-        check(false, "[class='main']", "//*[class='main']");
-        check(false, "[id='main']", "//*[id='main']");
-        check(false, "%ref", "(//* && //*[th:fragment='ref' OR data-th-fragment='ref'])");
-        check(false, "p.main", "(//p[class='main'] || //*[class='main' AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "p#main", "(//p[id='main'] || //*[id='main' AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "P#main", "(//p[id='main'] || //*[id='main' AND (th:fragment='P' OR data-th-fragment='P')])");
-        check(false, "p%ref", "(//p && //*[th:fragment='ref' OR data-th-fragment='ref'])");
-        check(false, "/p.main", "(/p[class='main'] || /*[class='main' AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "/p#main", "(/p[id='main'] || /*[id='main' AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "/p%ref", "(/p && /*[th:fragment='ref' OR data-th-fragment='ref'])");
-        check(false, "/P%REF", "(/p && /*[th:fragment='REF' OR data-th-fragment='REF'])");
-        check(false, "/p%ref[a = 'x']", "(/p[a='x'] && /*[th:fragment='ref' OR data-th-fragment='ref'])");
-        check(false, "/p.someclass[a = \"x\"]", "(/p[class='someclass' AND a='x'] || /*[(class='someclass' AND a='x') AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "/P.SOMECLASS[A = \"x\"]", "(/p[class='SOMECLASS' AND a='x'] || /*[(class='SOMECLASS' AND a='x') AND (th:fragment='P' OR data-th-fragment='P')])");
-        check(false, "/P[CLASS = 'someClass' AND A = \"x\"]", "(/p[class='someClass' AND a='x'] || /*[(class='someClass' AND a='x') AND (th:fragment='P' OR data-th-fragment='P')])");
-        check(true, "/P[CLASS = 'someClass' and A = \"x\"]", "(/P[CLASS='someClass' AND A='x'] || /*[(CLASS='someClass' AND A='x') AND (th:fragment='P' OR data-th-fragment='P')])");
-        checkNoRef(true, "/P[CLASS = 'someClass' and A = \"x\"]", "/P[CLASS='someClass' AND A='x']");
-        check(false, ".MAIN", "//*[class='MAIN']");
-        check(false, "#MAIN", "//*[id='MAIN']");
-        check(false, "%REF", "(//* && //*[th:fragment='REF' OR data-th-fragment='REF'])");
-        check(false, "P.MAIN", "(//p[class='MAIN'] || //*[class='MAIN' AND (th:fragment='P' OR data-th-fragment='P')])");
-        check(false, "P#MAIN", "(//p[id='MAIN'] || //*[id='MAIN' AND (th:fragment='P' OR data-th-fragment='P')])");
-        check(false, "P%REF", "(//p && //*[th:fragment='REF' OR data-th-fragment='REF'])");
-        checkNoRef(false, "P%REF", "//p");
-        check(true, ".MAIN", "//*[class='MAIN']");
-        check(true, "#MAIN", "//*[id='MAIN']");
-        check(true, "%REF", "(//* && //*[th:fragment='REF' OR data-th-fragment='REF'])");
-        check(true, "P.MAIN", "(//P[class='MAIN'] || //*[class='MAIN' AND (th:fragment='P' OR data-th-fragment='P')])");
-        check(true, "P#MAIN", "(//P[id='MAIN'] || //*[id='MAIN' AND (th:fragment='P' OR data-th-fragment='P')])");
-        check(true, "P%REF", "(//P && //*[th:fragment='REF' OR data-th-fragment='REF'])");
-        check(false, "/p.someclass[a = \"x\" and b!='y']", "(/p[class='someclass' AND (a='x' AND b!='y')] || /*[(class='someclass' AND (a='x' AND b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "/p.someclass[a = \"x\" aNd b!='y' AND c  ^= 'z']", "(/p[class='someclass' AND (a='x' AND (b!='y' AND c^='z'))] || /*[(class='someclass' AND (a='x' AND (b!='y' AND c^='z'))) AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "/p.someclass[a = \"x\" or b!='y']", "(/p[class='someclass' AND (a='x' OR b!='y')] || /*[(class='someclass' AND (a='x' OR b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "/p.someclass[a = \"x\" or (b!='y')]", "(/p[class='someclass' AND (a='x' OR b!='y')] || /*[(class='someclass' AND (a='x' OR b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "/p.someclass[a = \"x\" OR (b!='y')]", "(/p[class='someclass' AND (a='x' OR b!='y')] || /*[(class='someclass' AND (a='x' OR b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "/p[a = \"x\" OR (b!='y')]", "(/p[a='x' OR b!='y'] || /*[(a='x' OR b!='y') AND (th:fragment='p' OR data-th-fragment='p')])");
-        checkNoRef(false, "/p[a OR (b!='y')]", "/p[a* OR b!='y']");
-        check(false, "[a OR (b!='y')]", "//*[a* OR b!='y']");
-        checkNoRef(false, "[a OR (b!='y')]", "//*[a* OR b!='y']");
-        check(false, "/p#someclass[a = \"x\" or (b!='y')]", "(/p[id='someclass' AND (a='x' OR b!='y')] || /*[(id='someclass' AND (a='x' OR b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
-        check(false, "div[th:fragment='copy' or data-th-fragment='copy']","(//div[th:fragment='copy' OR data-th-fragment='copy'] || //*[(th:fragment='copy' OR data-th-fragment='copy') AND (th:fragment='div' OR data-th-fragment='div')])");
-        check(false, "html//p","(//html || //*[th:fragment='html' OR data-th-fragment='html'])(//p || //*[th:fragment='p' OR data-th-fragment='p'])");
-        checkNoRef(false, "html//p","//html//p");
-        check(false, "html//p[2]","(//html || //*[th:fragment='html' OR data-th-fragment='html'])(//p[2] || //*[th:fragment='p' OR data-th-fragment='p'][2])");
-        checkNoRef(false, "html//p[2]","//html//p[2]");
-        checkNoRef(false, "html/comment()","//html/comment()");
-        checkNoRef(false, "comment()","//comment()");
-        checkNoRef(false, "p//comment()","//p//comment()");
-        check(false, "p//comment()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//comment()");
-        checkNoRef(false, "p//comment()[2]","//p//comment()[2]");
-        checkNoRef(false, "p//comment()[even()]","//p//comment()[even()]");
-        checkNoRef(false, "p//text()[2]","//p//text()[2]");
-        checkNoRef(false, "p//text()[even()]","//p//text()[even()]");
-        checkNoRef(false, "html/cdata()","//html/cdata()");
-        checkNoRef(false, "cdata()","//cdata()");
-        checkNoRef(false, "p//cdata()","//p//cdata()");
-        check(false, "p//cdata()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//cdata()");
-        checkNoRef(false, "p//cdata()[2]","//p//cdata()[2]");
-        checkNoRef(false, "p//cdata()[even()]","//p//cdata()[even()]");
-        checkNoRef(false, "html/doctype()","//html/doctype()");
-        checkNoRef(false, "doctype()","//doctype()");
-        checkNoRef(false, "p//doctype()","//p//doctype()");
-        check(false, "p//doctype()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//doctype()");
-        checkNoRef(false, "p//doctype()[2]","//p//doctype()[2]");
-        checkNoRef(false, "p//doctype()[even()]","//p//doctype()[even()]");
-        checkNoRef(false, "html/xmldecl()","//html/xmldecl()");
-        checkNoRef(false, "xmldecl()","//xmldecl()");
-        checkNoRef(false, "p//xmldecl()","//p//xmldecl()");
-        check(false, "p//xmldecl()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//xmldecl()");
-        checkNoRef(false, "p//xmldecl()[2]","//p//xmldecl()[2]");
-        checkNoRef(false, "p//xmldecl()[even()]","//p//xmldecl()[even()]");
-        checkNoRef(false, "html/procinstr()","//html/procinstr()");
-        checkNoRef(false, "procinstr()","//procinstr()");
-        checkNoRef(false, "p//procinstr()","//p//procinstr()");
-        check(false, "p//procinstr()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//procinstr()");
-        checkNoRef(false, "p//procinstr()[2]","//p//procinstr()[2]");
-        checkNoRef(false, "p//procinstr()[even()]","//p//procinstr()[even()]");
+        check(MarkupSelectorMode.HTML, "//div", "(//div || //*[th:fragment='div' OR data-th-fragment='div'])");
+        check(MarkupSelectorMode.HTML, "//DIV", "(//div || //*[th:fragment='DIV' OR data-th-fragment='DIV'])");
+        check(MarkupSelectorMode.XML, "//DIV", "(//DIV || //*[th:fragment='DIV' OR data-th-fragment='DIV'])");
+        checkNoRef(MarkupSelectorMode.HTML, "//div", "//div");
+        check(MarkupSelectorMode.HTML, ".main", "//*[class='main']");
+        check(MarkupSelectorMode.HTML, "#main", "//*[id='main']");
+        check(MarkupSelectorMode.HTML, "[class='main']", "//*[class='main']");
+        check(MarkupSelectorMode.HTML, "[id='main']", "//*[id='main']");
+        check(MarkupSelectorMode.HTML, "%ref", "(//* && //*[th:fragment='ref' OR data-th-fragment='ref'])");
+        check(MarkupSelectorMode.HTML, "p.main", "(//p[class='main'] || //*[class='main' AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "p#main", "(//p[id='main'] || //*[id='main' AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "P#main", "(//p[id='main'] || //*[id='main' AND (th:fragment='P' OR data-th-fragment='P')])");
+        check(MarkupSelectorMode.HTML, "p%ref", "(//p && //*[th:fragment='ref' OR data-th-fragment='ref'])");
+        check(MarkupSelectorMode.HTML, "/p.main", "(/p[class='main'] || /*[class='main' AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "/p#main", "(/p[id='main'] || /*[id='main' AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "/p%ref", "(/p && /*[th:fragment='ref' OR data-th-fragment='ref'])");
+        check(MarkupSelectorMode.HTML, "/P%REF", "(/p && /*[th:fragment='REF' OR data-th-fragment='REF'])");
+        check(MarkupSelectorMode.HTML, "/p%ref[a = 'x']", "(/p[a='x'] && /*[th:fragment='ref' OR data-th-fragment='ref'])");
+        check(MarkupSelectorMode.HTML, "/p.someclass[a = \"x\"]", "(/p[class='someclass' AND a='x'] || /*[(class='someclass' AND a='x') AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "/P.SOMECLASS[A = \"x\"]", "(/p[class='SOMECLASS' AND a='x'] || /*[(class='SOMECLASS' AND a='x') AND (th:fragment='P' OR data-th-fragment='P')])");
+        check(MarkupSelectorMode.HTML, "/P[CLASS = 'someClass' AND A = \"x\"]", "(/p[class='someClass' AND a='x'] || /*[(class='someClass' AND a='x') AND (th:fragment='P' OR data-th-fragment='P')])");
+        check(MarkupSelectorMode.XML, "/P[CLASS = 'someClass' and A = \"x\"]", "(/P[CLASS='someClass' AND A='x'] || /*[(CLASS='someClass' AND A='x') AND (th:fragment='P' OR data-th-fragment='P')])");
+        checkNoRef(MarkupSelectorMode.XML, "/P[CLASS = 'someClass' and A = \"x\"]", "/P[CLASS='someClass' AND A='x']");
+        check(MarkupSelectorMode.HTML, ".MAIN", "//*[class='MAIN']");
+        check(MarkupSelectorMode.HTML, "#MAIN", "//*[id='MAIN']");
+        check(MarkupSelectorMode.HTML, "%REF", "(//* && //*[th:fragment='REF' OR data-th-fragment='REF'])");
+        check(MarkupSelectorMode.HTML, "P.MAIN", "(//p[class='MAIN'] || //*[class='MAIN' AND (th:fragment='P' OR data-th-fragment='P')])");
+        check(MarkupSelectorMode.HTML, "P#MAIN", "(//p[id='MAIN'] || //*[id='MAIN' AND (th:fragment='P' OR data-th-fragment='P')])");
+        check(MarkupSelectorMode.HTML, "P%REF", "(//p && //*[th:fragment='REF' OR data-th-fragment='REF'])");
+        checkNoRef(MarkupSelectorMode.HTML, "P%REF", "//p");
+        check(MarkupSelectorMode.XML, ".MAIN", "(//.MAIN || //*[th:fragment='.MAIN' OR data-th-fragment='.MAIN'])");
+        check(MarkupSelectorMode.XML, "#MAIN", "(//#MAIN || //*[th:fragment='#MAIN' OR data-th-fragment='#MAIN'])");
+        check(MarkupSelectorMode.XML, "%REF", "(//* && //*[th:fragment='REF' OR data-th-fragment='REF'])");
+        check(MarkupSelectorMode.XML, "P.MAIN", "(//P.MAIN || //*[th:fragment='P.MAIN' OR data-th-fragment='P.MAIN'])");
+        check(MarkupSelectorMode.XML, "P#MAIN", "(//P#MAIN || //*[th:fragment='P#MAIN' OR data-th-fragment='P#MAIN'])");
+        check(MarkupSelectorMode.XML, "P%REF", "(//P && //*[th:fragment='REF' OR data-th-fragment='REF'])");
+        check(MarkupSelectorMode.HTML, "/p.someclass[a = \"x\" and b!='y']", "(/p[class='someclass' AND (a='x' AND b!='y')] || /*[(class='someclass' AND (a='x' AND b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "/p.someclass[a = \"x\" aNd b!='y' AND c  ^= 'z']", "(/p[class='someclass' AND (a='x' AND (b!='y' AND c^='z'))] || /*[(class='someclass' AND (a='x' AND (b!='y' AND c^='z'))) AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "/p.someclass[a = \"x\" or b!='y']", "(/p[class='someclass' AND (a='x' OR b!='y')] || /*[(class='someclass' AND (a='x' OR b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "/p.someclass[a = \"x\" or (b!='y')]", "(/p[class='someclass' AND (a='x' OR b!='y')] || /*[(class='someclass' AND (a='x' OR b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "/p.someclass[a = \"x\" OR (b!='y')]", "(/p[class='someclass' AND (a='x' OR b!='y')] || /*[(class='someclass' AND (a='x' OR b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "/p[a = \"x\" OR (b!='y')]", "(/p[a='x' OR b!='y'] || /*[(a='x' OR b!='y') AND (th:fragment='p' OR data-th-fragment='p')])");
+        checkNoRef(MarkupSelectorMode.HTML, "/p[a OR (b!='y')]", "/p[a* OR b!='y']");
+        check(MarkupSelectorMode.HTML, "[a OR (b!='y')]", "//*[a* OR b!='y']");
+        checkNoRef(MarkupSelectorMode.HTML, "[a OR (b!='y')]", "//*[a* OR b!='y']");
+        check(MarkupSelectorMode.HTML, "/p#someclass[a = \"x\" or (b!='y')]", "(/p[id='someclass' AND (a='x' OR b!='y')] || /*[(id='someclass' AND (a='x' OR b!='y')) AND (th:fragment='p' OR data-th-fragment='p')])");
+        check(MarkupSelectorMode.HTML, "div[th:fragment='copy' or data-th-fragment='copy']","(//div[th:fragment='copy' OR data-th-fragment='copy'] || //*[(th:fragment='copy' OR data-th-fragment='copy') AND (th:fragment='div' OR data-th-fragment='div')])");
+        check(MarkupSelectorMode.HTML, "html//p","(//html || //*[th:fragment='html' OR data-th-fragment='html'])(//p || //*[th:fragment='p' OR data-th-fragment='p'])");
+        checkNoRef(MarkupSelectorMode.HTML, "html//p","//html//p");
+        check(MarkupSelectorMode.HTML, "html//p[2]","(//html || //*[th:fragment='html' OR data-th-fragment='html'])(//p[2] || //*[th:fragment='p' OR data-th-fragment='p'][2])");
+        checkNoRef(MarkupSelectorMode.HTML, "html//p[2]","//html//p[2]");
+        checkNoRef(MarkupSelectorMode.HTML, "html/comment()","//html/comment()");
+        checkNoRef(MarkupSelectorMode.HTML, "comment()","//comment()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//comment()","//p//comment()");
+        check(MarkupSelectorMode.HTML, "p//comment()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//comment()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//comment()[2]","//p//comment()[2]");
+        checkNoRef(MarkupSelectorMode.HTML, "p//comment()[even()]","//p//comment()[even()]");
+        checkNoRef(MarkupSelectorMode.HTML, "p//text()[2]","//p//text()[2]");
+        checkNoRef(MarkupSelectorMode.HTML, "p//text()[even()]","//p//text()[even()]");
+        checkNoRef(MarkupSelectorMode.HTML, "html/cdata()","//html/cdata()");
+        checkNoRef(MarkupSelectorMode.HTML, "cdata()","//cdata()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//cdata()","//p//cdata()");
+        check(MarkupSelectorMode.HTML, "p//cdata()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//cdata()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//cdata()[2]","//p//cdata()[2]");
+        checkNoRef(MarkupSelectorMode.HTML, "p//cdata()[even()]","//p//cdata()[even()]");
+        checkNoRef(MarkupSelectorMode.HTML, "html/doctype()","//html/doctype()");
+        checkNoRef(MarkupSelectorMode.HTML, "doctype()","//doctype()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//doctype()","//p//doctype()");
+        check(MarkupSelectorMode.HTML, "p//doctype()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//doctype()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//doctype()[2]","//p//doctype()[2]");
+        checkNoRef(MarkupSelectorMode.HTML, "p//doctype()[even()]","//p//doctype()[even()]");
+        checkNoRef(MarkupSelectorMode.HTML, "html/xmldecl()","//html/xmldecl()");
+        checkNoRef(MarkupSelectorMode.HTML, "xmldecl()","//xmldecl()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//xmldecl()","//p//xmldecl()");
+        check(MarkupSelectorMode.HTML, "p//xmldecl()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//xmldecl()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//xmldecl()[2]","//p//xmldecl()[2]");
+        checkNoRef(MarkupSelectorMode.HTML, "p//xmldecl()[even()]","//p//xmldecl()[even()]");
+        checkNoRef(MarkupSelectorMode.HTML, "html/procinstr()","//html/procinstr()");
+        checkNoRef(MarkupSelectorMode.HTML, "procinstr()","//procinstr()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//procinstr()","//p//procinstr()");
+        check(MarkupSelectorMode.HTML, "p//procinstr()","(//p || //*[th:fragment='p' OR data-th-fragment='p'])//procinstr()");
+        checkNoRef(MarkupSelectorMode.HTML, "p//procinstr()[2]","//p//procinstr()[2]");
+        checkNoRef(MarkupSelectorMode.HTML, "p//procinstr()[even()]","//p//procinstr()[even()]");
     }
     
 
 
 
 
-    private static void check(final boolean caseSensitive, final String blockSelector, final String expected) throws Exception{
+    private static void check(final MarkupSelectorMode mode, final String blockSelector, final String expected) throws Exception{
 
-        final List<IMarkupSelectorItem> items = MarkupSelectorItems.parseSelector(caseSensitive, blockSelector, referenceResolver);
+        final List<IMarkupSelectorItem> items = MarkupSelectorItems.parseSelector(mode, blockSelector, referenceResolver);
         final String result = StringUtils.join(items, "");
         assertEquals(expected, result);
 
     }
 
-    private static void checkNoRef(final boolean caseSensitive, final String blockSelector, final String expected) throws Exception{
+    private static void checkNoRef(final MarkupSelectorMode mode, final String blockSelector, final String expected) throws Exception{
 
-        final List<IMarkupSelectorItem> items = MarkupSelectorItems.parseSelector(caseSensitive, blockSelector, null);
+        final List<IMarkupSelectorItem> items = MarkupSelectorItems.parseSelector(mode, blockSelector, null);
         final String result = StringUtils.join(items, "");
         assertEquals(expected, result);
 

@@ -43,11 +43,11 @@ import org.thymeleaf.engine.markup.MarkupEngineConfiguration;
  * @since 1.1
  *
  */
-public class BlockSelectorWithAttributeMarkupHandlerTest extends TestCase {
+public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
-    private static final String RESOURCES_FOLDER = "blockselectorwithattribute/";
+    private static final String RESOURCES_FOLDER = "htmlblockselector/";
 
-    public BlockSelectorWithAttributeMarkupHandlerTest() {
+    public HtmlBlockSelectorMarkupHandlerTest() {
         super();
     }
     
@@ -118,12 +118,12 @@ public class BlockSelectorWithAttributeMarkupHandlerTest extends TestCase {
         final StringWriter writer = new StringWriter();
 
         final IMarkupHandler directOutputHandler = new DirectOutputMarkupHandler(templateName, writer);
-        final ISelectedSelectorEventHandler selectedEventHandler = new OpenCloseAttributeMarkingSelectedSelectorEventHandler();
+        final ISelectedSelectorEventHandler selectedEventHandler = new DelegatingSelectedSelectorEventHandler();
         final INonSelectedSelectorEventHandler nonSelectedEventHandler = new DiscardingNonSelectedSelectorEventHandler();
 
         final BlockSelectorMarkupHandler handler =
                 new BlockSelectorMarkupHandler(directOutputHandler, selectedEventHandler, nonSelectedEventHandler,
-                        blockSelectors, false, referenceResolver);
+                        blockSelectors, MarkupSelectorMode.HTML, referenceResolver);
 
         config.getParser().parseTemplate(config, handler, templateName, reader);
 
