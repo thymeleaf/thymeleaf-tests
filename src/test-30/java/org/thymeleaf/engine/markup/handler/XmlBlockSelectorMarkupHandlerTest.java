@@ -118,7 +118,7 @@ public class XmlBlockSelectorMarkupHandlerTest extends TestCase {
         final StringWriter writer = new StringWriter();
 
         final IMarkupHandler directOutputHandler = new DirectOutputMarkupHandler(templateName, writer);
-        final ISelectedSelectorEventHandler selectedEventHandler = new DelegatingSelectedSelectorEventHandler();
+        final ISelectedSelectorEventHandler selectedEventHandler = new AllowingSelectedSelectorEventHandler();
         final INonSelectedSelectorEventHandler nonSelectedEventHandler = new DiscardingNonSelectedSelectorEventHandler();
 
         final BlockSelectorMarkupHandler handler =

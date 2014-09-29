@@ -25,7 +25,7 @@ package org.thymeleaf.engine.markup.handler;
  * @since 3.0.0
  *
  */
-public class OpenCloseAttributeMarkingSelectedSelectorEventHandler extends DelegatingSelectedSelectorEventHandler {
+public class OpenCloseAttributeMarkingSelectedSelectorEventHandler extends AllowingSelectedSelectorEventHandler {
 
     private static final char[] SELECTOR_ATTRIBUTE_NAME = "selectors".toCharArray();
     private static final char[] INNER_WHITESPACE_BUFFER = " ".toCharArray();
