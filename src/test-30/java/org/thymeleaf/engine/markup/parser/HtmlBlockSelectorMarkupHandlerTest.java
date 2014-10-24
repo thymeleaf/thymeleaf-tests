@@ -22,7 +22,6 @@ package org.thymeleaf.engine.markup.parser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,6 +38,7 @@ import org.attoparser.discard.DiscardMarkupHandler;
 import org.attoparser.output.OutputMarkupHandler;
 import org.attoparser.select.BlockSelectorMarkupHandler;
 import org.attoparser.select.IMarkupSelectorReferenceResolver;
+import org.thymeleaf.engine.markup.resource.StringResource;
 
 /*
  *
@@ -56,7 +56,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
     public void test() throws Exception {
 
-        final StandardHtmlParser parser = new StandardHtmlParser(2, 4096);
+        final StandardHtmlTemplateParser parser = new StandardHtmlTemplateParser(2, 4096);
 
         final IMarkupSelectorReferenceResolver referenceResolver = new TestingFragmentReferenceResolver();
 
@@ -113,10 +113,9 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
 
     private static void check(
-            final StandardHtmlParser parser, final String templateName, final String input, final String output, final String[] blockSelectors,
+            final StandardHtmlTemplateParser parser, final String templateName, final String input, final String output, final String[] blockSelectors,
             final IMarkupSelectorReferenceResolver referenceResolver) throws Exception{
 
-        final StringReader reader = new StringReader(input);
         final StringWriter writer = new StringWriter();
 
         final IMarkupHandler directOutputHandler = new OutputMarkupHandler(writer);
@@ -124,7 +123,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
         final BlockSelectorMarkupHandler handler =
                 new BlockSelectorMarkupHandler(directOutputHandler, new DiscardMarkupHandler(), blockSelectors, referenceResolver);
 
-        parser.parse(templateName, reader, handler);
+        parser.parse(new StringResource(templateName, input), handler);
 
         assertEquals("Test failed for file: " + templateName, output, writer.toString());
 
