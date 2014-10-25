@@ -17,38 +17,37 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.conditionalcomments;
+package org.thymeleaf.aurora.stsm.model.repository;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.standard.StandardDialect;
-import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.springframework.stereotype.Repository;
+import org.thymeleaf.aurora.stsm.model.SeedStarter;
 
 
-public class ConditionalCommentsTest {
+@Repository
+public class SeedStarterRepository {
 
-
-    public ConditionalCommentsTest() {
+    private final List<SeedStarter> seedStarters = new ArrayList<SeedStarter>();
+    
+    
+    
+    public SeedStarterRepository() {
         super();
     }
     
     
     
-    
-    @Test
-    public void testConditionalComments() throws Exception {
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine21/conditionalcomments");
-        
-        Assert.assertTrue(executor.isAllOK());
-        
+    public List<SeedStarter> findAll() {
+        return new ArrayList<SeedStarter>(this.seedStarters);
     }
 
+    
+    public void add(final SeedStarter seedStarter) {
+        this.seedStarters.add(seedStarter);
+    }
+    
+    
     
 }

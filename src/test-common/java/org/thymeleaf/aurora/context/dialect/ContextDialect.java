@@ -17,38 +17,29 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.conditionalcomments;
+package org.thymeleaf.aurora.context.dialect;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.standard.StandardDialect;
-import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.dialect.AbstractDialect;
+import org.thymeleaf.processor.IProcessor;
 
+public class ContextDialect extends AbstractDialect {
 
-public class ConditionalCommentsTest {
-
-
-    public ConditionalCommentsTest() {
-        super();
-    }
-    
-    
-    
-    
-    @Test
-    public void testConditionalComments() throws Exception {
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine21/conditionalcomments");
-        
-        Assert.assertTrue(executor.isAllOK());
-        
+    public String getPrefix() {
+        return "context";
     }
 
+    public boolean isLenient() {
+        return false;
+    }
     
+    @Override
+    public Set<IProcessor> getProcessors() {
+        final Set<IProcessor> processors = new HashSet<IProcessor>();
+        processors.add(new AddContextVariableElementProcessor());
+        return processors;
+    }
+
 }

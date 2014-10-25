@@ -17,38 +17,42 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.conditionalcomments;
-
-import java.util.Arrays;
+package org.thymeleaf.aurora.gtvg;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
-public class ConditionalCommentsTest {
 
 
-    public ConditionalCommentsTest() {
+
+public class GTVGHTML5Test {
+    
+    
+    public GTVGHTML5Test() {
         super();
     }
     
     
-    
+    /*
+     * Given Thymeleaf 3.0 changes the way in which XHTML is parsed (basically, it is now treated as any other
+     * type of markup), structures coming from the XHTML DTD definitions like shape="rect" in <a>'s and things like
+     * that do not appear on output anymore. So the "normal" GTVG application has been moved to each of the per-version
+     * profiles (2.0, 2.1, 3.0) in order to specify different outputs for them, and an HTML5-ized version of the GTVG
+     * app (this one) has been left here mainly so that it can be a part of the benchmarks.
+     */
     
     @Test
-    public void testConditionalComments() throws Exception {
+    public void testGTVGHTML5() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine21/conditionalcomments");
+        executor.execute("classpath:engine/gtvg");
         
         Assert.assertTrue(executor.isAllOK());
         
     }
-
+    
+    
     
 }

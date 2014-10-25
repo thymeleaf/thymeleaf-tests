@@ -17,22 +17,20 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.conditionalcomments;
-
-import java.util.Arrays;
+package org.thymeleaf.aurora.parsing;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
-public class ConditionalCommentsTest {
 
 
-    public ConditionalCommentsTest() {
+
+public class ParsingTest {
+    
+    
+    public ParsingTest() {
         super();
     }
     
@@ -40,15 +38,14 @@ public class ConditionalCommentsTest {
     
     
     @Test
-    public void testConditionalComments() throws Exception {
+    public void testParsing() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine21/conditionalcomments");
+        executor.execute("classpath:engine/parsing");
         
         Assert.assertTrue(executor.isAllOK());
         
     }
-
+    
     
 }

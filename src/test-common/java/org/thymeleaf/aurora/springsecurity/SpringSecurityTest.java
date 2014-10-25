@@ -17,22 +17,23 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.conditionalcomments;
+package org.thymeleaf.aurora.springsecurity;
 
 import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.standard.StandardDialect;
+import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
+import org.thymeleaf.testing.templateengine.context.web.SpringSecurityWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class ConditionalCommentsTest {
-
-
-    public ConditionalCommentsTest() {
+public class SpringSecurityTest {
+    
+    
+    public SpringSecurityTest() {
         super();
     }
     
@@ -40,15 +41,24 @@ public class ConditionalCommentsTest {
     
     
     @Test
-    public void testConditionalComments() throws Exception {
+    public void testSpringSecurity() throws Exception {
 
+        final SpringSecurityWebProcessingContextBuilder processingContextBuilder =
+                new SpringSecurityWebProcessingContextBuilder();
+        processingContextBuilder.setApplicationContextConfigLocation(
+                "classpath:engine/springsecurity/applicationContext-security.xml");
+        
         final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine21/conditionalcomments");
+        executor.setProcessingContextBuilder(processingContextBuilder);
+        executor.setDialects(
+                Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(), new SpringSecurityDialect()}));
+        executor.execute("classpath:engine/springsecurity");
         
         Assert.assertTrue(executor.isAllOK());
         
+        
     }
-
+    
+    
     
 }

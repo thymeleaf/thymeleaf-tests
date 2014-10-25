@@ -17,37 +17,44 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.conditionalcomments;
-
-import java.util.Arrays;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.standard.StandardDialect;
-import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+package org.thymeleaf.aurora.stsm.model;
 
 
-public class ConditionalCommentsTest {
 
+public class Row {
 
-    public ConditionalCommentsTest() {
+    private Variety variety = null;
+    private Integer seedsPerCell = null;
+    
+    
+    
+    
+    public Row() {
         super();
     }
-    
-    
-    
-    
-    @Test
-    public void testConditionalComments() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine21/conditionalcomments");
-        
-        Assert.assertTrue(executor.isAllOK());
-        
+
+    public Variety getVariety() {
+        return this.variety;
+    }
+
+
+    public void setVariety(final Variety variety) {
+        this.variety = variety;
+    }
+
+    public Integer getSeedsPerCell() {
+        return this.seedsPerCell;
+    }
+
+    public void setSeedsPerCell(final Integer seedsPerCell) {
+        this.seedsPerCell = seedsPerCell;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Row [variety=" + this.variety + ", seedsPerCell=" + this.seedsPerCell + "]";
     }
 
     

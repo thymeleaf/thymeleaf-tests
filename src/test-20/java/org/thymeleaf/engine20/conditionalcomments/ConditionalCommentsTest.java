@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine.conditionalcomments;
+package org.thymeleaf.aurora.conditionalcomments;
 
 import java.util.Arrays;
 

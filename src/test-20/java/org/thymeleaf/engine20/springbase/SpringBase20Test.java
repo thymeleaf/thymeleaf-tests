@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine.springbase;
+package org.thymeleaf.aurora.springbase;
 
 import java.util.Arrays;
 

@@ -17,22 +17,22 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.conditionalcomments;
+package org.thymeleaf.aurora.stsm;
 
 import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.standard.StandardDialect;
+import org.thymeleaf.aurora.stsm.context.STSMWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class ConditionalCommentsTest {
-
-
-    public ConditionalCommentsTest() {
+public class STSMTest {
+    
+    
+    public STSMTest() {
         super();
     }
     
@@ -40,15 +40,18 @@ public class ConditionalCommentsTest {
     
     
     @Test
-    public void testConditionalComments() throws Exception {
+    public void testSTSM() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine21/conditionalcomments");
+        executor.setProcessingContextBuilder(new STSMWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:engine/stsm");
         
         Assert.assertTrue(executor.isAllOK());
         
+        
     }
-
+    
+    
     
 }

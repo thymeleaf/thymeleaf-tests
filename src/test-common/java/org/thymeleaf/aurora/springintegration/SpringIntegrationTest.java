@@ -17,23 +17,23 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine21.springintegration;
+package org.thymeleaf.aurora.springintegration;
 
 import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.engine21.springintegration.context.ErrorsSpringIntegrationWebProcessingContextBuilder;
-import org.thymeleaf.engine21.springintegration.context.SpringIntegrationWebProcessingContextBuilder;
+import org.thymeleaf.aurora.springintegration.context.ErrorsSpringIntegrationWebProcessingContextBuilder;
+import org.thymeleaf.aurora.springintegration.context.SpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class SpringIntegration21Test {
+public class SpringIntegrationTest {
     
     
-    public SpringIntegration21Test() {
+    public SpringIntegrationTest() {
         super();
     }
     
@@ -46,24 +46,24 @@ public class SpringIntegration21Test {
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
-        executor.execute("classpath:engine21/springintegration/form");
+        executor.execute("classpath:engine/springintegration/form");
         
         Assert.assertTrue(executor.isAllOK());
         
     }
 
-    
-    
+
+
     @Test
     public void testErrors() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
-        executor.execute("classpath:engine21/springintegration/errors");
-        
+        executor.execute("classpath:engine/springintegration/errors");
+
         Assert.assertTrue(executor.isAllOK());
-        
+
     }
 
 
@@ -73,10 +73,9 @@ public class SpringIntegration21Test {
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(
-                new org.thymeleaf.aurora.springintegration.context.SpringIntegrationWebProcessingContextBuilder(
-                        "classpath:engine21/springintegration/applicationContext-beans.xml"));
+                new SpringIntegrationWebProcessingContextBuilder("classpath:engine/springintegration/applicationContext-beans.xml"));
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
-        executor.execute("classpath:engine21/springintegration/beans");
+        executor.execute("classpath:engine/springintegration/beans");
 
         Assert.assertTrue(executor.isAllOK());
 
@@ -84,5 +83,18 @@ public class SpringIntegration21Test {
 
 
 
+    @Test
+    public void testExpression() throws Exception {
 
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:engine/springintegration/expression");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+    
+    
 }
