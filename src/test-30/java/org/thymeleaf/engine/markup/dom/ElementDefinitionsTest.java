@@ -30,35 +30,45 @@ public final class ElementDefinitionsTest {
     @Test
     public void test() {
 
-        final int standardSize = ElementDefinitions.ALL_STANDARD_ELEMENTS.size();
-        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_ELEMENT_NAMES.size());
+        final int standardSize = ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.size();
+        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size());
 
-        for (final String name : ElementDefinitions.ALL_STANDARD_ELEMENT_NAMES) {
-            final ElementDefinition def1 = ElementDefinitions.forName(false, name);
-            final ElementDefinition def2 = ElementDefinitions.forName(false, name);
-            final ElementDefinition def3 = ElementDefinitions.forName(false, name.toUpperCase());
+        for (final String name : ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES) {
+            final ElementDefinition def1 = ElementDefinitions.forHtmlName(name);
+            final ElementDefinition def2 = ElementDefinitions.forHtmlName(name);
+            final ElementDefinition def3 = ElementDefinitions.forHtmlName(name.toUpperCase());
             Assert.assertSame(def1, def2);
             Assert.assertSame(def2, def3);
         }
+        for (final String name : ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES) {
+            final ElementDefinition def1 = ElementDefinitions.forXmlName(name);
+            final ElementDefinition def2 = ElementDefinitions.forXmlName(name);
+            final ElementDefinition def3 = ElementDefinitions.forXmlName(name.toUpperCase());
+            Assert.assertSame(def1, def2);
+            Assert.assertNotSame(def2, def3);
+            Assert.assertNotEquals(def2, def3);
+        }
 
-        final ElementDefinition new1 = ElementDefinitions.forName(false, "NEW");
+        final ElementDefinition new1 = ElementDefinitions.forHtmlName("NEW");
         Assert.assertNotNull(new1);
         Assert.assertEquals("new", new1.getName());
-        final ElementDefinition new2 = ElementDefinitions.forName(false, "new");
+        final ElementDefinition new2 = ElementDefinitions.forHtmlName("new");
         Assert.assertSame(new1, new2);
-        final ElementDefinition new3 = ElementDefinitions.forName(false, "NeW");
+        final ElementDefinition new3 = ElementDefinitions.forHtmlName("NeW");
         Assert.assertSame(new1, new3);
-        final ElementDefinition new4 = ElementDefinitions.forName(true, "NeW");
+        final ElementDefinition new4 = ElementDefinitions.forXmlName("NeW");
         Assert.assertNotSame(new1, new4);
-        final ElementDefinition new5 = ElementDefinitions.forName(true, "new");
-        Assert.assertSame(new1, new5);
-        final ElementDefinition new6 = ElementDefinitions.forName(false, "new");
-        Assert.assertSame(new1, new6);
+        final ElementDefinition new5 = ElementDefinitions.forXmlName("new");
+        Assert.assertNotSame(new1, new5);
+        final ElementDefinition new6 = ElementDefinitions.forXmlName("new");
+        Assert.assertSame(new5, new6);
+        final ElementDefinition new7 = ElementDefinitions.forHtmlName("new");
+        Assert.assertSame(new1, new7);
 
-        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_ELEMENTS.size());
-        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_ELEMENT_NAMES.size());
-        Assert.assertFalse(ElementDefinitions.ALL_STANDARD_ELEMENT_NAMES.contains("new"));
-        Assert.assertFalse(ElementDefinitions.ALL_STANDARD_ELEMENTS.contains(new1));
+        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.size());
+        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size());
+        Assert.assertFalse(ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.contains("new"));
+        Assert.assertFalse(ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.contains(new1));
 
     }
 
