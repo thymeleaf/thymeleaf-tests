@@ -33,11 +33,8 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.attoparser.IMarkupHandler;
-import org.attoparser.discard.DiscardMarkupHandler;
-import org.attoparser.output.OutputMarkupHandler;
-import org.attoparser.select.BlockSelectorMarkupHandler;
-import org.attoparser.select.IMarkupSelectorReferenceResolver;
+import org.thymeleaf.engine.markup.handler.ITemplateHandler;
+import org.thymeleaf.engine.markup.handler.OutputTemplateHandler;
 import org.thymeleaf.engine.markup.resource.StringResource;
 
 /*
@@ -57,8 +54,6 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
     public void test() throws Exception {
 
         final StandardHtmlTemplateParser parser = new StandardHtmlTemplateParser(2, 4096);
-
-        final IMarkupSelectorReferenceResolver referenceResolver = new TestingFragmentReferenceResolver();
 
         final URL resourcesFolderURL = Thread.currentThread().getContextClassLoader().getResource(RESOURCES_FOLDER);
         assertNotNull(resourcesFolderURL);
@@ -101,7 +96,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
             final String[] blockSelectors = StringUtils.split(blockSelector,",");
 
-            check(parser, testFile.getName(), testFileContents, resultFileContents, blockSelectors, referenceResolver);
+            check(parser, testFile.getName(), testFileContents, resultFileContents, blockSelectors);
 
         }
 
@@ -113,30 +108,19 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
 
     private static void check(
-            final StandardHtmlTemplateParser parser, final String templateName, final String input, final String output, final String[] blockSelectors,
-            final IMarkupSelectorReferenceResolver referenceResolver) throws Exception{
+            final StandardHtmlTemplateParser parser, final String templateName, final String input, final String output, final String[] blockSelectors)
+            throws Exception{
 
         final StringWriter writer = new StringWriter();
 
-        final IMarkupHandler directOutputHandler = new OutputMarkupHandler(writer);
+        final ITemplateHandler handler = new OutputTemplateHandler(templateName, writer);
 
-        final BlockSelectorMarkupHandler handler =
-                new BlockSelectorMarkupHandler(directOutputHandler, new DiscardMarkupHandler(), blockSelectors, referenceResolver);
-
-        parser.parse(new StringResource(templateName, input), handler);
+        parser.parse(new StringResource(templateName, input), "th", blockSelectors, handler);
 
         assertEquals("Test failed for file: " + templateName, output, writer.toString());
 
     }
 
 
-
-
-    static final class TestingFragmentReferenceResolver implements IMarkupSelectorReferenceResolver {
-
-        public String resolveSelectorFromReference(final String reference) {
-            return "/[th:fragment='" + reference + "' or data-th-fragment='" + reference + "']";
-        }
-    }
 
 }
