@@ -33,7 +33,7 @@ public final class MarkupTextRepositoryTest {
     @Test
     public void testNormal() throws Exception {
 
-        final IMarkupTextRepository repository = new StandardMarkupTextRepository(15, new String[0]);
+        final ITextRepository repository = new StandardTextRepository(15, new String[0]);
 
         int res01 = testTextStr(repository, "UKHRHQIQWB");
         int res02 = testTextStr(repository, "CESIOUUOKO");
@@ -99,7 +99,7 @@ public final class MarkupTextRepositoryTest {
     @Test
     public void testWithUnremovable() throws Exception {
 
-        final IMarkupTextRepository repository = new StandardMarkupTextRepository(15, new String[] { "CESIOUUOKO" });
+        final ITextRepository repository = new StandardTextRepository(15, new String[] { "CESIOUUOKO" });
 
         int res01 = testTextStr(repository, "UKHRHQIQWB");
         int res02 = testTextStr(repository, "CESIOUUOKO");
@@ -165,17 +165,17 @@ public final class MarkupTextRepositoryTest {
 
 
 
-    private static int testTextChar(final IMarkupTextRepository repository, final char[] text, final int offset, final int len) {
+    private static int testTextChar(final ITextRepository repository, final char[] text, final int offset, final int len) {
         final String result = repository.getText(text,offset,len);
         return System.identityHashCode(result);
     }
 
-    private static int testTextChar(final IMarkupTextRepository repository, final String text) {
+    private static int testTextChar(final ITextRepository repository, final String text) {
         final String result = repository.getText(text.toCharArray(),0,text.length());
         return System.identityHashCode(result);
     }
 
-    private static int testTextStr(final IMarkupTextRepository repository, final String text) {
+    private static int testTextStr(final ITextRepository repository, final String text) {
         final String input = new String(text);
         final String result = repository.getText(input);
         return System.identityHashCode(result);
