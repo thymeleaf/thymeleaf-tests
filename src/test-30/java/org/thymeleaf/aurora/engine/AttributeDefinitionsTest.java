@@ -74,6 +74,14 @@ public final class AttributeDefinitionsTest {
         Assert.assertFalse(AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.contains("new"));
         Assert.assertFalse(AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTES.contains(new1));
 
+        final AttributeDefinition htmlIdDefinition = AttributeDefinitions.forHtmlName("id");
+        final AttributeDefinition htmlDisabledDefinition = AttributeDefinitions.forHtmlName("disabled");
+        final AttributeDefinition xmlDisabledDefinition = AttributeDefinitions.forXmlName("disabled");
+
+        Assert.assertFalse(htmlIdDefinition.isBooleanAttribute());
+        Assert.assertTrue(htmlDisabledDefinition.isBooleanAttribute());
+        Assert.assertFalse(xmlDisabledDefinition.isBooleanAttribute());
+
     }
 
 
