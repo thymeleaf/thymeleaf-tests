@@ -33,11 +33,11 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.thymeleaf.aurora.context.ITemplateEngineContext;
+import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.engine.ITemplateHandler;
 import org.thymeleaf.aurora.engine.OutputTemplateHandler;
 import org.thymeleaf.aurora.resource.StringResource;
-import org.thymeleaf.aurora.text.ITextRepository;
-import org.thymeleaf.aurora.text.TextRepositories;
 
 /*
  *
@@ -56,7 +56,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
     public void test() throws Exception {
 
         final HtmlTemplateParser parser = new HtmlTemplateParser(2, 4096);
-        final ITextRepository textRepository = TextRepositories.createDefault();
+        final ITemplateEngineContext templateEngineContext = new TemplateEngineContext();
 
         final URL resourcesFolderURL = Thread.currentThread().getContextClassLoader().getResource(RESOURCES_FOLDER);
         assertNotNull(resourcesFolderURL);
@@ -99,7 +99,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
             final String[] blockSelectors = StringUtils.split(blockSelector,",");
 
-            check(parser, textRepository, testFile.getName(), testFileContents, resultFileContents, blockSelectors);
+            check(parser, templateEngineContext, testFile.getName(), testFileContents, resultFileContents, blockSelectors);
 
         }
 
@@ -111,14 +111,14 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
 
     private static void check(
-            final HtmlTemplateParser parser, final ITextRepository textRepository,
+            final HtmlTemplateParser parser, final ITemplateEngineContext templateEngineContext,
             final String templateName, final String input, final String output, final String[] blockSelectors)
             throws Exception{
 
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(templateName, writer);
 
-        parser.parse(new StringResource(templateName, input), "th", blockSelectors, textRepository, handler);
+        parser.parse(templateEngineContext, new StringResource(templateName, input), blockSelectors, handler);
 
         assertEquals("Test failed for file: " + templateName, output, writer.toString());
 

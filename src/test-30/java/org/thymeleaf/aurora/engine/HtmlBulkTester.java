@@ -27,15 +27,15 @@ import java.io.OutputStreamWriter;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.thymeleaf.aurora.context.ITemplateEngineContext;
+import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.parser.HtmlTemplateParser;
 import org.thymeleaf.aurora.resource.ReaderResource;
-import org.thymeleaf.aurora.text.ITextRepository;
-import org.thymeleaf.aurora.text.TextRepositories;
 
 public class HtmlBulkTester {
 
     private static final HtmlTemplateParser PARSER = new HtmlTemplateParser(2, 4096);
-    private static final ITextRepository TEXT_REPOSITORY = TextRepositories.createDefault();
+    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = new TemplateEngineContext();
 
 
 
@@ -80,7 +80,7 @@ public class HtmlBulkTester {
 
             System.out.print("[PARSING]");
 
-            PARSER.parse(new ReaderResource(fileInTestFolderName, fileInTestFolderReader), TEXT_REPOSITORY, handler);
+            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new ReaderResource(fileInTestFolderName, fileInTestFolderReader), handler);
 
             // Input stream will be closed by parser
             testOutputWriter.close();

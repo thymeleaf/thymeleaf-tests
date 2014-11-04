@@ -21,8 +21,6 @@ package org.thymeleaf.aurora.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.engine.ElementDefinition;
-import org.thymeleaf.aurora.engine.ElementDefinitions;
 
 
 public final class ElementDefinitionsTest {
@@ -32,39 +30,41 @@ public final class ElementDefinitionsTest {
     @Test
     public void test() {
 
+        final ElementDefinitions elementDefinitions = new ElementDefinitions();
+
         final int standardSize = ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.size();
-        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size());
+        Assert.assertEquals(standardSize, elementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size());
 
         for (final String name : ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES) {
-            final ElementDefinition def1 = ElementDefinitions.forHtmlName(name);
-            final ElementDefinition def2 = ElementDefinitions.forHtmlName(name);
-            final ElementDefinition def3 = ElementDefinitions.forHtmlName(name.toUpperCase());
+            final ElementDefinition def1 = elementDefinitions.forHtmlName(name);
+            final ElementDefinition def2 = elementDefinitions.forHtmlName(name);
+            final ElementDefinition def3 = elementDefinitions.forHtmlName(name.toUpperCase());
             Assert.assertSame(def1, def2);
             Assert.assertSame(def2, def3);
         }
         for (final String name : ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES) {
-            final ElementDefinition def1 = ElementDefinitions.forXmlName(name);
-            final ElementDefinition def2 = ElementDefinitions.forXmlName(name);
-            final ElementDefinition def3 = ElementDefinitions.forXmlName(name.toUpperCase());
+            final ElementDefinition def1 = elementDefinitions.forXmlName(name);
+            final ElementDefinition def2 = elementDefinitions.forXmlName(name);
+            final ElementDefinition def3 = elementDefinitions.forXmlName(name.toUpperCase());
             Assert.assertSame(def1, def2);
             Assert.assertNotSame(def2, def3);
             Assert.assertNotEquals(def2, def3);
         }
 
-        final ElementDefinition new1 = ElementDefinitions.forHtmlName("NEW");
+        final ElementDefinition new1 = elementDefinitions.forHtmlName("NEW");
         Assert.assertNotNull(new1);
         Assert.assertEquals("new", new1.getName());
-        final ElementDefinition new2 = ElementDefinitions.forHtmlName("new");
+        final ElementDefinition new2 = elementDefinitions.forHtmlName("new");
         Assert.assertSame(new1, new2);
-        final ElementDefinition new3 = ElementDefinitions.forHtmlName("NeW");
+        final ElementDefinition new3 = elementDefinitions.forHtmlName("NeW");
         Assert.assertSame(new1, new3);
-        final ElementDefinition new4 = ElementDefinitions.forXmlName("NeW");
+        final ElementDefinition new4 = elementDefinitions.forXmlName("NeW");
         Assert.assertNotSame(new1, new4);
-        final ElementDefinition new5 = ElementDefinitions.forXmlName("new");
+        final ElementDefinition new5 = elementDefinitions.forXmlName("new");
         Assert.assertNotSame(new1, new5);
-        final ElementDefinition new6 = ElementDefinitions.forXmlName("new");
+        final ElementDefinition new6 = elementDefinitions.forXmlName("new");
         Assert.assertSame(new5, new6);
-        final ElementDefinition new7 = ElementDefinitions.forHtmlName("new");
+        final ElementDefinition new7 = elementDefinitions.forHtmlName("new");
         Assert.assertSame(new1, new7);
 
         Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.size());

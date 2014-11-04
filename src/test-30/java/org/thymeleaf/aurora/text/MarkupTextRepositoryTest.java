@@ -33,7 +33,7 @@ public final class MarkupTextRepositoryTest {
     @Test
     public void testNormal() throws Exception {
 
-        final ITextRepository repository = new StandardTextRepository(15, new String[0]);
+        final ITextRepository repository = new LimitedSizeCacheTextRepository(15, new String[0]);
 
         int res01 = testTextStr(repository, "UKHRHQIQWB");
         int res02 = testTextStr(repository, "CESIOUUOKO");
@@ -99,7 +99,7 @@ public final class MarkupTextRepositoryTest {
     @Test
     public void testWithUnremovable() throws Exception {
 
-        final ITextRepository repository = new StandardTextRepository(15, new String[] { "CESIOUUOKO" });
+        final ITextRepository repository = new LimitedSizeCacheTextRepository(15, new String[] { "CESIOUUOKO" });
 
         int res01 = testTextStr(repository, "UKHRHQIQWB");
         int res02 = testTextStr(repository, "CESIOUUOKO");

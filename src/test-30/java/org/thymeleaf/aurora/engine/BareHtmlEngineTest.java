@@ -23,16 +23,16 @@ import java.io.StringWriter;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.aurora.context.ITemplateEngineContext;
+import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.parser.HtmlTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
-import org.thymeleaf.aurora.text.ITextRepository;
-import org.thymeleaf.aurora.text.TextRepositories;
 
 
 public final class BareHtmlEngineTest {
 
     private static final HtmlTemplateParser PARSER = new HtmlTemplateParser(2, 4096);
-    private static final ITextRepository TEXT_REPOSITORY = TextRepositories.createDefault();
+    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = new TemplateEngineContext();
 
 
 
@@ -92,9 +92,9 @@ public final class BareHtmlEngineTest {
         final ITemplateHandler handler = new OutputTemplateHandler(templateName, writer);
 
         if (blockSelectors != null) {
-            PARSER.parse(new StringResource(templateName, input), "th", blockSelectors, TEXT_REPOSITORY, handler);
+            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), blockSelectors, handler);
         } else {
-            PARSER.parse(new StringResource(templateName, input), TEXT_REPOSITORY, handler);
+            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), handler);
         }
 
         Assert.assertEquals("Test failed for file: " + templateName, output, writer.toString());
