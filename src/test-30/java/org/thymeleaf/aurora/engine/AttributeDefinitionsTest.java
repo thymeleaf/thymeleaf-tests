@@ -53,7 +53,7 @@ public final class AttributeDefinitionsTest {
 
         final AttributeDefinition new1 = attributeDefinitions.forHtmlName("NEW");
         Assert.assertNotNull(new1);
-        Assert.assertEquals("new", new1.getName());
+        Assert.assertEquals("new", new1.getAttributeName().getCompleteNSAttributeName());
         final AttributeDefinition new2 = attributeDefinitions.forHtmlName("new");
         Assert.assertSame(new1, new2);
         final AttributeDefinition new3 = attributeDefinitions.forHtmlName("NeW");
@@ -75,10 +75,31 @@ public final class AttributeDefinitionsTest {
         final AttributeDefinition htmlIdDefinition = attributeDefinitions.forHtmlName("id");
         final AttributeDefinition htmlDisabledDefinition = attributeDefinitions.forHtmlName("disabled");
         final AttributeDefinition xmlDisabledDefinition = attributeDefinitions.forXmlName("disabled");
+        Assert.assertEquals("{disabled}", htmlDisabledDefinition.getAttributeName().toString());
 
         Assert.assertFalse(htmlIdDefinition.isBooleanAttribute());
         Assert.assertTrue(htmlDisabledDefinition.isBooleanAttribute());
         Assert.assertFalse(xmlDisabledDefinition.isBooleanAttribute());
+
+        final AttributeDefinition thtextDefinition = attributeDefinitions.forHtmlName("th:text");
+        Assert.assertEquals("{th:text,data-th-text}", thtextDefinition.getAttributeName().toString());
+        final AttributeDefinition thtextDefinition2 = attributeDefinitions.forHtmlName("th:text");
+        final AttributeDefinition thtextDefinition3 = attributeDefinitions.forHtmlName("th:TEXT");
+        final AttributeDefinition thtextDefinition4 = attributeDefinitions.forHtmlName("data-th-TEXT");
+        Assert.assertSame(thtextDefinition, thtextDefinition2);
+        Assert.assertSame(thtextDefinition, thtextDefinition3);
+        Assert.assertSame(thtextDefinition, thtextDefinition4);
+
+        final AttributeDefinition xmlthtextDefinition = attributeDefinitions.forXmlName("th:text");
+        Assert.assertEquals("{th:text}", xmlthtextDefinition.getAttributeName().toString());
+        final AttributeDefinition xmlthtextDefinition2 = attributeDefinitions.forXmlName("th:text");
+        final AttributeDefinition xmlthtextDefinition3 = attributeDefinitions.forXmlName("th:TEXT");
+        Assert.assertEquals("{th:TEXT}", xmlthtextDefinition3.getAttributeName().toString());
+        final AttributeDefinition xmlthtextDefinition4 = attributeDefinitions.forXmlName("data-th-TEXT");
+        Assert.assertEquals("{data-th-TEXT}", xmlthtextDefinition4.getAttributeName().toString());
+        Assert.assertSame(xmlthtextDefinition, xmlthtextDefinition2);
+        Assert.assertNotSame(xmlthtextDefinition, xmlthtextDefinition3);
+        Assert.assertNotSame(xmlthtextDefinition, xmlthtextDefinition4);
 
     }
 
