@@ -72,14 +72,12 @@ public final class AttributeDefinitionsTest {
         Assert.assertFalse(AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.contains("new"));
         Assert.assertFalse(AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTES.contains(new1));
 
-        final AttributeDefinition htmlIdDefinition = attributeDefinitions.forHtmlName("id");
-        final AttributeDefinition htmlDisabledDefinition = attributeDefinitions.forHtmlName("disabled");
-        final AttributeDefinition xmlDisabledDefinition = attributeDefinitions.forXmlName("disabled");
+        final HtmlAttributeDefinition htmlIdDefinition = attributeDefinitions.forHtmlName("id");
+        final HtmlAttributeDefinition htmlDisabledDefinition = attributeDefinitions.forHtmlName("disabled");
         Assert.assertEquals("{disabled}", htmlDisabledDefinition.getAttributeName().toString());
 
         Assert.assertFalse(htmlIdDefinition.isBooleanAttribute());
         Assert.assertTrue(htmlDisabledDefinition.isBooleanAttribute());
-        Assert.assertFalse(xmlDisabledDefinition.isBooleanAttribute());
 
         final AttributeDefinition thtextDefinition = attributeDefinitions.forHtmlName("th:text");
         Assert.assertEquals("{th:text,data-th-text}", thtextDefinition.getAttributeName().toString());
