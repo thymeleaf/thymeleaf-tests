@@ -53,7 +53,7 @@ public final class AttributeDefinitionsTest {
 
         final AttributeDefinition new1 = attributeDefinitions.forHtmlName("NEW");
         Assert.assertNotNull(new1);
-        Assert.assertEquals("new", new1.getAttributeName().getCompleteNSAttributeName());
+        Assert.assertEquals("new", new1.getAttributeName().getAttributeName());
         final AttributeDefinition new2 = attributeDefinitions.forHtmlName("new");
         Assert.assertSame(new1, new2);
         final AttributeDefinition new3 = attributeDefinitions.forHtmlName("NeW");

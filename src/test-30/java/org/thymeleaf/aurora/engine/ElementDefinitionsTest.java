@@ -53,7 +53,7 @@ public final class ElementDefinitionsTest {
 
         final ElementDefinition new1 = elementDefinitions.forHtmlName("NEW");
         Assert.assertNotNull(new1);
-        Assert.assertEquals("new", new1.getElementName().getCompleteNSElementName());
+        Assert.assertEquals("new", new1.getElementName().getElementName());
         final ElementDefinition new2 = elementDefinitions.forHtmlName("new");
         Assert.assertSame(new1, new2);
         final ElementDefinition new3 = elementDefinitions.forHtmlName("NeW");
