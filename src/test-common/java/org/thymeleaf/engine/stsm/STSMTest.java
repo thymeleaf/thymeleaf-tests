@@ -17,43 +17,41 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine20.springbase;
+package org.thymeleaf.engine.stsm;
 
 import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
+import org.thymeleaf.engine.stsm.context.STSMWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class SpringBase20Test {
-
-
-    public SpringBase20Test() {
+public class STSMTest {
+    
+    
+    public STSMTest() {
         super();
     }
-
-
+    
+    
+    
+    
     @Test
-    public void testSpringBaseConditionalComments() throws Exception {
-
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation(null);
+    public void testSTSM() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine20/springbase/springbaseconditionalcomments.thindex");
-
+        executor.setProcessingContextBuilder(new STSMWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:engine/stsm");
+        
         Assert.assertTrue(executor.isAllOK());
-
-
+        
+        
     }
-
+    
     
     
 }

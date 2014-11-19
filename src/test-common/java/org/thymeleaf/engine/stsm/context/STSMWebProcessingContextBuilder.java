@@ -17,8 +17,9 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine30.springintegration.context;
+package org.thymeleaf.engine.stsm.context;
 
+import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -26,27 +27,22 @@ import java.util.Map;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.DataBinder;
+import org.thymeleaf.engine.stsm.model.Variety;
+import org.thymeleaf.engine.stsm.model.repository.VarietyRepository;
 import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.exception.TestEngineExecutionException;
 import org.thymeleaf.testing.templateengine.messages.ITestMessages;
 import org.thymeleaf.testing.templateengine.testable.ITest;
-import org.thymeleaf.util.Validate;
 
 
-public class SpringIntegrationWebProcessingContextBuilder extends SpringWebProcessingContextBuilder {
+
+public class STSMWebProcessingContextBuilder extends SpringWebProcessingContextBuilder {
 
 
     
-    public SpringIntegrationWebProcessingContextBuilder() {
+    public STSMWebProcessingContextBuilder() {
         super();
-        setApplicationContextConfigLocation("classpath:engine30/springintegration/applicationContext.xml");
-    }
-
-
-    public SpringIntegrationWebProcessingContextBuilder(final String applicationContextLocation) {
-        super();
-        Validate.notNull(applicationContextLocation, "Application context location cannot be null");
-        setApplicationContextConfigLocation(applicationContextLocation);
+        setApplicationContextConfigLocation(null);
     }
 
     
@@ -67,8 +63,36 @@ public class SpringIntegrationWebProcessingContextBuilder extends SpringWebProce
         sdf.setLenient(false);
         dataBinder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
         
+        dataBinder.registerCustomEditor(Variety.class, new VarietyPropertyEditor(new VarietyRepository()));
+        
     }
     
+    
+    
+    static class VarietyPropertyEditor extends PropertyEditorSupport {
+
+        private final VarietyRepository varietyRepository;
+        
+        public VarietyPropertyEditor(final VarietyRepository varietyRepository) {
+            super();
+            this.varietyRepository = varietyRepository;
+        }
+        
+        
+        @Override
+        public String getAsText() {
+            final Variety value = (Variety) getValue();
+            return (value != null ? value.getId().toString() : "");
+        }
+
+        @Override
+        public void setAsText(final String text) throws IllegalArgumentException {
+            final Integer varietyId = Integer.valueOf(text);
+            setValue(this.varietyRepository.findById(varietyId));
+        }
+        
+        
+    }
     
     
 }

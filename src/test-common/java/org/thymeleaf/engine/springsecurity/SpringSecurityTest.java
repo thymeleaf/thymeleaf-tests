@@ -17,43 +17,48 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine20.springbase;
+package org.thymeleaf.engine.springsecurity;
 
 import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
+import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
+import org.thymeleaf.testing.templateengine.context.web.SpringSecurityWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class SpringBase20Test {
-
-
-    public SpringBase20Test() {
+public class SpringSecurityTest {
+    
+    
+    public SpringSecurityTest() {
         super();
     }
-
-
+    
+    
+    
+    
     @Test
-    public void testSpringBaseConditionalComments() throws Exception {
+    public void testSpringSecurity() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation(null);
-
+        final SpringSecurityWebProcessingContextBuilder processingContextBuilder =
+                new SpringSecurityWebProcessingContextBuilder();
+        processingContextBuilder.setApplicationContextConfigLocation(
+                "classpath:engine/springsecurity/applicationContext-security.xml");
+        
         final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine20/springbase/springbaseconditionalcomments.thindex");
-
+        executor.setProcessingContextBuilder(processingContextBuilder);
+        executor.setDialects(
+                Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(), new SpringSecurityDialect()}));
+        executor.execute("classpath:engine/springsecurity");
+        
         Assert.assertTrue(executor.isAllOK());
-
-
+        
+        
     }
-
+    
     
     
 }

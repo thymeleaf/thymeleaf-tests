@@ -17,38 +17,53 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine21.conditionalcomments;
+package org.thymeleaf.engine.springintegration.model;
 
-import java.util.Arrays;
+import java.util.Date;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.standard.StandardDialect;
-import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+public class FormBean01 {
 
-
-public class ConditionalCommentsTest {
-
-
-    public ConditionalCommentsTest() {
+    private Integer id = null;
+    private String name = null;
+    private Date date = null;
+    
+    
+    public FormBean01() {
         super();
     }
-    
-    
-    
-    
-    @Test
-    public void testConditionalComments() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine21/conditionalcomments");
-        
-        Assert.assertTrue(executor.isAllOK());
-        
+
+    public Integer getId() {
+        return this.id;
     }
 
+
+    public void setId(final Integer id) {
+        this.id = id;
+    }
+
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public void setDate(final Date date) {
+        this.date = date;
+    }
+
+
+    @Override
+    public String toString() {
+        return "FormBean01 [name=" + this.name + ", date=" + this.date + "]";
+    }
     
 }

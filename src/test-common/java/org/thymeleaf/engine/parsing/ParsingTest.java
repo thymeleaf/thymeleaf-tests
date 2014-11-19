@@ -17,43 +17,35 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine20.springbase;
-
-import java.util.Arrays;
+package org.thymeleaf.engine.parsing;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class SpringBase20Test {
 
 
-    public SpringBase20Test() {
+
+public class ParsingTest {
+    
+    
+    public ParsingTest() {
         super();
     }
-
-
+    
+    
+    
+    
     @Test
-    public void testSpringBaseConditionalComments() throws Exception {
-
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation(null);
+    public void testParsing() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(), new ConditionalCommentsDialect() }));
-        executor.execute("classpath:engine20/springbase/springbaseconditionalcomments.thindex");
-
+        executor.execute("classpath:engine/parsing");
+        
         Assert.assertTrue(executor.isAllOK());
-
-
+        
     }
-
     
     
 }

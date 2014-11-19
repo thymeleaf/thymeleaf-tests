@@ -73,7 +73,7 @@ public class SpringIntegration30Test {
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(
-                new org.thymeleaf.aurora.springintegration.context.SpringIntegrationWebProcessingContextBuilder(
+                new org.thymeleaf.engine30.springintegration.context.SpringIntegrationWebProcessingContextBuilder(
                         "classpath:engine30/springintegration/applicationContext-beans.xml"));
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
         executor.execute("classpath:engine30/springintegration/beans");

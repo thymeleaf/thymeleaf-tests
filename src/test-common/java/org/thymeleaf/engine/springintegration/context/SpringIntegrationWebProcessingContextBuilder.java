@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine30.springintegration.context;
+package org.thymeleaf.engine.springintegration.context;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,8 +38,7 @@ public class SpringIntegrationWebProcessingContextBuilder extends SpringWebProce
 
     
     public SpringIntegrationWebProcessingContextBuilder() {
-        super();
-        setApplicationContextConfigLocation("classpath:engine30/springintegration/applicationContext.xml");
+        this("classpath:engine/springintegration/applicationContext.xml");
     }
 
 
