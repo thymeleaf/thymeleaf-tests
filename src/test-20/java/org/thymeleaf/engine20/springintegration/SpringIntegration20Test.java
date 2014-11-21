@@ -17,39 +17,41 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine.context;
+package org.thymeleaf.engine20.springintegration;
 
 import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.engine.context.dialect.ContextDialect;
-import org.thymeleaf.standard.StandardDialect;
+import org.thymeleaf.engine20.springintegration.context.SpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class ContextTest {
-
-
-    public ContextTest() {
+public class SpringIntegration20Test {
+    
+    
+    public SpringIntegration20Test() {
         super();
     }
     
     
     
-    
+
+
     @Test
-    public void testContext() throws Exception {
+    public void testExpression() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setDialects(
-                Arrays.asList(new IDialect[] { new StandardDialect(), new ContextDialect()}));
-        executor.execute("classpath:engine/context");
-        
+        executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:engine20/springintegration/expression");
+
         Assert.assertTrue(executor.isAllOK());
-        
+
     }
-    
-    
+
+
+
 }

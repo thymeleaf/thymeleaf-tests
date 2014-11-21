@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine.context.dialect;
+package org.thymeleaf.engine20.context.dialect;
 
 import java.util.Collections;
 

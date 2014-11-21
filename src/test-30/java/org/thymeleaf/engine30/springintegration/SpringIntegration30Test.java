@@ -84,5 +84,19 @@ public class SpringIntegration30Test {
 
 
 
+    @Test
+    public void testExpression() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:engine30/springintegration/expression");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
 
 }

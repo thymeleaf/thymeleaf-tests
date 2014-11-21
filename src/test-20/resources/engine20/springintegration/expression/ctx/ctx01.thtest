@@ -1,17 +1,12 @@
 %EXTENDS ../../springintegration.common
 # ------------------------------------------------------------
 %CONTEXT
-prices = #{ 'euros': 9.00,\
-            'dollars': 12.00 }
-product = #{ 'name': 'Lettuce',\
-             'prices': prices }
+class = 'This is a class text'
 # ------------------------------------------------------------
 %INPUT
-<div th:object="${product}">
-  <p th:text="${#ctx.variables.product['name']}">...</p>
-</div>
+<p th:text="${#ctx.variables.class}">...</p>
+<p th:text="${class}">...</p>
 # ------------------------------------------------------------
 %OUTPUT
-<div>
-  <p>Lettuce</p>
-</div>
+<p>class org.thymeleaf.context.WebVariablesMap</p>
+<p>class org.thymeleaf.context.VariablesMap</p>

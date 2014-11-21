@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine.context.dialect;
+package org.thymeleaf.engine21.context.dialect;
 
 import java.util.HashSet;
 import java.util.Set;
