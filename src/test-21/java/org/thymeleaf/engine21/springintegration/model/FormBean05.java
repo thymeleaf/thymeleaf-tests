@@ -25,9 +25,13 @@ import java.util.Map;
 public class FormBean05 {
 
     protected Map<String, Object> properties = new LinkedHashMap<String, Object>();
+    protected Map<String, Boolean> booleanProperties = new LinkedHashMap<String, Boolean>();
 
     public Map<String, Object> getProperties() {
         return this.properties;
+    }
+    public Map<String, Boolean> getBooleanProperties() {
+        return this.booleanProperties;
     }
 
 }
