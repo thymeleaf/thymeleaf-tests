@@ -12,16 +12,16 @@ columns = {'alpha','beta'}
 %INPUT
 <form th:object="${entity}">
 <div th:each="column : ${columns}">
-  <input th:type="checkbox" th:field="*{properties['__${column}__']}" />
+  <input th:type="checkbox" th:field="*{properties['__${column}__']}" value="entityON" />
 </div>
 </form>
 # ------------------------------------------------------------
 %OUTPUT
 <form>
 <div>
-  <input type="checkbox" id="properties&#39;alpha&#39;" name="properties[&#39;alpha&#39;]" value="one alpha" />
+  <input value="entityON" type="checkbox" id="properties&#39;alpha&#39;1" name="properties[&#39;alpha&#39;]" /><input type="hidden" name="_properties[&#39;alpha&#39;]" value="on" />
 </div>
 <div>
-  <input type="checkbox" id="properties&#39;beta&#39;" name="properties[&#39;beta&#39;]" value="two beta" />
+  <input value="entityON" type="checkbox" id="properties&#39;beta&#39;1" name="properties[&#39;beta&#39;]" /><input type="hidden" name="_properties[&#39;beta&#39;]" value="on" />
 </div>
 </form>
