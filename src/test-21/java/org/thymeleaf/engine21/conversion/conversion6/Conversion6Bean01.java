@@ -40,6 +40,10 @@ public class Conversion6Bean01 {
         this.num = num;
     }
 
+    public Integer obtainNum() {
+        return this.num;
+    }
+
     @Override
     public String toString() {
         return "FormBean04{" +

@@ -1,0 +1,13 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+obj = new org.thymeleaf.engine30.conversion.conversion6.Conversion6Bean01()
+obj.num = 1234
+# ------------------------------------------------------------
+%INPUT
+<p th:text="${{obj.num}}">...</p>
+<p th:text="${{obj.obtainNum()}}">...</p>
+# ------------------------------------------------------------
+%OUTPUT
+<p>123.400%</p>
+<p>1234</p>
