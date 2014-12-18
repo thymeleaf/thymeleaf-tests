@@ -59,6 +59,17 @@ public class AttrProcessors21Test {
 
 
     @Test
+    public void testEach() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:engine21/attrprocessors/each");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
     public void testWith() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
