@@ -76,7 +76,8 @@
       </roles>
     </developer>
   </developers>
-  
+
+    <!--
   <distributionManagement>
     <snapshotRepository>
       <id>sonatype-nexus-snapshots</id>
@@ -99,19 +100,355 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+
+     <repository>
+         <id>Codehaus Mojo</id>
+         <name>Codehaus Mojo</name>
+         <url>https://nexus.codehaus.org/content/repositories/releases/</url>
+     </repository>
+
   </repositories>
+         -->
+
+    <repositories>
+
+        <repository>
+            <id>central sonotype</id>
+            <name>Apache M2</name>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <url>https://repo1.maven.org/maven2</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
+            <id>Codehaus Mojo</id>
+            <name>Codehaus Mojo</name>
+            <url>https://nexus.codehaus.org/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <url>https://repo1.maven.org/maven2/plugins</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>Codehaus Snapshots</id>
+            <url>http://nexus.codehaus.org/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <properties>
+       <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+       <nekohtml.version>1.9.21</nekohtml.version>
+       <!-- Thymeleaf 2.0 EOL CVEs -->
+       <thymeleaf.2.0.version>2.0.21</thymeleaf.2.0.version>
+       <thymeleaf-testing.2.0.version>2.0.21</thymeleaf-testing.2.0.version>
+       <thymeleaf-extras-springsecurity3.2.0.version>2.0.21</thymeleaf-extras-springsecurity3.2.0.version>
+       <thymeleaf-extras-tiles2.2.0.version>2.0.21</thymeleaf-extras-tiles2.2.0.version>
+       <thymeleaf-extras-conditionalcomments.2.0.version>2.0.21</thymeleaf-extras-conditionalcomments.2.0.version>
+       <thymeleaf-extras-tiles2-spring.version>2.0.1</thymeleaf-extras-tiles2-spring.version>
+       <!-- Thymeleaf 2.1 CURRENT-->
+       <thymeleaf.2.1.version>2.1.4-SNAPSHOT</thymeleaf.2.1.version>
+       <thymeleaf-testing.2.1.version>2.1.4-SNAPSHOT</thymeleaf-testing.2.1.version>
+       <thymeleaf-extras-springsecurity3.2.1.version>2.1.4-SNAPSHOT</thymeleaf-extras-springsecurity3.2.1.version>
+       <thymeleaf-extras-tiles2.2.1.version>2.1.4-SNAPSHOT</thymeleaf-extras-tiles2.2.1.version>
+       <thymeleaf-extras-conditionalcomments.2.1.version>2.1.4-SNAPSHOT</thymeleaf-extras-conditionalcomments.2.1.version>
+       <thymeleaf-extras-tiles2-spring.version>2.1.1.RELEASE</thymeleaf-extras-tiles2-spring.version>
+       <!-- Thymeleaf 3.0 DEV -->
+       <thymeleaf.3.0.version>3.0.0-SNAPSHOT</thymeleaf.3.0.version>
+       <thymeleaf-testing.3.0.version>3.0.0-SNAPSHOT</thymeleaf-testing.3.0.version>
+       <thymeleaf-extras-springsecurity3.3.0.version>3.0.0-SNAPSHOT</thymeleaf-extras-springsecurity3.3.0.version>
+       <thymeleaf-extras-tiles2.3.0.version>3.0.0-SNAPSHOT</thymeleaf-extras-tiles2.3.0.version>
+       <thymeleaf-extras-conditionalcomments.3.0.version>3.0.0-SNAPSHOT</thymeleaf-extras-conditionalcomments.3.0.version>
+        <!-- Spring 3.0 -->
+       <!-- <springframework.spring3.version>3.0.7.RELEASE</springframework.spring3.version>
+        <springsecurity.spring3.version>3.0.8.RELEASE</springsecurity.spring3.version>  -->
+
+       <!-- Spring 3.1 -->
+       <springframework.spring31.version>3.1.4.RELEASE</springframework.spring31.version>
+       <springsecurity.spring31.version>3.1.4.RELEASE</springsecurity.spring31.version>
+       <!-- CVE-2012-5055 Min 3.0.8 http://support.springsource.com/security/cve-2012-5055 -->
+      <!-- <thymeleaf-extras-tiles2-spring3.version>2.1.1.RELEASE</thymeleaf-extras-tiles2-spring3.version> -->
+       <!-- CVE-2009-1275 https://issues.apache.org/jira/browse/TILES-351 : 2.1.2 todo upgrade -->
+        <!-- Spring 3.2 -->
+        <springframework.spring32.version>3.2.12.RELEASE</springframework.spring32.version>
+        <springsecurity.spring32.version>3.1.7.RELEASE</springsecurity.spring32.version>
+
+       <!-- Spring 4 -->
+       <springframework.spring4.version>4.0.8.RELEASE</springframework.spring4.version>
+       <springsecurity.spring4.version>3.2.5.RELEASE</springsecurity.spring4.version>
+       <!-- <thymeleaf-extras-tiles2-spring4>2.1.1.RELEASE</thymeleaf-extras-tiles2-spring4> -->
+       <!-- Spring 4.1 CURRENT -->
+       <springframework.spring4.1.version>4.1.3.RELEASE</springframework.spring4.1.version>
+       <springsecurity.spring4.1.version>3.2.5.RELEASE</springsecurity.spring4.1.version>
 
 
+       <thymeleaf.version>${thymeleaf.2.1.version}</thymeleaf.version>
+       <thymeleaf-testing.version>${thymeleaf-testing.2.1.version}</thymeleaf-testing.version>
+       <thymeleaf-extras-springsecurity3.version>${thymeleaf-testing.2.1.version}</thymeleaf-extras-springsecurity3.version>
+      <!-- <thymeleaf-extras-tiles2.version>${thymeleaf-testing.2.1.version}</thymeleaf-extras-tiles2.version>
+       <thymeleaf-extras-conditionalcomments.version>${thymeleaf-testing.2.1.version}</thymeleaf-extras-conditionalcomments.version>  -->
+        <thymeleaf-extras-tiles2.version>2.1.1.RELEASE</thymeleaf-extras-tiles2.version>
+        <thymeleaf-extras-conditionalcomments.version>2.1.1.RELEASE</thymeleaf-extras-conditionalcomments.version>
 
-  <properties>
-    <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-  </properties>
+        <springframework.version>${springframework.spring31.version}</springframework.version>
+        <springsecurity.version>${springsecurity.spring31.version}</springsecurity.version>
+    </properties>
 
-  
+    <dependencies>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring3</artifactId>
+            <version>${thymeleaf.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-tiles2-spring3</artifactId>
+            <version>${thymeleaf-extras-tiles2.version}</version>
+            <scope>compile</scope>
+       </dependency>
+
+       <!--
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>${thymeleaf.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
+            <version>${thymeleaf-extras-tiles2.version}</version>
+            <scope>compile</scope>
+        </dependency>
+         -->
+
+        <dependency>
+              <groupId>org.thymeleaf</groupId>
+              <artifactId>thymeleaf</artifactId>
+              <version>${thymeleaf.version}</version>
+              <scope>compile</scope>
+          </dependency>
+
+          <dependency>
+              <groupId>org.thymeleaf</groupId>
+              <artifactId>thymeleaf-testing</artifactId>
+              <version>${thymeleaf-testing.version}</version>
+              <scope>compile</scope>
+          </dependency>
+
+          <dependency>
+              <groupId>org.thymeleaf.extras</groupId>
+              <artifactId>thymeleaf-extras-springsecurity3</artifactId>
+              <version>${thymeleaf-extras-springsecurity3.version}</version>
+              <scope>compile</scope>
+          </dependency>
+
+          <dependency>
+              <groupId>org.thymeleaf.extras</groupId>
+              <artifactId>thymeleaf-extras-tiles2</artifactId>
+              <version>${thymeleaf-extras-tiles2.version}</version>
+              <scope>compile</scope>
+          </dependency>
+
+          <dependency>
+              <groupId>org.thymeleaf.extras</groupId>
+              <artifactId>thymeleaf-extras-conditionalcomments</artifactId>
+              <version>${thymeleaf-extras-conditionalcomments.version}</version>
+              <scope>compile</scope>
+          </dependency>
+
+          <dependency>
+              <groupId>net.sourceforge.nekohtml</groupId>
+              <artifactId>nekohtml</artifactId>
+              <version>${nekohtml.version}</version>
+              <scope>compile</scope>
+          </dependency>
+
+        <dependency>
+            <groupId>org.attoparser</groupId>
+            <artifactId>attoparser</artifactId>
+            <version>2.0.0.BETA2</version>
+            <scope>compile</scope>
+        </dependency>
+
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-core</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-context</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-beans</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-aop</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-aspects</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+              <exclusions>
+                  <exclusion>
+                      <groupId>org.aspectj</groupId>
+                      <artifactId>aspectjweaver</artifactId>
+                  </exclusion>
+              </exclusions>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-expression</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-web</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-webmvc</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-tx</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-jdbc</artifactId>
+              <version>${springframework.version}</version>
+              <scope>compile</scope>
+          </dependency>
+
+          <dependency>
+              <groupId>org.springframework.security</groupId>
+              <artifactId>spring-security-core</artifactId>
+              <version>${springsecurity.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework.security</groupId>
+              <artifactId>spring-security-web</artifactId>
+              <version>${springsecurity.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework.security</groupId>
+              <artifactId>spring-security-config</artifactId>
+              <version>${springsecurity.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework.security</groupId>
+              <artifactId>spring-security-taglibs</artifactId>
+              <version>${springsecurity.version}</version>
+          </dependency>
+
+          <!-- Version cannot be > 2.2 because 2.3+ are compiled for Java 6 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Needed by Spring's @DateTimeFormat annotation in engine21.conversion3.conversion -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.6</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.6.6</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
   <build>
-  
     <resources>
-    
       <resource>
         <directory>src/main/resources</directory>
       </resource>
@@ -132,7 +469,6 @@
               <include>NOTICE.txt</include>
           </includes>
       </resource>
-      
     </resources>
 
     <testSourceDirectory>src/test-common/java</testSourceDirectory>
@@ -144,21 +480,24 @@
     </testResources>
     
     <plugins>
-    
+        <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>3.2</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
       
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>2.5</version>
+        <version>2.7</version>
         <configuration>
           <encoding>US-ASCII</encoding>
         </configuration>
@@ -167,7 +506,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.7</version>
+        <version>2.10.1</version>
         <configuration>
           <noqualifier>java.lang</noqualifier>
           <overview>${basedir}/src/main/javadoc/overview.html</overview>
@@ -187,7 +526,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.1.2</version>
+        <version>2.4</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -197,11 +536,12 @@
           </execution>
         </executions>
       </plugin>
-      
+
+        <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.1</version>
+        <version>1.5</version>
         <executions>
           <execution>
             <id>sign-artifacts</id>
@@ -212,24 +552,16 @@
           </execution>
         </executions>
       </plugin>
-      
+                -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.1</version>
+        <version>2.5.1</version>
       </plugin>
-
-
     </plugins>
-    
   </build>
 
-
-
-
   <profiles>
-
-
     <profile>
       <id>2.0-spring3</id>
       <build>
@@ -237,7 +569,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
+           <!-- <version>1.9.1/version> -->
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -289,30 +621,6 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>2.0.22-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.0.10-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.0.3-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.0.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>2.0.1-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>3.0.7.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-          <dependency>
-              <groupId>org.thymeleaf</groupId>
-              <artifactId>thymeleaf-spring3</artifactId>
-              <version>${thymeleaf.version}</version>
-              <scope>compile</scope>
-          </dependency>
-          <dependency>
-              <groupId>org.thymeleaf.extras</groupId>
-              <artifactId>thymeleaf-extras-tiles2-spring3</artifactId>
-              <version>${thymeleaf-extras-tiles2.version}</version>
-              <scope>compile</scope>
-          </dependency>
-      </dependencies>
     </profile>
 
     <profile>
@@ -322,7 +630,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
+           <!-- <version>1.9.1</version> -->
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -374,32 +682,7 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>2.0.22-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.0.10-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.0.3-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.0.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>2.0.1-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>4.0.0.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring4</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
-
 
     <profile>
       <id>2.1-spring3</id>
@@ -408,7 +691,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -460,30 +742,6 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>2.1.4-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.1.4-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.1.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.1.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>2.1.2-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>3.0.7.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring3</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring3</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
 
 
@@ -494,7 +752,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -554,32 +811,7 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>2.1.4-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.1.4-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.1.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.1.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>2.1.2-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>3.1.0.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring3</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring3</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
-
 
     <profile>
       <id>2.1-spring4</id>
@@ -588,7 +820,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -640,32 +871,7 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>2.1.4-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.1.4-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.1.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.1.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>2.1.2-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>4.0.0.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring4</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
-
 
     <profile>
       <id>2.1-spring41</id>
@@ -674,7 +880,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
+            <!-- <version>1.9.1</version> -->
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -734,30 +940,6 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>2.1.4-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.1.4-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.1.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.1.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>2.1.2-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>4.1.0.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring4</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
 
 
@@ -768,7 +950,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -820,30 +1001,6 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>3.0.0-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.1.4-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.1.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.1.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>3.0.0-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>3.0.7.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring3</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring3</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
 
 
@@ -854,7 +1011,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -914,30 +1070,6 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>3.0.0-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.1.4-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.1.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.1.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>3.0.0-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>3.1.0.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring3</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring3</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
 
 
@@ -948,7 +1080,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -1000,32 +1131,7 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>3.0.0-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.1.4-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.1.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.1.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>3.0.0-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>4.0.0.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring4</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
-
 
     <profile>
       <id>3.0-spring41</id>
@@ -1034,7 +1140,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.9</version>
             <executions>
               <execution>
                 <id>add-test-source</id>
@@ -1094,233 +1199,22 @@
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <thymeleaf.version>3.0.0-SNAPSHOT</thymeleaf.version>
-        <thymeleaf-testing.version>2.1.4-SNAPSHOT</thymeleaf-testing.version>
-        <thymeleaf-extras-springsecurity3.version>2.1.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-        <thymeleaf-extras-tiles2.version>2.1.2-SNAPSHOT</thymeleaf-extras-tiles2.version>
-        <thymeleaf-extras-conditionalcomments.version>3.0.0-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
-        <springframework.version>4.1.0.RELEASE</springframework.version>
-        <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-        <nekohtml.version>1.9.15</nekohtml.version>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring4</artifactId>
-          <version>${thymeleaf.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
-          <version>${thymeleaf-extras-tiles2.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
     </profile>
-
   </profiles>
 
+    <!--
+       tests with 2.1-spring31 profile:
+
+       [2014-12-18 20:09:18][QTLBCX][main] [sequence:start][W:\git\thymeleaf-tests\target\test-classes\engine21\conditionalcomments]
+[2014-12-18 20:09:18][QTLBCX][main]   [test:end][W:\git\thymeleaf-tests\target\test-classes\engine21\conditionalcomments\conditionalcomments01.thtest-001][11483765][KO] Test FAILED: org/attoparser/AttoParseException Time: 11483765ns (11ms).
+java.lang.NoClassDefFoundError: org/attoparser/AttoParseException
 
 
 
-  <dependencies>
-    
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-      <version>${thymeleaf.version}</version>
-      <scope>compile</scope>
-    </dependency>
+    Failed tests:   testSpringBaseConditionalComments(org.thymeleaf.engine21.springbase.SpringBase21Test)
+  testConditionalComments(org.thymeleaf.engine21.conditionalcomments.ConditionalCommentsTest)
 
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-testing</artifactId>
-      <version>${thymeleaf-testing.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity3</artifactId>
-      <version>${thymeleaf-extras-springsecurity3.version}</version>
-      <scope>compile</scope>
-    </dependency>
+Tests run: 167, Failures: 2, Errors: 0, Skipped: 0
 
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-tiles2</artifactId>
-      <version>${thymeleaf-extras-tiles2.version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-conditionalcomments</artifactId>
-      <version>${thymeleaf-extras-conditionalcomments.version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>net.sourceforge.nekohtml</groupId>
-      <artifactId>nekohtml</artifactId>
-      <version>${nekohtml.version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aop</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aspects</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.aspectj</groupId>
-          <artifactId>aspectjweaver</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-expression</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>${springframework.version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-core</artifactId>
-      <version>${springsecurity.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-web</artifactId>
-      <version>${springsecurity.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-config</artifactId>
-      <version>${springsecurity.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-taglibs</artifactId>
-      <version>${springsecurity.version}</version>
-    </dependency>
-    
-    <!-- Version cannot be > 2.2 because 2.3+ are compiled for Java 6 -->
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.2</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <!-- Needed by Spring's @DateTimeFormat annotation in engine21.conversion3.conversion -->
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <version>2.3</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.6.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.6.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>1.6.1</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.15</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>com.sun.jdmk</groupId>
-          <artifactId>jmxtools</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.sun.jmx</groupId>
-          <artifactId>jmxri</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>javax.jms</groupId>
-          <artifactId>jms</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    
-  </dependencies>
-
-  
+    -->
 </project>
