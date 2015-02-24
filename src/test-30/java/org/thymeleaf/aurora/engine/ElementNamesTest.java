@@ -97,41 +97,41 @@ public final class ElementNamesTest {
         Assert.assertEquals(
                 "{th:something}", ElementNames.forXmlName("abcdefghijkliklmnth:something".toCharArray(), 17, "th:something".length()).toString());
         Assert.assertEquals(
-                "th", ((XmlPrefixedElementName)ElementNames.forXmlName("th:something".toCharArray(), 0, "th:something".length())).getPrefix());
+                "th", ElementNames.forXmlName("th:something".toCharArray(), 0, "th:something".length()).getPrefix());
         Assert.assertEquals(
                 "{SOMETHING}", ElementNames.forXmlName("SOMETHING".toCharArray(), 0, "SOMETHING".length()).toString());
         Assert.assertEquals(
                 "{TH:SOMETHING}", ElementNames.forXmlName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length()).toString());
         Assert.assertEquals(
-                "TH", ((XmlPrefixedElementName)ElementNames.forXmlName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length())).getPrefix());
+                "TH", ElementNames.forXmlName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length()).getPrefix());
         Assert.assertEquals(
                 "{:something}", ElementNames.forXmlName(":something".toCharArray(), 0, ":something".length()).toString());
         Assert.assertFalse(
-                ElementNames.forXmlName(":something".toCharArray(), 0, ":something".length()) instanceof XmlPrefixedElementName);
+                ElementNames.forXmlName(":something".toCharArray(), 0, ":something".length()).isPrefixed());
         Assert.assertEquals(
                 "{data-th-something}", ElementNames.forXmlName("data-th-something".toCharArray(), 0, "data-th-something".length()).toString());
         Assert.assertFalse(
-                ElementNames.forXmlName("data-th-something".toCharArray(), 0, "data-th-something".length()) instanceof XmlPrefixedElementName);
+                ElementNames.forXmlName("data-th-something".toCharArray(), 0, "data-th-something".length()).isPrefixed());
         Assert.assertEquals(
                 "{data-something}", ElementNames.forXmlName("data-something".toCharArray(), 0, "data-something".length()).toString());
         Assert.assertEquals(
                 "{data:something}", ElementNames.forXmlName("data:something").toString());
         Assert.assertEquals(
-                "data", ((XmlPrefixedElementName)ElementNames.forXmlName("data:something")).getPrefix());
+                "data", ElementNames.forXmlName("data:something").getPrefix());
         Assert.assertEquals(
                 "{xml:ns}", ElementNames.forXmlName("xml:ns".toCharArray(), 0, "xml:ns".length()).toString());
         Assert.assertEquals(
-                "xml", ((XmlPrefixedElementName)ElementNames.forXmlName("xml:ns".toCharArray(), 0, "xml:ns".length())).getPrefix());
+                "xml", ElementNames.forXmlName("xml:ns".toCharArray(), 0, "xml:ns".length()).getPrefix());
         Assert.assertEquals(
                 "{xml:space}", ElementNames.forXmlName("xml:space".toCharArray(), 0, "xml:space".length()).toString());
         Assert.assertEquals(
                 "{XML:SPACE}", ElementNames.forXmlName("XML:SPACE".toCharArray(), 0, "xml:space".length()).toString());
         Assert.assertEquals(
-                "XML", ((XmlPrefixedElementName)ElementNames.forXmlName("XML:SPACE".toCharArray(), 0, "xml:space".length())).getPrefix());
+                "XML", ElementNames.forXmlName("XML:SPACE".toCharArray(), 0, "xml:space".length()).getPrefix());
         Assert.assertEquals(
                 "{xmlns:th}", ElementNames.forXmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).toString());
         Assert.assertEquals(
-                "xmlns", ((XmlPrefixedElementName)ElementNames.forXmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length())).getPrefix());
+                "xmlns", ElementNames.forXmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).getPrefix());
     }
 
 
@@ -142,41 +142,41 @@ public final class ElementNamesTest {
         Assert.assertEquals(
                 "{th:something}", ElementNames.forXmlName("th:something").toString());
         Assert.assertEquals(
-                "th", ((XmlPrefixedElementName)ElementNames.forXmlName("th:something")).getPrefix());
+                "th", ElementNames.forXmlName("th:something").getPrefix());
         Assert.assertEquals(
                 "{SOMETHING}", ElementNames.forXmlName("SOMETHING").toString());
         Assert.assertEquals(
                 "{TH:SOMETHING}", ElementNames.forXmlName("TH:SOMETHING").toString());
         Assert.assertEquals(
-                "TH", ((XmlPrefixedElementName)ElementNames.forXmlName("TH:SOMETHING")).getPrefix());
+                "TH", ElementNames.forXmlName("TH:SOMETHING").getPrefix());
         Assert.assertEquals(
                 "{:something}", ElementNames.forXmlName(":something").toString());
         Assert.assertFalse(
-                ElementNames.forXmlName(":something") instanceof XmlPrefixedElementName);
+                ElementNames.forXmlName(":something").isPrefixed());
         Assert.assertEquals(
                 "{data-th-something}", ElementNames.forXmlName("data-th-something").toString());
         Assert.assertFalse(
-                ElementNames.forXmlName("data-th-something") instanceof XmlPrefixedElementName);
+                ElementNames.forXmlName("data-th-something").isPrefixed());
         Assert.assertEquals(
                 "{data-something}", ElementNames.forXmlName("data-something").toString());
         Assert.assertEquals(
                 "{data:something}", ElementNames.forXmlName("data:something").toString());
         Assert.assertEquals(
-                "data", ((XmlPrefixedElementName)ElementNames.forXmlName("data:something")).getPrefix());
+                "data", ElementNames.forXmlName("data:something").getPrefix());
         Assert.assertEquals(
                 "{xml:ns}", ElementNames.forXmlName("xml:ns").toString());
         Assert.assertEquals(
-                "xml", ((XmlPrefixedElementName)ElementNames.forXmlName("xml:ns")).getPrefix());
+                "xml", ElementNames.forXmlName("xml:ns").getPrefix());
         Assert.assertEquals(
                 "{xml:space}", ElementNames.forXmlName("xml:space").toString());
         Assert.assertEquals(
                 "{XML:SPACE}", ElementNames.forXmlName("XML:SPACE").toString());
         Assert.assertEquals(
-                "XML", ((XmlPrefixedElementName)ElementNames.forXmlName("XML:SPACE")).getPrefix());
+                "XML", ElementNames.forXmlName("XML:SPACE").getPrefix());
         Assert.assertEquals(
                 "{xmlns:th}", ElementNames.forXmlName("xmlns:th").toString());
         Assert.assertEquals(
-                "xmlns", ((XmlPrefixedElementName)ElementNames.forXmlName("xmlns:th")).getPrefix());
+                "xmlns", ElementNames.forXmlName("xmlns:th").getPrefix());
     }
 
 

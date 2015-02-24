@@ -42,35 +42,54 @@ public final class ProcessingInstructionTest {
         final String content3 = null;
 
 
-        final ProcessingInstruction d1 = new ProcessingInstruction();
+        final ProcessingInstruction d1 = new ProcessingInstruction(
+                procInstr1,
+                target1,
+                content1,
+                11, 4);
+
+        Assert.assertSame(procInstr1, d1.getProcessingInstruction());
+        Assert.assertSame(target1, d1.getTarget());
+        Assert.assertSame(content1, d1.getContent());
+        Assert.assertEquals(11, d1.getLine());
+        Assert.assertEquals(4, d1.getCol());
 
         d1.setProcessingInstruction(
                 procInstr1,
                 target1,
-                content1
+                content1,
+                10, 3
         );
 
-        Assert.assertSame(procInstr1, d1.getXmlDeclaration());
+        Assert.assertSame(procInstr1, d1.getProcessingInstruction());
         Assert.assertSame(target1, d1.getTarget());
         Assert.assertSame(content1, d1.getContent());
+        Assert.assertEquals(10, d1.getLine());
+        Assert.assertEquals(3, d1.getCol());
 
         d1.setTarget(target2);
 
-        Assert.assertEquals(procInstr2, d1.getXmlDeclaration());
+        Assert.assertEquals(procInstr2, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
         Assert.assertSame(content1, d1.getContent());
+        Assert.assertEquals(-1, d1.getLine());
+        Assert.assertEquals(-1, d1.getCol());
 
         d1.setContent(content2);
 
-        Assert.assertEquals(procInstr3, d1.getXmlDeclaration());
+        Assert.assertEquals(procInstr3, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
         Assert.assertSame(content2, d1.getContent());
+        Assert.assertEquals(-1, d1.getLine());
+        Assert.assertEquals(-1, d1.getCol());
 
         d1.setContent(content3);
 
-        Assert.assertEquals(procInstr4, d1.getXmlDeclaration());
+        Assert.assertEquals(procInstr4, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
         Assert.assertNull(d1.getContent());
+        Assert.assertEquals(-1, d1.getLine());
+        Assert.assertEquals(-1, d1.getCol());
 
 
 
@@ -79,9 +98,11 @@ public final class ProcessingInstructionTest {
                     target1,
                     content1);
 
-        Assert.assertEquals(procInstr1, d2.getXmlDeclaration());
+        Assert.assertEquals(procInstr1, d2.getProcessingInstruction());
         Assert.assertSame(target1, d2.getTarget());
         Assert.assertSame(content1, d2.getContent());
+        Assert.assertEquals(-1, d2.getLine());
+        Assert.assertEquals(-1, d2.getCol());
 
 
         final ProcessingInstruction d3 =
@@ -89,9 +110,11 @@ public final class ProcessingInstructionTest {
                         target2,
                         null);
 
-        Assert.assertEquals(procInstr4, d3.getXmlDeclaration());
+        Assert.assertEquals(procInstr4, d3.getProcessingInstruction());
         Assert.assertSame(target2, d3.getTarget());
         Assert.assertNull(d3.getContent());
+        Assert.assertEquals(-1, d2.getLine());
+        Assert.assertEquals(-1, d2.getCol());
 
 
     }

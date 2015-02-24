@@ -34,14 +34,22 @@ public final class TextTest {
 
         final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
 
-        final Text c1 = new Text(textRepository);
-        Assert.assertNull(c1.getBuffer());
+        final char[] buf1 = "hello".toCharArray();
+
+        final Text c1 = new Text(textRepository, buf1, 0, 5, 10, 3);
+        Assert.assertSame(buf1, c1.getBuffer());
+        Assert.assertEquals(0, c1.getOffset());
+        Assert.assertEquals(5, c1.getLen());
+        Assert.assertEquals(10, c1.getLine());
+        Assert.assertEquals(3, c1.getCol());
 
         final String c1c0 = " something\nhere ";
         c1.setText(c1c0);
         Assert.assertSame(c1c0, c1.getText());
         Assert.assertEquals(c1c0, new String(c1.getBuffer(), c1.getOffset(), c1.getLen()));
         Assert.assertSame(textRepository.getText(" something\nhere "), c1.getText());
+        Assert.assertEquals(-1, c1.getLine());
+        Assert.assertEquals(-1, c1.getCol());
 
         final String c1c2 = "hey!";
         c1.setText(c1c2);
@@ -49,11 +57,13 @@ public final class TextTest {
         Assert.assertSame(c1c2, c1c2_2);
         Assert.assertSame(c1c2, c1.getText());
 
-        c1.setText(c1c0.toCharArray(), 0, c1c0.length());
+        c1.setText(c1c0.toCharArray(), 0, c1c0.length(), 11, 4);
         final String c1c3_2 = c1.getText();
         Assert.assertEquals(c1c0, c1c3_2);
         Assert.assertSame(c1c3_2, c1.getText());
         Assert.assertEquals(c1c3_2, new String(c1.getBuffer(), c1.getOffset(), c1.getLen()));
+        Assert.assertEquals(11, c1.getLine());
+        Assert.assertEquals(4, c1.getCol());
 
 
         final String c2c1 = "hello";
@@ -62,6 +72,8 @@ public final class TextTest {
         final String c2cs1_2 = c2.getText();
         Assert.assertEquals(c2c1, c2cs1_2);
         Assert.assertSame(c2cs1_2, c2.getText());
+        Assert.assertEquals(-1, c2.getLine());
+        Assert.assertEquals(-1, c2.getCol());
 
         final char[] c2Buffer1 = c2.getBuffer();
 
