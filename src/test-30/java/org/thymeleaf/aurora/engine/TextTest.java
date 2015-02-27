@@ -36,17 +36,18 @@ public final class TextTest {
 
         final char[] buf1 = "hello".toCharArray();
 
-        final Text c1 = new Text(textRepository, buf1, 0, 5, 10, 3);
-        Assert.assertSame(buf1, c1.getBuffer());
-        Assert.assertEquals(0, c1.getOffset());
-        Assert.assertEquals(5, c1.getLen());
+        final Text c1 = new Text(textRepository);
+        c1.setText(buf1, 0, 5, 10, 3);
+        Assert.assertEquals("hello", extractText(c1));
+        final String c1all = c1.getText();
+        Assert.assertEquals("hello", c1all);
+        Assert.assertSame(c1all, c1.getText());
         Assert.assertEquals(10, c1.getLine());
         Assert.assertEquals(3, c1.getCol());
 
         final String c1c0 = " something\nhere ";
         c1.setText(c1c0);
         Assert.assertSame(c1c0, c1.getText());
-        Assert.assertEquals(c1c0, new String(c1.getBuffer(), c1.getOffset(), c1.getLen()));
         Assert.assertSame(textRepository.getText(" something\nhere "), c1.getText());
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
@@ -61,31 +62,30 @@ public final class TextTest {
         final String c1c3_2 = c1.getText();
         Assert.assertEquals(c1c0, c1c3_2);
         Assert.assertSame(c1c3_2, c1.getText());
-        Assert.assertEquals(c1c3_2, new String(c1.getBuffer(), c1.getOffset(), c1.getLen()));
         Assert.assertEquals(11, c1.getLine());
         Assert.assertEquals(4, c1.getCol());
 
 
         final String c2c1 = "hello";
         final Text c2 = new Text(c2c1);
-        Assert.assertEquals(c2c1, new String(c2.getBuffer(), c2.getOffset(), c2.getLen()));
         final String c2cs1_2 = c2.getText();
         Assert.assertEquals(c2c1, c2cs1_2);
         Assert.assertSame(c2cs1_2, c2.getText());
         Assert.assertEquals(-1, c2.getLine());
         Assert.assertEquals(-1, c2.getCol());
 
-        final char[] c2Buffer1 = c2.getBuffer();
+    }
 
-        c2.setText("huruhuhuuu");
-        // The internal buffer will need growth, so it cannot be the same object
-        final char[] c2Buffer2 = c2.getBuffer();
-        Assert.assertNotSame(c2Buffer1, c2Buffer2);
 
-        c2.setText("huu");
-        // The internal buffer didn't need to grow, so this time it must be the same
-        final char[] c2Buffer3 = c2.getBuffer();
-        Assert.assertSame(c2Buffer2, c2Buffer3);
+
+
+    private static String extractText(final Text text) {
+
+        final StringBuilder strBuilder = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            strBuilder.append(text.charAt(i));
+        }
+        return strBuilder.toString();
 
     }
 

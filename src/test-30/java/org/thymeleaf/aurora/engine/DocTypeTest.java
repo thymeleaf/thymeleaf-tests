@@ -21,8 +21,6 @@ package org.thymeleaf.aurora.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.text.ITextRepository;
-import org.thymeleaf.aurora.text.TextRepositories;
 
 
 public final class DocTypeTest {
@@ -51,7 +49,8 @@ public final class DocTypeTest {
 
         final String internalSubsetWSXHTMLTransitional = "\n <!-- an internal subset can be embedded here -->\n ";
 
-        final DocType d1 = new DocType(
+        final DocType d1 = new DocType();
+        d1.setDocType(
                 doctypeXHTMLTransitionalWS,
                 keywordUC,
                 elementNameHtml,

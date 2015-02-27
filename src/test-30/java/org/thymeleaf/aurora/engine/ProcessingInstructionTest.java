@@ -42,7 +42,8 @@ public final class ProcessingInstructionTest {
         final String content3 = null;
 
 
-        final ProcessingInstruction d1 = new ProcessingInstruction(
+        final ProcessingInstruction d1 = new ProcessingInstruction();
+        d1.setProcessingInstruction(
                 procInstr1,
                 target1,
                 content1,

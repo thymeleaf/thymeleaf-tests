@@ -36,35 +36,35 @@ public final class CDATASectionTest {
 
         final char[] buf1 = "<![CDATA[hello]]>".toCharArray();
 
-        final CDATASection c1 = new CDATASection(textRepository, buf1, 9, 5, 0, 17, 10, 3);
-        Assert.assertSame(buf1, c1.getBuffer());
-        Assert.assertEquals(9, c1.getContentOffset());
-        Assert.assertEquals(5, c1.getContentLen());
-        Assert.assertEquals(0, c1.getOuterOffset());
-        Assert.assertEquals(17, c1.getOuterLen());
+        final CDATASection c1 = new CDATASection(textRepository);
+        c1.setCDATASection(buf1, 0, 17, 10, 3);
+        Assert.assertEquals("<![CDATA[hello]]>", extractText(c1));
+        final String c1all = c1.getCDATASection();
+        final String c1content = c1.getContent();
+        Assert.assertEquals("<![CDATA[hello]]>", c1all);
+        Assert.assertEquals("hello", c1content);
+        Assert.assertSame(c1all, c1.getCDATASection());
+        Assert.assertSame(c1content, c1.getContent());
         Assert.assertEquals(10, c1.getLine());
         Assert.assertEquals(3, c1.getCol());
+        Assert.assertSame(textRepository.getText("<![CDATA[hello]]>"), c1.getCDATASection());
 
         final String c1c0 = " something\nhere ";
         c1.setContent(c1c0);
         Assert.assertSame(c1c0, c1.getContent());
         Assert.assertEquals("<![CDATA[ something\nhere ]]>", c1.getCDATASection());
-        Assert.assertEquals(c1c0, new String(c1.getBuffer(), c1.getContentOffset(), c1.getContentLen()));
-        Assert.assertEquals("<![CDATA[ something\nhere ]]>", new String(c1.getBuffer(), c1.getOuterOffset(), c1.getOuterLen()));
-        Assert.assertSame(textRepository.getText("<![CDATA[ something\nhere ]]>"), c1.getCDATASection());
+        Assert.assertNotSame(textRepository.getText("<![CDATA[ something\nhere ]]>"), c1.getCDATASection());
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
 
         final String c1cs1 = "<![CDATA[ something\nhere ]]>";
         final char[] c1cs1Buf = c1cs1.toCharArray();
         final String c1c1 = " something\nhere ";
-        c1.setCDATASection(c1cs1Buf, 9, 16, 0, 28, 11, 4);
+        c1.setCDATASection(c1cs1Buf, 0, 28, 11, 4);
         Assert.assertEquals(c1cs1, c1.getCDATASection());
         final String c1c1_2 = c1.getContent();
         Assert.assertEquals(c1c1, c1c1_2);
         Assert.assertSame(c1c1_2, c1.getContent());
-        Assert.assertEquals(c1c1, new String(c1.getBuffer(), c1.getContentOffset(), c1.getContentLen()));
-        Assert.assertEquals(c1cs1, new String(c1.getBuffer(), c1.getOuterOffset(), c1.getOuterLen()));
         Assert.assertEquals(11, c1.getLine());
         Assert.assertEquals(4, c1.getCol());
 
@@ -82,24 +82,22 @@ public final class CDATASectionTest {
         final String c1c3 = "huy!";
         final String c1cs3 = "<![cdata[huy!]]>";
         final char[] c1cs3Buf = c1cs3.toCharArray();
-        c1.setCDATASection(c1cs3Buf, 9, 4, 0, 16, 11, 4);
+        c1.setCDATASection(c1cs3Buf, 0, 16, 11, 4);
         Assert.assertEquals(c1c3, c1.getContent());
         Assert.assertEquals(11, c1.getLine());
         Assert.assertEquals(4, c1.getCol());
 
         c1.setContent(c1c2);
         Assert.assertSame(c1c2, c1.getContent());
-        Assert.assertEquals("<![cdata[hey!]]>", c1.getCDATASection());
+        Assert.assertEquals("<![CDATA[hey!]]>", c1.getCDATASection());
 
 
-        c1.setCDATASection(c1cs3.toCharArray(), 9, 4, 0, c1cs3.length(), 12, 5);
+        c1.setCDATASection(c1cs3.toCharArray(), 0, c1cs3.length(), 12, 5);
         final String c1c3_2 = c1.getContent();
         Assert.assertEquals(c1c3, c1c3_2);
         Assert.assertSame(c1c3_2, c1.getContent());
         Assert.assertEquals(c1cs3, c1.getCDATASection());
         Assert.assertSame(c1c3_2, c1.getContent());
-        Assert.assertEquals(c1c3_2, new String(c1.getBuffer(), c1.getContentOffset(), c1.getContentLen()));
-        Assert.assertEquals(c1cs3, new String(c1.getBuffer(), c1.getOuterOffset(), c1.getOuterLen()));
         Assert.assertEquals(12, c1.getLine());
         Assert.assertEquals(5, c1.getCol());
 
@@ -108,16 +106,14 @@ public final class CDATASectionTest {
         final String c1c3_3 = c1.getContent();
         Assert.assertEquals(c1c3, c1c3_3);
         Assert.assertSame(c1c3_3, c1.getContent());
-        Assert.assertEquals(c1cs3, c1.getCDATASection());
+        Assert.assertEquals("<![CDATA[huy!]]>", c1.getCDATASection());
         Assert.assertSame(c1c3_3, c1.getContent());
-        Assert.assertEquals(c1c3_3, new String(c1.getBuffer(), c1.getContentOffset(), c1.getContentLen()));
-        Assert.assertEquals(c1cs3, new String(c1.getBuffer(), c1.getOuterOffset(), c1.getOuterLen()));
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
 
         final String empty = "<![CDATA[]]>"; // Set keyword to upper case
         final char[] emptyBuf = empty.toCharArray();
-        c1.setCDATASection(emptyBuf, 9, 0, 0, 12, 9, 3);
+        c1.setCDATASection(emptyBuf, 0, 12, 9, 3);
         final String c1cs3_2 = "<![CDATA[huy!]]>";
         c1.setContent(new String(c1cs3.toCharArray(), 9, 4));
         final String c1c3_4 = c1.getContent();
@@ -128,14 +124,10 @@ public final class CDATASectionTest {
         Assert.assertEquals(c1cs3_2, c1cs3_3);
         Assert.assertSame(c1cs3_3, c1.getCDATASection());
         Assert.assertSame(c1c3_4, c1.getContent());
-        Assert.assertEquals(c1c3_4, new String(c1.getBuffer(), c1.getContentOffset(), c1.getContentLen()));
-        Assert.assertEquals(c1cs3_2, new String(c1.getBuffer(), c1.getOuterOffset(), c1.getOuterLen()));
 
         final String c2cs1 = "<![CDATA[hello]]>";
         final String c2c1 = "hello";
         final CDATASection c2 = new CDATASection(c2c1);
-        Assert.assertEquals(c2cs1, new String(c2.getBuffer(), c2.getOuterOffset(), c2.getOuterLen()));
-        Assert.assertEquals(c2c1, new String(c2.getBuffer(), c2.getContentOffset(), c2.getContentLen()));
         final String c2cs1_2 = c2.getCDATASection();
         final String c2c1_2 = c2.getContent();
         Assert.assertEquals(c2cs1, c2cs1_2);
@@ -143,21 +135,20 @@ public final class CDATASectionTest {
         Assert.assertSame(c2cs1_2, c2.getCDATASection());
         Assert.assertSame(c2c1_2, c2.getContent());
 
-        final char[] c2Buffer1 = c2.getBuffer();
-
-        c2.setContent("huruhuhuuu");
-        // The internal buffer will need growth, so it cannot be the same object
-        final char[] c2Buffer2 = c2.getBuffer();
-        Assert.assertNotSame(c2Buffer1, c2Buffer2);
-
-        c2.setContent("huu");
-        // The internal buffer didn't need to grow, so this time it must be the same
-        final char[] c2Buffer3 = c2.getBuffer();
-        Assert.assertSame(c2Buffer2, c2Buffer3);
-
     }
 
 
+
+
+    private static String extractText(final CDATASection cdataSection) {
+
+        final StringBuilder strBuilder = new StringBuilder();
+        for (int i = 0; i < cdataSection.length(); i++) {
+            strBuilder.append(cdataSection.charAt(i));
+        }
+        return strBuilder.toString();
+
+    }
 
     
 }

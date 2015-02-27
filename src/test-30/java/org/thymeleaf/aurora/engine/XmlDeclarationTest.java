@@ -46,7 +46,8 @@ public final class XmlDeclarationTest {
         final String standaloneyes = "yes";
 
 
-        final XmlDeclaration d1 = new XmlDeclaration(
+        final XmlDeclaration d1 = new XmlDeclaration();
+        d1.setXmlDeclaration(
                 xmlDeclar1utfno,
                 keyword,
                 version1,
