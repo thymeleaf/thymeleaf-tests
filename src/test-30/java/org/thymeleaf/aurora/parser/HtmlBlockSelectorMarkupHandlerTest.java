@@ -38,6 +38,7 @@ import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.engine.ITemplateHandler;
 import org.thymeleaf.aurora.engine.OutputTemplateHandler;
 import org.thymeleaf.aurora.resource.StringResource;
+import org.thymeleaf.aurora.templatemode.TemplateMode;
 
 /*
  *
@@ -118,7 +119,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(templateName, writer);
 
-        parser.parse(templateEngineContext, new StringResource(templateName, input), blockSelectors, handler);
+        parser.parse(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
 
         assertEquals("Test failed for file: " + templateName, output, writer.toString());
 

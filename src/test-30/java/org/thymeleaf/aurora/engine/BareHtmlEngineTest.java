@@ -27,6 +27,7 @@ import org.thymeleaf.aurora.context.ITemplateEngineContext;
 import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.parser.HtmlTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
+import org.thymeleaf.aurora.templatemode.TemplateMode;
 
 
 public final class BareHtmlEngineTest {
@@ -92,9 +93,9 @@ public final class BareHtmlEngineTest {
         final ITemplateHandler handler = new OutputTemplateHandler(templateName, writer);
 
         if (blockSelectors != null) {
-            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), blockSelectors, handler);
+            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
         } else {
-            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), handler);
+            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), handler);
         }
 
         Assert.assertEquals("Test failed for file: " + templateName, output, writer.toString());

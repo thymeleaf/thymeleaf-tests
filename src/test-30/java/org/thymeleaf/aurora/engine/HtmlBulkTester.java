@@ -31,6 +31,7 @@ import org.thymeleaf.aurora.context.ITemplateEngineContext;
 import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.parser.HtmlTemplateParser;
 import org.thymeleaf.aurora.resource.ReaderResource;
+import org.thymeleaf.aurora.templatemode.TemplateMode;
 
 public class HtmlBulkTester {
 
@@ -80,7 +81,7 @@ public class HtmlBulkTester {
 
             System.out.print("[PARSING]");
 
-            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new ReaderResource(fileInTestFolderName, fileInTestFolderReader), handler);
+            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new ReaderResource(fileInTestFolderName, fileInTestFolderReader), handler);
 
             // Input stream will be closed by parser
             testOutputWriter.close();

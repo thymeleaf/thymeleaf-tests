@@ -26,6 +26,7 @@ import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.parser.HtmlTemplateParser;
 import org.thymeleaf.aurora.parser.XmlTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
+import org.thymeleaf.aurora.templatemode.TemplateMode;
 
 
 public final class ElementAttributesTest {
@@ -596,7 +597,7 @@ public final class ElementAttributesTest {
         final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        HTML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), handler);
+        HTML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), handler);
 
         return handler.elementAttributes;
 
@@ -610,7 +611,7 @@ public final class ElementAttributesTest {
         final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        XML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), handler);
+        XML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.XML, new StringResource(templateName, input), handler);
 
         return handler.elementAttributes;
 
