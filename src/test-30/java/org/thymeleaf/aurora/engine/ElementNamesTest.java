@@ -30,6 +30,8 @@ public final class ElementNamesTest {
     @Test
     public void testHTMLBuffer() {
         Assert.assertEquals(
+                "{th:something,th-something}", ElementNames.forHtmlName(null, "th:something".toCharArray(), 0, "th:something".length()).toString());
+        Assert.assertEquals(
                 "{something}", ElementNames.forHtmlName("something".toCharArray(), 0, "something".length()).toString());
         Assert.assertEquals(
                 "{something}", ElementNames.forHtmlName("abcdefghijkliklmnsomething".toCharArray(), 17, "something".length()).toString());
@@ -55,12 +57,35 @@ public final class ElementNamesTest {
                 "{xml:space}", ElementNames.forHtmlName("XML:SPACE".toCharArray(), 0, "xml:space".length()).toString());
         Assert.assertEquals(
                 "{xmlns:th}", ElementNames.forHtmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).toString());
+
+        try {
+            ElementNames.forHtmlName(null, 0, 0);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forHtmlName("".toCharArray(), 0, 0);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forHtmlName(" ".toCharArray(), 0, 1);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
     }
 
 
 
     @Test
     public void testHTMLString() {
+        Assert.assertEquals(
+                "{th:something,th-something}", ElementNames.forHtmlName(null, "th:something").toString());
         Assert.assertEquals(
                 "{something}", ElementNames.forHtmlName("something").toString());
         Assert.assertEquals(
@@ -83,11 +108,48 @@ public final class ElementNamesTest {
                 "{xml:space}", ElementNames.forHtmlName("XML:SPACE").toString());
         Assert.assertEquals(
                 "{xmlns:th}", ElementNames.forHtmlName("xmlns:th").toString());
+
+        try {
+            ElementNames.forHtmlName(null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forHtmlName("");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forHtmlName("t", "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forHtmlName(" ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forHtmlName("t", " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
     }
 
 
     @Test
     public void testXMLBuffer() {
+        Assert.assertEquals(
+                "{th:something}", ElementNames.forXmlName(null, "th:something".toCharArray(), 0, "th:something".length()).toString());
         Assert.assertEquals(
                 "{something}", ElementNames.forXmlName("something".toCharArray(), 0, "something".length()).toString());
         Assert.assertEquals(
@@ -132,11 +194,34 @@ public final class ElementNamesTest {
                 "{xmlns:th}", ElementNames.forXmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).toString());
         Assert.assertEquals(
                 "xmlns", ElementNames.forXmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).getPrefix());
+
+        try {
+            ElementNames.forXmlName(null, 0, 0);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forXmlName("".toCharArray(), 0, 0);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forXmlName(" ".toCharArray(), 0, 1);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
     }
 
 
     @Test
     public void testXMLString() {
+        Assert.assertEquals(
+                "{th:something}", ElementNames.forXmlName(null, "th:something").toString());
         Assert.assertEquals(
                 "{something}", ElementNames.forXmlName("something").toString());
         Assert.assertEquals(
@@ -177,6 +262,41 @@ public final class ElementNamesTest {
                 "{xmlns:th}", ElementNames.forXmlName("xmlns:th").toString());
         Assert.assertEquals(
                 "xmlns", ElementNames.forXmlName("xmlns:th").getPrefix());
+
+        try {
+            ElementNames.forXmlName(null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forXmlName("");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forXmlName("t", "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forXmlName(" ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            ElementNames.forXmlName("t", " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
     }
 
 

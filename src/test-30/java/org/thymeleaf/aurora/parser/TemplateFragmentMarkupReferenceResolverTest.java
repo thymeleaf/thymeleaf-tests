@@ -29,17 +29,17 @@ import junit.framework.TestCase;
 public class TemplateFragmentMarkupReferenceResolverTest extends TestCase {
 
 
-    public void test() throws Exception {
+    public void testHtml() throws Exception {
 
-        final TemplateFragmentMarkupReferenceResolver rr01 = TemplateFragmentMarkupReferenceResolver.forPrefix(null);
-        final TemplateFragmentMarkupReferenceResolver rr02 = TemplateFragmentMarkupReferenceResolver.forPrefix("th");
+        final TemplateFragmentMarkupReferenceResolver rr01 = TemplateFragmentMarkupReferenceResolver.forPrefix(true, null);
+        final TemplateFragmentMarkupReferenceResolver rr02 = TemplateFragmentMarkupReferenceResolver.forPrefix(true, "th");
 
-        final TemplateFragmentMarkupReferenceResolver rr03 = TemplateFragmentMarkupReferenceResolver.forPrefix(null);
-        final TemplateFragmentMarkupReferenceResolver rr04 = TemplateFragmentMarkupReferenceResolver.forPrefix("th");
+        final TemplateFragmentMarkupReferenceResolver rr03 = TemplateFragmentMarkupReferenceResolver.forPrefix(true, null);
+        final TemplateFragmentMarkupReferenceResolver rr04 = TemplateFragmentMarkupReferenceResolver.forPrefix(true, "th");
         assertSame(rr01, rr03);
         assertSame(rr02, rr04);
 
-        final TemplateFragmentMarkupReferenceResolver rr05 = TemplateFragmentMarkupReferenceResolver.forPrefix("q");
+        final TemplateFragmentMarkupReferenceResolver rr05 = TemplateFragmentMarkupReferenceResolver.forPrefix(true, "q");
 
         final String result01 = rr01.resolveSelectorFromReference("abc");
         final String result02 = rr01.resolveSelectorFromReference("abc");
@@ -63,5 +63,39 @@ public class TemplateFragmentMarkupReferenceResolverTest extends TestCase {
 
     }
 
+
+    public void testXml() throws Exception {
+
+        final TemplateFragmentMarkupReferenceResolver rr01 = TemplateFragmentMarkupReferenceResolver.forPrefix(false, null);
+        final TemplateFragmentMarkupReferenceResolver rr02 = TemplateFragmentMarkupReferenceResolver.forPrefix(false, "th");
+
+        final TemplateFragmentMarkupReferenceResolver rr03 = TemplateFragmentMarkupReferenceResolver.forPrefix(false, null);
+        final TemplateFragmentMarkupReferenceResolver rr04 = TemplateFragmentMarkupReferenceResolver.forPrefix(false, "th");
+        assertSame(rr01, rr03);
+        assertSame(rr02, rr04);
+
+        final TemplateFragmentMarkupReferenceResolver rr05 = TemplateFragmentMarkupReferenceResolver.forPrefix(false, "q");
+
+        final String result01 = rr01.resolveSelectorFromReference("abc");
+        final String result02 = rr01.resolveSelectorFromReference("abc");
+        assertEquals("/[fragment='abc']", result01);
+        assertSame(result01, result02);
+
+        final String result03 = rr02.resolveSelectorFromReference("abc");
+        final String result04 = rr02.resolveSelectorFromReference("abc");
+        assertEquals("/[th:fragment='abc']", result03);
+        assertSame(result03, result04);
+
+        final String result05 = rr05.resolveSelectorFromReference("abc");
+        final String result06 = rr05.resolveSelectorFromReference("abc");
+        assertEquals("/[q:fragment='abc']", result05);
+        assertSame(result05, result06);
+
+        final String result07 = rr02.resolveSelectorFromReference("abc");
+        final String result08 = rr02.resolveSelectorFromReference("abc");
+        assertEquals("/[th:fragment='abc']", result07);
+        assertSame(result07, result08);
+
+    }
 
 }

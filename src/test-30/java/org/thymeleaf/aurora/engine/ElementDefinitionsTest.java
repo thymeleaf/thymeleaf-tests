@@ -72,6 +72,163 @@ public final class ElementDefinitionsTest {
         Assert.assertFalse(ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.contains("new"));
         Assert.assertFalse(ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.contains(new1));
 
+        ElementDefinition thtextDefinition_3 = elementDefinitions.forHtmlName("t", "text");
+        Assert.assertEquals("{t:text,t-text}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName(null, "text");
+        Assert.assertEquals("{text}", thtextDefinition_3.getElementName().toString());
+        ElementDefinition thtextDefinition_4 = elementDefinitions.forHtmlName("text");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{text}", thtextDefinition_4.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName("thhhh", "text");
+        Assert.assertEquals("{thhhh:text,thhhh-text}", thtextDefinition_3.getElementName().toString());
+
+        thtextDefinition_3 = elementDefinitions.forHtmlName("t", "t");
+        Assert.assertEquals("{t:t,t-t}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName(null, "t");
+        Assert.assertEquals("{t}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_4 = elementDefinitions.forHtmlName("t");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{t}", thtextDefinition_4.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName("thhhh", "teeee");
+        Assert.assertEquals("{thhhh:teeee,thhhh-teeee}", thtextDefinition_3.getElementName().toString());
+
+        thtextDefinition_3 = elementDefinitions.forHtmlName("t", "te");
+        Assert.assertEquals("{t:te,t-te}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName(null, "te");
+        Assert.assertEquals("{te}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_4 = elementDefinitions.forHtmlName("te");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{te}", thtextDefinition_4.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName("t", "teeee");
+        Assert.assertEquals("{t:teeee,t-teeee}", thtextDefinition_3.getElementName().toString());
+
+        thtextDefinition_3 = elementDefinitions.forHtmlName("t", "ta");
+        Assert.assertEquals("{t:ta,t-ta}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName(null, "ta");
+        Assert.assertEquals("{ta}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_4 = elementDefinitions.forHtmlName("ta");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{ta}", thtextDefinition_4.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName("t", "teeee");
+        Assert.assertEquals("{t:teeee,t-teeee}", thtextDefinition_3.getElementName().toString());
+
+        thtextDefinition_3 = elementDefinitions.forHtmlName("t", "ti");
+        Assert.assertEquals("{t:ti,t-ti}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName(null, "ti");
+        Assert.assertEquals("{ti}", thtextDefinition_3.getElementName().toString());
+        thtextDefinition_4 = elementDefinitions.forHtmlName("ti");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{ti}", thtextDefinition_4.getElementName().toString());
+        thtextDefinition_3 = elementDefinitions.forHtmlName("t", "teeee");
+        Assert.assertEquals("{t:teeee,t-teeee}", thtextDefinition_3.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName("t:teeee");
+        Assert.assertEquals("{t:teeee,t-teeee}", thtextDefinition_4.getElementName().toString());
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "t:teeee");
+        Assert.assertEquals("{t:teeee,t-teeee}", thtextDefinition_4.getElementName().toString());
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName("t-teeee");
+        Assert.assertEquals("{t:teeee,t-teeee}", thtextDefinition_4.getElementName().toString());
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "t-teeee");
+        Assert.assertEquals("{t:teeee,t-teeee}", thtextDefinition_4.getElementName().toString());
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forHtmlName(null, null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forHtmlName(null, "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forHtmlName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forXmlName(null, null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forXmlName(null, "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forXmlName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee,data-teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee,dataa-teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "data:data");
+        Assert.assertEquals("{data:data,data-data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "DATA:TEEEE");
+        Assert.assertEquals("{data:teeee,data-teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "DATA");
+        Assert.assertEquals("{data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{dataa:teeee,dataa-teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forHtmlName(null, "DATA:DATA");
+        Assert.assertEquals("{data:data,data-data}", thtextDefinition_4.getElementName().toString());
+
+
+        thtextDefinition_4 = elementDefinitions.forXmlName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forXmlName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forXmlName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forXmlName(null, "data:data");
+        Assert.assertEquals("{data:data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forXmlName(null, "DATA:TEEEE");
+        Assert.assertEquals("{DATA:TEEEE}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forXmlName(null, "DATA");
+        Assert.assertEquals("{DATA}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forXmlName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forXmlName(null, "DATA:DATA");
+        Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getElementName().toString());
+
     }
 
 

@@ -19,71 +19,106 @@
  */
 package org.thymeleaf.aurora.engine;
 
-import java.io.StringWriter;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
 import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.parser.HtmlTemplateParser;
+import org.thymeleaf.aurora.parser.XmlTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
 
 
 public final class ElementAttributesTest {
 
-    private static final HtmlTemplateParser PARSER = new HtmlTemplateParser(2, 4096);
+    private static final HtmlTemplateParser HTML_PARSER = new HtmlTemplateParser(2, 4096);
+    private static final XmlTemplateParser XML_PARSER = new XmlTemplateParser(2, 4096);
     private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = new TemplateEngineContext();
 
 
 
 
     @Test
-    public void testElementAttributesAttrManagement() {
+    public void testHtmlElementAttributesAttrManagement() {
 
-        HtmlElementAttributes attrs;
+        ElementAttributes attrs;
 
-        attrs = computeAttributes("<input>");
+        attrs = computeHtmlAttributes("<input>");
         Assert.assertEquals("", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\">");
+        attrs = computeHtmlAttributes("<input type=\"text\">");
         Assert.assertEquals(" type=\"text\"", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'", attrs.toString());
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!'", attrs.toString());
         attrs.removeAttribute("value");
         Assert.assertEquals("", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    >");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    >");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ", attrs.toString());
-        attrs.removeAttribute("type");
+        attrs.removeAttribute(null, "type");
         Assert.assertEquals(" value='hello!!!'    ", attrs.toString());
-        attrs.removeAttribute("value");
+        attrs.removeAttribute(null, "value");
         Assert.assertEquals("    ", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba>");
+        attrs = computeHtmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    >");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("th", "type");
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("th", "value");
+        Assert.assertEquals("    ", attrs.toString());
+
+        attrs = computeHtmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    >");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("TH", "TYPE");
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("tH", "Value");
+        Assert.assertEquals("    ", attrs.toString());
+
+        attrs = computeHtmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    >");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("data-th-type");
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("data-th-value");
+        Assert.assertEquals("    ", attrs.toString());
+
+        attrs = computeHtmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    >");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(AttributeNames.forHtmlName("th:type"));
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(AttributeNames.forHtmlName("th:value"));
+        Assert.assertEquals("    ", attrs.toString());
+
+        attrs = computeHtmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    >");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(AttributeNames.forHtmlName("th", "type"));
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(AttributeNames.forHtmlName("TH", "VALUE"));
+        Assert.assertEquals("    ", attrs.toString());
+
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba", attrs.toString());
         attrs.removeAttribute("value");
         Assert.assertEquals(" type=\"text\"   ba", attrs.toString());
         attrs.removeAttribute("ba");
         Assert.assertEquals(" type=\"text\"", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba", attrs.toString());
         attrs.removeAttribute("value");
         Assert.assertEquals(" type=\"text\"   ba", attrs.toString());
         attrs.removeAttribute("type");
         Assert.assertEquals(" ba", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba >");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba >");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba ", attrs.toString());
         attrs.removeAttribute("value");
         Assert.assertEquals(" type=\"text\"   ba ", attrs.toString());
         attrs.removeAttribute("ba");
         Assert.assertEquals(" type=\"text\" ", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba >");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba >");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba ", attrs.toString());
         attrs.setAttribute("value", "bye! :(");
         Assert.assertEquals(" type=\"text\"   value='bye! :('    ba ", attrs.toString());
@@ -102,31 +137,31 @@ public final class ElementAttributesTest {
         attrs.setAttribute("ba", "six");
         Assert.assertEquals(" type=\"one\"   value='bye! :('    ba=six ", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba=twenty >");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba=twenty >");
         attrs.setAttribute("ba", "thirty");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba=thirty ", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"value='hello!!!' >");
+        attrs = computeHtmlAttributes("<input type=\"text\"value='hello!!!' >");
         Assert.assertEquals(" type=\"text\"value='hello!!!' ", attrs.toString());
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!' ", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"value='hello!!!' name='one' >");
+        attrs = computeHtmlAttributes("<input type=\"text\"value='hello!!!' name='one' >");
         Assert.assertEquals(" type=\"text\"value='hello!!!' name='one' ", attrs.toString());
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!' name='one' ", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"value='hello!!!' name='one'>");
+        attrs = computeHtmlAttributes("<input type=\"text\"value='hello!!!' name='one'>");
         Assert.assertEquals(" type=\"text\"value='hello!!!' name='one'", attrs.toString());
         attrs.removeAttribute("name");
         Assert.assertEquals(" type=\"text\"value='hello!!!'", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("ba", null);
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("value", null);
         Assert.assertEquals(" type=\"text\"   value    ba= s", attrs.toString());
@@ -135,7 +170,7 @@ public final class ElementAttributesTest {
         attrs.setAttribute("type", null, ElementAttributes.ValueQuotes.SINGLE);
         Assert.assertEquals(" type   ba= s", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= s", attrs.toString());
         attrs.clearAll();
         Assert.assertEquals("", attrs.toString());
@@ -165,25 +200,25 @@ public final class ElementAttributesTest {
         attrs.setAttribute("name", "");
         Assert.assertEquals(" value placeholder=\"a\" name=\"\"", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("type", null);
         Assert.assertEquals(" value='hello!!!'    ba= s type", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("title", null);
         Assert.assertEquals(" value='hello!!!'    ba= s title", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("title", "");
         Assert.assertEquals(" value='hello!!!'    ba= s title=\"\"", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("title", "", ElementAttributes.ValueQuotes.SINGLE);
@@ -196,19 +231,19 @@ public final class ElementAttributesTest {
             Assert.assertTrue(true);
         }
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("value", "one", ElementAttributes.ValueQuotes.NONE);
         Assert.assertEquals(" type=\"text\"   value=one    ba= s", attrs.toString());
         attrs.setAttribute("value", "");
         Assert.assertEquals(" type=\"text\"   value=\"\"    ba= s", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("ba", "");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= \"\"", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= s", attrs.toString());
         attrs.setAttribute("ba", "one");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= one", attrs.toString());
@@ -217,7 +252,7 @@ public final class ElementAttributesTest {
         attrs.setAttribute("ba", "one");
         Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"one\"", attrs.toString());
 
-        attrs = computeAttributes("<input type=\"text\"   value='hello!!!'    ba>");
+        attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba>");
         attrs.setAttribute("ba", "one", ElementAttributes.ValueQuotes.SINGLE);
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba='one'", attrs.toString());
         attrs.removeAttribute("ba");
@@ -244,29 +279,29 @@ public final class ElementAttributesTest {
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!' ba=\"two\" bo=\"five\"", attrs.toString());
 
-        attrs = computeAttributes("<input>");
+        attrs = computeHtmlAttributes("<input>");
         Assert.assertEquals("", attrs.toString());
         attrs.setAttribute("a", "one");
         Assert.assertEquals(" a=\"one\"", attrs.toString());
 
-        attrs = computeAttributes("<input>");
+        attrs = computeHtmlAttributes("<input>");
         Assert.assertEquals("", attrs.toString());
         attrs.setAttribute("a", "one", ElementAttributes.ValueQuotes.NONE);
         Assert.assertEquals(" a=one", attrs.toString());
 
-        attrs = computeAttributes("<input   >");
+        attrs = computeHtmlAttributes("<input   >");
         Assert.assertEquals("   ", attrs.toString());
         attrs.setAttribute("a", "one");
         Assert.assertEquals(" a=\"one\"   ", attrs.toString());
         attrs.setAttribute("b", "two");
         Assert.assertEquals(" a=\"one\" b=\"two\"   ", attrs.toString());
 
-        attrs = computeAttributes("<input\none  />");
+        attrs = computeHtmlAttributes("<input\none  />");
         Assert.assertEquals("\none  ", attrs.toString());
         attrs.setAttribute("a", "two");
         Assert.assertEquals("\none a=\"two\"  ", attrs.toString());
 
-        attrs = computeAttributes("<input\none two/>");
+        attrs = computeHtmlAttributes("<input\none two/>");
         Assert.assertEquals("\none two", attrs.toString());
         attrs.removeAttribute("one");
         Assert.assertEquals("\ntwo", attrs.toString());
@@ -276,15 +311,308 @@ public final class ElementAttributesTest {
 
 
 
-    private static HtmlElementAttributes computeAttributes(final String input) {
+    @Test
+    public void testXmlElementAttributesAttrManagement() {
+
+        ElementAttributes attrs;
+
+        attrs = computeXmlAttributes("<input/>");
+        Assert.assertEquals("", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"/>");
+        Assert.assertEquals(" type=\"text\"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'", attrs.toString());
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!'", attrs.toString());
+        attrs.removeAttribute("value");
+        Assert.assertEquals("", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    />");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(null, "type");
+        Assert.assertEquals(" value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(null, "value");
+        Assert.assertEquals("    ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    />");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("th", "type");
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("th", "value");
+        Assert.assertEquals("    ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    />");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("TH", "TYPE");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("tH", "Value");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    />");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("data-th-type");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute("data-th-value");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    />");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(AttributeNames.forXmlName("th:type"));
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(AttributeNames.forXmlName("th:value"));
+        Assert.assertEquals("    ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    />");
+        Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(AttributeNames.forXmlName("th", "type"));
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+        attrs.removeAttribute(AttributeNames.forXmlName("TH", "VALUE"));
+        Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba=''/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba=''", attrs.toString());
+        attrs.removeAttribute("value");
+        Assert.assertEquals(" type=\"text\"   ba=''", attrs.toString());
+        attrs.removeAttribute("ba");
+        Assert.assertEquals(" type=\"text\"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba=''/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba=''", attrs.toString());
+        attrs.removeAttribute("value");
+        Assert.assertEquals(" type=\"text\"   ba=''", attrs.toString());
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" ba=''", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba='' />");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba='' ", attrs.toString());
+        attrs.removeAttribute("value");
+        Assert.assertEquals(" type=\"text\"   ba='' ", attrs.toString());
+        attrs.removeAttribute("ba");
+        Assert.assertEquals(" type=\"text\" ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba='' />");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba='' ", attrs.toString());
+        attrs.setAttribute("value", "bye! :(");
+        Assert.assertEquals(" type=\"text\"   value='bye! :('    ba='' ", attrs.toString());
+        attrs.setAttribute("type", "one");
+        Assert.assertEquals(" type=\"one\"   value='bye! :('    ba='' ", attrs.toString());
+        attrs.setAttribute("ba", "two");
+        Assert.assertEquals(" type=\"one\"   value='bye! :('    ba='two' ", attrs.toString());
+        attrs.setAttribute("ba", "three", ElementAttributes.ValueQuotes.SINGLE);
+        Assert.assertEquals(" type=\"one\"   value='bye! :('    ba='three' ", attrs.toString());
+
+        try {
+            attrs.setAttribute("ba", "four", ElementAttributes.ValueQuotes.NONE);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            attrs.setAttribute("ba", null, ElementAttributes.ValueQuotes.NONE);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            attrs.setAttribute("ba", null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        attrs.setAttribute("ba", "five");
+        Assert.assertEquals(" type=\"one\"   value='bye! :('    ba='five' ", attrs.toString());
+        attrs.setAttribute("ba", "six");
+        Assert.assertEquals(" type=\"one\"   value='bye! :('    ba='six' ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba='twenty' />");
+        attrs.setAttribute("ba", "thirty");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba='thirty' ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"value='hello!!!' />");
+        Assert.assertEquals(" type=\"text\"value='hello!!!' ", attrs.toString());
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!' ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"value='hello!!!' name='one' />");
+        Assert.assertEquals(" type=\"text\"value='hello!!!' name='one' ", attrs.toString());
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!' name='one' ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"value='hello!!!' name='one'/>");
+        Assert.assertEquals(" type=\"text\"value='hello!!!' name='one'", attrs.toString());
+        attrs.removeAttribute("name");
+        Assert.assertEquals(" type=\"text\"value='hello!!!'", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= 's'", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.removeAttribute("value");
+        Assert.assertEquals(" type=\"text\"   ba= 's'", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.clearAll();
+        Assert.assertEquals("", attrs.toString());
+        attrs.clearAll();
+        Assert.assertEquals("", attrs.toString());
+        attrs.setAttribute("name", "onename");
+        Assert.assertEquals(" name=\"onename\"", attrs.toString());
+        attrs.setAttribute("value", "val");
+        Assert.assertEquals(" name=\"onename\" value=\"val\"", attrs.toString());
+        attrs.setAttribute("placeholder", "a");
+        Assert.assertEquals(" name=\"onename\" value=\"val\" placeholder=\"a\"", attrs.toString());
+        attrs.setAttribute("name", "");
+        Assert.assertEquals(" name=\"\" value=\"val\" placeholder=\"a\"", attrs.toString());
+        attrs.setAttribute("name", "", ElementAttributes.ValueQuotes.SINGLE);
+        Assert.assertEquals(" name='' value=\"val\" placeholder=\"a\"", attrs.toString());
+        attrs.setAttribute("name", "");
+        Assert.assertEquals(" name='' value=\"val\" placeholder=\"a\"", attrs.toString());
+        attrs.removeAttribute("name");
+        Assert.assertEquals(" value=\"val\" placeholder=\"a\"", attrs.toString());
+        Assert.assertEquals(2, attrs.size());
+        attrs.setAttribute("name", "");
+        Assert.assertEquals(" value=\"val\" placeholder=\"a\" name=\"\"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.setAttribute("type", "");
+        Assert.assertEquals(" value='hello!!!'    ba= 's' type=\"\"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.setAttribute("title", " ");
+        Assert.assertEquals(" value='hello!!!'    ba= 's' title=\" \"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.setAttribute("title", "");
+        Assert.assertEquals(" value='hello!!!'    ba= 's' title=\"\"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.setAttribute("title", "", ElementAttributes.ValueQuotes.SINGLE);
+        Assert.assertEquals(" value='hello!!!'    ba= 's' title=''", attrs.toString());
+        try {
+            // Shouldn't be able to set an empty-string value with no quotes
+            attrs.setAttribute("title", "", ElementAttributes.ValueQuotes.NONE);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.setAttribute("value", "one", ElementAttributes.ValueQuotes.DOUBLE);
+        Assert.assertEquals(" type=\"text\"   value=\"one\"    ba= 's'", attrs.toString());
+        attrs.setAttribute("value", "");
+        Assert.assertEquals(" type=\"text\"   value=\"\"    ba= 's'", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.setAttribute("ba", "");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= ''", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba= 's'/>");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= 's'", attrs.toString());
+        attrs.setAttribute("ba", "one");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= 'one'", attrs.toString());
+        attrs.removeAttribute("ba");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'", attrs.toString());
+        attrs.setAttribute("ba", "one");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"one\"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input type=\"text\"   value='hello!!!'    ba=\"\"/>");
+        attrs.setAttribute("ba", "one", ElementAttributes.ValueQuotes.SINGLE);
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba='one'", attrs.toString());
+        attrs.removeAttribute("ba");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!'", attrs.toString());
+        attrs.setAttribute("ba", "two");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"two\"", attrs.toString());
+        attrs.setAttribute("be", "three");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"two\" be=\"three\"", attrs.toString());
+        attrs.setAttribute("bi", "four");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"two\" be=\"three\" bi=\"four\"", attrs.toString());
+        attrs.setAttribute("bo", "five");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"two\" be=\"three\" bi=\"four\" bo=\"five\"", attrs.toString());
+        attrs.setAttribute("bu", "six");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"two\" be=\"three\" bi=\"four\" bo=\"five\" bu=\"six\"", attrs.toString());
+        attrs.removeAttribute("be");
+        attrs.removeAttribute("bu");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"two\" bi=\"four\" bo=\"five\"", attrs.toString());
+        attrs.removeAttribute("bi");
+        Assert.assertEquals(" type=\"text\"   value='hello!!!' ba=\"two\" bo=\"five\"", attrs.toString());
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!' ba=\"two\" bo=\"five\"", attrs.toString());
+        attrs.removeAttribute("type");
+        Assert.assertEquals(" value='hello!!!' ba=\"two\" bo=\"five\"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input/>");
+        Assert.assertEquals("", attrs.toString());
+        attrs.setAttribute("a", "one");
+        Assert.assertEquals(" a=\"one\"", attrs.toString());
+
+        attrs = computeXmlAttributes("<input/>");
+        Assert.assertEquals("", attrs.toString());
+        attrs.setAttribute("a", "one", ElementAttributes.ValueQuotes.SINGLE);
+        Assert.assertEquals(" a='one'", attrs.toString());
+
+        attrs = computeXmlAttributes("<input   />");
+        Assert.assertEquals("   ", attrs.toString());
+        attrs.setAttribute("a", "one");
+        Assert.assertEquals(" a=\"one\"   ", attrs.toString());
+        attrs.setAttribute("b", "two");
+        Assert.assertEquals(" a=\"one\" b=\"two\"   ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input\none=\"\"  />");
+        Assert.assertEquals("\none=\"\"  ", attrs.toString());
+        attrs.setAttribute("a", "two");
+        Assert.assertEquals("\none=\"\" a=\"two\"  ", attrs.toString());
+
+        attrs = computeXmlAttributes("<input\none=\"\" two=\"\"/>");
+        Assert.assertEquals("\none=\"\" two=\"\"", attrs.toString());
+        attrs.removeAttribute("one");
+        Assert.assertEquals("\ntwo=\"\"", attrs.toString());
+
+    }
+
+
+
+
+
+
+    private static ElementAttributes computeHtmlAttributes(final String input) {
 
         final String templateName = "test";
-        final StringWriter writer = new StringWriter();
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), handler);
+        HTML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), handler);
 
-        return (HtmlElementAttributes) handler.elementAttributes;
+        return handler.elementAttributes;
+
+    }
+
+
+
+
+    private static ElementAttributes computeXmlAttributes(final String input) {
+
+        final String templateName = "test";
+        final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
+
+        XML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, new StringResource(templateName, input), handler);
+
+        return handler.elementAttributes;
 
     }
 

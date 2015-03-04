@@ -99,6 +99,183 @@ public final class AttributeDefinitionsTest {
         Assert.assertNotSame(xmlthtextDefinition, xmlthtextDefinition3);
         Assert.assertNotSame(xmlthtextDefinition, xmlthtextDefinition4);
 
+        final AttributeDefinition thtextDefinition_2 = attributeDefinitions.forHtmlName("th", "text");
+        Assert.assertEquals("{th:text,data-th-text}", thtextDefinition_2.getAttributeName().toString());
+        final AttributeDefinition thtextDefinition2_2 = attributeDefinitions.forHtmlName("th:text");
+        final AttributeDefinition thtextDefinition3_2 = attributeDefinitions.forHtmlName("th:TEXT");
+        final AttributeDefinition thtextDefinition4_2 = attributeDefinitions.forHtmlName("data-th-TEXT");
+        Assert.assertSame(thtextDefinition_2, thtextDefinition2_2);
+        Assert.assertSame(thtextDefinition_2, thtextDefinition3_2);
+        Assert.assertSame(thtextDefinition_2, thtextDefinition4_2);
+
+        final AttributeDefinition xmlthtextDefinition_2 = attributeDefinitions.forXmlName("th","text");
+        Assert.assertEquals("{th:text}", xmlthtextDefinition_2.getAttributeName().toString());
+        final AttributeDefinition xmlthtextDefinition2_2 = attributeDefinitions.forXmlName("th:text");
+        final AttributeDefinition xmlthtextDefinition3_2 = attributeDefinitions.forXmlName("th:TEXT");
+        Assert.assertEquals("{th:TEXT}", xmlthtextDefinition3_2.getAttributeName().toString());
+        final AttributeDefinition xmlthtextDefinition4_2 = attributeDefinitions.forXmlName("data-th-TEXT");
+        Assert.assertEquals("{data-th-TEXT}", xmlthtextDefinition4_2.getAttributeName().toString());
+        Assert.assertSame(xmlthtextDefinition_2, xmlthtextDefinition2_2);
+        Assert.assertNotSame(xmlthtextDefinition_2, xmlthtextDefinition3_2);
+        Assert.assertNotSame(xmlthtextDefinition_2, xmlthtextDefinition4_2);
+
+        AttributeDefinition thtextDefinition_3 = attributeDefinitions.forHtmlName("t", "text");
+        Assert.assertEquals("{t:text,data-t-text}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName(null, "text");
+        Assert.assertEquals("{text}", thtextDefinition_3.getAttributeName().toString());
+        AttributeDefinition thtextDefinition_4 = attributeDefinitions.forHtmlName("text");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{text}", thtextDefinition_4.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("thhhh", "text");
+        Assert.assertEquals("{thhhh:text,data-thhhh-text}", thtextDefinition_3.getAttributeName().toString());
+
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("t", "t");
+        Assert.assertEquals("{t:t,data-t-t}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName(null, "t");
+        Assert.assertEquals("{t}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_4 = attributeDefinitions.forHtmlName("t");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{t}", thtextDefinition_4.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("thhhh", "teeee");
+        Assert.assertEquals("{thhhh:teeee,data-thhhh-teeee}", thtextDefinition_3.getAttributeName().toString());
+
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("t", "te");
+        Assert.assertEquals("{t:te,data-t-te}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName(null, "te");
+        Assert.assertEquals("{te}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_4 = attributeDefinitions.forHtmlName("te");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{te}", thtextDefinition_4.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("t", "teeee");
+        Assert.assertEquals("{t:teeee,data-t-teeee}", thtextDefinition_3.getAttributeName().toString());
+
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("t", "ta");
+        Assert.assertEquals("{t:ta,data-t-ta}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName(null, "ta");
+        Assert.assertEquals("{ta}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_4 = attributeDefinitions.forHtmlName("ta");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{ta}", thtextDefinition_4.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("t", "teeee");
+        Assert.assertEquals("{t:teeee,data-t-teeee}", thtextDefinition_3.getAttributeName().toString());
+
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("t", "ti");
+        Assert.assertEquals("{t:ti,data-t-ti}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName(null, "ti");
+        Assert.assertEquals("{ti}", thtextDefinition_3.getAttributeName().toString());
+        thtextDefinition_4 = attributeDefinitions.forHtmlName("ti");
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+        Assert.assertEquals("{ti}", thtextDefinition_4.getAttributeName().toString());
+        thtextDefinition_3 = attributeDefinitions.forHtmlName("t", "teeee");
+        Assert.assertEquals("{t:teeee,data-t-teeee}", thtextDefinition_3.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName("t:teeee");
+        Assert.assertEquals("{t:teeee,data-t-teeee}", thtextDefinition_4.getAttributeName().toString());
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "t:teeee");
+        Assert.assertEquals("{t:teeee,data-t-teeee}", thtextDefinition_4.getAttributeName().toString());
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName("data-t-teeee");
+        Assert.assertEquals("{t:teeee,data-t-teeee}", thtextDefinition_4.getAttributeName().toString());
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "data-t-teeee");
+        Assert.assertEquals("{t:teeee,data-t-teeee}", thtextDefinition_4.getAttributeName().toString());
+        Assert.assertSame(thtextDefinition_3, thtextDefinition_4);
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forHtmlName(null, null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forHtmlName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forXmlName(null, null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forXmlName(null, "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forXmlName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee,data-data-teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee,data-dataa-teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "data:data");
+        Assert.assertEquals("{data:data,data-data-data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "DATA:TEEEE");
+        Assert.assertEquals("{data:teeee,data-data-teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "DATA");
+        Assert.assertEquals("{data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{dataa:teeee,data-dataa-teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forHtmlName(null, "DATA:DATA");
+        Assert.assertEquals("{data:data,data-data-data}", thtextDefinition_4.getAttributeName().toString());
+
+
+        thtextDefinition_4 = attributeDefinitions.forXmlName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forXmlName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forXmlName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forXmlName(null, "data:data");
+        Assert.assertEquals("{data:data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forXmlName(null, "DATA:TEEEE");
+        Assert.assertEquals("{DATA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forXmlName(null, "DATA");
+        Assert.assertEquals("{DATA}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forXmlName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forXmlName(null, "DATA:DATA");
+        Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getAttributeName().toString());
+
     }
 
 
