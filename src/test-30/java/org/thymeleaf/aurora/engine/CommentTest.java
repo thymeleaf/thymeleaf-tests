@@ -128,7 +128,7 @@ public final class CommentTest {
 
         final String c2cs1 = "<!--hello-->";
         final String c2c1 = "hello";
-        final Comment c2 = new Comment(c2c1);
+        final Comment c2 = new Comment(textRepository, c2c1);
         final String c2cs1_2 = c2.getComment();
         final String c2c1_2 = c2.getContent();
         Assert.assertEquals(c2cs1, c2cs1_2);

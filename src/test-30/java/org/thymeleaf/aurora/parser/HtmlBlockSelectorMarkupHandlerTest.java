@@ -56,7 +56,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
     public void test() throws Exception {
 
-        final HtmlTemplateParser parser = new HtmlTemplateParser(2, 4096);
+        final HTMLTemplateParser parser = new HTMLTemplateParser(2, 4096);
         final ITemplateEngineContext templateEngineContext = new TemplateEngineContext();
 
         final URL resourcesFolderURL = Thread.currentThread().getContextClassLoader().getResource(RESOURCES_FOLDER);
@@ -112,7 +112,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
 
     private static void check(
-            final HtmlTemplateParser parser, final ITemplateEngineContext templateEngineContext,
+            final HTMLTemplateParser parser, final ITemplateEngineContext templateEngineContext,
             final String templateName, final String input, final String output, final String[] blockSelectors)
             throws Exception{
 

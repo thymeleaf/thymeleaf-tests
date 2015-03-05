@@ -127,7 +127,7 @@ public final class CDATASectionTest {
 
         final String c2cs1 = "<![CDATA[hello]]>";
         final String c2c1 = "hello";
-        final CDATASection c2 = new CDATASection(c2c1);
+        final CDATASection c2 = new CDATASection(git c2c1);
         final String c2cs1_2 = c2.getCDATASection();
         final String c2c1_2 = c2.getContent();
         Assert.assertEquals(c2cs1, c2cs1_2);

@@ -148,7 +148,7 @@ public final class DocTypeTest {
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
-        d1.setToHtml5();
+        d1.setToHTML5();
         Assert.assertEquals(doctypeHTML5LC, d1.getDocType());
         Assert.assertSame(keywordLC, d1.getKeyword());
         Assert.assertSame(elementNameHtml, d1.getElementName());

@@ -30,50 +30,50 @@ public final class ElementNamesTest {
     @Test
     public void testHTMLBuffer() {
         Assert.assertEquals(
-                "{th:something,th-something}", ElementNames.forHtmlName(null, "th:something".toCharArray(), 0, "th:something".length()).toString());
+                "{th:something,th-something}", ElementNames.forHTMLName(null, "th:something".toCharArray(), 0, "th:something".length()).toString());
         Assert.assertEquals(
-                "{something}", ElementNames.forHtmlName("something".toCharArray(), 0, "something".length()).toString());
+                "{something}", ElementNames.forHTMLName("something".toCharArray(), 0, "something".length()).toString());
         Assert.assertEquals(
-                "{something}", ElementNames.forHtmlName("abcdefghijkliklmnsomething".toCharArray(), 17, "something".length()).toString());
+                "{something}", ElementNames.forHTMLName("abcdefghijkliklmnsomething".toCharArray(), 17, "something".length()).toString());
         Assert.assertEquals(
-                "{th:something,th-something}", ElementNames.forHtmlName("th:something".toCharArray(), 0, "th:something".length()).toString());
+                "{th:something,th-something}", ElementNames.forHTMLName("th:something".toCharArray(), 0, "th:something".length()).toString());
         Assert.assertEquals(
-                "{th:something,th-something}", ElementNames.forHtmlName("abcdefghijkliklmnth:something".toCharArray(), 17, "th:something".length()).toString());
+                "{th:something,th-something}", ElementNames.forHTMLName("abcdefghijkliklmnth:something".toCharArray(), 17, "th:something".length()).toString());
         Assert.assertEquals(
-                "{something}", ElementNames.forHtmlName("SOMETHING".toCharArray(), 0, "SOMETHING".length()).toString());
+                "{something}", ElementNames.forHTMLName("SOMETHING".toCharArray(), 0, "SOMETHING".length()).toString());
         Assert.assertEquals(
-                "{th:something,th-something}", ElementNames.forHtmlName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length()).toString());
+                "{th:something,th-something}", ElementNames.forHTMLName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length()).toString());
         Assert.assertEquals(
-                "{:something}", ElementNames.forHtmlName(":something".toCharArray(), 0, ":something".length()).toString());
+                "{:something}", ElementNames.forHTMLName(":something".toCharArray(), 0, ":something".length()).toString());
         Assert.assertEquals(
-                "{data:th-something,data-th-something}", ElementNames.forHtmlName("data-th-something".toCharArray(), 0, "data-th-something".length()).toString());
+                "{data:th-something,data-th-something}", ElementNames.forHTMLName("data-th-something".toCharArray(), 0, "data-th-something".length()).toString());
         Assert.assertEquals(
-                "{data:something,data-something}", ElementNames.forHtmlName("data-something".toCharArray(), 0, "data-something".length()).toString());
+                "{data:something,data-something}", ElementNames.forHTMLName("data-something".toCharArray(), 0, "data-something".length()).toString());
         Assert.assertEquals(
-                "{xml:ns}", ElementNames.forHtmlName("xml:ns".toCharArray(), 0, "xml:ns".length()).toString());
+                "{xml:ns}", ElementNames.forHTMLName("xml:ns".toCharArray(), 0, "xml:ns".length()).toString());
         Assert.assertEquals(
-                "{xml:space}", ElementNames.forHtmlName("xml:space".toCharArray(), 0, "xml:space".length()).toString());
+                "{xml:space}", ElementNames.forHTMLName("xml:space".toCharArray(), 0, "xml:space".length()).toString());
         Assert.assertEquals(
-                "{xml:space}", ElementNames.forHtmlName("XML:SPACE".toCharArray(), 0, "xml:space".length()).toString());
+                "{xml:space}", ElementNames.forHTMLName("XML:SPACE".toCharArray(), 0, "xml:space".length()).toString());
         Assert.assertEquals(
-                "{xmlns:th}", ElementNames.forHtmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).toString());
+                "{xmlns:th}", ElementNames.forHTMLName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).toString());
 
         try {
-            ElementNames.forHtmlName(null, 0, 0);
+            ElementNames.forHTMLName(null, 0, 0);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forHtmlName("".toCharArray(), 0, 0);
+            ElementNames.forHTMLName("".toCharArray(), 0, 0);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forHtmlName(" ".toCharArray(), 0, 1);
+            ElementNames.forHTMLName(" ".toCharArray(), 0, 1);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
@@ -85,60 +85,60 @@ public final class ElementNamesTest {
     @Test
     public void testHTMLString() {
         Assert.assertEquals(
-                "{th:something,th-something}", ElementNames.forHtmlName(null, "th:something").toString());
+                "{th:something,th-something}", ElementNames.forHTMLName(null, "th:something").toString());
         Assert.assertEquals(
-                "{something}", ElementNames.forHtmlName("something").toString());
+                "{something}", ElementNames.forHTMLName("something").toString());
         Assert.assertEquals(
-                "{th:something,th-something}", ElementNames.forHtmlName("th:something").toString());
+                "{th:something,th-something}", ElementNames.forHTMLName("th:something").toString());
         Assert.assertEquals(
-                "{something}", ElementNames.forHtmlName("SOMETHING").toString());
+                "{something}", ElementNames.forHTMLName("SOMETHING").toString());
         Assert.assertEquals(
-                "{th:something,th-something}", ElementNames.forHtmlName("TH:SOMETHING").toString());
+                "{th:something,th-something}", ElementNames.forHTMLName("TH:SOMETHING").toString());
         Assert.assertEquals(
-                "{:something}", ElementNames.forHtmlName(":something").toString());
+                "{:something}", ElementNames.forHTMLName(":something").toString());
         Assert.assertEquals(
-                "{data:th-something,data-th-something}", ElementNames.forHtmlName("data-th-something").toString());
+                "{data:th-something,data-th-something}", ElementNames.forHTMLName("data-th-something").toString());
         Assert.assertEquals(
-                "{data:something,data-something}", ElementNames.forHtmlName("data-something").toString());
+                "{data:something,data-something}", ElementNames.forHTMLName("data-something").toString());
         Assert.assertEquals(
-                "{xml:ns}", ElementNames.forHtmlName("xml:ns").toString());
+                "{xml:ns}", ElementNames.forHTMLName("xml:ns").toString());
         Assert.assertEquals(
-                "{xml:space}", ElementNames.forHtmlName("xml:space").toString());
+                "{xml:space}", ElementNames.forHTMLName("xml:space").toString());
         Assert.assertEquals(
-                "{xml:space}", ElementNames.forHtmlName("XML:SPACE").toString());
+                "{xml:space}", ElementNames.forHTMLName("XML:SPACE").toString());
         Assert.assertEquals(
-                "{xmlns:th}", ElementNames.forHtmlName("xmlns:th").toString());
+                "{xmlns:th}", ElementNames.forHTMLName("xmlns:th").toString());
 
         try {
-            ElementNames.forHtmlName(null);
+            ElementNames.forHTMLName(null);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forHtmlName("");
+            ElementNames.forHTMLName("");
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forHtmlName("t", "");
+            ElementNames.forHTMLName("t", "");
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forHtmlName(" ");
+            ElementNames.forHTMLName(" ");
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forHtmlName("t", " ");
+            ElementNames.forHTMLName("t", " ");
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
@@ -149,68 +149,68 @@ public final class ElementNamesTest {
     @Test
     public void testXMLBuffer() {
         Assert.assertEquals(
-                "{th:something}", ElementNames.forXmlName(null, "th:something".toCharArray(), 0, "th:something".length()).toString());
+                "{th:something}", ElementNames.forXMLName(null, "th:something".toCharArray(), 0, "th:something".length()).toString());
         Assert.assertEquals(
-                "{something}", ElementNames.forXmlName("something".toCharArray(), 0, "something".length()).toString());
+                "{something}", ElementNames.forXMLName("something".toCharArray(), 0, "something".length()).toString());
         Assert.assertEquals(
-                "{something}", ElementNames.forXmlName("abcdefghijkliklmnsomething".toCharArray(), 17, "something".length()).toString());
+                "{something}", ElementNames.forXMLName("abcdefghijkliklmnsomething".toCharArray(), 17, "something".length()).toString());
         Assert.assertEquals(
-                "{th:something}", ElementNames.forXmlName("th:something".toCharArray(), 0, "th:something".length()).toString());
+                "{th:something}", ElementNames.forXMLName("th:something".toCharArray(), 0, "th:something".length()).toString());
         Assert.assertEquals(
-                "{th:something}", ElementNames.forXmlName("abcdefghijkliklmnth:something".toCharArray(), 17, "th:something".length()).toString());
+                "{th:something}", ElementNames.forXMLName("abcdefghijkliklmnth:something".toCharArray(), 17, "th:something".length()).toString());
         Assert.assertEquals(
-                "th", ElementNames.forXmlName("th:something".toCharArray(), 0, "th:something".length()).getPrefix());
+                "th", ElementNames.forXMLName("th:something".toCharArray(), 0, "th:something".length()).getPrefix());
         Assert.assertEquals(
-                "{SOMETHING}", ElementNames.forXmlName("SOMETHING".toCharArray(), 0, "SOMETHING".length()).toString());
+                "{SOMETHING}", ElementNames.forXMLName("SOMETHING".toCharArray(), 0, "SOMETHING".length()).toString());
         Assert.assertEquals(
-                "{TH:SOMETHING}", ElementNames.forXmlName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length()).toString());
+                "{TH:SOMETHING}", ElementNames.forXMLName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length()).toString());
         Assert.assertEquals(
-                "TH", ElementNames.forXmlName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length()).getPrefix());
+                "TH", ElementNames.forXMLName("TH:SOMETHING".toCharArray(), 0, "TH:SOMETHING".length()).getPrefix());
         Assert.assertEquals(
-                "{:something}", ElementNames.forXmlName(":something".toCharArray(), 0, ":something".length()).toString());
+                "{:something}", ElementNames.forXMLName(":something".toCharArray(), 0, ":something".length()).toString());
         Assert.assertFalse(
-                ElementNames.forXmlName(":something".toCharArray(), 0, ":something".length()).isPrefixed());
+                ElementNames.forXMLName(":something".toCharArray(), 0, ":something".length()).isPrefixed());
         Assert.assertEquals(
-                "{data-th-something}", ElementNames.forXmlName("data-th-something".toCharArray(), 0, "data-th-something".length()).toString());
+                "{data-th-something}", ElementNames.forXMLName("data-th-something".toCharArray(), 0, "data-th-something".length()).toString());
         Assert.assertFalse(
-                ElementNames.forXmlName("data-th-something".toCharArray(), 0, "data-th-something".length()).isPrefixed());
+                ElementNames.forXMLName("data-th-something".toCharArray(), 0, "data-th-something".length()).isPrefixed());
         Assert.assertEquals(
-                "{data-something}", ElementNames.forXmlName("data-something".toCharArray(), 0, "data-something".length()).toString());
+                "{data-something}", ElementNames.forXMLName("data-something".toCharArray(), 0, "data-something".length()).toString());
         Assert.assertEquals(
-                "{data:something}", ElementNames.forXmlName("data:something").toString());
+                "{data:something}", ElementNames.forXMLName("data:something").toString());
         Assert.assertEquals(
-                "data", ElementNames.forXmlName("data:something").getPrefix());
+                "data", ElementNames.forXMLName("data:something").getPrefix());
         Assert.assertEquals(
-                "{xml:ns}", ElementNames.forXmlName("xml:ns".toCharArray(), 0, "xml:ns".length()).toString());
+                "{xml:ns}", ElementNames.forXMLName("xml:ns".toCharArray(), 0, "xml:ns".length()).toString());
         Assert.assertEquals(
-                "xml", ElementNames.forXmlName("xml:ns".toCharArray(), 0, "xml:ns".length()).getPrefix());
+                "xml", ElementNames.forXMLName("xml:ns".toCharArray(), 0, "xml:ns".length()).getPrefix());
         Assert.assertEquals(
-                "{xml:space}", ElementNames.forXmlName("xml:space".toCharArray(), 0, "xml:space".length()).toString());
+                "{xml:space}", ElementNames.forXMLName("xml:space".toCharArray(), 0, "xml:space".length()).toString());
         Assert.assertEquals(
-                "{XML:SPACE}", ElementNames.forXmlName("XML:SPACE".toCharArray(), 0, "xml:space".length()).toString());
+                "{XML:SPACE}", ElementNames.forXMLName("XML:SPACE".toCharArray(), 0, "xml:space".length()).toString());
         Assert.assertEquals(
-                "XML", ElementNames.forXmlName("XML:SPACE".toCharArray(), 0, "xml:space".length()).getPrefix());
+                "XML", ElementNames.forXMLName("XML:SPACE".toCharArray(), 0, "xml:space".length()).getPrefix());
         Assert.assertEquals(
-                "{xmlns:th}", ElementNames.forXmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).toString());
+                "{xmlns:th}", ElementNames.forXMLName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).toString());
         Assert.assertEquals(
-                "xmlns", ElementNames.forXmlName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).getPrefix());
+                "xmlns", ElementNames.forXMLName("xmlns:th".toCharArray(), 0, "xmlns:th".length()).getPrefix());
 
         try {
-            ElementNames.forXmlName(null, 0, 0);
+            ElementNames.forXMLName(null, 0, 0);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forXmlName("".toCharArray(), 0, 0);
+            ElementNames.forXMLName("".toCharArray(), 0, 0);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forXmlName(" ".toCharArray(), 0, 1);
+            ElementNames.forXMLName(" ".toCharArray(), 0, 1);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
@@ -221,78 +221,78 @@ public final class ElementNamesTest {
     @Test
     public void testXMLString() {
         Assert.assertEquals(
-                "{th:something}", ElementNames.forXmlName(null, "th:something").toString());
+                "{th:something}", ElementNames.forXMLName(null, "th:something").toString());
         Assert.assertEquals(
-                "{something}", ElementNames.forXmlName("something").toString());
+                "{something}", ElementNames.forXMLName("something").toString());
         Assert.assertEquals(
-                "{th:something}", ElementNames.forXmlName("th:something").toString());
+                "{th:something}", ElementNames.forXMLName("th:something").toString());
         Assert.assertEquals(
-                "th", ElementNames.forXmlName("th:something").getPrefix());
+                "th", ElementNames.forXMLName("th:something").getPrefix());
         Assert.assertEquals(
-                "{SOMETHING}", ElementNames.forXmlName("SOMETHING").toString());
+                "{SOMETHING}", ElementNames.forXMLName("SOMETHING").toString());
         Assert.assertEquals(
-                "{TH:SOMETHING}", ElementNames.forXmlName("TH:SOMETHING").toString());
+                "{TH:SOMETHING}", ElementNames.forXMLName("TH:SOMETHING").toString());
         Assert.assertEquals(
-                "TH", ElementNames.forXmlName("TH:SOMETHING").getPrefix());
+                "TH", ElementNames.forXMLName("TH:SOMETHING").getPrefix());
         Assert.assertEquals(
-                "{:something}", ElementNames.forXmlName(":something").toString());
+                "{:something}", ElementNames.forXMLName(":something").toString());
         Assert.assertFalse(
-                ElementNames.forXmlName(":something").isPrefixed());
+                ElementNames.forXMLName(":something").isPrefixed());
         Assert.assertEquals(
-                "{data-th-something}", ElementNames.forXmlName("data-th-something").toString());
+                "{data-th-something}", ElementNames.forXMLName("data-th-something").toString());
         Assert.assertFalse(
-                ElementNames.forXmlName("data-th-something").isPrefixed());
+                ElementNames.forXMLName("data-th-something").isPrefixed());
         Assert.assertEquals(
-                "{data-something}", ElementNames.forXmlName("data-something").toString());
+                "{data-something}", ElementNames.forXMLName("data-something").toString());
         Assert.assertEquals(
-                "{data:something}", ElementNames.forXmlName("data:something").toString());
+                "{data:something}", ElementNames.forXMLName("data:something").toString());
         Assert.assertEquals(
-                "data", ElementNames.forXmlName("data:something").getPrefix());
+                "data", ElementNames.forXMLName("data:something").getPrefix());
         Assert.assertEquals(
-                "{xml:ns}", ElementNames.forXmlName("xml:ns").toString());
+                "{xml:ns}", ElementNames.forXMLName("xml:ns").toString());
         Assert.assertEquals(
-                "xml", ElementNames.forXmlName("xml:ns").getPrefix());
+                "xml", ElementNames.forXMLName("xml:ns").getPrefix());
         Assert.assertEquals(
-                "{xml:space}", ElementNames.forXmlName("xml:space").toString());
+                "{xml:space}", ElementNames.forXMLName("xml:space").toString());
         Assert.assertEquals(
-                "{XML:SPACE}", ElementNames.forXmlName("XML:SPACE").toString());
+                "{XML:SPACE}", ElementNames.forXMLName("XML:SPACE").toString());
         Assert.assertEquals(
-                "XML", ElementNames.forXmlName("XML:SPACE").getPrefix());
+                "XML", ElementNames.forXMLName("XML:SPACE").getPrefix());
         Assert.assertEquals(
-                "{xmlns:th}", ElementNames.forXmlName("xmlns:th").toString());
+                "{xmlns:th}", ElementNames.forXMLName("xmlns:th").toString());
         Assert.assertEquals(
-                "xmlns", ElementNames.forXmlName("xmlns:th").getPrefix());
+                "xmlns", ElementNames.forXMLName("xmlns:th").getPrefix());
 
         try {
-            ElementNames.forXmlName(null);
+            ElementNames.forXMLName(null);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forXmlName("");
+            ElementNames.forXMLName("");
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forXmlName("t", "");
+            ElementNames.forXMLName("t", "");
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forXmlName(" ");
+            ElementNames.forXMLName(" ");
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            ElementNames.forXmlName("t", " ");
+            ElementNames.forXMLName("t", " ");
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);

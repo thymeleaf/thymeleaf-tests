@@ -25,14 +25,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
 import org.thymeleaf.aurora.context.TemplateEngineContext;
-import org.thymeleaf.aurora.parser.HtmlTemplateParser;
+import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
 import org.thymeleaf.aurora.templatemode.TemplateMode;
 
 
 public final class BareHtmlEngineTest {
 
-    private static final HtmlTemplateParser PARSER = new HtmlTemplateParser(2, 4096);
+    private static final HTMLTemplateParser PARSER = new HTMLTemplateParser(2, 4096);
     private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = new TemplateEngineContext();
 
 

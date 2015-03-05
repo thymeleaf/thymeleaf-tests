@@ -29,13 +29,13 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
 import org.thymeleaf.aurora.context.TemplateEngineContext;
-import org.thymeleaf.aurora.parser.HtmlTemplateParser;
+import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.resource.ReaderResource;
 import org.thymeleaf.aurora.templatemode.TemplateMode;
 
 public class HtmlBulkTester {
 
-    private static final HtmlTemplateParser PARSER = new HtmlTemplateParser(2, 4096);
+    private static final HTMLTemplateParser PARSER = new HTMLTemplateParser(2, 4096);
     private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = new TemplateEngineContext();
 
 

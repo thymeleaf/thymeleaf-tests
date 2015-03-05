@@ -29,7 +29,7 @@ public final class XmlDeclarationTest {
     @Test
     public void test() {
 
-        final String keyword = XmlDeclaration.DEFAULT_KEYWORD;
+        final String keyword = XMLDeclaration.DEFAULT_KEYWORD;
 
         final String xmlDeclar1utfno = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>";
         final String xmlDeclar1utf = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -46,7 +46,7 @@ public final class XmlDeclarationTest {
         final String standaloneyes = "yes";
 
 
-        final XmlDeclaration d1 = new XmlDeclaration();
+        final XMLDeclaration d1 = new XMLDeclaration();
         d1.setXmlDeclaration(
                 xmlDeclar1utfno,
                 keyword,
@@ -115,8 +115,8 @@ public final class XmlDeclarationTest {
 
 
 
-        final XmlDeclaration d2 =
-                new XmlDeclaration(
+        final XMLDeclaration d2 =
+                new XMLDeclaration(
                     version1,
                     encodingIso,
                     standaloneno);
@@ -129,8 +129,8 @@ public final class XmlDeclarationTest {
         Assert.assertEquals(-1, d2.getCol());
 
 
-        final XmlDeclaration d3 =
-                new XmlDeclaration(
+        final XMLDeclaration d3 =
+                new XMLDeclaration(
                         version1,
                         null,
                         null);
