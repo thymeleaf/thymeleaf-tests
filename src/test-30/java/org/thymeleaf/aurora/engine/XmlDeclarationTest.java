@@ -21,6 +21,8 @@ package org.thymeleaf.aurora.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.aurora.text.ITextRepository;
+import org.thymeleaf.aurora.text.TextRepositories;
 
 
 public final class XmlDeclarationTest {
@@ -28,6 +30,8 @@ public final class XmlDeclarationTest {
 
     @Test
     public void test() {
+
+        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
 
         final String keyword = XMLDeclaration.DEFAULT_KEYWORD;
 
@@ -46,7 +50,7 @@ public final class XmlDeclarationTest {
         final String standaloneyes = "yes";
 
 
-        final XMLDeclaration d1 = new XMLDeclaration();
+        final XMLDeclaration d1 = new XMLDeclaration(textRepository);
         d1.setXmlDeclaration(
                 xmlDeclar1utfno,
                 keyword,
@@ -117,6 +121,7 @@ public final class XmlDeclarationTest {
 
         final XMLDeclaration d2 =
                 new XMLDeclaration(
+                    textRepository,
                     version1,
                     encodingIso,
                     standaloneno);
@@ -131,6 +136,7 @@ public final class XmlDeclarationTest {
 
         final XMLDeclaration d3 =
                 new XMLDeclaration(
+                        textRepository,
                         version1,
                         null,
                         null);

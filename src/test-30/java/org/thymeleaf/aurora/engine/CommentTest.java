@@ -53,7 +53,7 @@ public final class CommentTest {
         c1.setContent(c1c0);
         Assert.assertSame(c1c0, c1.getContent());
         Assert.assertEquals("<!-- something\nhere -->", c1.getComment());
-        Assert.assertNotSame(textRepository.getText("<!-- something\nhere -->"), c1.getComment());
+        Assert.assertSame(textRepository.getText("<!-- something\nhere -->"), c1.getComment());
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
 

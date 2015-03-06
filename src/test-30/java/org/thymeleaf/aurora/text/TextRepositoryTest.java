@@ -23,7 +23,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public final class MarkupTextRepositoryTest {
+public final class TextRepositoryTest {
 
     //
     // The two character squences 'UKHRHQIQWB' and 'CESIOUUOKO' are used in these tests because they
@@ -165,6 +165,26 @@ public final class MarkupTextRepositoryTest {
 
 
 
+    @Test
+    public void testCharSequences() throws Exception {
+
+        final ITextRepository repository = new LimitedSizeCacheTextRepository(15, new String[0]);
+
+        int res01 = testTextStrBuilder(repository, "one", "two");
+        int res02 = testTextStrBuilder(repository, "one", "two");
+        int res03 = testTextStrBuilder(repository, "onetw", "o");
+        int res04 = testTextStrBuffer(repository, "onetwo", "");
+        int res05 = testTextStr(repository, "onetwo");
+        Assert.assertEquals(res01, res02);
+        Assert.assertEquals(res01, res03);
+        Assert.assertEquals(res01, res04);
+        Assert.assertEquals(res01, res05);
+
+
+    }
+
+
+
     private static int testTextChar(final ITextRepository repository, final char[] text, final int offset, final int len) {
         final String result = repository.getText(text,offset,len);
         return System.identityHashCode(result);
@@ -181,7 +201,20 @@ public final class MarkupTextRepositoryTest {
         return System.identityHashCode(result);
     }
 
+    private static int testTextStrBuilder(final ITextRepository repository, final String text1, final String text2) {
+        final StringBuilder input = new StringBuilder();
+        input.append(text1);
+        input.append(text2);
+        final String result = repository.getText(input);
+        return System.identityHashCode(result);
+    }
 
-
+    private static int testTextStrBuffer(final ITextRepository repository, final String text1, final String text2) {
+        final StringBuffer input = new StringBuffer();
+        input.append(text1);
+        input.append(text2);
+        final String result = repository.getText(input);
+        return System.identityHashCode(result);
+    }
 
 }

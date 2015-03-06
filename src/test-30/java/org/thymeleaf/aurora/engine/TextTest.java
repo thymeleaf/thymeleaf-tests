@@ -67,7 +67,7 @@ public final class TextTest {
 
 
         final String c2c1 = "hello";
-        final Text c2 = new Text(c2c1);
+        final Text c2 = new Text(textRepository, c2c1);
         final String c2cs1_2 = c2.getText();
         Assert.assertEquals(c2c1, c2cs1_2);
         Assert.assertSame(c2cs1_2, c2.getText());

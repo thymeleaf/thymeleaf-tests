@@ -21,6 +21,8 @@ package org.thymeleaf.aurora.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.aurora.text.ITextRepository;
+import org.thymeleaf.aurora.text.TextRepositories;
 
 
 public final class DocTypeTest {
@@ -28,6 +30,8 @@ public final class DocTypeTest {
 
     @Test
     public void test() {
+
+        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
 
         final String doctypeHTML5UC = "<!DOCTYPE html>";
         final String doctypeHTML5LC = "<!doctype html>";
@@ -49,7 +53,7 @@ public final class DocTypeTest {
 
         final String internalSubsetWSXHTMLTransitional = "\n <!-- an internal subset can be embedded here -->\n ";
 
-        final DocType d1 = new DocType();
+        final DocType d1 = new DocType(textRepository);
         d1.setDocType(
                 doctypeXHTMLTransitionalWS,
                 keywordUC,
@@ -162,6 +166,7 @@ public final class DocTypeTest {
 
         final DocType d2 =
                 new DocType(
+                    textRepository,
                     keywordUC,
                     elementNameHtml,
                     typePublicUC,
@@ -195,6 +200,7 @@ public final class DocTypeTest {
 
         final DocType d3 =
                 new DocType(
+                        textRepository,
                         publicIdXHTMLTransitional,
                         systemIdXHTMLTransitional);
 
@@ -210,7 +216,7 @@ public final class DocTypeTest {
 
 
         final DocType d4 =
-                new DocType(null, null);
+                new DocType(textRepository, null, null);
 
         Assert.assertEquals(doctypeHTML5UC, d4.getDocType());
         Assert.assertEquals(keywordUC, d4.getKeyword());

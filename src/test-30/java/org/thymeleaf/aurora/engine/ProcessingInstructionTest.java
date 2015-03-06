@@ -21,6 +21,8 @@ package org.thymeleaf.aurora.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.aurora.text.ITextRepository;
+import org.thymeleaf.aurora.text.TextRepositories;
 
 
 public final class ProcessingInstructionTest {
@@ -28,6 +30,8 @@ public final class ProcessingInstructionTest {
 
     @Test
     public void test() {
+
+        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
 
         final String procInstr1 = "<?something someother and other and other?>";
         final String procInstr2 = "<?anything-else someother and other and other?>";
@@ -42,7 +46,7 @@ public final class ProcessingInstructionTest {
         final String content3 = null;
 
 
-        final ProcessingInstruction d1 = new ProcessingInstruction();
+        final ProcessingInstruction d1 = new ProcessingInstruction(textRepository);
         d1.setProcessingInstruction(
                 procInstr1,
                 target1,
@@ -96,6 +100,7 @@ public final class ProcessingInstructionTest {
 
         final ProcessingInstruction d2 =
                 new ProcessingInstruction(
+                    textRepository,
                     target1,
                     content1);
 
@@ -108,6 +113,7 @@ public final class ProcessingInstructionTest {
 
         final ProcessingInstruction d3 =
                 new ProcessingInstruction(
+                        textRepository,
                         target2,
                         null);
 
