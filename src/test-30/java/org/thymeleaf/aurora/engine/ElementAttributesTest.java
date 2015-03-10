@@ -41,7 +41,7 @@ public final class ElementAttributesTest {
     @Test
     public void testHtmlElementAttributesAttrManagement() {
 
-        ElementAttributes attrs;
+        IElementAttributes attrs;
 
         attrs = computeHtmlAttributes("<input>");
         Assert.assertEquals("", attrs.toString());
@@ -315,7 +315,7 @@ public final class ElementAttributesTest {
     @Test
     public void testXmlElementAttributesAttrManagement() {
 
-        ElementAttributes attrs;
+        IElementAttributes attrs;
 
         attrs = computeXmlAttributes("<input/>");
         Assert.assertEquals("", attrs.toString());
@@ -596,7 +596,7 @@ public final class ElementAttributesTest {
     @Test
     public void testHtmlElementAttributesAttrObtention() {
 
-        ElementAttributes attrs;
+        IElementAttributes attrs;
         final AttributeDefinitions attributeDefinitions = TEMPLATE_ENGINE_CONTEXT.getAttributeDefinitions();
 
         attrs = computeHtmlAttributes("<input>");
@@ -888,6 +888,94 @@ public final class ElementAttributesTest {
         Assert.assertFalse(attrs.hasAttribute(AttributeNames.forHTMLName("TH:TYPE")));
         Assert.assertEquals(0, attrs.size());
 
+        attrs = computeHtmlAttributes("<input type=text th:type=\"${thetype}\">");
+        Assert.assertEquals(IElementAttributes.ValueQuotes.NONE, attrs.getValueQuotes("type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.NONE, attrs.getValueQuotes("", "type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.NONE, attrs.getValueQuotes(AttributeNames.forHTMLName("", "type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.NONE, attrs.getValueQuotes(AttributeNames.forHTMLName("type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes("th:type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes("", "th:type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes("th", "type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes("", "TH:Type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes("TH", "Type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes(AttributeNames.forHTMLName("", "th:type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes(AttributeNames.forHTMLName("th:type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes(AttributeNames.forHTMLName("th", "type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes(AttributeNames.forHTMLName("TH:Type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes(AttributeNames.forHTMLName("TH", "Type")));
+
+        attrs = computeHtmlAttributes("<input type='text' \nth:type=\"${thetype}\">");
+        Assert.assertEquals(1, attrs.getLine("type"));
+        Assert.assertEquals(1, attrs.getLine("", "type"));
+        Assert.assertEquals(1, attrs.getLine(AttributeNames.forHTMLName("", "type")));
+        Assert.assertEquals(1, attrs.getLine(AttributeNames.forHTMLName("type")));
+        Assert.assertEquals(8, attrs.getCol("type"));
+        Assert.assertEquals(8, attrs.getCol("", "type"));
+        Assert.assertEquals(8, attrs.getCol(AttributeNames.forHTMLName("", "type")));
+        Assert.assertEquals(8, attrs.getCol(AttributeNames.forHTMLName("type")));
+        Assert.assertEquals(2, attrs.getLine("th:type"));
+        Assert.assertEquals(2, attrs.getLine("th", "type"));
+        Assert.assertEquals(2, attrs.getLine("", "th:type"));
+        Assert.assertEquals(2, attrs.getLine("TH", "Type"));
+        Assert.assertEquals(2, attrs.getLine("", "TH:Type"));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forHTMLName("", "th:type")));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forHTMLName("th", "type")));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forHTMLName("", "TH:Type")));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forHTMLName("TH", "Type")));
+        Assert.assertEquals(1, attrs.getCol("th:type"));
+        Assert.assertEquals(1, attrs.getCol("", "th:type"));
+        Assert.assertEquals(1, attrs.getCol("th", "type"));
+        Assert.assertEquals(1, attrs.getCol("TH", "Type"));
+        Assert.assertEquals(1, attrs.getCol(AttributeNames.forHTMLName("", "th:type")));
+        Assert.assertEquals(1, attrs.getCol(AttributeNames.forHTMLName("th:type")));
+        Assert.assertEquals(1, attrs.getCol(AttributeNames.forHTMLName("th", "type")));
+        Assert.assertEquals(1, attrs.getCol(AttributeNames.forHTMLName("TH:Type")));
+        Assert.assertEquals(1, attrs.getCol(AttributeNames.forHTMLName("TH", "Type")));
+
+        attrs = computeHtmlAttributes("<input type='text' \na=\"b\" th:type=\"${thetype}\">");
+        attrs.removeAttribute("a");
+        Assert.assertEquals(1, attrs.getLine("type"));
+        Assert.assertEquals(1, attrs.getLine("", "type"));
+        Assert.assertEquals(1, attrs.getLine(AttributeNames.forHTMLName("", "type")));
+        Assert.assertEquals(1, attrs.getLine(AttributeNames.forHTMLName("type")));
+        Assert.assertEquals(8, attrs.getCol("type"));
+        Assert.assertEquals(8, attrs.getCol("", "type"));
+        Assert.assertEquals(8, attrs.getCol(AttributeNames.forHTMLName("", "type")));
+        Assert.assertEquals(8, attrs.getCol(AttributeNames.forHTMLName("type")));
+        Assert.assertEquals(2, attrs.getLine("th:type"));
+        Assert.assertEquals(2, attrs.getLine("th", "type"));
+        Assert.assertEquals(2, attrs.getLine("", "th:type"));
+        Assert.assertEquals(2, attrs.getLine("TH", "Type"));
+        Assert.assertEquals(2, attrs.getLine("", "TH:Type"));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forHTMLName("", "th:type")));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forHTMLName("th", "type")));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forHTMLName("", "TH:Type")));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forHTMLName("TH", "Type")));
+        Assert.assertEquals(7, attrs.getCol("th:type"));
+        Assert.assertEquals(7, attrs.getCol("", "th:type"));
+        Assert.assertEquals(7, attrs.getCol("th", "type"));
+        Assert.assertEquals(7, attrs.getCol("TH", "Type"));
+        Assert.assertEquals(7, attrs.getCol(AttributeNames.forHTMLName("", "th:type")));
+        Assert.assertEquals(7, attrs.getCol(AttributeNames.forHTMLName("th:type")));
+        Assert.assertEquals(7, attrs.getCol(AttributeNames.forHTMLName("th", "type")));
+        Assert.assertEquals(7, attrs.getCol(AttributeNames.forHTMLName("TH:Type")));
+        Assert.assertEquals(7, attrs.getCol(AttributeNames.forHTMLName("TH", "Type")));
+
+        Assert.assertTrue(attrs.hasLocation("th:type"));
+        Assert.assertTrue(attrs.hasLocation("", "th:type"));
+        Assert.assertTrue(attrs.hasLocation("th", "type"));
+        Assert.assertTrue(attrs.hasLocation("TH", "Type"));
+        Assert.assertTrue(attrs.hasLocation(AttributeNames.forHTMLName("", "th:type")));
+        Assert.assertTrue(attrs.hasLocation(AttributeNames.forHTMLName("th:type")));
+        Assert.assertTrue(attrs.hasLocation(AttributeNames.forHTMLName("th", "type")));
+        Assert.assertTrue(attrs.hasLocation(AttributeNames.forHTMLName("TH:Type")));
+        Assert.assertTrue(attrs.hasLocation(AttributeNames.forHTMLName("TH", "Type")));
+        attrs.setAttribute("one", "two");
+        Assert.assertFalse(attrs.hasLocation("one"));
+        Assert.assertFalse(attrs.hasLocation("", "one"));
+        Assert.assertFalse(attrs.hasLocation(AttributeNames.forHTMLName("", "one")));
+        Assert.assertFalse(attrs.hasLocation(AttributeNames.forHTMLName("one")));
+
     }
 
 
@@ -900,7 +988,7 @@ public final class ElementAttributesTest {
     @Test
     public void testXmlElementAttributesAttrObtention() {
 
-        ElementAttributes attrs;
+        IElementAttributes attrs;
         final AttributeDefinitions attributeDefinitions = TEMPLATE_ENGINE_CONTEXT.getAttributeDefinitions();
 
         attrs = computeXmlAttributes("<input/>");
@@ -1177,12 +1265,100 @@ public final class ElementAttributesTest {
         Assert.assertFalse(attrs.hasAttribute(AttributeNames.forXMLName("TH:TYPE")));
         Assert.assertEquals(0, attrs.size());
 
+        attrs = computeXmlAttributes("<input type='text' th:type=\"${thetype}\"/>");
+        Assert.assertEquals(IElementAttributes.ValueQuotes.SINGLE, attrs.getValueQuotes("type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.SINGLE, attrs.getValueQuotes("", "type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.SINGLE, attrs.getValueQuotes(AttributeNames.forXMLName("", "type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.SINGLE, attrs.getValueQuotes(AttributeNames.forXMLName("type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes("th:type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes("", "th:type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes("th", "type"));
+        Assert.assertNull(attrs.getValueQuotes("", "TH:Type"));
+        Assert.assertNull(attrs.getValueQuotes("TH", "Type"));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes(AttributeNames.forXMLName("", "th:type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes(AttributeNames.forXMLName("th:type")));
+        Assert.assertEquals(IElementAttributes.ValueQuotes.DOUBLE, attrs.getValueQuotes(AttributeNames.forXMLName("th", "type")));
+        Assert.assertNull(attrs.getValueQuotes(AttributeNames.forXMLName("TH:Type")));
+        Assert.assertNull(attrs.getValueQuotes(AttributeNames.forXMLName("TH", "Type")));
+
+        attrs = computeXmlAttributes("<input type='text' \nth:type=\"${thetype}\"/>");
+        Assert.assertEquals(1, attrs.getLine("type"));
+        Assert.assertEquals(1, attrs.getLine("", "type"));
+        Assert.assertEquals(1, attrs.getLine(AttributeNames.forXMLName("", "type")));
+        Assert.assertEquals(1, attrs.getLine(AttributeNames.forXMLName("type")));
+        Assert.assertEquals(8, attrs.getCol("type"));
+        Assert.assertEquals(8, attrs.getCol("", "type"));
+        Assert.assertEquals(8, attrs.getCol(AttributeNames.forXMLName("", "type")));
+        Assert.assertEquals(8, attrs.getCol(AttributeNames.forXMLName("type")));
+        Assert.assertEquals(2, attrs.getLine("th:type"));
+        Assert.assertEquals(2, attrs.getLine("th", "type"));
+        Assert.assertEquals(2, attrs.getLine("", "th:type"));
+        Assert.assertEquals(-1, attrs.getLine("TH", "Type"));
+        Assert.assertEquals(-1, attrs.getLine("", "TH:Type"));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forXMLName("", "th:type")));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forXMLName("th", "type")));
+        Assert.assertEquals(-1, attrs.getLine(AttributeNames.forXMLName("", "TH:Type")));
+        Assert.assertEquals(-1, attrs.getLine(AttributeNames.forXMLName("TH", "Type")));
+        Assert.assertEquals(1, attrs.getCol("th:type"));
+        Assert.assertEquals(1, attrs.getCol("", "th:type"));
+        Assert.assertEquals(1, attrs.getCol("th", "type"));
+        Assert.assertEquals(-1, attrs.getCol("TH", "Type"));
+        Assert.assertEquals(1, attrs.getCol(AttributeNames.forXMLName("", "th:type")));
+        Assert.assertEquals(1, attrs.getCol(AttributeNames.forXMLName("th:type")));
+        Assert.assertEquals(1, attrs.getCol(AttributeNames.forXMLName("th", "type")));
+        Assert.assertEquals(-1, attrs.getCol(AttributeNames.forXMLName("TH:Type")));
+        Assert.assertEquals(-1, attrs.getCol(AttributeNames.forXMLName("TH", "Type")));
+
+        attrs = computeXmlAttributes("<input type='text' \na=\"b\" th:type=\"${thetype}\"/>");
+        attrs.removeAttribute("a");
+        Assert.assertEquals(1, attrs.getLine("type"));
+        Assert.assertEquals(1, attrs.getLine("", "type"));
+        Assert.assertEquals(1, attrs.getLine(AttributeNames.forXMLName("", "type")));
+        Assert.assertEquals(1, attrs.getLine(AttributeNames.forXMLName("type")));
+        Assert.assertEquals(8, attrs.getCol("type"));
+        Assert.assertEquals(8, attrs.getCol("", "type"));
+        Assert.assertEquals(8, attrs.getCol(AttributeNames.forXMLName("", "type")));
+        Assert.assertEquals(8, attrs.getCol(AttributeNames.forXMLName("type")));
+        Assert.assertEquals(2, attrs.getLine("th:type"));
+        Assert.assertEquals(2, attrs.getLine("th", "type"));
+        Assert.assertEquals(2, attrs.getLine("", "th:type"));
+        Assert.assertEquals(-1, attrs.getLine("TH", "Type"));
+        Assert.assertEquals(-1, attrs.getLine("", "TH:Type"));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forXMLName("", "th:type")));
+        Assert.assertEquals(2, attrs.getLine(AttributeNames.forXMLName("th", "type")));
+        Assert.assertEquals(-1, attrs.getLine(AttributeNames.forXMLName("", "TH:Type")));
+        Assert.assertEquals(-1, attrs.getLine(AttributeNames.forXMLName("TH", "Type")));
+        Assert.assertEquals(7, attrs.getCol("th:type"));
+        Assert.assertEquals(7, attrs.getCol("", "th:type"));
+        Assert.assertEquals(7, attrs.getCol("th", "type"));
+        Assert.assertEquals(-1, attrs.getCol("TH", "Type"));
+        Assert.assertEquals(7, attrs.getCol(AttributeNames.forXMLName("", "th:type")));
+        Assert.assertEquals(7, attrs.getCol(AttributeNames.forXMLName("th:type")));
+        Assert.assertEquals(7, attrs.getCol(AttributeNames.forXMLName("th", "type")));
+        Assert.assertEquals(-1, attrs.getCol(AttributeNames.forXMLName("TH:Type")));
+        Assert.assertEquals(-1, attrs.getCol(AttributeNames.forXMLName("TH", "Type")));
+
+        Assert.assertTrue(attrs.hasLocation("th:type"));
+        Assert.assertTrue(attrs.hasLocation("", "th:type"));
+        Assert.assertTrue(attrs.hasLocation("th", "type"));
+        Assert.assertFalse(attrs.hasLocation("TH", "Type"));
+        Assert.assertTrue(attrs.hasLocation(AttributeNames.forXMLName("", "th:type")));
+        Assert.assertTrue(attrs.hasLocation(AttributeNames.forXMLName("th:type")));
+        Assert.assertTrue(attrs.hasLocation(AttributeNames.forXMLName("th", "type")));
+        Assert.assertFalse(attrs.hasLocation(AttributeNames.forXMLName("TH:Type")));
+        Assert.assertFalse(attrs.hasLocation(AttributeNames.forXMLName("TH", "Type")));
+        attrs.setAttribute("one", "two");
+        Assert.assertFalse(attrs.hasLocation("one"));
+        Assert.assertFalse(attrs.hasLocation("", "one"));
+        Assert.assertFalse(attrs.hasLocation(AttributeNames.forXMLName("", "one")));
+        Assert.assertFalse(attrs.hasLocation(AttributeNames.forXMLName("one")));
+
     }
 
 
 
 
-    private static ElementAttributes computeHtmlAttributes(final String input) {
+    private static IElementAttributes computeHtmlAttributes(final String input) {
 
         final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
@@ -1196,7 +1372,7 @@ public final class ElementAttributesTest {
 
 
 
-    private static ElementAttributes computeXmlAttributes(final String input) {
+    private static IElementAttributes computeXmlAttributes(final String input) {
 
         final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
@@ -1213,17 +1389,17 @@ public final class ElementAttributesTest {
     private static class ElementAttributeObtentionTemplateHandler extends AbstractTemplateHandler {
 
 
-        ElementAttributes elementAttributes;
+        IElementAttributes elementAttributes;
 
 
         @Override
-        public void handleStandaloneElement(final ElementDefinition elementDefinition, final String elementName, final ElementAttributes elementAttributes, final boolean minimized, final int line, final int col) {
-            this.elementAttributes = elementAttributes.cloneElementAttributes();
+        public void handleStandaloneElement(final IStandaloneElementTag standaloneElementTag) {
+            this.elementAttributes = standaloneElementTag.cloneElementTag().getAttributes();
         }
 
         @Override
-        public void handleOpenElement(final ElementDefinition elementDefinition, final String elementName, final ElementAttributes elementAttributes, final int line, final int col) {
-            this.elementAttributes = elementAttributes.cloneElementAttributes();
+        public void handleOpenElement(final IOpenElementTag openElementTag) {
+            this.elementAttributes = openElementTag.cloneElementTag().getAttributes();
         }
 
     }
