@@ -34,7 +34,7 @@ import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TemplateEngineContext;
+import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
 import org.thymeleaf.aurora.engine.ITemplateHandler;
 import org.thymeleaf.aurora.engine.OutputTemplateHandler;
 import org.thymeleaf.aurora.resource.StringResource;
@@ -57,7 +57,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
     public void test() throws Exception {
 
         final HTMLTemplateParser parser = new HTMLTemplateParser(2, 4096);
-        final ITemplateEngineContext templateEngineContext = new TemplateEngineContext();
+        final ITemplateEngineContext templateEngineContext = TestTemplateEngineContextBuilder.build();
 
         final URL resourcesFolderURL = Thread.currentThread().getContextClassLoader().getResource(RESOURCES_FOLDER);
         assertNotNull(resourcesFolderURL);

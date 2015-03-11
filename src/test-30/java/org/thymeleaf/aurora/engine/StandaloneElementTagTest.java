@@ -22,7 +22,7 @@ package org.thymeleaf.aurora.engine;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TemplateEngineContext;
+import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.parser.XMLTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
@@ -33,7 +33,7 @@ public final class StandaloneElementTagTest {
 
     private static final HTMLTemplateParser HTML_PARSER = new HTMLTemplateParser(2, 4096);
     private static final XMLTemplateParser XML_PARSER = new XMLTemplateParser(2, 4096);
-    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = new TemplateEngineContext();
+    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = TestTemplateEngineContextBuilder.build();
 
 
 
