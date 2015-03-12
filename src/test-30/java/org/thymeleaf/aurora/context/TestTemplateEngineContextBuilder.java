@@ -19,11 +19,9 @@
  */
 package org.thymeleaf.aurora.context;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.dialect.IDialect;
 import org.thymeleaf.aurora.standard.StandardDialect;
 import org.thymeleaf.aurora.text.TextRepositories;
@@ -34,9 +32,10 @@ public final class TestTemplateEngineContextBuilder {
 
 
     public static ITemplateEngineContext build() {
-        final Set<IDialect> dialects = new HashSet<IDialect>();
-        dialects.add(new StandardDialect());
-        return new TemplateEngineContext(dialects, TextRepositories.createLimitedSizeCacheRepository());
+        final StandardDialect standardDialect = new StandardDialect();
+        final Map<String,IDialect> standardDialectMap = new HashMap<String,IDialect>(2,1.0f);
+        standardDialectMap.put(standardDialect.getPrefix(), standardDialect);
+        return new TemplateEngineContext(standardDialectMap, TextRepositories.createLimitedSizeCacheRepository());
     }
 
 

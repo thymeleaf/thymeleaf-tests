@@ -24,20 +24,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TemplateEngineContext;
 import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
-import org.thymeleaf.aurora.dialect.IDialect;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.resource.ReaderResource;
-import org.thymeleaf.aurora.standard.StandardDialect;
 import org.thymeleaf.aurora.templatemode.TemplateMode;
-import org.thymeleaf.aurora.text.TextRepositories;
 
 public class HtmlBulkTester {
 

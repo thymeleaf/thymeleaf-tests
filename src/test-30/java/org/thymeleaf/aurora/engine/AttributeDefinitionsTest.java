@@ -19,6 +19,8 @@
  */
 package org.thymeleaf.aurora.engine;
 
+import java.util.Collections;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,9 +32,9 @@ public final class AttributeDefinitionsTest {
     @Test
     public void test() {
 
-        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions();
+        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions(Collections.EMPTY_SET);
 
-        final int standardSize = AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTES.size();
+        final int standardSize = AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.size();
         Assert.assertEquals(standardSize, AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.size());
 
         for (final String name : AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES) {
@@ -67,10 +69,10 @@ public final class AttributeDefinitionsTest {
         final AttributeDefinition new7 = attributeDefinitions.forHTMLName("new");
         Assert.assertSame(new1, new7);
 
-        Assert.assertEquals(standardSize, AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTES.size());
+        Assert.assertEquals(standardSize, AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.size());
         Assert.assertEquals(standardSize, AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.size());
         Assert.assertFalse(AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.contains("new"));
-        Assert.assertFalse(AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTES.contains(new1));
+        Assert.assertFalse(AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.contains(new1.getAttributeName().attributeName));
 
         final HTMLAttributeDefinition htmlIdDefinition = attributeDefinitions.forHTMLName("id");
         final HTMLAttributeDefinition htmlDisabledDefinition = attributeDefinitions.forHTMLName("disabled");

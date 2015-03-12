@@ -19,6 +19,8 @@
  */
 package org.thymeleaf.aurora.engine;
 
+import java.util.Collections;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,9 +32,9 @@ public final class ElementDefinitionsTest {
     @Test
     public void test() {
 
-        final ElementDefinitions elementDefinitions = new ElementDefinitions();
+        final ElementDefinitions elementDefinitions = new ElementDefinitions(Collections.EMPTY_SET);
 
-        final int standardSize = ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.size();
+        final int standardSize = ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size();
         Assert.assertEquals(standardSize, elementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size());
 
         for (final String name : ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES) {
@@ -67,10 +69,10 @@ public final class ElementDefinitionsTest {
         final ElementDefinition new7 = elementDefinitions.forHTMLName("new");
         Assert.assertSame(new1, new7);
 
-        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.size());
+        Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size());
         Assert.assertEquals(standardSize, ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size());
         Assert.assertFalse(ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.contains("new"));
-        Assert.assertFalse(ElementDefinitions.ALL_STANDARD_HTML_ELEMENTS.contains(new1));
+        Assert.assertFalse(ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.contains(new1.getElementName().elementName));
 
         ElementDefinition thtextDefinition_3 = elementDefinitions.forHTMLName("t", "text");
         Assert.assertEquals("{t:text,t-text}", thtextDefinition_3.getElementName().toString());
