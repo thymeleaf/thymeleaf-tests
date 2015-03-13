@@ -32,7 +32,7 @@ public final class ElementDefinitionsTest {
     @Test
     public void test() {
 
-        final ElementDefinitions elementDefinitions = new ElementDefinitions(Collections.EMPTY_SET);
+        final ElementDefinitions elementDefinitions = new ElementDefinitions(Collections.EMPTY_MAP);
 
         final int standardSize = ElementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size();
         Assert.assertEquals(standardSize, elementDefinitions.ALL_STANDARD_HTML_ELEMENT_NAMES.size());

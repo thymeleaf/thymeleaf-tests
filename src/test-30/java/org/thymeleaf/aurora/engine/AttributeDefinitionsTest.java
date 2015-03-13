@@ -32,7 +32,7 @@ public final class AttributeDefinitionsTest {
     @Test
     public void test() {
 
-        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions(Collections.EMPTY_SET);
+        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions(Collections.EMPTY_MAP);
 
         final int standardSize = AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.size();
         Assert.assertEquals(standardSize, AttributeDefinitions.ALL_STANDARD_HTML_ATTRIBUTE_NAMES.size());
