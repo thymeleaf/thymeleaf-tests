@@ -24,6 +24,7 @@ import java.io.StringWriter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
+import org.thymeleaf.aurora.context.TemplateProcessingContext;
 import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
@@ -90,7 +91,8 @@ public final class BareHtmlEngineTest {
 
         final String templateName = "test";
         final StringWriter writer = new StringWriter();
-        final ITemplateHandler handler = new OutputTemplateHandler(templateName, writer);
+        final ITemplateHandler handler = new OutputTemplateHandler(writer);
+        handler.setTemplateProcessingContext(new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML));
 
         if (blockSelectors != null) {
             PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);

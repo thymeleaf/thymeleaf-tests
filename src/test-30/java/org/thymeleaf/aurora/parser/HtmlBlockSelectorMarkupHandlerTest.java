@@ -34,6 +34,7 @@ import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
+import org.thymeleaf.aurora.context.TemplateProcessingContext;
 import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
 import org.thymeleaf.aurora.engine.ITemplateHandler;
 import org.thymeleaf.aurora.engine.OutputTemplateHandler;
@@ -48,6 +49,7 @@ import org.thymeleaf.aurora.templatemode.TemplateMode;
 public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
     private static final String RESOURCES_FOLDER = "htmlblockselector/";
+    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = TestTemplateEngineContextBuilder.build();
 
     public HtmlBlockSelectorMarkupHandlerTest() {
         super();
@@ -117,7 +119,8 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
             throws Exception{
 
         final StringWriter writer = new StringWriter();
-        final ITemplateHandler handler = new OutputTemplateHandler(templateName, writer);
+        final ITemplateHandler handler = new OutputTemplateHandler(writer);
+        handler.setTemplateProcessingContext(new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML));
 
         parser.parse(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
 

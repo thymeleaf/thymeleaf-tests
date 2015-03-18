@@ -182,35 +182,15 @@ public final class StandaloneElementTagTest {
 
         tag = computeHtmlTag("<input>");
         Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
-        tag.setElementName("meta");
-        Assert.assertEquals("<meta>", tag.toString());
-        Assert.assertSame(elementDefinitions.forHTMLName("meta"), tag.getElementDefinition());
-
-        tag = computeHtmlTag("<input>");
+        tag.setMinimized(true);
+        Assert.assertEquals("<input/>", tag.toString());
         Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
-        tag.setElementName("voodoo", true);
-        Assert.assertEquals("<voodoo/>", tag.toString());
-        Assert.assertSame(elementDefinitions.forHTMLName("voodoo"), tag.getElementDefinition());
 
-        tag = computeHtmlTag("<input type=\"text\">");
-        tag.setElementName("voodoo", true);
-        Assert.assertEquals("<voodoo type=\"text\"/>", tag.toString());
-
-        tag = computeHtmlTag("<input>");
-        try {
-            tag.setElementName("div");
-            Assert.assertTrue(false);
-        } catch (final IllegalArgumentException e) {
-            Assert.assertTrue(true);
-        }
-
-        tag = computeHtmlTag("<input>");
-        try {
-            tag.setElementName("voodoo");
-            Assert.assertTrue(false);
-        } catch (final IllegalArgumentException e) {
-            Assert.assertTrue(true);
-        }
+        tag = computeHtmlTag("<input />");
+        Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
+        tag.setMinimized(false);
+        Assert.assertEquals("<input >", tag.toString());
+        Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
 
     }
 
@@ -229,13 +209,12 @@ public final class StandaloneElementTagTest {
 
         tag = computeXmlTag("<input/>");
         Assert.assertSame(elementDefinitions.forXMLName("input"), tag.getElementDefinition());
-        tag.setElementName("voodoo");
-        Assert.assertEquals("<voodoo/>", tag.toString());
-        Assert.assertSame(elementDefinitions.forXMLName("voodoo"), tag.getElementDefinition());
-
-        tag = computeXmlTag("<input type=\"text\"/>");
-        tag.setElementName("voodoo");
-        Assert.assertEquals("<voodoo type=\"text\"/>", tag.toString());
+        try {
+            tag.setMinimized(false); // XML standalone elements cannot be un-minimized
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
 
     }
 

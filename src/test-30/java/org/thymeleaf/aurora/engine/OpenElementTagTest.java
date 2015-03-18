@@ -174,57 +174,6 @@ public final class OpenElementTagTest {
 
 
 
-    @Test
-    public void testHtmlOpenElementPropertyManagement() {
-
-        IOpenElementTag tag;
-        final ElementDefinitions elementDefinitions = TEMPLATE_ENGINE_CONTEXT.getElementDefinitions();
-
-        tag = computeHtmlTag("<div>");
-        Assert.assertSame(elementDefinitions.forHTMLName("div"), tag.getElementDefinition());
-        tag.setElementName("voodoo");
-        Assert.assertEquals("<voodoo>", tag.toString());
-        Assert.assertSame(elementDefinitions.forHTMLName("voodoo"), tag.getElementDefinition());
-
-        tag = computeHtmlTag("<div type=\"text\">");
-        tag.setElementName("voodoo");
-        Assert.assertEquals("<voodoo type=\"text\">", tag.toString());
-
-        tag = computeHtmlTag("<div>");
-        try {
-            tag.setElementName("meta");
-            Assert.assertTrue(false);
-        } catch (final IllegalArgumentException e) {
-            Assert.assertTrue(true);
-        }
-
-    }
-
-
-
-
-
-
-
-
-    @Test
-    public void testXmlOpenElementPropertyManagement() {
-
-        IOpenElementTag tag;
-        final ElementDefinitions elementDefinitions = TEMPLATE_ENGINE_CONTEXT.getElementDefinitions();
-
-        tag = computeXmlTag("<input></input>");
-        Assert.assertSame(elementDefinitions.forXMLName("input"), tag.getElementDefinition());
-        tag.setElementName("voodoo");
-        Assert.assertEquals("<voodoo>", tag.toString());
-        Assert.assertSame(elementDefinitions.forXMLName("voodoo"), tag.getElementDefinition());
-
-        tag = computeXmlTag("<input type=\"text\"></input>");
-        tag.setElementName("voodoo");
-        Assert.assertEquals("<voodoo type=\"text\">", tag.toString());
-
-    }
-
 
 
 
