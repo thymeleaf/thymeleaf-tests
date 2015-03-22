@@ -30,6 +30,9 @@ public final class AttributeNamesTest {
     @Test
     public void testHTMLBuffer() {
         Assert.assertEquals(
+                "{data-something}", AttributeNames.forHTMLName(null, "data-something".toCharArray(), 0, "data-something".length()).toString());
+        Assert.assertNull(AttributeNames.forHTMLName(null, "data-something".toCharArray(), 0, "data-something".length()).getPrefix());
+        Assert.assertEquals(
                 "{th:something,data-th-something}", AttributeNames.forHTMLName(null, "th:something".toCharArray(), 0, "th:something".length()).toString());
         Assert.assertEquals(
                 "{something}", AttributeNames.forHTMLName("something".toCharArray(), 0, "something".length()).toString());
@@ -89,6 +92,12 @@ public final class AttributeNamesTest {
 
     @Test
     public void testHTMLString() {
+        Assert.assertEquals(
+                "{data-something}", AttributeNames.forHTMLName(null, "data-something".toCharArray(), 0, "data-something".length()).toString());
+        Assert.assertNull(AttributeNames.forHTMLName(null, "data-something".toCharArray(), 0, "data-something".length()).getPrefix());
+        Assert.assertEquals(
+                "{data-something}", AttributeNames.forHTMLName(null, "data-something").toString());
+        Assert.assertNull(AttributeNames.forHTMLName(null, "data-something").getPrefix());
         Assert.assertEquals(
                 "{th:something,data-th-something}", AttributeNames.forHTMLName(null, "th:something").toString());
         Assert.assertEquals(
@@ -225,6 +234,9 @@ public final class AttributeNamesTest {
 
     @Test
     public void testXMLString() {
+        Assert.assertEquals(
+                "{data-something}", AttributeNames.forHTMLName(null, "data-something").toString());
+        Assert.assertNull(AttributeNames.forHTMLName(null, "data-something").getPrefix());
         Assert.assertEquals(
                 "{th:something}", AttributeNames.forXMLName(null, "th:something").toString());
         Assert.assertEquals(
