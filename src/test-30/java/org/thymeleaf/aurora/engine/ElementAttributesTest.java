@@ -47,14 +47,20 @@ public final class ElementAttributesTest {
         Assert.assertEquals("", attrs.toString());
 
         attrs = computeHtmlAttributes("<input type=\"text\">");
+        Assert.assertEquals("[type]", attrs.getAllCompleteNames().toString());
         Assert.assertEquals(" type=\"text\"", attrs.toString());
 
         attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'>");
+        Assert.assertEquals("[type, value]", attrs.getAllCompleteNames().toString());
+        Assert.assertEquals("[{type}, {value}]", attrs.getAllAttributeNames().toString());
         Assert.assertEquals(" type=\"text\"   value='hello!!!'", attrs.toString());
         attrs.removeAttribute("type");
         Assert.assertEquals(" value='hello!!!'", attrs.toString());
+        Assert.assertEquals("[value]", attrs.getAllCompleteNames().toString());
+        Assert.assertEquals("[{value}]", attrs.getAllAttributeNames().toString());
         attrs.removeAttribute("value");
         Assert.assertEquals("", attrs.toString());
+        Assert.assertEquals("[]", attrs.getAllCompleteNames().toString());
 
         attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    >");
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ", attrs.toString());
@@ -172,6 +178,7 @@ public final class ElementAttributesTest {
         Assert.assertEquals(" type   ba= s", attrs.toString());
 
         attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
+        Assert.assertEquals("[type, value, ba]", attrs.getAllCompleteNames().toString());
         Assert.assertEquals(" type=\"text\"   value='hello!!!'    ba= s", attrs.toString());
         attrs.clearAll();
         Assert.assertEquals("", attrs.toString());
@@ -199,6 +206,7 @@ public final class ElementAttributesTest {
         Assert.assertEquals(" value placeholder=\"a\"", attrs.toString());
         Assert.assertEquals(2, attrs.size());
         attrs.setAttribute("name", "");
+        Assert.assertEquals("[value, placeholder, name]", attrs.getAllCompleteNames().toString());
         Assert.assertEquals(" value placeholder=\"a\" name=\"\"", attrs.toString());
 
         attrs = computeHtmlAttributes("<input type=\"text\"   value='hello!!!'    ba= s>");
@@ -366,6 +374,7 @@ public final class ElementAttributesTest {
         Assert.assertEquals("    ", attrs.toString());
 
         attrs = computeXmlAttributes("<input th:type=\"text\"   th:value='hello!!!'    />");
+        Assert.assertEquals("[th:type, th:value]", attrs.getAllCompleteNames().toString());
         Assert.assertEquals(" th:type=\"text\"   th:value='hello!!!'    ", attrs.toString());
         attrs.removeAttribute(AttributeNames.forXMLName("th", "type"));
         Assert.assertEquals(" th:value='hello!!!'    ", attrs.toString());
