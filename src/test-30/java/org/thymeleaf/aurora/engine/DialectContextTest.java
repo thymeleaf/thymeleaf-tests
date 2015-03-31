@@ -53,7 +53,7 @@ public final class DialectContextTest {
     public void testProcessorComputation01() {
 
         final IProcessorDialect dialect =
-                buildDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildDialect("standard", "th",
                         "CD-10-cdataone,CD-5-cdatatwo,C-20-comone,E-20-null-src,N-ELEMENT-10-test-null",
                         "CD-5-cdataxml");
 
@@ -71,7 +71,7 @@ public final class DialectContextTest {
     public void testProcessorComputation02() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "TH",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "TH",
                         "E-20-null-src, E-10-null-src,E-20-null-href,E-20-null-text,E-10-null-text,E-10-*div-text,E-15-*div-src,E-1-form-*action,E-20-form-null,E-10-null-*action,E-50-null-null");
 
         final DialectConfiguration dialectConfiguration = new DialectConfiguration(dialect);
@@ -94,7 +94,7 @@ public final class DialectContextTest {
     public void testProcessorComputation03() {
 
         final IProcessorDialect dialect =
-                buildDialect("standard", "TH",
+                ProcessorAggregationTestDialect.buildDialect("standard", "TH",
                         "E-20-null-src, E-10-null-src,E-20-null-href,E-20-null-text,E-10-null-text,E-10-*div-text,E-15-*div-src,E-1-form-*action,E-20-form-null,E-10-null-*action,E-50-null-null",
                         "E-200-null-src, E-100-null-src,E-200-null-href,E-200-null-text,E-100-null-text,E-100-*div-text,E-150-*div-src,E-10-form-*action,E-200-form-null,E-100-null-*action,E-500-null-null");
 
@@ -126,7 +126,7 @@ public final class DialectContextTest {
     public void testProcessorComputation04() {
 
         final IProcessorDialect dialect =
-                buildDialect("standard", "TH",
+                ProcessorAggregationTestDialect.buildDialect("standard", "TH",
                         "N-ELEMENT-20-null-src, N-ELEMENT-10-null-src,N-ELEMENT-20-null-href,N-ELEMENT-20-null-text,N-ELEMENT-10-null-text,N-ELEMENT-10-*div-text,N-ELEMENT-15-*div-src,N-ELEMENT-1-form-*action,N-ELEMENT-20-form-null,N-ELEMENT-10-null-*action,N-ELEMENT-50-null-null",
                         "N-ELEMENT-200-null-src, N-ELEMENT-100-null-src,N-ELEMENT-200-null-href,N-ELEMENT-200-null-text,N-ELEMENT-100-null-text,N-ELEMENT-100-*div-text,N-ELEMENT-150-*div-src,N-ELEMENT-10-form-*action,N-ELEMENT-200-form-null,N-ELEMENT-100-null-*action,N-ELEMENT-500-null-null");
 
@@ -158,7 +158,7 @@ public final class DialectContextTest {
     public void testProcessorComputation05() {
 
         final IProcessorDialect dialect =
-                buildDialect("standard", "TH",
+                ProcessorAggregationTestDialect.buildDialect("standard", "TH",
                         "N-ELEMENT-20-null-src, N-CDATA_SECTION-10-some,N-DOC_TYPE-20-other,E-20-null-text,E-10-null-text,N-TEXT-10-whoa!,E-15-*div-src,E-1-form-*action,N-ELEMENT-20-form-null,E-10-null-*action,E-50-null-null,N-CDATA_SECTION-5-someother,T-25-uye,T-10-eo",
                         "N-TEXT-20-whoaX!,T-10-eoX");
 
@@ -198,7 +198,7 @@ public final class DialectContextTest {
     public void testProcessorComputation06() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "TH",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "TH",
                         "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other");
 
         final DialectConfiguration dialectConfiguration = new DialectConfiguration(dialect);
@@ -229,7 +229,7 @@ public final class DialectContextTest {
     public void testProcessorComputation07() {
 
         final IProcessorDialect dialect =
-                buildXMLDialect("standard", "TH",
+                ProcessorAggregationTestDialect.buildXMLDialect("standard", "TH",
                         "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other");
 
         final DialectConfiguration dialectConfiguration = new DialectConfiguration(dialect);
@@ -260,7 +260,7 @@ public final class DialectContextTest {
     public void testProcessorComputation08() {
 
         final IProcessorDialect dialect =
-                buildDialect("standard", "TH",
+                ProcessorAggregationTestDialect.buildDialect("standard", "TH",
                         "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other",
                         "N-CDATA_SECTION-100-some,CD-40-other,N-COMMENT-100-some,C-40-other,N-DOC_TYPE-100-some,DT-40-other,N-PROCESSING_INSTRUCTION-100-some,PI-40-other,N-TEXT-100-some,T-40-other,N-XML_DECLARATION-100-some,XD-40-other");
 
@@ -287,360 +287,6 @@ public final class DialectContextTest {
 
 
 
-
-
-
-
-    private static ProcessorAggregationTestDialect buildDialect(
-            final String name, final String prefix, final String htmlProcSpecification, final String xmlProcSpecification) {
-        return ProcessorAggregationTestDialect.build(name, prefix, htmlProcSpecification, xmlProcSpecification);
-    }
-
-    private static ProcessorAggregationTestDialect buildHTMLDialect(
-            final String name, final String prefix, final String htmlProcSpecification) {
-        return buildDialect(name, prefix, htmlProcSpecification, "");
-    }
-
-    private static ProcessorAggregationTestDialect buildXMLDialect(
-            final String name, final String prefix, final String xmlProcSpecification) {
-        return buildDialect(name, prefix, "", xmlProcSpecification);
-    }
-
-
-    private static class ProcessorAggregationTestDialect extends AbstractProcessorDialect {
-
-
-        static ProcessorAggregationTestDialect build(final String name, final String prefix,
-                                              final String htmlProcSpecification, final String xmlProcSpecification) {
-
-
-            final Set<IProcessor> processors = new LinkedHashSet<IProcessor>();
-            processors.addAll(buildProcessors(TemplateMode.HTML, htmlProcSpecification));
-            processors.addAll(buildProcessors(TemplateMode.XML, xmlProcSpecification));
-            return new ProcessorAggregationTestDialect(name, prefix, processors);
-
-        }
-
-
-        static Set<IProcessor> buildProcessors(final TemplateMode templateMode, final String specification) {
-
-            final Set<IProcessor> processors = new LinkedHashSet<IProcessor>();
-            final StringTokenizer specTok = new StringTokenizer(specification,", ");
-
-            while (specTok.hasMoreTokens()) {
-
-                final String procSpec = specTok.nextToken();
-
-                final StringTokenizer procSpecTok = new StringTokenizer(procSpec,"-");
-
-                final String type = procSpecTok.nextToken();
-                if (type.equals("CD")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new CDATASectionProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("C")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new CommentProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("DT")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new DocTypeProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("PI")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new ProcessingInstructionProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("T")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new TextProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("XD")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new XMLDeclarationProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("E")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    String elementName = procSpecTok.nextToken();
-                    boolean prefixElementName = true;
-                    if (elementName.startsWith("*")) {
-                        prefixElementName = false;
-                        elementName = elementName.substring(1);
-                    }
-                    String attributeName = procSpecTok.nextToken();
-                    boolean prefixAttributeName = true;
-                    if (attributeName.startsWith("*")) {
-                        prefixAttributeName = false;
-                        attributeName = attributeName.substring(1);
-                    }
-                    processors.add(
-                            new ElementProcessorAggregationTestProcessor(
-                                    (elementName.equals("null")? null : elementName), prefixElementName,
-                                    (attributeName.equals("null")? null : attributeName), prefixAttributeName,
-                                    templateMode, precedence));
-                } else if (type.equals("N")) {
-                    final INodeProcessor.MatchingNodeType matchingNodeType = INodeProcessor.MatchingNodeType.valueOf(procSpecTok.nextToken());
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    switch(matchingNodeType) {
-
-                        case CDATA_SECTION:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case COMMENT:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case DOC_TYPE:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case ELEMENT:
-                            String elementName = procSpecTok.nextToken();
-                            boolean prefixElementName = true;
-                            if (elementName.startsWith("*")) {
-                                prefixElementName = false;
-                                elementName = elementName.substring(1);
-                            }
-                            String attributeName = procSpecTok.nextToken();
-                            boolean prefixAttributeName = true;
-                            if (attributeName.startsWith("*")) {
-                                prefixAttributeName = false;
-                                attributeName = attributeName.substring(1);
-                            }
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType,
-                                            (elementName.equals("null")? null : elementName), prefixElementName,
-                                            (attributeName.equals("null")? null : attributeName), prefixAttributeName,
-                                            templateMode, precedence));
-                            break;
-                        case PROCESSING_INSTRUCTION:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case TEXT:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case XML_DECLARATION:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-
-                    }
-                } else {
-                    throw new IllegalArgumentException("Unrecognized: " + type);
-                }
-
-            }
-
-            return processors;
-
-        }
-
-
-        protected ProcessorAggregationTestDialect(final String name, final String prefix, final Set<IProcessor> processors) {
-            super(name, prefix, processors);
-        }
-
-
-        public String toString() {
-            return "[" + getName() + "," + getPrefix() + "," + getProcessors() + "]";
-        }
-
-
-
-        static interface NamedTestProcessor {
-            String getName();
-        }
-
-
-        private static class CDATASectionProcessorAggregationTestProcessor extends AbstractCDATASectionProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            CDATASectionProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "CD-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class CommentProcessorAggregationTestProcessor extends AbstractCommentProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            CommentProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "C-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class DocTypeProcessorAggregationTestProcessor extends AbstractDocTypeProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            DocTypeProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "DT-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class ProcessingInstructionProcessorAggregationTestProcessor extends AbstractProcessingInstructionProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            ProcessingInstructionProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "PI-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class TextProcessorAggregationTestProcessor extends AbstractTextProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            TextProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "T-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class XMLDeclarationProcessorAggregationTestProcessor extends AbstractXMLDeclarationProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            XMLDeclarationProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "XD-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class ElementProcessorAggregationTestProcessor extends AbstractElementProcessor implements NamedTestProcessor {
-
-            ElementProcessorAggregationTestProcessor(
-                    final String elementName, final boolean prefixElementName,
-                    final String attributeName, final boolean prefixAttributeName,
-                    final TemplateMode templateMode, final int precedence) {
-                super(templateMode, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
-            }
-
-            public String getName() {
-                return "E-" + getPrecedence() + "-" + this.getMatchingElementName() + "-" + this.getMatchingAttributeName();
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class NodeProcessorAggregationTestProcessor extends AbstractNodeProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            NodeProcessorAggregationTestProcessor(
-                    final MatchingNodeType matchingNodeType,
-                    final String elementName, final boolean prefixElementName,
-                    final String attributeName, final boolean prefixAttributeName,
-                    final TemplateMode templateMode, final int precedence) {
-                super(matchingNodeType, templateMode, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
-                this.name = null;
-            }
-
-            NodeProcessorAggregationTestProcessor(
-                    final MatchingNodeType matchingNodeType, final String name, final TemplateMode templateMode, final int precedence) {
-                super(matchingNodeType, templateMode, null, false, null, false, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                if (getMatchingNodeType() == MatchingNodeType.ELEMENT) {
-                    return "N-" + this.getMatchingNodeType() + "-" + getPrecedence() + "-" + this.getMatchingElementName() + "-" + this.getMatchingAttributeName();
-                }
-                return "N-" + this.getMatchingNodeType() + "-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-    }
 
 
 

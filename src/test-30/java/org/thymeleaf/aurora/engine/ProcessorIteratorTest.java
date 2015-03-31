@@ -19,14 +19,16 @@
  */
 package org.thymeleaf.aurora.engine;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.DialectConfiguration;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
 import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
 import org.thymeleaf.aurora.dialect.AbstractProcessorDialect;
@@ -61,11 +63,11 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration01() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
         Assert.assertEquals("N-ELEMENT-10-null-{th:src,data-th-src}", iterator.next().toString());
@@ -79,11 +81,12 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration02() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-15-null-one");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
         tag.getAttributes().setAttribute("th:one", "somevalue");
@@ -99,11 +102,12 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration03() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-7-null-one");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
         tag.getAttributes().setAttribute("th:one", "somevalue");
@@ -119,11 +123,12 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration04() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
         tag.getAttributes().setAttribute("th:one", "somevalue");
@@ -139,11 +144,12 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration05() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
 
         tag.getAttributes().setAttribute("th:one", "somevalue");
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next().toString());
@@ -159,11 +165,12 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration06() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
 
         tag.getAttributes().removeAttribute("th:src");
         Assert.assertNull(iterator.next());
@@ -176,11 +183,12 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration07() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
 
         tag.getAttributes().removeAttribute("th:src");
         tag.getAttributes().setAttribute("th:one", "somevalue");
@@ -195,11 +203,12 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration08() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
         tag.getAttributes().setAttribute("th:one", "somevalue");
@@ -215,13 +224,125 @@ public final class ProcessorIteratorTest {
     public void testProcessorIteration09() {
 
         final IProcessorDialect dialect =
-                buildHTMLDialect("standard", "th",
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
-        final IOpenElementTag tag = computeHtmlTag("<a th:src='hello'>", dialect);
-        final IProcessorIterator iterator = tag.getAssociatedProcessorsIterator();
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
+        tag.getAttributes().setAttribute("th:one", "somevalue");
+        Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next().toString());
+        tag.getAttributes().removeAttribute("th:src");
+        Assert.assertNull(iterator.next());
+
+    }
+
+
+
+    @Test
+    public void testProcessorIteration10() {
+
+        // This one checks that iteration also works OK for tags using a non-standard implementation
+
+        final IProcessorDialect dialect =
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
+                        "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
+
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect, true);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
+
+        Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
+        tag.getAttributes().setAttribute("th:one", "somevalue");
+        Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next().toString());
+        tag.getAttributes().removeAttribute("th:src");
+        Assert.assertNull(iterator.next());
+
+    }
+
+
+
+    @Test
+    public void testProcessorIteration11() {
+
+        final IProcessorDialect dialect =
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
+                        "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
+
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
+
+        Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
+        tag.getAttributes().setAttribute("th:one", "somevalue");
+        Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next().toString());
+        tag.getAttributes().removeAttribute("th:src");
+        Assert.assertNull(iterator.next());
+
+    }
+
+
+
+    @Test
+    public void testProcessorIteration12() {
+
+        // This one checks that iteration also works OK for tags using a non-standard implementation
+
+        final IProcessorDialect dialect =
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
+                        "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
+
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><a th:src='hello'>", dialect, true);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
+
+        Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next().toString());
+        tag.getAttributes().setAttribute("th:one", "somevalue");
+        Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next().toString());
+        tag.getAttributes().removeAttribute("th:src");
+        Assert.assertNull(iterator.next());
+
+    }
+
+
+
+    @Test
+    public void testProcessorIteration13() {
+
+        final IProcessorDialect dialect =
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
+                        "N-ELEMENT-10-null-src,N-ELEMENT-5-*a-src,N-ELEMENT-2-null-one");
+
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><p th:src='uuuh'><a th:src='hello'>", dialect, false);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
+
+        Assert.assertEquals("N-ELEMENT-5-{a}-{th:src,data-th-src}", iterator.next().toString());
+        tag.getAttributes().setAttribute("th:one", "somevalue");
+        Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next().toString());
+        tag.getAttributes().removeAttribute("th:src");
+        Assert.assertNull(iterator.next());
+
+    }
+
+
+
+    @Test
+    public void testProcessorIteration14() {
+
+        // This one checks that iteration also works OK for tags using a non-standard implementation
+
+        final IProcessorDialect dialect =
+                ProcessorAggregationTestDialect.buildHTMLDialect("standard", "th",
+                        "N-ELEMENT-10-null-src,N-ELEMENT-5-*a-src,N-ELEMENT-2-null-one");
+
+        final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><p th:src='uuuh'><a th:src='hello'>", dialect, true);
+        final ProcessorIterator iterator = handler.iter;
+        final IOpenElementTag tag = handler.tag;
+
+        Assert.assertEquals("N-ELEMENT-5-{a}-{th:src,data-th-src}", iterator.next().toString());
         tag.getAttributes().setAttribute("th:one", "somevalue");
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next().toString());
         tag.getAttributes().removeAttribute("th:src");
@@ -241,38 +362,38 @@ public final class ProcessorIteratorTest {
 
 
 
-    private static IOpenElementTag computeHtmlTag(final String input, final IDialect dialect) {
-        return computeHtmlTag(input, Collections.singleton(dialect));
+    private static TagObtentionTemplateHandler computeHtmlTag(final String input, final IDialect dialect, final boolean wrapTag) {
+        return computeHtmlTag(input, Collections.singleton(dialect), wrapTag);
     }
 
-    private static IOpenElementTag computeHtmlTag(final String input, final Set<IDialect> dialects) {
+    private static TagObtentionTemplateHandler computeHtmlTag(final String input, final Set<IDialect> dialects, final boolean wrapTag) {
 
         final String templateName = "test";
-        final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
+        final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler(wrapTag);
         final ITemplateEngineContext templateEngineContext = TestTemplateEngineContextBuilder.build(dialects);
 
         HTML_PARSER.parse(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), handler);
 
-        return handler.tag;
+        return handler;
 
     }
 
 
 
 
-    private static IOpenElementTag computeXmlTag(final String input, final IDialect dialect) {
-        return computeXmlTag(input, Collections.singleton(dialect));
+    private static TagObtentionTemplateHandler computeXmlTag(final String input, final IDialect dialect, final boolean wrapTag) {
+        return computeXmlTag(input, Collections.singleton(dialect), wrapTag);
     }
 
-    private static IOpenElementTag computeXmlTag(final String input, final Set<IDialect> dialects) {
+    private static TagObtentionTemplateHandler computeXmlTag(final String input, final Set<IDialect> dialects, final boolean wrapTag) {
 
         final String templateName = "test";
-        final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
+        final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler(wrapTag);
         final ITemplateEngineContext templateEngineContext = TestTemplateEngineContextBuilder.build(dialects);
 
         XML_PARSER.parse(templateEngineContext, TemplateMode.XML, new StringResource(templateName, input), handler);
 
-        return handler.tag;
+        return handler;
 
     }
 
@@ -281,13 +402,26 @@ public final class ProcessorIteratorTest {
 
     private static class TagObtentionTemplateHandler extends AbstractTemplateHandler {
 
-
+        final boolean wrapTag;
         IOpenElementTag tag;
+        ProcessorIterator iter = new ProcessorIterator();
+
+        TagObtentionTemplateHandler(final boolean wrapTag) {
+            super();
+            this.wrapTag = wrapTag;
+        }
 
 
         @Override
         public void handleOpenElement(final IOpenElementTag openElementTag) {
+            if (this.tag != null) {
+                this.iter.next(); // Force the creation and computation of the iterator, and leave it not-completed for more thorough testing
+            }
             this.tag = openElementTag.cloneElementTag();
+            if (this.wrapTag) {
+                this.tag = new TagWrapper(this.tag);
+            }
+            this.iter.reset(this.tag);
         }
 
     }
@@ -295,361 +429,61 @@ public final class ProcessorIteratorTest {
 
 
 
+    private static class TagWrapper implements IOpenElementTag {
+
+        // Used for checking the correctness of iterators with non-standard implementations of IOpenElementTag
+
+        private final IOpenElementTag tag;
+
+        TagWrapper(final IOpenElementTag tag) {
+            super();
+            this.tag = tag;
+        }
 
 
+        public IOpenElementTag cloneElementTag() {
+            return this.tag.cloneElementTag();
+        }
 
+        public IElementAttributes getAttributes() {
+            return this.tag.getAttributes();
+        }
 
+        public boolean hasAssociatedProcessors() {
+            return this.tag.hasAssociatedProcessors();
+        }
 
-    private static ProcessorAggregationTestDialect buildDialect(
-            final String name, final String prefix, final String htmlProcSpecification, final String xmlProcSpecification) {
-        return ProcessorAggregationTestDialect.build(name, prefix, htmlProcSpecification, xmlProcSpecification);
+        public List<IProcessor> getAssociatedProcessorsInOrder() {
+            return this.tag.getAssociatedProcessorsInOrder();
+        }
+
+        public ElementDefinition getElementDefinition() {
+            return this.tag.getElementDefinition();
+        }
+
+        public String getElementName() {
+            return this.tag.getElementName();
+        }
+
+        public boolean hasLocation() {
+            return this.tag.hasLocation();
+        }
+
+        public int getLine() {
+            return this.tag.getLine();
+        }
+
+        public int getCol() {
+            return this.tag.getCol();
+        }
+
+        public void write(final Writer writer) throws IOException {
+            this.tag.write(writer);
+        }
     }
 
-    private static ProcessorAggregationTestDialect buildHTMLDialect(
-            final String name, final String prefix, final String htmlProcSpecification) {
-        return buildDialect(name, prefix, htmlProcSpecification, "");
-    }
 
-    private static ProcessorAggregationTestDialect buildXMLDialect(
-            final String name, final String prefix, final String xmlProcSpecification) {
-        return buildDialect(name, prefix, "", xmlProcSpecification);
-    }
 
-
-    private static class ProcessorAggregationTestDialect extends AbstractProcessorDialect {
-
-
-        static ProcessorAggregationTestDialect build(final String name, final String prefix,
-                                              final String htmlProcSpecification, final String xmlProcSpecification) {
-
-
-            final Set<IProcessor> processors = new LinkedHashSet<IProcessor>();
-            processors.addAll(buildProcessors(TemplateMode.HTML, htmlProcSpecification));
-            processors.addAll(buildProcessors(TemplateMode.XML, xmlProcSpecification));
-            return new ProcessorAggregationTestDialect(name, prefix, processors);
-
-        }
-
-
-        static Set<IProcessor> buildProcessors(final TemplateMode templateMode, final String specification) {
-
-            final Set<IProcessor> processors = new LinkedHashSet<IProcessor>();
-            final StringTokenizer specTok = new StringTokenizer(specification,", ");
-
-            while (specTok.hasMoreTokens()) {
-
-                final String procSpec = specTok.nextToken();
-
-                final StringTokenizer procSpecTok = new StringTokenizer(procSpec,"-");
-
-                final String type = procSpecTok.nextToken();
-                if (type.equals("CD")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new CDATASectionProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("C")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new CommentProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("DT")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new DocTypeProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("PI")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new ProcessingInstructionProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("T")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new TextProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("XD")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    processors.add(
-                            new XMLDeclarationProcessorAggregationTestProcessor(
-                                    procSpecTok.nextToken(), templateMode, precedence));
-                } else if (type.equals("E")) {
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    String elementName = procSpecTok.nextToken();
-                    boolean prefixElementName = true;
-                    if (elementName.startsWith("*")) {
-                        prefixElementName = false;
-                        elementName = elementName.substring(1);
-                    }
-                    String attributeName = procSpecTok.nextToken();
-                    boolean prefixAttributeName = true;
-                    if (attributeName.startsWith("*")) {
-                        prefixAttributeName = false;
-                        attributeName = attributeName.substring(1);
-                    }
-                    processors.add(
-                            new ElementProcessorAggregationTestProcessor(
-                                    (elementName.equals("null")? null : elementName), prefixElementName,
-                                    (attributeName.equals("null")? null : attributeName), prefixAttributeName,
-                                    templateMode, precedence));
-                } else if (type.equals("N")) {
-                    final INodeProcessor.MatchingNodeType matchingNodeType = INodeProcessor.MatchingNodeType.valueOf(procSpecTok.nextToken());
-                    final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                    switch(matchingNodeType) {
-
-                        case CDATA_SECTION:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case COMMENT:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case DOC_TYPE:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case ELEMENT:
-                            String elementName = procSpecTok.nextToken();
-                            boolean prefixElementName = true;
-                            if (elementName.startsWith("*")) {
-                                prefixElementName = false;
-                                elementName = elementName.substring(1);
-                            }
-                            String attributeName = procSpecTok.nextToken();
-                            boolean prefixAttributeName = true;
-                            if (attributeName.startsWith("*")) {
-                                prefixAttributeName = false;
-                                attributeName = attributeName.substring(1);
-                            }
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType,
-                                            (elementName.equals("null")? null : elementName), prefixElementName,
-                                            (attributeName.equals("null")? null : attributeName), prefixAttributeName,
-                                            templateMode, precedence));
-                            break;
-                        case PROCESSING_INSTRUCTION:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case TEXT:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-                        case XML_DECLARATION:
-                            processors.add(
-                                    new NodeProcessorAggregationTestProcessor(
-                                            matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                            break;
-
-                    }
-                } else {
-                    throw new IllegalArgumentException("Unrecognized: " + type);
-                }
-
-            }
-
-            return processors;
-
-        }
-
-
-        protected ProcessorAggregationTestDialect(final String name, final String prefix, final Set<IProcessor> processors) {
-            super(name, prefix, processors);
-        }
-
-
-        public String toString() {
-            return "[" + getName() + "," + getPrefix() + "," + getProcessors() + "]";
-        }
-
-
-
-        static interface NamedTestProcessor {
-            String getName();
-        }
-
-
-        private static class CDATASectionProcessorAggregationTestProcessor extends AbstractCDATASectionProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            CDATASectionProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "CD-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class CommentProcessorAggregationTestProcessor extends AbstractCommentProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            CommentProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "C-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class DocTypeProcessorAggregationTestProcessor extends AbstractDocTypeProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            DocTypeProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "DT-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class ProcessingInstructionProcessorAggregationTestProcessor extends AbstractProcessingInstructionProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            ProcessingInstructionProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "PI-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class TextProcessorAggregationTestProcessor extends AbstractTextProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            TextProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "T-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class XMLDeclarationProcessorAggregationTestProcessor extends AbstractXMLDeclarationProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            XMLDeclarationProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-                super(templateMode, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                return "XD-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class ElementProcessorAggregationTestProcessor extends AbstractElementProcessor implements NamedTestProcessor {
-
-            ElementProcessorAggregationTestProcessor(
-                    final String elementName, final boolean prefixElementName,
-                    final String attributeName, final boolean prefixAttributeName,
-                    final TemplateMode templateMode, final int precedence) {
-                super(templateMode, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
-            }
-
-            public String getName() {
-                return "E-" + getPrecedence() + "-" + this.getMatchingElementName() + "-" + this.getMatchingAttributeName();
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-        private static class NodeProcessorAggregationTestProcessor extends AbstractNodeProcessor implements NamedTestProcessor {
-
-            private final String name;
-
-            NodeProcessorAggregationTestProcessor(
-                    final MatchingNodeType matchingNodeType,
-                    final String elementName, final boolean prefixElementName,
-                    final String attributeName, final boolean prefixAttributeName,
-                    final TemplateMode templateMode, final int precedence) {
-                super(matchingNodeType, templateMode, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
-                this.name = null;
-            }
-
-            NodeProcessorAggregationTestProcessor(
-                    final MatchingNodeType matchingNodeType, final String name, final TemplateMode templateMode, final int precedence) {
-                super(matchingNodeType, templateMode, null, false, null, false, precedence);
-                this.name = name;
-            }
-
-            public String getName() {
-                if (getMatchingNodeType() == MatchingNodeType.ELEMENT) {
-                    return "N-" + this.getMatchingNodeType() + "-" + getPrecedence() + "-" + this.getMatchingElementName() + "-" + this.getMatchingAttributeName();
-                }
-                return "N-" + this.getMatchingNodeType() + "-" + getPrecedence() + "-" + this.name;
-            }
-
-            public String toString() {
-                return getName();
-            }
-
-        }
-
-
-    }
 
 
 
