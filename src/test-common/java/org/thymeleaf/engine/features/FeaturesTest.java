@@ -114,5 +114,30 @@ public class FeaturesTest {
 
     }
 
-    
+
+    @Test
+    public void testExecInfo() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:engine/features/execinfo");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testAccessRestrictions() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:engine/features/accessrestrictions");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+
+
 }
