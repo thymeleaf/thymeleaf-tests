@@ -20,6 +20,7 @@
 package org.thymeleaf.aurora.engine;
 
 import java.io.StringWriter;
+import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -92,7 +93,8 @@ public final class BareHtmlEngineTest {
         final String templateName = "test";
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
-        handler.setTemplateProcessingContext(new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML));
+        handler.setTemplateProcessingContext(
+                new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML, Locale.US, new TemplateProcessingVariablesMap(null)));
 
         if (blockSelectors != null) {
             PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);

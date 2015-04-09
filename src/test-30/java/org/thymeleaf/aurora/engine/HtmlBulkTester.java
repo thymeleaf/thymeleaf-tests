@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.thymeleaf.aurora.context.ITemplateEngineContext;
@@ -77,7 +78,8 @@ public class HtmlBulkTester {
             final OutputStreamWriter testOutputWriter = new OutputStreamWriter(testOutputStream, "UTF-8");
 
             final ITemplateHandler handler = new OutputTemplateHandler(testOutputWriter);
-            handler.setTemplateProcessingContext(new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, fileInTestFolderName, TemplateMode.HTML));
+            handler.setTemplateProcessingContext(
+                    new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, fileInTestFolderName, TemplateMode.HTML, Locale.US, null));
 
             System.out.print(fileInTestFolderName);
 

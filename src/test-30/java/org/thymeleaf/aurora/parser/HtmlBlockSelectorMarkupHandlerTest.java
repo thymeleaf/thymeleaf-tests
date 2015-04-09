@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
@@ -120,7 +121,8 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
-        handler.setTemplateProcessingContext(new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML));
+        handler.setTemplateProcessingContext(
+                new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML, Locale.US, null));
 
         parser.parse(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
 
