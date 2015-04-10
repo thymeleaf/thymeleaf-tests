@@ -19,50 +19,36 @@
  */
 package org.thymeleaf.aurora.engine;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
-import org.thymeleaf.testing.templateengine.testable.ITest;
 
 
-public final class TemplateProcessingWebVariablesMapTest {
+public final class TemplateProcessingWebVariableContextTest {
 
 
 
     @Test
     public void test01() {
 
-        final Map<String,Object> requestAttributes = new HashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new HashMap<String, Object[]>();
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
         final Locale requestLocale = Locale.US;
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
 
-        final Map<String,Object> servletContextAttributes = new HashMap<String, Object>();
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final TemplateProcessingWebVariablesMap vm = new TemplateProcessingWebVariablesMap(mockRequest, mockServletContext, null);
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, null);
 
         vm.put("one", "a value");
 
@@ -234,21 +220,21 @@ public final class TemplateProcessingWebVariablesMapTest {
     @Test
     public void test02() {
 
-        final Map<String,Object> starting = new HashMap<String, Object>();
+        final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
         starting.put("ten", "tieen");
 
-        final Map<String,Object> requestAttributes = new HashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new HashMap<String, Object[]>();
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
         final Locale requestLocale = Locale.US;
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
 
-        final Map<String,Object> servletContextAttributes = new HashMap<String, Object>();
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final TemplateProcessingWebVariablesMap vm = new TemplateProcessingWebVariablesMap(mockRequest, mockServletContext, starting);
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, starting);
 
         Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.contains("one"));
@@ -289,17 +275,17 @@ public final class TemplateProcessingWebVariablesMapTest {
     @Test
     public void test03() {
 
-        final Map<String,Object> requestAttributes = new HashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new HashMap<String, Object[]>();
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
         final Locale requestLocale = Locale.US;
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
 
-        final Map<String,Object> servletContextAttributes = new HashMap<String, Object>();
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final TemplateProcessingWebVariablesMap vm = new TemplateProcessingWebVariablesMap(mockRequest, mockServletContext, null);
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, null);
 
         vm.put("one", "a value");
 
@@ -587,21 +573,21 @@ public final class TemplateProcessingWebVariablesMapTest {
     @Test
     public void test04() {
 
-        final Map<String,Object> starting = new HashMap<String, Object>();
+        final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
         starting.put("ten", "tieen");
 
-        final Map<String,Object> requestAttributes = new HashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new HashMap<String, Object[]>();
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
         final Locale requestLocale = Locale.US;
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
 
-        final Map<String,Object> servletContextAttributes = new HashMap<String, Object>();
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final TemplateProcessingWebVariablesMap vm = new TemplateProcessingWebVariablesMap(mockRequest, mockServletContext, starting);
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, starting);
 
         Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.contains("one"));
@@ -730,21 +716,21 @@ public final class TemplateProcessingWebVariablesMapTest {
     @Test
     public void test05() {
 
-        final Map<String,Object> starting = new HashMap<String, Object>();
+        final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
         starting.put("ten", "tieen");
 
-        final Map<String,Object> requestAttributes = new HashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new HashMap<String, Object[]>();
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
         final Locale requestLocale = Locale.US;
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
 
-        final Map<String,Object> servletContextAttributes = new HashMap<String, Object>();
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final TemplateProcessingWebVariablesMap vm = new TemplateProcessingWebVariablesMap(mockRequest, mockServletContext, starting);
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, starting);
 
         Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.contains("one"));
@@ -846,6 +832,504 @@ public final class TemplateProcessingWebVariablesMapTest {
         Assert.assertFalse(enumerationContains(mockRequest.getAttributeNames(), "one"));
         Assert.assertFalse(enumerationContains(mockRequest.getAttributeNames(), "two"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "ten"));
+
+    }
+
+
+    @Test
+    public void test06() {
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Locale requestLocale = Locale.US;
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, null);
+
+        vm.put("one", "a value");
+
+        Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value}", vm.toString());
+
+        vm.put("one", "two values");
+
+        Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values}", vm.toString());
+
+        vm.increaseLevel();
+        vm.put("one", "hello");
+
+        Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello}", vm.toString());
+
+        vm.put("two", "twello");
+
+        Assert.assertEquals("{1:{one=hello, two=twello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, two=twello}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values}", vm.toString());
+
+        vm.increaseLevel();
+        vm.put("two", "twellor");
+
+        Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
+
+        vm.increaseLevel();
+        vm.put("three", "twelloree");
+
+        Assert.assertEquals("{2:{three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values, two=twellor, three=twelloree}", vm.toString());
+
+        vm.put("one", "atwe");
+
+        Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+
+        vm.increaseLevel();
+        vm.increaseLevel();
+        vm.increaseLevel();
+
+        Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+
+        vm.put("four", "lotwss");
+
+        Assert.assertEquals("{5:{four=lotwss},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree, four=lotwss}", vm.toString());
+
+        vm.put("two", "itwiii");
+
+        Assert.assertEquals("{5:{four=lotwss, two=itwiii},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=itwiii, three=twelloree, four=lotwss}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values}", vm.toString());
+
+    }
+
+
+
+
+    @Test
+    public void test07() {
+
+        final Map<String,Object> starting = new LinkedHashMap<String, Object>();
+        starting.put("one", "ha");
+        starting.put("ten", "tieen");
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Locale requestLocale = Locale.US;
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, starting);
+
+        Assert.assertEquals("{0:{one=ha, ten=tieen}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=ha, ten=tieen}", vm.toString());
+
+        vm.put("one", "a value");
+
+        Assert.assertEquals("{0:{one=a value, ten=tieen}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value, ten=tieen}", vm.toString());
+
+        vm.increaseLevel();
+        vm.put("one", "hello");
+
+        Assert.assertEquals("{1:{one=hello},0:{one=a value, ten=tieen}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, ten=tieen}", vm.toString());
+
+        vm.put("two", "twello");
+
+        Assert.assertEquals("{1:{one=hello, two=twello},0:{one=a value, ten=tieen}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, ten=tieen, two=twello}", vm.toString());
+
+        mockRequest.removeAttribute("one");
+
+        Assert.assertEquals("{1:{two=twello},0:{ten=tieen}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{ten=tieen, two=twello}", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.put("one", "helloz");
+
+        Assert.assertEquals("{2:{one=helloz},1:{two=twello},0:{ten=tieen}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{ten=tieen, two=twello, one=helloz}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{1:{two=twello},0:{ten=tieen}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{ten=tieen, two=twello}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{0:{ten=tieen}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{ten=tieen}", vm.toString());
+
+    }
+
+
+
+
+
+    @Test
+    public void test08() {
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Locale requestLocale = Locale.US;
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, null);
+
+        vm.put("one", "a value");
+
+        Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value}", vm.toString());
+
+        vm.put("one", "two values");
+
+        Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values}", vm.toString());
+
+        vm.remove("one");
+
+        Assert.assertEquals("{0:{}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{}", vm.toString());
+
+        vm.put("one", "two values");
+
+        Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values}", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.put("one", "hello");
+
+        Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello}", vm.toString());
+
+        vm.remove("one");
+
+        Assert.assertEquals("{1:{one=(*removed*)},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{}", vm.toString());
+
+        vm.put("one", "hello");
+
+        Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello}", vm.toString());
+
+        vm.remove("two");
+
+        Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello}", vm.toString());
+
+        vm.put("two", "twello");
+
+        Assert.assertEquals("{1:{one=hello, two=twello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, two=twello}", vm.toString());
+
+        vm.remove("two");
+
+        Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello}", vm.toString());
+
+        vm.remove("one");
+
+        Assert.assertEquals("{1:{one=(*removed*)},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values}", vm.toString());
+
+        vm.increaseLevel();
+        vm.put("two", "twellor");
+
+        Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
+
+        vm.increaseLevel();
+        vm.put("three", "twelloree");
+
+        Assert.assertEquals("{2:{three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values, two=twellor, three=twelloree}", vm.toString());
+
+        vm.put("one", "atwe");
+
+        Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.remove("two");
+
+        Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.remove("two");
+
+        Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+
+        vm.increaseLevel();
+
+        Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+
+        vm.put("four", "lotwss");
+
+        Assert.assertEquals("{5:{four=lotwss},3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss}", vm.toString());
+
+        vm.put("two", "itwiii");
+
+        Assert.assertEquals("{5:{four=lotwss, two=itwiii},3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss, two=itwiii}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree, two=twellor}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=two values}", vm.toString());
+
+    }
+
+
+    @Test
+    public void test09() {
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Locale requestLocale = Locale.US;
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, null);
+
+        vm.put("one", "a value");
+
+        Assert.assertEquals(0, vm.level());
+        Assert.assertTrue(vm.contains("one"));
+        Assert.assertEquals("a value", vm.get("one"));
+
+        vm.increaseLevel();
+        vm.put("one", "hello");
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertTrue(vm.contains("one"));
+        Assert.assertEquals("hello", vm.get("one"));
+
+        vm.put("two", "twello");
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertTrue(vm.contains("one"));
+        Assert.assertTrue(vm.contains("two"));
+        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertEquals("twello", vm.get("two"));
+
+        vm.put("three", "trwello");
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertTrue(vm.contains("one"));
+        Assert.assertTrue(vm.contains("two"));
+        Assert.assertTrue(vm.contains("three"));
+        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertEquals("twello", vm.get("two"));
+        Assert.assertEquals("trwello", vm.get("three"));
+
+        vm.put("four", "fwello");
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertTrue(vm.contains("one"));
+        Assert.assertTrue(vm.contains("two"));
+        Assert.assertTrue(vm.contains("three"));
+        Assert.assertTrue(vm.contains("four"));
+        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertEquals("twello", vm.get("two"));
+        Assert.assertEquals("trwello", vm.get("three"));
+        Assert.assertEquals("fwello", vm.get("four"));
+
+        vm.put("five", "vwello");
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertTrue(vm.contains("one"));
+        Assert.assertTrue(vm.contains("two"));
+        Assert.assertTrue(vm.contains("three"));
+        Assert.assertTrue(vm.contains("four"));
+        Assert.assertTrue(vm.contains("five"));
+        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertEquals("twello", vm.get("two"));
+        Assert.assertEquals("trwello", vm.get("three"));
+        Assert.assertEquals("fwello", vm.get("four"));
+        Assert.assertEquals("vwello", vm.get("five"));
+
+        vm.put("six", "swello");
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertTrue(vm.contains("one"));
+        Assert.assertTrue(vm.contains("two"));
+        Assert.assertTrue(vm.contains("three"));
+        Assert.assertTrue(vm.contains("four"));
+        Assert.assertTrue(vm.contains("five"));
+        Assert.assertTrue(vm.contains("six"));
+        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertEquals("twello", vm.get("two"));
+        Assert.assertEquals("trwello", vm.get("three"));
+        Assert.assertEquals("fwello", vm.get("four"));
+        Assert.assertEquals("vwello", vm.get("five"));
+        Assert.assertEquals("swello", vm.get("six"));
+
+        vm.put("seven", "svwello");
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertTrue(vm.contains("one"));
+        Assert.assertTrue(vm.contains("two"));
+        Assert.assertTrue(vm.contains("three"));
+        Assert.assertTrue(vm.contains("four"));
+        Assert.assertTrue(vm.contains("five"));
+        Assert.assertTrue(vm.contains("six"));
+        Assert.assertTrue(vm.contains("seven"));
+        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertEquals("twello", vm.get("two"));
+        Assert.assertEquals("trwello", vm.get("three"));
+        Assert.assertEquals("fwello", vm.get("four"));
+        Assert.assertEquals("vwello", vm.get("five"));
+        Assert.assertEquals("swello", vm.get("six"));
+        Assert.assertEquals("svwello", vm.get("seven"));
+
+    }
+
+
+
+
+    @Test
+    public void test10() {
+
+        final Map<String,Object> starting = new LinkedHashMap<String, Object>();
+        starting.put("one", "ha");
+        starting.put("ten", "tieen");
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Locale requestLocale = Locale.US;
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final TemplateProcessingWebVariableContext vm = new TemplateProcessingWebVariableContext(mockRequest, mockServletContext, starting);
+
+        Assert.assertEquals("{0:{one=ha, ten=tieen}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=ha, ten=tieen}", vm.toString());
+
+        vm.put("one", "a value");
+
+        Assert.assertEquals("{0:{one=a value, ten=tieen}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value, ten=tieen}", vm.toString());
+
+        vm.increaseLevel();
+        vm.put("one", "hello");
+
+        Assert.assertEquals("{1:{one=hello},0:{one=a value, ten=tieen}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, ten=tieen}", vm.toString());
+
+        vm.put("two", "twello");
+
+        Assert.assertEquals("{1:{one=hello, two=twello},0:{one=a value, ten=tieen}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, ten=tieen, two=twello}", vm.toString());
+
+        // This are directly set into the request, so they should only be affected by higher levels, never by decreasing levels
+        mockRequest.setAttribute("one", "outer1");
+        mockRequest.setAttribute("six", "outer6");
+
+        Assert.assertEquals("{1:{two=twello},0:{one=outer1, ten=tieen, six=outer6}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=outer1, ten=tieen, two=twello, six=outer6}", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.put("one", "helloz");
+
+        Assert.assertEquals("{2:{one=helloz},1:{two=twello},0:{one=outer1, ten=tieen, six=outer6}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=helloz, ten=tieen, two=twello, six=outer6}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{1:{two=twello},0:{one=outer1, ten=tieen, six=outer6}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=outer1, ten=tieen, two=twello, six=outer6}", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals("{0:{one=outer1, ten=tieen, six=outer6}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=outer1, ten=tieen, six=outer6}", vm.toString());
 
     }
 

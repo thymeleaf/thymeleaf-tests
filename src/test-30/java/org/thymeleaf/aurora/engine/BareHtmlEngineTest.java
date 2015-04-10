@@ -94,7 +94,7 @@ public final class BareHtmlEngineTest {
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
         handler.setTemplateProcessingContext(
-                new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML, Locale.US, new TemplateProcessingVariablesMap(null)));
+                new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML, Locale.US, new TemplateProcessingVariableContext(null)));
 
         if (blockSelectors != null) {
             PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);

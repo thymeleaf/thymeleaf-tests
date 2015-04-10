@@ -20,26 +20,12 @@
 package org.thymeleaf.aurora.engine;
 
 import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.aurora.DialectConfiguration;
 import org.thymeleaf.aurora.context.DialectContext;
-import org.thymeleaf.aurora.dialect.AbstractProcessorDialect;
 import org.thymeleaf.aurora.dialect.IProcessorDialect;
-import org.thymeleaf.aurora.processor.IProcessor;
-import org.thymeleaf.aurora.processor.cdatasection.AbstractCDATASectionProcessor;
-import org.thymeleaf.aurora.processor.comment.AbstractCommentProcessor;
-import org.thymeleaf.aurora.processor.doctype.AbstractDocTypeProcessor;
-import org.thymeleaf.aurora.processor.element.AbstractElementProcessor;
-import org.thymeleaf.aurora.processor.node.AbstractNodeProcessor;
-import org.thymeleaf.aurora.processor.node.INodeProcessor;
-import org.thymeleaf.aurora.processor.processinginstruction.AbstractProcessingInstructionProcessor;
-import org.thymeleaf.aurora.processor.text.AbstractTextProcessor;
-import org.thymeleaf.aurora.processor.xmldeclaration.AbstractXMLDeclarationProcessor;
 import org.thymeleaf.aurora.templatemode.TemplateMode;
 
 
