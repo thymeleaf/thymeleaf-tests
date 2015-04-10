@@ -118,7 +118,7 @@ public final class TestMockServletUtil {
 
 
 
-    private static final HttpServletResponse createHttpServletResponse() {
+    public static HttpServletResponse createHttpServletResponse() {
         final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         Mockito.when(response.encodeURL(Matchers.anyString())).thenAnswer(new EncodeUrlAnswer());
         return response;

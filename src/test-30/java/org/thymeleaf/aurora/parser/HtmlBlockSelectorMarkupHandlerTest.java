@@ -34,11 +34,12 @@ import java.util.Locale;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TemplateProcessingContext;
-import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
+import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.context.Context;
+import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.aurora.engine.ITemplateHandler;
 import org.thymeleaf.aurora.engine.OutputTemplateHandler;
+import org.thymeleaf.aurora.engine.StandardTemplateProcessingContextFactory;
 import org.thymeleaf.aurora.resource.StringResource;
 import org.thymeleaf.aurora.templatemode.TemplateMode;
 
@@ -50,7 +51,7 @@ import org.thymeleaf.aurora.templatemode.TemplateMode;
 public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
     private static final String RESOURCES_FOLDER = "htmlblockselector/";
-    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = TestTemplateEngineContextBuilder.build();
+    private static final ITemplateEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
 
     public HtmlBlockSelectorMarkupHandlerTest() {
         super();
@@ -60,7 +61,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
     public void test() throws Exception {
 
         final HTMLTemplateParser parser = new HTMLTemplateParser(2, 4096);
-        final ITemplateEngineContext templateEngineContext = TestTemplateEngineContextBuilder.build();
+        final ITemplateEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build();
 
         final URL resourcesFolderURL = Thread.currentThread().getContextClassLoader().getResource(RESOURCES_FOLDER);
         assertNotNull(resourcesFolderURL);
@@ -115,14 +116,14 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
 
     private static void check(
-            final HTMLTemplateParser parser, final ITemplateEngineContext templateEngineContext,
+            final HTMLTemplateParser parser, final ITemplateEngineConfiguration templateEngineContext,
             final String templateName, final String input, final String output, final String[] blockSelectors)
             throws Exception{
 
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
         handler.setTemplateProcessingContext(
-                new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML, Locale.US, null));
+                StandardTemplateProcessingContextFactory.build(TEMPLATE_ENGINE_CONFIGURATION, templateName, TemplateMode.HTML, new Context(Locale.US)));
 
         parser.parse(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
 

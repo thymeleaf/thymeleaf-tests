@@ -24,37 +24,39 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.thymeleaf.aurora.DialectConfiguration;
+import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.TemplateEngineConfiguration;
 import org.thymeleaf.aurora.dialect.IDialect;
 import org.thymeleaf.aurora.standard.StandardDialect;
 import org.thymeleaf.aurora.text.TextRepositories;
 
 
-public final class TestTemplateEngineContextBuilder {
+public final class TestTemplateEngineConfigurationBuilder {
 
 
 
-    public static ITemplateEngineContext build() {
+    public static ITemplateEngineConfiguration build() {
         final StandardDialect standardDialect = new StandardDialect();
         final DialectConfiguration standardDialectConfiguration = new DialectConfiguration(standardDialect);
-        return new TemplateEngineContext(Collections.singleton(standardDialectConfiguration), TextRepositories.createLimitedSizeCacheRepository());
+        return new TemplateEngineConfiguration(Collections.singleton(standardDialectConfiguration), TextRepositories.createLimitedSizeCacheRepository());
     }
 
 
-    public static ITemplateEngineContext build(final IDialect dialect) {
+    public static ITemplateEngineConfiguration build(final IDialect dialect) {
         return build(Collections.singleton(dialect));
     }
 
 
-    public static ITemplateEngineContext build(final Set<IDialect> dialects) {
+    public static ITemplateEngineConfiguration build(final Set<IDialect> dialects) {
         final Set<DialectConfiguration> dialectConfigurations = new LinkedHashSet<DialectConfiguration>();
         for (final IDialect dialect : dialects) {
             dialectConfigurations.add(new DialectConfiguration(dialect));
         }
-        return new TemplateEngineContext(dialectConfigurations, TextRepositories.createLimitedSizeCacheRepository());
+        return new TemplateEngineConfiguration(dialectConfigurations, TextRepositories.createLimitedSizeCacheRepository());
     }
 
 
-    private TestTemplateEngineContextBuilder() {
+    private TestTemplateEngineConfigurationBuilder() {
         super();
     }
 

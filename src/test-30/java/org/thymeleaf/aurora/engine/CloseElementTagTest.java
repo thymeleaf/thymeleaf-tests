@@ -19,8 +19,9 @@
  */
 package org.thymeleaf.aurora.engine;
 
-import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
+import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
+import org.thymeleaf.aurora.model.ICloseElementTag;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.parser.XMLTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
@@ -31,7 +32,7 @@ public final class CloseElementTagTest {
 
     private static final HTMLTemplateParser HTML_PARSER = new HTMLTemplateParser(2, 4096);
     private static final XMLTemplateParser XML_PARSER = new XMLTemplateParser(2, 4096);
-    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = TestTemplateEngineContextBuilder.build();
+    private static final ITemplateEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
 
 
 
@@ -43,7 +44,7 @@ public final class CloseElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        HTML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), handler);
+        HTML_PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), handler);
 
         return handler.tag;
 
@@ -57,7 +58,7 @@ public final class CloseElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        XML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.XML, new StringResource(templateName, input), handler);
+        XML_PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.XML, new StringResource(templateName, input), handler);
 
         return handler.tag;
 

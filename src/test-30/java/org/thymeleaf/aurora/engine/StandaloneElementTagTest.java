@@ -21,8 +21,9 @@ package org.thymeleaf.aurora.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
+import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
+import org.thymeleaf.aurora.model.IStandaloneElementTag;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.parser.XMLTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
@@ -33,7 +34,7 @@ public final class StandaloneElementTagTest {
 
     private static final HTMLTemplateParser HTML_PARSER = new HTMLTemplateParser(2, 4096);
     private static final XMLTemplateParser XML_PARSER = new XMLTemplateParser(2, 4096);
-    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = TestTemplateEngineContextBuilder.build();
+    private static final ITemplateEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
 
 
 
@@ -178,7 +179,7 @@ public final class StandaloneElementTagTest {
     public void testHtmlStandaloneElementPropertyManagement() {
 
         IStandaloneElementTag tag;
-        final ElementDefinitions elementDefinitions = TEMPLATE_ENGINE_CONTEXT.getElementDefinitions();
+        final ElementDefinitions elementDefinitions = TEMPLATE_ENGINE_CONFIGURATION.getElementDefinitions();
 
         tag = computeHtmlTag("<input>");
         Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
@@ -205,7 +206,7 @@ public final class StandaloneElementTagTest {
     public void testXmlStandaloneElementPropertyManagement() {
 
         IStandaloneElementTag tag;
-        final ElementDefinitions elementDefinitions = TEMPLATE_ENGINE_CONTEXT.getElementDefinitions();
+        final ElementDefinitions elementDefinitions = TEMPLATE_ENGINE_CONFIGURATION.getElementDefinitions();
 
         tag = computeXmlTag("<input/>");
         Assert.assertSame(elementDefinitions.forXMLName("input"), tag.getElementDefinition());
@@ -226,7 +227,7 @@ public final class StandaloneElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        HTML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), handler);
+        HTML_PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), handler);
 
         return handler.tag;
 
@@ -240,7 +241,7 @@ public final class StandaloneElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        XML_PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.XML, new StringResource(templateName, input), handler);
+        XML_PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.XML, new StringResource(templateName, input), handler);
 
         return handler.tag;
 

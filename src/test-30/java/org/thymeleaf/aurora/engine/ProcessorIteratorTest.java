@@ -27,10 +27,12 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
+import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.aurora.dialect.IDialect;
 import org.thymeleaf.aurora.dialect.IProcessorDialect;
+import org.thymeleaf.aurora.model.IElementAttributes;
+import org.thymeleaf.aurora.model.IOpenElementTag;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.parser.XMLTemplateParser;
 import org.thymeleaf.aurora.processor.IProcessor;
@@ -358,7 +360,7 @@ public final class ProcessorIteratorTest {
 
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler(wrapTag);
-        final ITemplateEngineContext templateEngineContext = TestTemplateEngineContextBuilder.build(dialects);
+        final ITemplateEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
 
         HTML_PARSER.parse(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), handler);
 
@@ -377,7 +379,7 @@ public final class ProcessorIteratorTest {
 
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler(wrapTag);
-        final ITemplateEngineContext templateEngineContext = TestTemplateEngineContextBuilder.build(dialects);
+        final ITemplateEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
 
         XML_PARSER.parse(templateEngineContext, TemplateMode.XML, new StringResource(templateName, input), handler);
 

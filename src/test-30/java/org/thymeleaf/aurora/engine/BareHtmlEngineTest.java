@@ -24,9 +24,8 @@ import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.context.ITemplateEngineContext;
-import org.thymeleaf.aurora.context.TemplateProcessingContext;
-import org.thymeleaf.aurora.context.TestTemplateEngineContextBuilder;
+import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
 import org.thymeleaf.aurora.templatemode.TemplateMode;
@@ -35,7 +34,7 @@ import org.thymeleaf.aurora.templatemode.TemplateMode;
 public final class BareHtmlEngineTest {
 
     private static final HTMLTemplateParser PARSER = new HTMLTemplateParser(2, 4096);
-    private static final ITemplateEngineContext TEMPLATE_ENGINE_CONTEXT = TestTemplateEngineContextBuilder.build();
+    private static final ITemplateEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
 
 
 
@@ -94,12 +93,12 @@ public final class BareHtmlEngineTest {
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
         handler.setTemplateProcessingContext(
-                new TemplateProcessingContext(TEMPLATE_ENGINE_CONTEXT, templateName, TemplateMode.HTML, Locale.US, new TemplateProcessingVariableContext(null)));
+                new TemplateProcessingContext(TEMPLATE_ENGINE_CONFIGURATION, templateName, TemplateMode.HTML, Locale.US, null));
 
         if (blockSelectors != null) {
-            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
+            PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
         } else {
-            PARSER.parse(TEMPLATE_ENGINE_CONTEXT, TemplateMode.HTML, new StringResource(templateName, input), handler);
+            PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), handler);
         }
 
         Assert.assertEquals("Test failed for file: " + templateName, output, writer.toString());
