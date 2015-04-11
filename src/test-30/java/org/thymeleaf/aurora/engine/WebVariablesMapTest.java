@@ -55,164 +55,164 @@ public final class WebVariablesMapTest {
         vm.put("one", "a value");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("a value", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
 
         vm.put("one", "two values");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("two values", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
 
         vm.increaseLevel();
         vm.put("one", "hello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
 
         vm.put("two", "twello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
 
         vm.increaseLevel();
         vm.put("two", "twellor");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
 
         vm.increaseLevel();
         vm.put("three", "twelloree");
 
         Assert.assertEquals(2, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
 
         vm.put("one", "atwe");
 
         Assert.assertEquals(2, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
 
         vm.increaseLevel();
         vm.increaseLevel();
         vm.increaseLevel();
 
         Assert.assertEquals(5, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
 
         vm.put("four", "lotwss");
 
         Assert.assertEquals(5, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertTrue(vm.contains("four"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertEquals("lotwss", vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertEquals("lotwss", vm.getVariable("four"));
 
         vm.put("two", "itwiii");
 
         Assert.assertEquals(5, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertTrue(vm.contains("four"));
-        Assert.assertFalse(vm.contains("five"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("itwiii", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertEquals("lotwss", vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertFalse(vm.containsVariable("five"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("itwiii", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertEquals("lotwss", vm.getVariable("four"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(4, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(3, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(2, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertFalse(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertNull(vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertFalse(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertNull(vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertFalse(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertNull(vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertFalse(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertNull(vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
 
     }
 
@@ -240,35 +240,35 @@ public final class WebVariablesMapTest {
         final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, starting);
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("ha", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("ha", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.put("one", "a value");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("a value", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.increaseLevel();
         vm.put("one", "hello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("a value", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
     }
 
@@ -294,31 +294,31 @@ public final class WebVariablesMapTest {
         vm.put("one", "a value");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("a value", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
         Assert.assertEquals("a value", mockRequest.getAttribute("one"));
 
         vm.put("one", "two values");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("two values", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
         Assert.assertEquals("two values", mockRequest.getAttribute("one"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "one"));
 
         vm.remove("one");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertFalse(vm.contains("one"));
-        Assert.assertNull(vm.get("one"));
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
         Assert.assertNull(mockRequest.getAttribute("one"));
         Assert.assertFalse(enumerationContains(mockRequest.getAttributeNames(), "one"));
 
         vm.put("one", "two values");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("two values", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
         Assert.assertEquals("two values", mockRequest.getAttribute("one"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "one"));
 
@@ -327,79 +327,79 @@ public final class WebVariablesMapTest {
         vm.put("one", "hello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
         Assert.assertEquals("hello", mockRequest.getAttribute("one"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "one"));
 
         vm.remove("one");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertFalse(vm.contains("one"));
-        Assert.assertNull(vm.get("one"));
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
         Assert.assertNull(mockRequest.getAttribute("one"));
         Assert.assertFalse(enumerationContains(mockRequest.getAttributeNames(), "one"));
 
         vm.put("one", "hello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
         Assert.assertEquals("hello", mockRequest.getAttribute("one"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "one"));
 
         vm.remove("two");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertNull(vm.get("twello"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("twello"));
         Assert.assertNull(mockRequest.getAttribute("two"));
         Assert.assertFalse(enumerationContains(mockRequest.getAttributeNames(), "two"));
 
         vm.put("two", "twello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
         Assert.assertEquals("twello", mockRequest.getAttribute("two"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "two"));
 
         vm.remove("two");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertNull(vm.get("twello"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("twello"));
 
         vm.remove("one");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertFalse(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertNull(vm.get("one"));
-        Assert.assertNull(vm.get("twello"));
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertNull(vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("twello"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
 
         vm.increaseLevel();
         vm.put("two", "twellor");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
         Assert.assertEquals("twellor", mockRequest.getAttribute("two"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "two"));
 
@@ -407,22 +407,22 @@ public final class WebVariablesMapTest {
         vm.put("three", "twelloree");
 
         Assert.assertEquals(2, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
 
         vm.put("one", "atwe");
 
         Assert.assertEquals(2, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertEquals("atwe", mockRequest.getAttribute("one"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "one"));
 
@@ -431,12 +431,12 @@ public final class WebVariablesMapTest {
         vm.remove("two");
 
         Assert.assertEquals(3, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertNull(mockRequest.getAttribute("two"));
         Assert.assertFalse(enumerationContains(mockRequest.getAttributeNames(), "two"));
 
@@ -445,89 +445,89 @@ public final class WebVariablesMapTest {
         vm.remove("two");
 
         Assert.assertEquals(4, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
 
         vm.increaseLevel();
 
         Assert.assertEquals(5, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertNull(mockRequest.getAttribute("two"));
         Assert.assertFalse(enumerationContains(mockRequest.getAttributeNames(), "two"));
 
         vm.put("four", "lotwss");
 
         Assert.assertEquals(5, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertTrue(vm.contains("four"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertEquals("lotwss", vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertEquals("lotwss", vm.getVariable("four"));
 
         vm.put("two", "itwiii");
 
         Assert.assertEquals(5, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertTrue(vm.contains("four"));
-        Assert.assertFalse(vm.contains("five"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("itwiii", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertEquals("lotwss", vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertFalse(vm.containsVariable("five"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("itwiii", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertEquals("lotwss", vm.getVariable("four"));
         Assert.assertEquals("itwiii", mockRequest.getAttribute("two"));
         Assert.assertTrue(enumerationContains(mockRequest.getAttributeNames(), "two"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(4, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
         Assert.assertNull(mockRequest.getAttribute("two"));
         Assert.assertFalse(enumerationContains(mockRequest.getAttributeNames(), "two"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(3, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(2, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("atwe", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertEquals("twelloree", vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
         Assert.assertEquals("atwe", mockRequest.getAttribute("one"));
         Assert.assertEquals("twellor", mockRequest.getAttribute("two"));
         Assert.assertEquals("twelloree", mockRequest.getAttribute("three"));
@@ -540,26 +540,26 @@ public final class WebVariablesMapTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertFalse(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertEquals("twellor", vm.get("two"));
-        Assert.assertNull(vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertFalse(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertNull(vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
 
         vm.decreaseLevel();
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertFalse(vm.contains("three"));
-        Assert.assertFalse(vm.contains("four"));
-        Assert.assertEquals("two values", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertNull(vm.get("three"));
-        Assert.assertNull(vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertFalse(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertNull(vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
         Assert.assertEquals("two values", mockRequest.getAttribute("one"));
         Assert.assertNull(mockRequest.getAttribute("two"));
         Assert.assertNull(mockRequest.getAttribute("three"));
@@ -595,51 +595,51 @@ public final class WebVariablesMapTest {
         final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, starting);
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("ha", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("ha", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.put("one", "a value");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("a value", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.increaseLevel();
         vm.put("one", "hello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.put("two", "twello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         // This are directly set into the request, so they should only be affected by higher levels, never by decreasing levels
         mockRequest.setAttribute("one", "outer1");
         mockRequest.setAttribute("six", "outer6");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertTrue(vm.contains("six"));
-        Assert.assertEquals("outer1", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
-        Assert.assertEquals("outer6", vm.get("six"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertTrue(vm.containsVariable("six"));
+        Assert.assertEquals("outer1", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
+        Assert.assertEquals("outer6", vm.getVariable("six"));
         Assert.assertEquals("outer1", mockRequest.getAttribute("one"));
         Assert.assertEquals("twello", mockRequest.getAttribute("two"));
         Assert.assertEquals("tieen", mockRequest.getAttribute("ten"));
@@ -654,14 +654,14 @@ public final class WebVariablesMapTest {
         vm.put("one", "helloz");
 
         Assert.assertEquals(2, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertTrue(vm.contains("six"));
-        Assert.assertEquals("helloz", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
-        Assert.assertEquals("outer6", vm.get("six"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertTrue(vm.containsVariable("six"));
+        Assert.assertEquals("helloz", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
+        Assert.assertEquals("outer6", vm.getVariable("six"));
         Assert.assertEquals("helloz", mockRequest.getAttribute("one"));
         Assert.assertEquals("twello", mockRequest.getAttribute("two"));
         Assert.assertEquals("tieen", mockRequest.getAttribute("ten"));
@@ -675,14 +675,14 @@ public final class WebVariablesMapTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertTrue(vm.contains("six"));
-        Assert.assertEquals("outer1", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
-        Assert.assertEquals("outer6", vm.get("six"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertTrue(vm.containsVariable("six"));
+        Assert.assertEquals("outer1", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
+        Assert.assertEquals("outer6", vm.getVariable("six"));
         Assert.assertEquals("outer1", mockRequest.getAttribute("one"));
         Assert.assertEquals("twello", mockRequest.getAttribute("two"));
         Assert.assertEquals("tieen", mockRequest.getAttribute("ten"));
@@ -696,14 +696,14 @@ public final class WebVariablesMapTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertTrue(vm.contains("six"));
-        Assert.assertEquals("outer1", vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
-        Assert.assertEquals("outer6", vm.get("six"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertTrue(vm.containsVariable("six"));
+        Assert.assertEquals("outer1", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
+        Assert.assertEquals("outer6", vm.getVariable("six"));
         Assert.assertEquals("outer1", mockRequest.getAttribute("one"));
         Assert.assertNull(mockRequest.getAttribute("two"));
         Assert.assertEquals("tieen", mockRequest.getAttribute("ten"));
@@ -739,47 +739,47 @@ public final class WebVariablesMapTest {
         final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, starting);
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("ha", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("ha", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.put("one", "a value");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("a value", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.increaseLevel();
         vm.put("one", "hello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.put("two", "twello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         mockRequest.removeAttribute("one");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertFalse(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertNull(vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertNull(vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
         Assert.assertNull(mockRequest.getAttribute("one"));
         Assert.assertEquals("twello", mockRequest.getAttribute("two"));
         Assert.assertEquals("tieen", mockRequest.getAttribute("ten"));
@@ -792,12 +792,12 @@ public final class WebVariablesMapTest {
         vm.put("one", "helloz");
 
         Assert.assertEquals(2, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertEquals("helloz", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertEquals("helloz", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
         Assert.assertEquals("helloz", mockRequest.getAttribute("one"));
         Assert.assertEquals("twello", mockRequest.getAttribute("two"));
         Assert.assertEquals("tieen", mockRequest.getAttribute("ten"));
@@ -809,12 +809,12 @@ public final class WebVariablesMapTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertFalse(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertNull(vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertNull(vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
         Assert.assertNull(mockRequest.getAttribute("one"));
         Assert.assertEquals("twello", mockRequest.getAttribute("two"));
         Assert.assertEquals("tieen", mockRequest.getAttribute("ten"));
@@ -826,12 +826,12 @@ public final class WebVariablesMapTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertFalse(vm.contains("one"));
-        Assert.assertFalse(vm.contains("two"));
-        Assert.assertTrue(vm.contains("ten"));
-        Assert.assertNull(vm.get("one"));
-        Assert.assertNull(vm.get("two"));
-        Assert.assertEquals("tieen", vm.get("ten"));
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("ten"));
+        Assert.assertNull(vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("tieen", vm.getVariable("ten"));
         Assert.assertNull(mockRequest.getAttribute("one"));
         Assert.assertNull(mockRequest.getAttribute("two"));
         Assert.assertEquals("tieen", mockRequest.getAttribute("ten"));
@@ -1035,21 +1035,25 @@ public final class WebVariablesMapTest {
 
         Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=a value}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.put("one", "two values");
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.remove("one");
 
         Assert.assertEquals("{0:{}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}", vm.toString());
+        Assert.assertEquals("[]", vm.getVariableNames().toString());
 
         vm.put("one", "two values");
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.increaseLevel();
 
@@ -1057,58 +1061,69 @@ public final class WebVariablesMapTest {
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.remove("one");
 
         Assert.assertEquals("{1:{one=(*removed*)},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}", vm.toString());
+        Assert.assertEquals("[]", vm.getVariableNames().toString());
 
         vm.put("one", "hello");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.remove("two");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.put("two", "twello");
 
         Assert.assertEquals("{1:{one=hello, two=twello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello, two=twello}", vm.toString());
+        Assert.assertEquals("[one, two]", vm.getVariableNames().toString());
 
         vm.remove("two");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.remove("one");
 
         Assert.assertEquals("{1:{one=(*removed*)},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}", vm.toString());
+        Assert.assertEquals("[]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.increaseLevel();
         vm.put("two", "twellor");
 
         Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
+        Assert.assertEquals("[one, two]", vm.getVariableNames().toString());
 
         vm.increaseLevel();
         vm.put("three", "twelloree");
 
         Assert.assertEquals("{2:{three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values, two=twellor, three=twelloree}", vm.toString());
+        Assert.assertEquals("[one, two, three]", vm.getVariableNames().toString());
 
         vm.put("one", "atwe");
 
         Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+        Assert.assertEquals("[one, two, three]", vm.getVariableNames().toString());
 
         vm.increaseLevel();
 
@@ -1116,6 +1131,7 @@ public final class WebVariablesMapTest {
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
 
         vm.increaseLevel();
 
@@ -1123,46 +1139,55 @@ public final class WebVariablesMapTest {
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
 
         vm.increaseLevel();
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
 
         vm.put("four", "lotwss");
 
         Assert.assertEquals("{5:{four=lotwss},3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss}", vm.toString());
+        Assert.assertEquals("[one, three, four]", vm.getVariableNames().toString());
 
         vm.put("two", "itwiii");
 
         Assert.assertEquals("{5:{four=lotwss, two=itwiii},3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss, two=itwiii}", vm.toString());
+        Assert.assertEquals("[one, three, four, two]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree, two=twellor}", vm.toString());
+        Assert.assertEquals("[one, three, two]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
+        Assert.assertEquals("[one, two]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
+        Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
     }
 
@@ -1186,93 +1211,93 @@ public final class WebVariablesMapTest {
         vm.put("one", "a value");
 
         Assert.assertEquals(0, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("a value", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
 
         vm.increaseLevel();
         vm.put("one", "hello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertEquals("hello", vm.get("one"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
 
         vm.put("two", "twello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
 
         vm.put("three", "trwello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("trwello", vm.get("three"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("trwello", vm.getVariable("three"));
 
         vm.put("four", "fwello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertTrue(vm.contains("four"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("trwello", vm.get("three"));
-        Assert.assertEquals("fwello", vm.get("four"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("trwello", vm.getVariable("three"));
+        Assert.assertEquals("fwello", vm.getVariable("four"));
 
         vm.put("five", "vwello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertTrue(vm.contains("four"));
-        Assert.assertTrue(vm.contains("five"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("trwello", vm.get("three"));
-        Assert.assertEquals("fwello", vm.get("four"));
-        Assert.assertEquals("vwello", vm.get("five"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertTrue(vm.containsVariable("five"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("trwello", vm.getVariable("three"));
+        Assert.assertEquals("fwello", vm.getVariable("four"));
+        Assert.assertEquals("vwello", vm.getVariable("five"));
 
         vm.put("six", "swello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertTrue(vm.contains("four"));
-        Assert.assertTrue(vm.contains("five"));
-        Assert.assertTrue(vm.contains("six"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("trwello", vm.get("three"));
-        Assert.assertEquals("fwello", vm.get("four"));
-        Assert.assertEquals("vwello", vm.get("five"));
-        Assert.assertEquals("swello", vm.get("six"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertTrue(vm.containsVariable("five"));
+        Assert.assertTrue(vm.containsVariable("six"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("trwello", vm.getVariable("three"));
+        Assert.assertEquals("fwello", vm.getVariable("four"));
+        Assert.assertEquals("vwello", vm.getVariable("five"));
+        Assert.assertEquals("swello", vm.getVariable("six"));
 
         vm.put("seven", "svwello");
 
         Assert.assertEquals(1, vm.level());
-        Assert.assertTrue(vm.contains("one"));
-        Assert.assertTrue(vm.contains("two"));
-        Assert.assertTrue(vm.contains("three"));
-        Assert.assertTrue(vm.contains("four"));
-        Assert.assertTrue(vm.contains("five"));
-        Assert.assertTrue(vm.contains("six"));
-        Assert.assertTrue(vm.contains("seven"));
-        Assert.assertEquals("hello", vm.get("one"));
-        Assert.assertEquals("twello", vm.get("two"));
-        Assert.assertEquals("trwello", vm.get("three"));
-        Assert.assertEquals("fwello", vm.get("four"));
-        Assert.assertEquals("vwello", vm.get("five"));
-        Assert.assertEquals("swello", vm.get("six"));
-        Assert.assertEquals("svwello", vm.get("seven"));
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertTrue(vm.containsVariable("five"));
+        Assert.assertTrue(vm.containsVariable("six"));
+        Assert.assertTrue(vm.containsVariable("seven"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+        Assert.assertEquals("trwello", vm.getVariable("three"));
+        Assert.assertEquals("fwello", vm.getVariable("four"));
+        Assert.assertEquals("vwello", vm.getVariable("five"));
+        Assert.assertEquals("swello", vm.getVariable("six"));
+        Assert.assertEquals("svwello", vm.getVariable("seven"));
 
     }
 
@@ -1301,22 +1326,26 @@ public final class WebVariablesMapTest {
 
         Assert.assertEquals("{0:{one=ha, ten=tieen}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=ha, ten=tieen}", vm.toString());
+        Assert.assertEquals("[one, ten]", vm.getVariableNames().toString());
 
         vm.put("one", "a value");
 
         Assert.assertEquals("{0:{one=a value, ten=tieen}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=a value, ten=tieen}", vm.toString());
+        Assert.assertEquals("[one, ten]", vm.getVariableNames().toString());
 
         vm.increaseLevel();
         vm.put("one", "hello");
 
         Assert.assertEquals("{1:{one=hello},0:{one=a value, ten=tieen}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello, ten=tieen}", vm.toString());
+        Assert.assertEquals("[one, ten]", vm.getVariableNames().toString());
 
         vm.put("two", "twello");
 
         Assert.assertEquals("{1:{one=hello, two=twello},0:{one=a value, ten=tieen}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello, ten=tieen, two=twello}", vm.toString());
+        Assert.assertEquals("[one, ten, two]", vm.getVariableNames().toString());
 
         // This are directly set into the request, so they should only be affected by higher levels, never by decreasing levels
         mockRequest.setAttribute("one", "outer1");
@@ -1324,6 +1353,7 @@ public final class WebVariablesMapTest {
 
         Assert.assertEquals("{1:{two=twello},0:{one=outer1, ten=tieen, six=outer6}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=outer1, ten=tieen, two=twello, six=outer6}", vm.toString());
+        Assert.assertEquals("[one, ten, two, six]", vm.getVariableNames().toString());
 
         vm.increaseLevel();
 
@@ -1331,16 +1361,19 @@ public final class WebVariablesMapTest {
 
         Assert.assertEquals("{2:{one=helloz},1:{two=twello},0:{one=outer1, ten=tieen, six=outer6}}[2]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=helloz, ten=tieen, two=twello, six=outer6}", vm.toString());
+        Assert.assertEquals("[one, ten, two, six]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{1:{two=twello},0:{one=outer1, ten=tieen, six=outer6}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=outer1, ten=tieen, two=twello, six=outer6}", vm.toString());
+        Assert.assertEquals("[one, ten, two, six]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{0:{one=outer1, ten=tieen, six=outer6}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=outer1, ten=tieen, six=outer6}", vm.toString());
+        Assert.assertEquals("[one, ten, six]", vm.getVariableNames().toString());
 
     }
 
