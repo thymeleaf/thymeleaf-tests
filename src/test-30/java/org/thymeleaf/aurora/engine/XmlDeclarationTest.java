@@ -51,7 +51,7 @@ public final class XmlDeclarationTest {
 
 
         final XMLDeclaration d1 = new XMLDeclaration(textRepository);
-        d1.setXmlDeclaration(
+        d1.reset(
                 xmlDeclar1utfno,
                 keyword,
                 version1,
@@ -68,7 +68,7 @@ public final class XmlDeclarationTest {
         Assert.assertEquals(11, d1.getLine());
         Assert.assertEquals(4, d1.getCol());
 
-        d1.setXmlDeclaration(
+        d1.reset(
                 xmlDeclar1utfno,
                 keyword,
                 version1,

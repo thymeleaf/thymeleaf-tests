@@ -47,7 +47,7 @@ public final class ProcessingInstructionTest {
 
 
         final ProcessingInstruction d1 = new ProcessingInstruction(textRepository);
-        d1.setProcessingInstruction(
+        d1.reset(
                 procInstr1,
                 target1,
                 content1,
@@ -59,7 +59,7 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(11, d1.getLine());
         Assert.assertEquals(4, d1.getCol());
 
-        d1.setProcessingInstruction(
+        d1.reset(
                 procInstr1,
                 target1,
                 content1,

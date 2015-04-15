@@ -37,7 +37,7 @@ public final class TextTest {
         final char[] buf1 = "hello".toCharArray();
 
         final Text c1 = new Text(textRepository);
-        c1.setText(buf1, 0, 5, 10, 3);
+        c1.reset(buf1, 0, 5, 10, 3);
         Assert.assertEquals("hello", extractText(c1));
         final String c1all = c1.getText();
         Assert.assertEquals("hello", c1all);
@@ -58,7 +58,7 @@ public final class TextTest {
         Assert.assertSame(c1c2, c1c2_2);
         Assert.assertSame(c1c2, c1.getText());
 
-        c1.setText(c1c0.toCharArray(), 0, c1c0.length(), 11, 4);
+        c1.reset(c1c0.toCharArray(), 0, c1c0.length(), 11, 4);
         final String c1c3_2 = c1.getText();
         Assert.assertEquals(c1c0, c1c3_2);
         Assert.assertSame(c1c3_2, c1.getText());

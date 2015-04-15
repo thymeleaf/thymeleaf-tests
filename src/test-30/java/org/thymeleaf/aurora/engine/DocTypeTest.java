@@ -54,7 +54,7 @@ public final class DocTypeTest {
         final String internalSubsetWSXHTMLTransitional = "\n <!-- an internal subset can be embedded here -->\n ";
 
         final DocType d1 = new DocType(textRepository);
-        d1.setDocType(
+        d1.reset(
                 doctypeXHTMLTransitionalWS,
                 keywordUC,
                 elementNameHtml,
@@ -75,7 +75,7 @@ public final class DocTypeTest {
         Assert.assertEquals(11, d1.getLine());
         Assert.assertEquals(4, d1.getCol());
 
-        d1.setDocType(
+        d1.reset(
                 doctypeXHTMLTransitionalWS,
                 keywordUC,
                 elementNameHtml,
