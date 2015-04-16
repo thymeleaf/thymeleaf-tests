@@ -1378,6 +1378,294 @@ public final class WebVariablesMapTest {
     }
 
 
+    @Test
+    public void test11() {
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Locale requestLocale = Locale.US;
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
+        final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, null);
+
+        vm.put("one", "a value");
+        Assert.assertFalse(vm.hasSelectionTarget());
+        Assert.assertNull(vm.getSelectionTarget());
+        Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value}", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.put("one", "hello");
+        vm.remove("one");
+        vm.put("one", "hello");
+        vm.remove("two");
+        vm.put("two", "twello");
+        vm.put("two", "twellor");
+        Assert.assertFalse(vm.hasSelectionTarget());
+        Assert.assertNull(vm.getSelectionTarget());
+        Assert.assertEquals("{1:{one=hello, two=twellor},0:{one=a value}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, two=twellor}", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.put("three", "twelloree");
+        vm.put("one", "atwe");
+        Assert.assertFalse(vm.hasSelectionTarget());
+        Assert.assertNull(vm.getSelectionTarget());
+        Assert.assertEquals("{2:{three=twelloree, one=atwe},1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+
+        vm.setSelectionTarget("BIGFORM");
+
+        Assert.assertEquals(2, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("BIGFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{2:{three=twelloree, one=atwe}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}<BIGFORM>", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.remove("two");
+
+        Assert.assertEquals(3, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("BIGFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[3]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}<BIGFORM>", vm.toString());
+
+        vm.increaseLevel();
+
+        vm.remove("two");
+        vm.setSelectionTarget("SMALLFORM");
+
+        Assert.assertEquals(4, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("SMALLFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{three=twelloree, one=atwe}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[4]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}<SMALLFORM>", vm.toString());
+
+
+        vm.increaseLevel();
+
+        Assert.assertEquals(5, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("SMALLFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{three=twelloree, one=atwe}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}<SMALLFORM>", vm.toString());
+
+        vm.put("four", "lotwss");
+
+        Assert.assertEquals(5, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertEquals("lotwss", vm.getVariable("four"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("SMALLFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{5:{four=lotwss},4:<SMALLFORM>,3:{two=(*removed*)},2:{three=twelloree, one=atwe}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss}<SMALLFORM>", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(4, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("SMALLFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{three=twelloree, one=atwe}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[4]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}<SMALLFORM>", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(3, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("BIGFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{3:{two=(*removed*)},2:{three=twelloree, one=atwe}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[3]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree}<BIGFORM>", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(2, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("BIGFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{2:{three=twelloree, one=atwe}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree, two=twellor}<BIGFORM>", vm.toString());
+
+        vm.setSelectionTarget("MEDIUMFORM");
+
+        Assert.assertEquals(2, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("MEDIUMFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{2:{three=twelloree, one=atwe}<MEDIUMFORM>,1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree, two=twellor}<MEDIUMFORM>", vm.toString());
+
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertFalse(vm.hasSelectionTarget());
+        Assert.assertNull(vm.getSelectionTarget());
+        Assert.assertEquals("{1:{one=hello, two=twellor},0:{one=a value}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, two=twellor}", vm.toString());
+
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(0, vm.level());
+        Assert.assertFalse(vm.hasSelectionTarget());
+        Assert.assertNull(vm.getSelectionTarget());
+        Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value}", vm.toString());
+
+        vm.setSelectionTarget("TOTALFORM");
+
+        Assert.assertEquals(0, vm.level());
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("TOTALFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{0:{one=a value}<TOTALFORM>}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value}<TOTALFORM>", vm.toString());
+
+
+        vm.increaseLevel();
+
+        Assert.assertEquals(1, vm.level());
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("TOTALFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{0:{one=a value}<TOTALFORM>}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value}<TOTALFORM>", vm.toString());
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(0, vm.level());
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertFalse(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertNull(vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("TOTALFORM", vm.getSelectionTarget());
+        Assert.assertEquals("{0:{one=a value}<TOTALFORM>}[0]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=a value}<TOTALFORM>", vm.toString());
+
+    }
+
+
+
+    @Test
+    public void test12() {
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Locale requestLocale = Locale.US;
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, requestLocale);
+        final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, null);
+
+        vm.put("one", "a val1");
+
+        vm.increaseLevel();
+
+        vm.put("one", "a val2");
+        vm.setSelectionTarget("FORM");
+
+        Assert.assertTrue(vm.hasSelectionTarget());
+        Assert.assertEquals("FORM", vm.getSelectionTarget());
+
+        vm.decreaseLevel();
+
+        vm.put("one", "a val3");
+        Assert.assertFalse(vm.hasSelectionTarget());
+        Assert.assertNull(vm.getSelectionTarget());
+
+        vm.increaseLevel();
+
+        vm.put("one", "a val4");
+        Assert.assertFalse(vm.hasSelectionTarget());
+        Assert.assertNull(vm.getSelectionTarget());
+
+        vm.increaseLevel();
+
+        vm.put("one", "a val5");
+        Assert.assertFalse(vm.hasSelectionTarget());
+        Assert.assertNull(vm.getSelectionTarget());
+
+    }
+
+
 
 
     private static boolean enumerationContains(final Enumeration<String> enumeration, final String value) {
