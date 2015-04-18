@@ -35,7 +35,7 @@ import org.thymeleaf.aurora.resource.StringResource;
 import org.thymeleaf.aurora.templatemode.TemplateMode;
 
 
-public final class ProcessorIteratorTest {
+public final class ElementProcessorIteratorTest {
 
     private static final HTMLTemplateParser HTML_PARSER = new HTMLTemplateParser(2, 4096);
     private static final XMLTemplateParser XML_PARSER = new XMLTemplateParser(2, 4096);
@@ -52,7 +52,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(handler.tag).toString());
@@ -71,7 +71,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-15-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -92,7 +92,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-7-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -113,7 +113,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -134,7 +134,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         tag.getAttributes().setAttribute("th:one", "somevalue");
@@ -155,7 +155,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         tag.getAttributes().removeAttribute("th:src");
@@ -173,7 +173,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         tag.getAttributes().removeAttribute("th:src");
@@ -193,7 +193,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -214,7 +214,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -237,7 +237,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -258,7 +258,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -281,7 +281,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -302,7 +302,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-*a-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><p th:src='uuuh'><a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-{a}-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -325,7 +325,7 @@ public final class ProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-*a-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><p th:src='uuuh'><a th:src='hello'>", dialect);
-        final ProcessorIterator iterator = handler.iter;
+        final ElementProcessorIterator iterator = handler.iter;
         final OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-{a}-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -389,7 +389,7 @@ public final class ProcessorIteratorTest {
     private static class TagObtentionTemplateHandler extends AbstractTemplateHandler {
 
         OpenElementTag tag;
-        ProcessorIterator iter = new ProcessorIterator();
+        ElementProcessorIterator iter = new ElementProcessorIterator();
 
         TagObtentionTemplateHandler() {
             super();

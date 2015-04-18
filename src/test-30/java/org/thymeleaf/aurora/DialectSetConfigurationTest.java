@@ -23,8 +23,6 @@ import java.util.Collections;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.DialectConfiguration;
-import org.thymeleaf.aurora.DialectSetConfiguration;
 import org.thymeleaf.aurora.dialect.IProcessorDialect;
 import org.thymeleaf.aurora.engine.AttributeDefinitions;
 import org.thymeleaf.aurora.engine.ElementDefinitions;

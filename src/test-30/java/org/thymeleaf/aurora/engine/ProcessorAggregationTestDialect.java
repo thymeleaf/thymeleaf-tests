@@ -28,9 +28,8 @@ import org.thymeleaf.aurora.processor.IProcessor;
 import org.thymeleaf.aurora.processor.cdatasection.AbstractCDATASectionProcessor;
 import org.thymeleaf.aurora.processor.comment.AbstractCommentProcessor;
 import org.thymeleaf.aurora.processor.doctype.AbstractDocTypeProcessor;
-import org.thymeleaf.aurora.processor.element.AbstractElementProcessor;
-import org.thymeleaf.aurora.processor.node.AbstractNodeProcessor;
-import org.thymeleaf.aurora.processor.node.INodeProcessor;
+import org.thymeleaf.aurora.processor.element.AbstractElementNodeProcessor;
+import org.thymeleaf.aurora.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.aurora.processor.processinginstruction.AbstractProcessingInstructionProcessor;
 import org.thymeleaf.aurora.processor.text.AbstractTextProcessor;
 import org.thymeleaf.aurora.processor.xmldeclaration.AbstractXMLDeclarationProcessor;
@@ -127,67 +126,31 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                     attributeName = attributeName.substring(1);
                 }
                 processors.add(
-                        new ElementProcessorAggregationTestProcessor(
+                        new ElementProcessorAggregationTestTagProcessor(
                                 (elementName.equals("null")? null : elementName), prefixElementName,
                                 (attributeName.equals("null")? null : attributeName), prefixAttributeName,
                                 templateMode, precedence));
             } else if (type.equals("N")) {
-                final INodeProcessor.MatchingNodeType matchingNodeType = INodeProcessor.MatchingNodeType.valueOf(procSpecTok.nextToken());
+                procSpecTok.nextToken(); // This will just be "ELEMENT"
                 final int precedence = Integer.valueOf(procSpecTok.nextToken());
-                switch(matchingNodeType) {
-
-                    case CDATA_SECTION:
-                        processors.add(
-                                new NodeProcessorAggregationTestProcessor(
-                                        matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                        break;
-                    case COMMENT:
-                        processors.add(
-                                new NodeProcessorAggregationTestProcessor(
-                                        matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                        break;
-                    case DOC_TYPE:
-                        processors.add(
-                                new NodeProcessorAggregationTestProcessor(
-                                        matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                        break;
-                    case ELEMENT:
-                        String elementName = procSpecTok.nextToken();
-                        boolean prefixElementName = true;
-                        if (elementName.startsWith("*")) {
-                            prefixElementName = false;
-                            elementName = elementName.substring(1);
-                        }
-                        String attributeName = procSpecTok.nextToken();
-                        boolean prefixAttributeName = true;
-                        if (attributeName.startsWith("*")) {
-                            prefixAttributeName = false;
-                            attributeName = attributeName.substring(1);
-                        }
-                        processors.add(
-                                new NodeProcessorAggregationTestProcessor(
-                                        matchingNodeType,
-                                        (elementName.equals("null")? null : elementName), prefixElementName,
-                                        (attributeName.equals("null")? null : attributeName), prefixAttributeName,
-                                        templateMode, precedence));
-                        break;
-                    case PROCESSING_INSTRUCTION:
-                        processors.add(
-                                new NodeProcessorAggregationTestProcessor(
-                                        matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                        break;
-                    case TEXT:
-                        processors.add(
-                                new NodeProcessorAggregationTestProcessor(
-                                        matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                        break;
-                    case XML_DECLARATION:
-                        processors.add(
-                                new NodeProcessorAggregationTestProcessor(
-                                        matchingNodeType, procSpecTok.nextToken(), templateMode, precedence));
-                        break;
-
+                String elementName = procSpecTok.nextToken();
+                boolean prefixElementName = true;
+                if (elementName.startsWith("*")) {
+                    prefixElementName = false;
+                    elementName = elementName.substring(1);
                 }
+                String attributeName = procSpecTok.nextToken();
+                boolean prefixAttributeName = true;
+                if (attributeName.startsWith("*")) {
+                    prefixAttributeName = false;
+                    attributeName = attributeName.substring(1);
+                }
+                processors.add(
+                        new ElementNodeProcessorAggregationTestProcessor(
+                                (elementName.equals("null")? null : elementName), prefixElementName,
+                                (attributeName.equals("null")? null : attributeName), prefixAttributeName,
+                                templateMode, precedence));
+
             } else {
                 throw new IllegalArgumentException("Unrecognized: " + type);
             }
@@ -335,9 +298,9 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
     }
 
 
-    private static class ElementProcessorAggregationTestProcessor extends AbstractElementProcessor implements NamedTestProcessor {
+    private static class ElementProcessorAggregationTestTagProcessor extends AbstractElementTagProcessor implements NamedTestProcessor {
 
-        ElementProcessorAggregationTestProcessor(
+        ElementProcessorAggregationTestTagProcessor(
                 final String elementName, final boolean prefixElementName,
                 final String attributeName, final boolean prefixAttributeName,
                 final TemplateMode templateMode, final int precedence) {
@@ -355,30 +318,25 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
     }
 
 
-    private static class NodeProcessorAggregationTestProcessor extends AbstractNodeProcessor implements NamedTestProcessor {
+    private static class ElementNodeProcessorAggregationTestProcessor extends AbstractElementNodeProcessor implements NamedTestProcessor {
 
         private final String name;
 
-        NodeProcessorAggregationTestProcessor(
-                final MatchingNodeType matchingNodeType,
+        ElementNodeProcessorAggregationTestProcessor(
                 final String elementName, final boolean prefixElementName,
                 final String attributeName, final boolean prefixAttributeName,
                 final TemplateMode templateMode, final int precedence) {
-            super(matchingNodeType, templateMode, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
+            super(templateMode, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
             this.name = null;
         }
 
-        NodeProcessorAggregationTestProcessor(
-                final MatchingNodeType matchingNodeType, final String name, final TemplateMode templateMode, final int precedence) {
-            super(matchingNodeType, templateMode, null, false, null, false, precedence);
+        ElementNodeProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, null, false, null, false, precedence);
             this.name = name;
         }
 
         public String getName() {
-            if (getMatchingNodeType() == MatchingNodeType.ELEMENT) {
-                return "N-" + this.getMatchingNodeType() + "-" + getPrecedence() + "-" + this.getMatchingElementName() + "-" + this.getMatchingAttributeName();
-            }
-            return "N-" + this.getMatchingNodeType() + "-" + getPrecedence() + "-" + this.name;
+                return "N-ELEMENT" + "-" + getPrecedence() + "-" + this.getMatchingElementName() + "-" + this.getMatchingAttributeName();
         }
 
         public String toString() {
