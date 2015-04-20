@@ -19,7 +19,7 @@
  */
 package org.thymeleaf.aurora.engine;
 
-import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.IEngineConfiguration;
 import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.aurora.model.ICloseElementTag;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
@@ -32,7 +32,7 @@ public final class CloseElementTagTest {
 
     private static final HTMLTemplateParser HTML_PARSER = new HTMLTemplateParser(2, 4096);
     private static final XMLTemplateParser XML_PARSER = new XMLTemplateParser(2, 4096);
-    private static final ITemplateEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
+    private static final IEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
 
 
 

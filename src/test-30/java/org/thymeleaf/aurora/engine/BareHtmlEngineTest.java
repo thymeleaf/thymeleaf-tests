@@ -24,7 +24,8 @@ import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.IEngineConfiguration;
+import org.thymeleaf.aurora.context.ProcessingContext;
 import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.resource.StringResource;
@@ -34,7 +35,7 @@ import org.thymeleaf.aurora.templatemode.TemplateMode;
 public final class BareHtmlEngineTest {
 
     private static final HTMLTemplateParser PARSER = new HTMLTemplateParser(2, 4096);
-    private static final ITemplateEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
+    private static final IEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
 
 
 
@@ -92,8 +93,8 @@ public final class BareHtmlEngineTest {
         final String templateName = "test";
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
-        handler.setTemplateProcessingContext(
-                new TemplateProcessingContext(TEMPLATE_ENGINE_CONFIGURATION, templateName, TemplateMode.HTML, Locale.US, null));
+        handler.setProcessingContext(
+                new ProcessingContext(TEMPLATE_ENGINE_CONFIGURATION, templateName, TemplateMode.HTML, Locale.US, null));
 
         if (blockSelectors != null) {
             PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);

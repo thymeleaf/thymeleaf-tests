@@ -28,7 +28,8 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
-import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.IEngineConfiguration;
+import org.thymeleaf.aurora.context.ProcessingContext;
 import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.aurora.parser.HTMLTemplateParser;
 import org.thymeleaf.aurora.resource.ReaderResource;
@@ -37,7 +38,7 @@ import org.thymeleaf.aurora.templatemode.TemplateMode;
 public class HtmlBulkTester {
 
     private static final HTMLTemplateParser PARSER = new HTMLTemplateParser(2, 4096);
-    private static final ITemplateEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
+    private static final IEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
 
 
 
@@ -77,8 +78,8 @@ public class HtmlBulkTester {
             final OutputStreamWriter testOutputWriter = new OutputStreamWriter(testOutputStream, "UTF-8");
 
             final ITemplateHandler handler = new OutputTemplateHandler(testOutputWriter);
-            handler.setTemplateProcessingContext(
-                    new TemplateProcessingContext(TEMPLATE_ENGINE_CONFIGURATION, fileInTestFolderName, TemplateMode.HTML, Locale.US, null));
+            handler.setProcessingContext(
+                    new ProcessingContext(TEMPLATE_ENGINE_CONFIGURATION, fileInTestFolderName, TemplateMode.HTML, Locale.US, null));
 
             System.out.print(fileInTestFolderName);
 

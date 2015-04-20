@@ -21,7 +21,7 @@ package org.thymeleaf.aurora.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.ITemplateEngineConfiguration;
+import org.thymeleaf.aurora.IEngineConfiguration;
 import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.aurora.model.IElementAttributes;
 import org.thymeleaf.aurora.model.IOpenElementTag;
@@ -36,7 +36,7 @@ public final class ElementAttributesTest {
 
     private static final HTMLTemplateParser HTML_PARSER = new HTMLTemplateParser(2, 4096);
     private static final XMLTemplateParser XML_PARSER = new XMLTemplateParser(2, 4096);
-    private static final ITemplateEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
+    private static final IEngineConfiguration TEMPLATE_ENGINE_CONFIGURATION = TestTemplateEngineConfigurationBuilder.build();
 
 
 
