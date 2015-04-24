@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.engine;
+package org.thymeleaf.engine;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

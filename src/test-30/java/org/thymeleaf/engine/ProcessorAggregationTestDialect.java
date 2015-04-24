@@ -17,23 +17,23 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.engine;
+package org.thymeleaf.engine;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.thymeleaf.aurora.dialect.AbstractProcessorDialect;
-import org.thymeleaf.aurora.processor.IProcessor;
-import org.thymeleaf.aurora.processor.cdatasection.AbstractCDATASectionProcessor;
-import org.thymeleaf.aurora.processor.comment.AbstractCommentProcessor;
-import org.thymeleaf.aurora.processor.doctype.AbstractDocTypeProcessor;
-import org.thymeleaf.aurora.processor.element.AbstractElementNodeProcessor;
-import org.thymeleaf.aurora.processor.element.AbstractElementTagProcessor;
-import org.thymeleaf.aurora.processor.processinginstruction.AbstractProcessingInstructionProcessor;
-import org.thymeleaf.aurora.processor.text.AbstractTextProcessor;
-import org.thymeleaf.aurora.processor.xmldeclaration.AbstractXMLDeclarationProcessor;
-import org.thymeleaf.aurora.templatemode.TemplateMode;
+import org.thymeleaf.dialect.AbstractProcessorDialect;
+import org.thymeleaf.processor.IProcessor;
+import org.thymeleaf.processor.cdatasection.AbstractCDATASectionProcessor;
+import org.thymeleaf.processor.comment.AbstractCommentProcessor;
+import org.thymeleaf.processor.doctype.AbstractDocTypeProcessor;
+import org.thymeleaf.processor.element.AbstractElementNodeProcessor;
+import org.thymeleaf.processor.element.AbstractElementTagProcessor;
+import org.thymeleaf.processor.processinginstruction.AbstractProcessingInstructionProcessor;
+import org.thymeleaf.processor.text.AbstractTextProcessor;
+import org.thymeleaf.processor.xmldeclaration.AbstractXMLDeclarationProcessor;
+import org.thymeleaf.templatemode.TemplateMode;
 
 
 public final class ProcessorAggregationTestDialect extends AbstractProcessorDialect {

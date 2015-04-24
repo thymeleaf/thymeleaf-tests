@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.context;
+package org.thymeleaf.context;
 
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -30,8 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.context.WebVariablesMap;
-import org.thymeleaf.aurora.engine.TestMockServletUtil;
+import org.thymeleaf.engine.TestMockServletUtil;
 
 
 public final class WebVariablesMapTest {

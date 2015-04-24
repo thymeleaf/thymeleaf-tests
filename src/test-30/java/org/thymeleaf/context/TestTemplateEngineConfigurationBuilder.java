@@ -17,18 +17,18 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.context;
+package org.thymeleaf.context;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.thymeleaf.aurora.DialectConfiguration;
-import org.thymeleaf.aurora.IEngineConfiguration;
-import org.thymeleaf.aurora.EngineConfiguration;
-import org.thymeleaf.aurora.dialect.IDialect;
-import org.thymeleaf.aurora.standard.StandardDialect;
-import org.thymeleaf.aurora.text.TextRepositories;
+import org.thymeleaf.DialectConfiguration;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.EngineConfiguration;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.standard.StandardDialect;
+import org.thymeleaf.text.TextRepositories;
 
 
 public final class TestTemplateEngineConfigurationBuilder {

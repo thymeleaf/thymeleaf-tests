@@ -17,7 +17,7 @@
  *
  * =============================================================================
  */
-package org.thymeleaf.aurora.parser;
+package org.thymeleaf.templateparser;
 
 import junit.framework.TestCase;
 

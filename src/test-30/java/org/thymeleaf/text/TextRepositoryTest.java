@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.text;
+package org.thymeleaf.text;
 
 import org.junit.Assert;
 import org.junit.Test;

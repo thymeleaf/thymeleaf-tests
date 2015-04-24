@@ -17,12 +17,12 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.engine;
+package org.thymeleaf.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.text.ITextRepository;
-import org.thymeleaf.aurora.text.TextRepositories;
+import org.thymeleaf.text.ITextRepository;
+import org.thymeleaf.text.TextRepositories;
 
 
 public final class ProcessingInstructionTest {

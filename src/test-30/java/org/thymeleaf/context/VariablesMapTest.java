@@ -17,14 +17,13 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.context;
+package org.thymeleaf.context;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.aurora.context.VariablesMap;
 
 
 public final class VariablesMapTest {

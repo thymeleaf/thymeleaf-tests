@@ -17,15 +17,15 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora.engine;
+package org.thymeleaf.engine;
 
-import org.thymeleaf.aurora.IEngineConfiguration;
-import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
-import org.thymeleaf.aurora.model.ICloseElementTag;
-import org.thymeleaf.aurora.parser.HTMLTemplateParser;
-import org.thymeleaf.aurora.parser.XMLTemplateParser;
-import org.thymeleaf.aurora.resource.StringResource;
-import org.thymeleaf.aurora.templatemode.TemplateMode;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
+import org.thymeleaf.model.ICloseElementTag;
+import org.thymeleaf.templateparser.HTMLTemplateParser;
+import org.thymeleaf.templateparser.XMLTemplateParser;
+import org.thymeleaf.resource.StringResource;
+import org.thymeleaf.templatemode.TemplateMode;
 
 
 public final class CloseElementTagTest {

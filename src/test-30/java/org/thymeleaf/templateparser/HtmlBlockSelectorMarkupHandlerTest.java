@@ -17,7 +17,7 @@
  *
  * =============================================================================
  */
-package org.thymeleaf.aurora.parser;
+package org.thymeleaf.templateparser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,14 +34,14 @@ import java.util.Locale;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.thymeleaf.aurora.IEngineConfiguration;
-import org.thymeleaf.aurora.context.Context;
-import org.thymeleaf.aurora.context.TestTemplateEngineConfigurationBuilder;
-import org.thymeleaf.aurora.engine.ITemplateHandler;
-import org.thymeleaf.aurora.engine.OutputTemplateHandler;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
+import org.thymeleaf.engine.ITemplateHandler;
+import org.thymeleaf.engine.OutputTemplateHandler;
 import org.thymeleaf.aurora.context.StandardProcessingContextFactory;
-import org.thymeleaf.aurora.resource.StringResource;
-import org.thymeleaf.aurora.templatemode.TemplateMode;
+import org.thymeleaf.resource.StringResource;
+import org.thymeleaf.templatemode.TemplateMode;
 
 /*
  *
