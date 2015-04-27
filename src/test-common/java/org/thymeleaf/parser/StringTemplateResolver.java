@@ -6,7 +6,7 @@ import java.io.StringReader;
 import org.apache.commons.io.input.ReaderInputStream;
 import org.thymeleaf.TemplateProcessingParameters;
 import org.thymeleaf.resourceresolver.IResourceResolver;
-import org.thymeleaf.templateresolver.ITemplateResolutionValidity;
+import org.thymeleaf.cache.ICacheEntryValidity;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolution;
 
@@ -76,8 +76,8 @@ public class StringTemplateResolver implements ITemplateResolver {
         };
     }
 
-    protected ITemplateResolutionValidity getValidity() {
-        return new ITemplateResolutionValidity() {
+    protected ICacheEntryValidity getValidity() {
+        return new ICacheEntryValidity() {
 
             public boolean isCacheable() {
                 return StringTemplateResolver.this.cacheable;

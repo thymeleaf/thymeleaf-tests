@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.aurora;
+package org.thymeleaf;
 
 import java.util.Collections;
 

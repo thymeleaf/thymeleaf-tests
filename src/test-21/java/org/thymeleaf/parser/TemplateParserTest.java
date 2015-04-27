@@ -22,7 +22,7 @@ import org.thymeleaf.templatemode.StandardTemplateModeHandlers;
 import org.thymeleaf.templateparser.ITemplateParser;
 import org.thymeleaf.templateparser.xmldom.XhtmlAndHtml5NonValidatingDOMTemplateParser;
 import org.thymeleaf.templateparser.xmlsax.XhtmlAndHtml5NonValidatingSAXTemplateParser;
-import org.thymeleaf.templateresolver.NonCacheableTemplateResolutionValidity;
+import org.thymeleaf.cache.NonCacheableCacheEntryValidity;
 import org.thymeleaf.templateresolver.TemplateResolution;
 import org.thymeleaf.templatewriter.ITemplateWriter;
 
@@ -177,7 +177,7 @@ public class TemplateParserTest {
         
         final TemplateResolution templateResolution = 
                 new TemplateResolution("test", "test", new ClassLoaderResourceResolver(), "UTF-8", "XHTML", 
-                        new NonCacheableTemplateResolutionValidity());
+                        new NonCacheableCacheEntryValidity());
         
         final Arguments arguments = 
                 new Arguments(
