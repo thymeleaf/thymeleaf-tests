@@ -21,10 +21,8 @@ package org.thymeleaf.util;
 
 import java.util.Calendar;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
  *
@@ -33,7 +31,6 @@ import static org.junit.Assert.assertThat;
  * @since 2.0.17
  *
  */
-//CHECKSTYLE:OFF
 public class DateUtilsTest {
     /**
      * constructor.
@@ -48,13 +45,12 @@ public class DateUtilsTest {
         final Calendar cal = Calendar.getInstance();
         final Calendar today = DateUtils.createToday();
 
-        assertThat(today.get(Calendar.YEAR), is(cal.get(Calendar.YEAR)));
-        assertThat(today.get(Calendar.MONTH), is(cal.get(Calendar.MONTH)));
-        assertThat(today.get(Calendar.DAY_OF_MONTH), is(cal.get(Calendar.DAY_OF_MONTH)));
-        assertThat(today.get(Calendar.HOUR), is(0));
-        assertThat(today.get(Calendar.MINUTE), is(0));
-        assertThat(today.get(Calendar.SECOND), is(0));
-        assertThat(today.get(Calendar.MILLISECOND), is(0));
+        Assert.assertEquals(today.get(Calendar.YEAR), cal.get(Calendar.YEAR));
+        Assert.assertEquals(today.get(Calendar.MONTH), cal.get(Calendar.MONTH));
+        Assert.assertEquals(today.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_MONTH));
+        Assert.assertEquals(today.get(Calendar.HOUR), 0);
+        Assert.assertEquals(today.get(Calendar.MINUTE), 0);
+        Assert.assertEquals(today.get(Calendar.SECOND), 0);
+        Assert.assertEquals(today.get(Calendar.MILLISECOND), 0);
     }
 }
-//CHECKSTYLE:ON
