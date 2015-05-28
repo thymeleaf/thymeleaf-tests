@@ -23,9 +23,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.thymeleaf.dialect.AbstractDialect;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
-public class Dialect02 extends AbstractDialect {
+public class Dialect02 extends AbstractDialect implements IProcessorDialect {
+
+
+    public Dialect02() {
+        super("Dialect02");
+    }
+
 
     public String getPrefix() {
         return null;
