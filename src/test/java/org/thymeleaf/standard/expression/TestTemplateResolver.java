@@ -27,7 +27,7 @@ import org.thymeleaf.TemplateProcessingParameters;
 import org.thymeleaf.exceptions.TemplateInputException;
 import org.thymeleaf.resourceresolver.IResourceResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
-import org.thymeleaf.cache.NonCacheableCacheEntryValidity;
+import org.thymeleaf.templateresolver.NonCacheableTemplateResolutionValidity;
 import org.thymeleaf.templateresolver.TemplateResolution;
 
 /**
@@ -72,7 +72,7 @@ public class TestTemplateResolver implements ITemplateResolver {
             new TemplateResolution(
                     templateName, "TEST", resourceResolver, 
                     "UTF-8", "HTML5", 
-                    new NonCacheableCacheEntryValidity());
+                    new NonCacheableTemplateResolutionValidity());
         
         return templateResolution;
     }
