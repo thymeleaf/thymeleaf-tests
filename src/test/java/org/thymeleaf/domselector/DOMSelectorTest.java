@@ -29,7 +29,7 @@ import org.junit.Assert;
 import org.thymeleaf.dom.DOMSelector;
 import org.thymeleaf.dom.Document;
 import org.thymeleaf.dom.Node;
-import org.thymeleaf.util.MarkupUtils;
+import org.thymeleaf.util.DOMUtils;
 
 public class DOMSelectorTest extends TestCase {
 
@@ -49,7 +49,7 @@ public class DOMSelectorTest extends TestCase {
         final DOMSelector selector4 = new DOMSelector("/html/body//p");
         final DOMSelector selector5 = new DOMSelector("//body/div/p");
         
-        final Document doc0 = MarkupUtils.getHtml5DOMFor(new StringReader(markup0));
+        final Document doc0 = DOMUtils.getHtml5DOMFor(new StringReader(markup0));
         
         outputResult(selector0, doc0);
         outputResult(selector1, doc0);
@@ -69,7 +69,7 @@ public class DOMSelectorTest extends TestCase {
         final List<Node> selected = selector.select(document.getChildren());
         final List<String> selectedStrs = new ArrayList<String>();
         for (final Node node : selected) {
-            selectedStrs.add(MarkupUtils.getHtml5For(node));
+            selectedStrs.add(DOMUtils.getHtml5For(node));
         }
         System.out.println("**" + selector + "**");
         for (final String selectedStr : selectedStrs) {
