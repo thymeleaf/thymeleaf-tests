@@ -1,9 +1,5 @@
 language: java
 
-os:
-  - linux
-  - osx
-
 jdk:
   - openjdk6
   - openjdk7
