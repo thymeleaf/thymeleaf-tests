@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.engine.springintegration.context.ErrorsSpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.engine.springintegration.context.SpringIntegrationWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
@@ -95,6 +96,36 @@ public class SpringIntegrationTest {
 
     }
 
-    
-    
+
+    @Test
+    public void testMvc() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:engine/springintegration/mvc/applicationContext.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:engine/springintegration/mvc");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+    @Test
+    public void testXmlNs() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation(null);
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:engine/springintegration/xmlns");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
 }
