@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.engine.stsm.context.STSMWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
@@ -40,7 +41,7 @@ public class STSMTest {
     
     
     @Test
-    public void testSTSM() throws Exception {
+    public void testSTSMWithoutIntegratedConversion() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(new STSMWebProcessingContextBuilder());
@@ -51,7 +52,22 @@ public class STSMTest {
         
         
     }
-    
-    
-    
+
+    @Test
+    public void testSTSMWithIntegratedConversion() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:engine/stsm/applicationContext.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:engine/stsm");
+
+        Assert.assertTrue(executor.isAllOK());
+
+
+    }
+
+
 }
