@@ -40,10 +40,10 @@ public final class SpringResourceTemplateResolverSpring3Test {
     @Test
     public void testResolveTemplate() throws Exception {
 
-        final String templateLocation = "spring321/view/test.html";
+        final String templateLocation = "spring3/templateresolver/test.html";
 
         final ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:spring321/view/applicationContext.xml");
+                new ClassPathXmlApplicationContext("classpath:spring3/templateresolver/applicationContext.xml");
 
         final SpringResourceTemplateResolver resolver =
                 (SpringResourceTemplateResolver) context.getBean("springResourceTemplateResolver");

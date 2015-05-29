@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.spring3.templateresolver;
+package org.thymeleaf.spring3.resourceresolver;
 
 import java.io.InputStream;
 
@@ -27,46 +27,37 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.thymeleaf.Configuration;
 import org.thymeleaf.TemplateProcessingParameters;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.resourceresolver.IResourceResolver;
-import org.thymeleaf.templateresolver.TemplateResolution;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;
 import org.thymeleaf.util.ClassLoaderUtils;
 
 
-public final class SpringResourceTemplateResolverSpring3Test {
+public final class SpringResourceResourceResolverSpring3Test {
 
 
 
     @Test
-    public void testResolveTemplate() throws Exception {
+    public void testGetResourceAsStream() throws Exception {
 
-        final String templateLocation = "spring321/view/test.html";
+        final String templateLocation = "spring3/resourceresolver/test.html";
 
         final ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:spring321/view/applicationContext.xml");
+                new ClassPathXmlApplicationContext("classpath:spring3/resourceresolver/applicationContext.xml");
 
-        final SpringResourceTemplateResolver resolver =
-                (SpringResourceTemplateResolver) context.getBean("springResourceTemplateResolver");
-
-        resolver.initialize();
-
-        final String templateMode = resolver.getTemplateMode();
-        Assert.assertEquals("HTML5", templateMode);
+        final SpringResourceResourceResolver resolver =
+                (SpringResourceResourceResolver) context.getBean("springResourceResourceResolver");
 
         final TemplateProcessingParameters parameters =
-                new TemplateProcessingParameters(new Configuration(), "classpath:" + templateLocation, new Context());
+                new TemplateProcessingParameters(new Configuration(), "test", new Context());
 
-        final TemplateResolution resolution = resolver.resolveTemplate(parameters);
-
-        final IResourceResolver resourceResolver = resolution.getResourceResolver();
-        final InputStream is = resourceResolver.getResourceAsStream(parameters, resolution.getResourceName());
+        final InputStream is =
+                resolver.getResourceAsStream(parameters, "classpath:" + templateLocation);
 
         final String testResource =
                 ResourceUtils.normalize(ResourceUtils.read(is, "US-ASCII"));
 
         final String expected =
                 ResourceUtils.read(
-                        ClassLoaderUtils.getClassLoader(SpringResourceTemplateResolverSpring3Test.class).getResourceAsStream(templateLocation),
+                        ClassLoaderUtils.getClassLoader(SpringResourceResourceResolverSpring3Test.class).getResourceAsStream(templateLocation),
                         "US-ASCII", true);
 
         Assert.assertEquals(expected, testResource);
