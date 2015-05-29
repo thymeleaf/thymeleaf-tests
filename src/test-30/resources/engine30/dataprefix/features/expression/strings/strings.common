@@ -1,9 +1,0 @@
-%EXTENDS ../../html5.01.common
-# ------------------------------------------------------------
-%CONTEXT
-
-one = 'one'
-two = 'two'
-three = 'three'
-
-strList = { one, two, three }
