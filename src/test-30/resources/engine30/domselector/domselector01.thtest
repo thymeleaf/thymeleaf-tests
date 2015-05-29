@@ -1,6 +1,0 @@
-%EXTENDS domselector.common
-# ------------------------------------------------------------
-%FRAGMENT /h2[1]
-# ------------------------------------------------------------
-%OUTPUT
-<h2 ref="two">Standard and SpringStandard Dialects</h2>

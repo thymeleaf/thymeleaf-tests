@@ -1,9 +1,0 @@
-%TEMPLATE_MODE HTML5
-# ------------------------------------------------------------
-%INPUT
-<div></div>
-# ------------------------------------------------------------
-# This should work in 3.0 because multiple dialects with the same prefix should be possible
-# ------------------------------------------------------------
-%OUTPUT
-<div>[From Dialect 01][From Dialect 02][01][02]</div>
