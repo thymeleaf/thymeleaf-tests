@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine30spring4.requestdata.processor;
+package org.thymeleaf.engine.springintegration.requestdata.processor;
 
 import org.springframework.web.servlet.support.RequestDataValueProcessor;
 

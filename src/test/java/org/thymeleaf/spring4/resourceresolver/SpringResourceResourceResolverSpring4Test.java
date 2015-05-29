@@ -38,10 +38,10 @@ public final class SpringResourceResourceResolverSpring4Test {
     @Test
     public void testGetResourceAsStream() throws Exception {
 
-        final String templateLocation = "spring421/view/test.html";
+        final String templateLocation = "spring4/resourceresolver/test.html";
 
         final ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:spring421/view/applicationContext.xml");
+                new ClassPathXmlApplicationContext("classpath:spring4/resourceresolver/applicationContext.xml");
 
         final SpringResourceResourceResolver resolver =
                 (SpringResourceResourceResolver) context.getBean("springResourceResourceResolver");
