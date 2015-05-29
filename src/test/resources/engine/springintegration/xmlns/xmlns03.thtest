@@ -1,7 +1,7 @@
 %TEMPLATE_MODE VALIDXHTML
 # ------------------------------------------------------------
 %INPUT
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-3.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:unknown="oh!">Hello!</title>
