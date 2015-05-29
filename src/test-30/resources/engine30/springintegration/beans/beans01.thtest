@@ -1,7 +1,0 @@
-%EXTENDS ../springintegration.common
-# ------------------------------------------------------------
-%INPUT
-<div th:text="${@myMap['one']}">..</div>
-# ------------------------------------------------------------
-%OUTPUT
-<div>one value</div>
