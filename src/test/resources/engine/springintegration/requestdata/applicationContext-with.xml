@@ -6,6 +6,6 @@
 
 
   <bean name="requestDataValueProcessor"
-        class="org.thymeleaf.engine21spring4.requestdata.processor.TestRequestDataValueProcessor" />
+        class="org.thymeleaf.engine.springintegration.requestdata.processor.TestRequestDataValueProcessor" />
 
 </beans>
