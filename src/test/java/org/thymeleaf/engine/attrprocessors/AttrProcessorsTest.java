@@ -212,5 +212,16 @@ public class AttrProcessorsTest {
 
     }
 
+    @Test
+    public void testAssert() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:engine/attrprocessors/assert");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
     
 }
