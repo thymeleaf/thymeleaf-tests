@@ -25,9 +25,19 @@ public class FormBean03 {
     private Boolean notNullTrue = Boolean.TRUE;
     private Boolean notNullFalse = Boolean.FALSE;
 
+    private FormEnum01 choice = null;
+
 
     public FormBean03() {
         super();
+    }
+
+    public FormEnum01 getChoice() {
+        return choice;
+    }
+
+    public void setChoice(final FormEnum01 choice) {
+        this.choice = choice;
     }
 
     public Boolean getNullBool() {
