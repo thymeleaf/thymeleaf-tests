@@ -17,41 +17,46 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine30spring3.springintegration.xmlns;
+package org.thymeleaf.engine.springintegration.mvc.controllers;
 
 import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
-public class Xmlns30Spring3Test {
+@Controller
+public class Mvc21Spring3Controller {
 
 
-    public Xmlns30Spring3Test() {
+    public Mvc21Spring3Controller() {
         super();
     }
     
     
-    
-    
-    @Test
-    public void testXmlNs() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation(null);
+    @RequestMapping("/something")
+    public String someController() {
+        return "something";
+    }
 
-        final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
-        executor.execute("classpath:engine30spring3/springintegration/xmlns");
 
-        Assert.assertTrue(executor.isAllOK());
+    @RequestMapping("/somethingArgs")
+    public String someControllerWithArgs(@RequestParam String argOne) {
+        return "somethingArgs";
+    }
 
+    @RequestMapping("/somethingOtherArgs/{argTwo}")
+    public String someControllerWithOtherArgs(@RequestParam String argOne, @PathVariable final String argTwo, @RequestParam final String argThree) {
+        return "somethingArgs";
     }
 
 
