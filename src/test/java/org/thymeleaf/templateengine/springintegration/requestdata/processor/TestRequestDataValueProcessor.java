@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine.springintegration.requestdata.processor;
+package org.thymeleaf.templateengine.springintegration.requestdata.processor;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
