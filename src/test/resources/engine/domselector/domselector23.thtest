@@ -1,8 +1,0 @@
-%EXTENDS domselector2.common
-# ------------------------------------------------------------
-%FRAGMENT[evaluator] org.thymeleaf.engine.domselector.TestFragmentTestFieldEvaluator
-# ------------------------------------------------------------
-%FRAGMENT ul/li/two
-# ------------------------------------------------------------
-%OUTPUT
-<i ref="two">template modes</i><a href="documentation.html" ref="two">documentation</a>
