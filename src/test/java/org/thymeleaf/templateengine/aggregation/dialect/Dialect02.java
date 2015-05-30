@@ -23,12 +23,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.thymeleaf.dialect.AbstractDialect;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
-public class Dialect02 extends AbstractDialect {
+public class Dialect02 extends AbstractDialect implements IProcessorDialect {
+
+
+    public Dialect02() {
+        super("Dialect02");
+    }
+
 
     public String getPrefix() {
-        return "b";
+        return null;
     }
 
     public boolean isLenient() {
@@ -38,6 +45,7 @@ public class Dialect02 extends AbstractDialect {
     @Override
     public Set<IProcessor> getProcessors() {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
+        processors.add(new Dialect02DivProcessor());
         processors.add(new Dialect02TextProcessor());
         processors.add(new Dialect02DocumentProcessor());
         return processors;
