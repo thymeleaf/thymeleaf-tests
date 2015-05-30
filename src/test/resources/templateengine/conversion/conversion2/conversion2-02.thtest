@@ -1,7 +1,7 @@
 %TEMPLATE_MODE HTML5
 # ------------------------------------------------------------
 %CONTEXT
-boundobj = new org.thymeleaf.engine.conversion.conversion2.Conversion2Object(#dates.create(1492,10,12))
+boundobj = new org.thymeleaf.templateengine.conversion.conversion2.Conversion2Object(#dates.create(1492,10,12))
 # ------------------------------------------------------------
 %INPUT
 <p th:object="${boundobj}" th:text="*{onedate}">...</p>

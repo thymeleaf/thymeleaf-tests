@@ -2,22 +2,22 @@
 # ------------------------------------------------------------
 %CONTEXT
 
-typePlastic = @org.thymeleaf.engine.dataprefix.stsm.model.Type@PLASTIC
-typeWood = @org.thymeleaf.engine.dataprefix.stsm.model.Type@WOOD
+typePlastic = @org.thymeleaf.templateengine.dataprefix.stsm.model.Type@PLASTIC
+typeWood = @org.thymeleaf.templateengine.dataprefix.stsm.model.Type@WOOD
 allTypes = { typePlastic, typeWood }
 
-featureSubstrate = @org.thymeleaf.engine.dataprefix.stsm.model.Feature@SEEDSTARTER_SPECIFIC_SUBSTRATE
-featureFertilizer = @org.thymeleaf.engine.dataprefix.stsm.model.Feature@FERTILIZER
-featurePhCorrector = @org.thymeleaf.engine.dataprefix.stsm.model.Feature@PH_CORRECTOR
+featureSubstrate = @org.thymeleaf.templateengine.dataprefix.stsm.model.Feature@SEEDSTARTER_SPECIFIC_SUBSTRATE
+featureFertilizer = @org.thymeleaf.templateengine.dataprefix.stsm.model.Feature@FERTILIZER
+featurePhCorrector = @org.thymeleaf.templateengine.dataprefix.stsm.model.Feature@PH_CORRECTOR
 allFeatures = { featureSubstrate, featureFertilizer, featurePhCorrector }
 
-varietyRepository = new org.thymeleaf.engine.dataprefix.stsm.model.repository.VarietyRepository()
+varietyRepository = new org.thymeleaf.templateengine.dataprefix.stsm.model.repository.VarietyRepository()
 allVarieties = varietyRepository.findAll()
 
-seedStarterRepository = new org.thymeleaf.engine.dataprefix.stsm.model.repository.SeedStarterRepository()
+seedStarterRepository = new org.thymeleaf.templateengine.dataprefix.stsm.model.repository.SeedStarterRepository()
 allSeedStarters = seedStarterRepository.findAll()
 
-seedStarter = new org.thymeleaf.engine.dataprefix.stsm.model.SeedStarter()
+seedStarter = new org.thymeleaf.templateengine.dataprefix.stsm.model.SeedStarter()
 seedStarter.datePlanted = #dates.create(2013,5,3)
 
 # ------------------------------------------------------------

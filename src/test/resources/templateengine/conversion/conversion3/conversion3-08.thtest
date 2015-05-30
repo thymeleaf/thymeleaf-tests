@@ -1,7 +1,7 @@
 %EXTENDS conversion3.common
 # ------------------------------------------------------------
 %CONTEXT
-oneObj = new org.thymeleaf.engine.conversion.conversion3.Conversion3Object2()
+oneObj = new org.thymeleaf.templateengine.conversion.conversion3.Conversion3Object2()
 # ------------------------------------------------------------
 %INPUT
 <p th:text="${{oneObj}}">One object here!</p>

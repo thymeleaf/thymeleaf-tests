@@ -5,10 +5,10 @@ date.format = yyyy-MM-dd
 # ------------------------------------------------------------
 %CONTEXT
 
-form = new org.thymeleaf.engine.springintegration.model.FormBean04()
-form.applications[0] = new org.thymeleaf.engine.springintegration.model.FormBean04$Application()
+form = new org.thymeleaf.templateengine.springintegration.model.FormBean04()
+form.applications[0] = new org.thymeleaf.templateengine.springintegration.model.FormBean04$Application()
 form.applications[0].recommendedSum = 10
-form.applications[1] = new org.thymeleaf.engine.springintegration.model.FormBean04$Application()
+form.applications[1] = new org.thymeleaf.templateengine.springintegration.model.FormBean04$Application()
 form.applications[1].recommendedSum = 20
 
 bindingError = #{ 'binding' : 'form',\

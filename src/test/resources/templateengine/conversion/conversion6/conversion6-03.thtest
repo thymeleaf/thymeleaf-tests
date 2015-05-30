@@ -1,7 +1,7 @@
 %TEMPLATE_MODE HTML5
 # ------------------------------------------------------------
 %CONTEXT
-obj = new org.thymeleaf.engine.conversion.conversion6.Conversion6Bean01()
+obj = new org.thymeleaf.templateengine.conversion.conversion6.Conversion6Bean01()
 obj.num = 1234
 # ------------------------------------------------------------
 %INPUT
