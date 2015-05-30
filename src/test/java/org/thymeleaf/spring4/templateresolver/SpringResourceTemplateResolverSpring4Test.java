@@ -22,15 +22,15 @@ package org.thymeleaf.spring4.templateresolver;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.thymeleaf.Configuration;
-import org.thymeleaf.TemplateProcessingParameters;
+import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.Context;
+import org.thymeleaf.resource.IResource;
 import org.thymeleaf.resourceresolver.IResourceResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.TemplateResolution;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;
 import org.thymeleaf.util.ClassLoaderUtils;
-
-import java.io.InputStream;
 
 
 public final class SpringResourceTemplateResolverSpring4Test {
@@ -40,6 +40,9 @@ public final class SpringResourceTemplateResolverSpring4Test {
     @Test
     public void testResolveTemplate() throws Exception {
 
+        final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        final IEngineConfiguration configuration = templateEngine.getConfiguration();
+
         final String templateLocation = "spring4/templateresolver/test.html";
 
         final ClassPathXmlApplicationContext context =
@@ -48,21 +51,16 @@ public final class SpringResourceTemplateResolverSpring4Test {
         final SpringResourceTemplateResolver resolver =
                 (SpringResourceTemplateResolver) context.getBean("springResourceTemplateResolver");
 
-        resolver.initialize();
+        final TemplateMode templateMode = resolver.getTemplateMode();
+        Assert.assertEquals(TemplateMode.HTML, templateMode);
 
-        final String templateMode = resolver.getTemplateMode();
-        Assert.assertEquals("HTML5", templateMode);
-
-        final TemplateProcessingParameters parameters =
-                new TemplateProcessingParameters(new Configuration(), "classpath:" + templateLocation, new Context());
-
-        final TemplateResolution resolution = resolver.resolveTemplate(parameters);
+        final TemplateResolution resolution =
+                resolver.resolveTemplate(configuration, new Context(), "classpath:" + templateLocation);
 
         final IResourceResolver resourceResolver = resolution.getResourceResolver();
-        final InputStream is = resourceResolver.getResourceAsStream(parameters, resolution.getResourceName());
+        final IResource resource = resourceResolver.getResource(configuration, new Context(), resolution.getResourceName(), "US-ASCII");
 
-        final String testResource =
-                ResourceUtils.normalize(ResourceUtils.read(is, "US-ASCII"));
+        final String testResource = resource.readFully();
 
         final String expected =
                 ResourceUtils.read(

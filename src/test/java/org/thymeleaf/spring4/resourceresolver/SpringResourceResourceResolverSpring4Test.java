@@ -22,13 +22,12 @@ package org.thymeleaf.spring4.resourceresolver;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.thymeleaf.Configuration;
-import org.thymeleaf.TemplateProcessingParameters;
+import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.Context;
+import org.thymeleaf.resource.IResource;
+import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;
 import org.thymeleaf.util.ClassLoaderUtils;
-
-import java.io.InputStream;
 
 
 public final class SpringResourceResourceResolverSpring4Test {
@@ -38,6 +37,9 @@ public final class SpringResourceResourceResolverSpring4Test {
     @Test
     public void testGetResourceAsStream() throws Exception {
 
+        final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        final IEngineConfiguration configuration = templateEngine.getConfiguration();
+
         final String templateLocation = "spring4/resourceresolver/test.html";
 
         final ClassPathXmlApplicationContext context =
@@ -46,14 +48,10 @@ public final class SpringResourceResourceResolverSpring4Test {
         final SpringResourceResourceResolver resolver =
                 (SpringResourceResourceResolver) context.getBean("springResourceResourceResolver");
 
-        final TemplateProcessingParameters parameters =
-                new TemplateProcessingParameters(new Configuration(), "test", new Context());
+        final IResource resource =
+                resolver.getResource(configuration, new Context(), "classpath:" + templateLocation, "US-ASCII");
 
-        final InputStream is =
-                resolver.getResourceAsStream(parameters, "classpath:" + templateLocation);
-
-        final String testResource =
-                ResourceUtils.normalize(ResourceUtils.read(is, "US-ASCII"));
+        final String testResource = resource.readFully();
 
         final String expected =
                 ResourceUtils.read(
