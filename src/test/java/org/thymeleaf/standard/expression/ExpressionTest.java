@@ -52,8 +52,8 @@ public class ExpressionTest extends TestCase {
     
     
     private TemplateEngine templateEngine;
-    private IContext contextES;
-    private IContext contextEN;
+    private Context contextES;
+    private Context contextEN;
     
     
     
@@ -303,8 +303,8 @@ public class ExpressionTest extends TestCase {
         objects.put("loginsArray", logins.toArray(new String[logins.size()]));
         objects.put("size", "Size is 5");
         
-        this.contextES.getVariables().putAll(objects);
-        this.contextEN.getVariables().putAll(objects);
+        this.contextES.setVariables(objects);
+        this.contextEN.setVariables(objects);
         
         
         final Properties props = new Properties();

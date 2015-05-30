@@ -62,7 +62,7 @@ public final class DocTypeTest {
                 publicIdXHTMLTransitional,
                 systemIdXHTMLTransitional,
                 internalSubsetWSXHTMLTransitional,
-                11, 4
+                "template", 11, 4
         );
 
         Assert.assertSame(doctypeXHTMLTransitionalWS, d1.getDocType());
@@ -72,6 +72,7 @@ public final class DocTypeTest {
         Assert.assertSame(publicIdXHTMLTransitional, d1.getPublicId());
         Assert.assertSame(systemIdXHTMLTransitional, d1.getSystemId());
         Assert.assertSame(internalSubsetWSXHTMLTransitional, d1.getInternalSubset());
+        Assert.assertEquals("template", d1.getTemplateName());
         Assert.assertEquals(11, d1.getLine());
         Assert.assertEquals(4, d1.getCol());
 
@@ -83,7 +84,7 @@ public final class DocTypeTest {
                 publicIdXHTMLTransitional,
                 systemIdXHTMLTransitional,
                 internalSubsetWSXHTMLTransitional,
-                10, 3
+                "template", 10, 3
         );
 
         Assert.assertSame(doctypeXHTMLTransitionalWS, d1.getDocType());
@@ -93,6 +94,7 @@ public final class DocTypeTest {
         Assert.assertSame(publicIdXHTMLTransitional, d1.getPublicId());
         Assert.assertSame(systemIdXHTMLTransitional, d1.getSystemId());
         Assert.assertSame(internalSubsetWSXHTMLTransitional, d1.getInternalSubset());
+        Assert.assertEquals("template", d1.getTemplateName());
         Assert.assertEquals(10, d1.getLine());
         Assert.assertEquals(3, d1.getCol());
 
@@ -105,6 +107,7 @@ public final class DocTypeTest {
         Assert.assertSame(publicIdXHTMLTransitional, d1.getPublicId());
         Assert.assertSame(systemIdXHTMLTransitional, d1.getSystemId());
         Assert.assertNull(d1.getInternalSubset());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -116,6 +119,7 @@ public final class DocTypeTest {
         Assert.assertSame(publicIdXHTMLTransitional, d1.getPublicId());
         Assert.assertSame(systemIdXHTMLTransitional, d1.getSystemId());
         Assert.assertNull(d1.getInternalSubset());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -127,6 +131,7 @@ public final class DocTypeTest {
         Assert.assertSame("something", d1.getPublicId());
         Assert.assertSame("someother", d1.getSystemId());
         Assert.assertNull(d1.getInternalSubset());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -138,6 +143,7 @@ public final class DocTypeTest {
         Assert.assertNull(d1.getPublicId());
         Assert.assertSame("someother", d1.getSystemId());
         Assert.assertNull(d1.getInternalSubset());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -149,6 +155,7 @@ public final class DocTypeTest {
         Assert.assertNull(d1.getPublicId());
         Assert.assertSame("someother", d1.getSystemId());
         Assert.assertNull(d1.getInternalSubset());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -160,6 +167,7 @@ public final class DocTypeTest {
         Assert.assertNull(d1.getPublicId());
         Assert.assertNull(d1.getSystemId());
         Assert.assertNull(d1.getInternalSubset());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -181,6 +189,7 @@ public final class DocTypeTest {
         Assert.assertSame(publicIdXHTMLTransitional, d2.getPublicId());
         Assert.assertSame(systemIdXHTMLTransitional, d2.getSystemId());
         Assert.assertSame(internalSubsetWSXHTMLTransitional, d2.getInternalSubset());
+        Assert.assertNull(d2.getTemplateName());
         Assert.assertEquals(-1, d2.getLine());
         Assert.assertEquals(-1, d2.getCol());
 
@@ -193,6 +202,7 @@ public final class DocTypeTest {
         Assert.assertSame(publicIdXHTMLTransitional, d2.getPublicId());
         Assert.assertSame(systemIdXHTMLTransitional, d2.getSystemId());
         Assert.assertNull(d2.getInternalSubset());
+        Assert.assertNull(d2.getTemplateName());
         Assert.assertEquals(-1, d2.getLine());
         Assert.assertEquals(-1, d2.getCol());
 
@@ -211,6 +221,7 @@ public final class DocTypeTest {
         Assert.assertSame(publicIdXHTMLTransitional, d3.getPublicId());
         Assert.assertSame(systemIdXHTMLTransitional, d3.getSystemId());
         Assert.assertNull(d3.getInternalSubset());
+        Assert.assertNull(d3.getTemplateName());
         Assert.assertEquals(-1, d3.getLine());
         Assert.assertEquals(-1, d3.getCol());
 
@@ -225,6 +236,7 @@ public final class DocTypeTest {
         Assert.assertNull(d4.getPublicId());
         Assert.assertNull(d4.getSystemId());
         Assert.assertNull(d4.getInternalSubset());
+        Assert.assertNull(d4.getTemplateName());
         Assert.assertEquals(-1, d4.getLine());
         Assert.assertEquals(-1, d4.getCol());
 

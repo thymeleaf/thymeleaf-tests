@@ -25,15 +25,13 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.thymeleaf.IEngineConfiguration;
-import org.thymeleaf.context.ProcessingContext;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
-import org.thymeleaf.templateparser.HTMLTemplateParser;
 import org.thymeleaf.resource.ReaderResource;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.HTMLTemplateParser;
 
 public class HtmlBulkTester {
 
@@ -78,14 +76,12 @@ public class HtmlBulkTester {
             final OutputStreamWriter testOutputWriter = new OutputStreamWriter(testOutputStream, "UTF-8");
 
             final ITemplateHandler handler = new OutputTemplateHandler(testOutputWriter);
-            handler.setProcessingContext(
-                    new ProcessingContext(TEMPLATE_ENGINE_CONFIGURATION, fileInTestFolderName, TemplateMode.HTML, Locale.US, null));
 
             System.out.print(fileInTestFolderName);
 
             System.out.print("[PARSING]");
 
-            PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new ReaderResource(fileInTestFolderName, fileInTestFolderReader), handler);
+            PARSER.parseTemplate(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new ReaderResource(fileInTestFolderName, fileInTestFolderReader), null, handler);
 
             // Input stream will be closed by parser
             testOutputWriter.close();

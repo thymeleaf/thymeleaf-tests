@@ -20,16 +20,17 @@
 package org.thymeleaf.engine;
 
 import java.io.StringWriter;
-import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
-import org.thymeleaf.context.ProcessingContext;
+import org.thymeleaf.context.IContext;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
-import org.thymeleaf.templateparser.HTMLTemplateParser;
+import org.thymeleaf.resource.IResource;
 import org.thymeleaf.resource.StringResource;
+import org.thymeleaf.resourceresolver.IResourceResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.HTMLTemplateParser;
 
 
 public final class BareHtmlEngineTest {
@@ -93,21 +94,26 @@ public final class BareHtmlEngineTest {
         final String templateName = "test";
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
-        handler.setProcessingContext(
-                new ProcessingContext(TEMPLATE_ENGINE_CONFIGURATION, templateName, TemplateMode.HTML, Locale.US, null));
 
-        if (blockSelectors != null) {
-            PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
-        } else {
-            PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), handler);
-        }
+        PARSER.parseTemplate(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
 
         Assert.assertEquals("Test failed for file: " + templateName, output, writer.toString());
 
     }
 
 
+    private static final class TestStringResourceResolver implements IResourceResolver {
 
+        public String getName() {
+            return "StringResourceResolver";
+        }
+
+        public IResource getResource(
+                final IEngineConfiguration engineConfiguration, final IContext context,
+                final String resourceName, final String characterEncoding) {
+            return new StringResource("stringresource", resourceName);
+        }
+    }
 
 
 
