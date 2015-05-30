@@ -1,7 +1,7 @@
 %TEMPLATE_MODE HTML5
 # ------------------------------------------------------------
 %CONTEXT
-onedate = new org.thymeleaf.engine.conversion.conversion2.Conversion2Date(#dates.create(1492,10,12))
+onedate = new org.thymeleaf.templateengine.conversion.conversion2.Conversion2Date(#dates.create(1492,10,12))
 # ------------------------------------------------------------
 %INPUT
 <p th:text="${onedate}">...</p>
