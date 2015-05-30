@@ -1,8 +1,0 @@
-%EXTENDS domselector2.common
-# ------------------------------------------------------------
-%FRAGMENT[evaluator] org.thymeleaf.engine.domselector.TestFragmentTestFieldEvaluator
-# ------------------------------------------------------------
-%FRAGMENT %aOa
-# ------------------------------------------------------------
-%OUTPUT
-<li ref="aOa">Developers can extend and create custom dialects.</li>
