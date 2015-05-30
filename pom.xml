@@ -111,7 +111,6 @@
     <thymeleaf-extras-conditionalcomments.version>2.0.1-SNAPSHOT</thymeleaf-extras-conditionalcomments.version>
     <springframework.version>3.0.7.RELEASE</springframework.version>
     <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
-    <mockito.version>1.9.5</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
   </properties>
 
@@ -365,13 +364,6 @@
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-taglibs</artifactId>
       <version>${springsecurity.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>${mockito.version}</version>
-      <scope>compile</scope>
     </dependency>
 
     <!-- Version cannot be > 2.2 because 2.3+ are compiled for Java 6 -->
