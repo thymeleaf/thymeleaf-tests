@@ -132,12 +132,12 @@ public class SpringIntegrationTest {
     public void testRequestDataFormWith() throws Exception {
 
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:engine/springintegration/requestdata/applicationContext-with.xml");
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
-        executor.execute("classpath:engine/springintegration/requestdata/formwith");
+        executor.execute("classpath:templateengine/springintegration/requestdata/formwith");
 
         Assert.assertTrue(executor.isAllOK());
 
@@ -148,12 +148,12 @@ public class SpringIntegrationTest {
     public void testRequestDataFormWithout() throws Exception {
 
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:engine/springintegration/requestdata/applicationContext-without.xml");
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
-        executor.execute("classpath:engine/springintegration/requestdata/formwithout");
+        executor.execute("classpath:templateengine/springintegration/requestdata/formwithout");
 
         Assert.assertTrue(executor.isAllOK());
 
@@ -165,12 +165,12 @@ public class SpringIntegrationTest {
     public void testRequestDataUrlsWith() throws Exception {
 
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:engine/springintegration/requestdata/applicationContext-with.xml");
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
-        executor.execute("classpath:engine/springintegration/requestdata/urlswith");
+        executor.execute("classpath:templateengine/springintegration/requestdata/urlswith");
 
         Assert.assertTrue(executor.isAllOK());
 
@@ -181,12 +181,12 @@ public class SpringIntegrationTest {
     public void testRequestDataUrlsWithout() throws Exception {
 
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:engine/springintegration/requestdata/applicationContext-without.xml");
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
-        executor.execute("classpath:engine/springintegration/requestdata/urlswithout");
+        executor.execute("classpath:templateengine/springintegration/requestdata/urlswithout");
 
         Assert.assertTrue(executor.isAllOK());
 
