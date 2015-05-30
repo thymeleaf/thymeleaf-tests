@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine.springintegration.requestdata.model;
+package org.thymeleaf.templateengine.springintegration.requestdata.model;
 
 import java.util.Date;
 
