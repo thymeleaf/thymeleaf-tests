@@ -51,11 +51,12 @@ public final class ProcessingInstructionTest {
                 procInstr1,
                 target1,
                 content1,
-                11, 4);
+                "template", 11, 4);
 
         Assert.assertSame(procInstr1, d1.getProcessingInstruction());
         Assert.assertSame(target1, d1.getTarget());
         Assert.assertSame(content1, d1.getContent());
+        Assert.assertEquals("template", d1.getTemplateName());
         Assert.assertEquals(11, d1.getLine());
         Assert.assertEquals(4, d1.getCol());
 
@@ -63,12 +64,13 @@ public final class ProcessingInstructionTest {
                 procInstr1,
                 target1,
                 content1,
-                10, 3
+                "template", 10, 3
         );
 
         Assert.assertSame(procInstr1, d1.getProcessingInstruction());
         Assert.assertSame(target1, d1.getTarget());
         Assert.assertSame(content1, d1.getContent());
+        Assert.assertEquals("template", d1.getTemplateName());
         Assert.assertEquals(10, d1.getLine());
         Assert.assertEquals(3, d1.getCol());
 
@@ -77,6 +79,7 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(procInstr2, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
         Assert.assertSame(content1, d1.getContent());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -85,6 +88,7 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(procInstr3, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
         Assert.assertSame(content2, d1.getContent());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -93,6 +97,7 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(procInstr4, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
         Assert.assertNull(d1.getContent());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -107,6 +112,7 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(procInstr1, d2.getProcessingInstruction());
         Assert.assertSame(target1, d2.getTarget());
         Assert.assertSame(content1, d2.getContent());
+        Assert.assertNull(d2.getTemplateName());
         Assert.assertEquals(-1, d2.getLine());
         Assert.assertEquals(-1, d2.getCol());
 
@@ -120,8 +126,9 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(procInstr4, d3.getProcessingInstruction());
         Assert.assertSame(target2, d3.getTarget());
         Assert.assertNull(d3.getContent());
-        Assert.assertEquals(-1, d2.getLine());
-        Assert.assertEquals(-1, d2.getCol());
+        Assert.assertNull(d3.getTemplateName());
+        Assert.assertEquals(-1, d3.getLine());
+        Assert.assertEquals(-1, d3.getCol());
 
 
     }

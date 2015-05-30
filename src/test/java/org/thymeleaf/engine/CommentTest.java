@@ -37,7 +37,7 @@ public final class CommentTest {
         final char[] buf1 = "<!--hello-->".toCharArray();
 
         final Comment c1 = new Comment(textRepository);
-        c1.reset(buf1, 0, 12, 10, 3);
+        c1.reset(buf1, 0, 12, "template", 10, 3);
         Assert.assertEquals("<!--hello-->", extractText(c1));
         final String c1all = c1.getComment();
         final String c1content = c1.getContent();
@@ -45,6 +45,7 @@ public final class CommentTest {
         Assert.assertEquals("hello", c1content);
         Assert.assertSame(c1all, c1.getComment());
         Assert.assertSame(c1content, c1.getContent());
+        Assert.assertEquals("template", c1.getTemplateName());
         Assert.assertEquals(10, c1.getLine());
         Assert.assertEquals(3, c1.getCol());
         Assert.assertSame(textRepository.getText("<!--hello-->"), c1.getComment());
@@ -54,17 +55,19 @@ public final class CommentTest {
         Assert.assertSame(c1c0, c1.getContent());
         Assert.assertEquals("<!-- something\nhere -->", c1.getComment());
         Assert.assertSame(textRepository.getText("<!-- something\nhere -->"), c1.getComment());
+        Assert.assertNull(c1.getTemplateName());
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
 
         final String c1cs1 = "<!-- something\nhere -->";
         final char[] c1cs1Buf = c1cs1.toCharArray();
         final String c1c1 = " something\nhere ";
-        c1.reset(c1cs1Buf, 0, 23, 11, 4);
+        c1.reset(c1cs1Buf, 0, 23, "template", 11, 4);
         Assert.assertEquals(c1cs1, c1.getComment());
         final String c1c1_2 = c1.getContent();
         Assert.assertEquals(c1c1, c1c1_2);
         Assert.assertSame(c1c1_2, c1.getContent());
+        Assert.assertEquals("template", c1.getTemplateName());
         Assert.assertEquals(11, c1.getLine());
         Assert.assertEquals(4, c1.getCol());
 
@@ -73,6 +76,7 @@ public final class CommentTest {
         final String c1c2_2 = c1.getContent();
         Assert.assertSame(c1c2, c1c2_2);
         Assert.assertSame(c1c2, c1.getContent());
+        Assert.assertNull(c1.getTemplateName());
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
 
@@ -82,24 +86,27 @@ public final class CommentTest {
         final String c1c3 = "huy!";
         final String c1cs3 = "<!--huy!-->";
         final char[] c1cs3Buf = c1cs3.toCharArray();
-        c1.reset(c1cs3Buf, 0, 11, 11, 4);
+        c1.reset(c1cs3Buf, 0, 11, "template", 11, 4);
         Assert.assertEquals(c1c3, c1.getContent());
+        Assert.assertEquals("template", c1.getTemplateName());
         Assert.assertEquals(11, c1.getLine());
         Assert.assertEquals(4, c1.getCol());
 
         c1.setContent(c1c2);
         Assert.assertSame(c1c2, c1.getContent());
         Assert.assertEquals("<!--hey!-->", c1.getComment());
+        Assert.assertNull(c1.getTemplateName());
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
 
 
-        c1.reset(c1cs3.toCharArray(), 0, c1cs3.length(), 12, 5);
+        c1.reset(c1cs3.toCharArray(), 0, c1cs3.length(), "template", 12, 5);
         final String c1c3_2 = c1.getContent();
         Assert.assertEquals(c1c3, c1c3_2);
         Assert.assertSame(c1c3_2, c1.getContent());
         Assert.assertEquals(c1cs3, c1.getComment());
         Assert.assertSame(c1c3_2, c1.getContent());
+        Assert.assertEquals("template", c1.getTemplateName());
         Assert.assertEquals(12, c1.getLine());
         Assert.assertEquals(5, c1.getCol());
 
@@ -115,7 +122,7 @@ public final class CommentTest {
 
         final String empty = "<!---->"; // Set keyword to upper case
         final char[] emptyBuf = empty.toCharArray();
-        c1.reset(emptyBuf, 0, 7, 9, 3);
+        c1.reset(emptyBuf, 0, 7, "template", 9, 3);
         final String c1cs3_2 = "<!--huy!-->";
         c1.setContent(new String(c1cs3.toCharArray(), 4, 4));
         final String c1c3_4 = c1.getContent();

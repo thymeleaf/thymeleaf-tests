@@ -19,15 +19,13 @@
  */
 package org.thymeleaf.standard.expression;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-
-import org.thymeleaf.TemplateProcessingParameters;
-import org.thymeleaf.exceptions.TemplateInputException;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.cache.NonCacheableCacheEntryValidity;
+import org.thymeleaf.context.IContext;
 import org.thymeleaf.resourceresolver.IResourceResolver;
+import org.thymeleaf.resourceresolver.StringResourceResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
-import org.thymeleaf.templateresolver.NonCacheableTemplateResolutionValidity;
 import org.thymeleaf.templateresolver.TemplateResolution;
 
 /**
@@ -56,58 +54,29 @@ public class TestTemplateResolver implements ITemplateResolver {
         return Integer.valueOf(1);
     }
 
-    public TemplateResolution resolveTemplate(final TemplateProcessingParameters templateProcessingParameters) {
-        
-        final String templateName = templateProcessingParameters.getTemplateName();
+    public TemplateResolution resolveTemplate(final IEngineConfiguration configuration, final IContext context, final String template) {
 
         final int placeholderPos = this.template.indexOf("{%%}");
-        final String result =
-            this.template.substring(0,placeholderPos) + 
-            templateName +
-            this.template.substring(placeholderPos + 4);
-        
-        final IResourceResolver resourceResolver = new TestResourceResolver(result);
-        
-        final TemplateResolution templateResolution = 
-            new TemplateResolution(
-                    templateName, "TEST", resourceResolver, 
-                    "UTF-8", "HTML5", 
-                    new NonCacheableTemplateResolutionValidity());
-        
+        final String resource =
+                this.template.substring(0,placeholderPos) +
+                        template +
+                        this.template.substring(placeholderPos + 4);
+
+        final IResourceResolver resourceResolver = new StringResourceResolver();
+
+        final TemplateResolution templateResolution =
+                new TemplateResolution(
+                        template, resource, resourceResolver,
+                        "UTF-8", TemplateMode.HTML,
+                        new NonCacheableCacheEntryValidity());
+
         return templateResolution;
+
     }
+
 
     public void initialize() {
         // nothing to be done;
     }
-    
-    
-    
-    
-    public static class TestResourceResolver implements IResourceResolver {
 
-        private final String result;
-        
-        TestResourceResolver(final String result) {
-            super();
-            this.result = result;
-        }
-        
-        public String getName() {
-            return "TEST EXPRESSION RESOURCE RESOLVER";
-        }
-
-        public InputStream getResourceAsStream(
-                final TemplateProcessingParameters templateProcessingParameters, final String resourceName) {
-            
-            try {
-                return new ByteArrayInputStream(this.result.getBytes("UTF-8"));
-            } catch (final UnsupportedEncodingException e) {
-                throw new TemplateInputException("ERROR READING TEMPLATE: " + this.result);
-            }
-            
-        }
-        
-    }
-    
 }

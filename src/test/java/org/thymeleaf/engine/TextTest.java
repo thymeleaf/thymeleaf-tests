@@ -37,11 +37,12 @@ public final class TextTest {
         final char[] buf1 = "hello".toCharArray();
 
         final Text c1 = new Text(textRepository);
-        c1.reset(buf1, 0, 5, 10, 3);
+        c1.reset(buf1, 0, 5, "template", 10, 3);
         Assert.assertEquals("hello", extractText(c1));
         final String c1all = c1.getText();
         Assert.assertEquals("hello", c1all);
         Assert.assertSame(c1all, c1.getText());
+        Assert.assertEquals("template", c1.getTemplateName());
         Assert.assertEquals(10, c1.getLine());
         Assert.assertEquals(3, c1.getCol());
 
@@ -49,6 +50,7 @@ public final class TextTest {
         c1.setText(c1c0);
         Assert.assertSame(c1c0, c1.getText());
         Assert.assertSame(textRepository.getText(" something\nhere "), c1.getText());
+        Assert.assertNull(c1.getTemplateName());
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
 
@@ -58,10 +60,11 @@ public final class TextTest {
         Assert.assertSame(c1c2, c1c2_2);
         Assert.assertSame(c1c2, c1.getText());
 
-        c1.reset(c1c0.toCharArray(), 0, c1c0.length(), 11, 4);
+        c1.reset(c1c0.toCharArray(), 0, c1c0.length(), "template", 11, 4);
         final String c1c3_2 = c1.getText();
         Assert.assertEquals(c1c0, c1c3_2);
         Assert.assertSame(c1c3_2, c1.getText());
+        Assert.assertEquals("template", c1.getTemplateName());
         Assert.assertEquals(11, c1.getLine());
         Assert.assertEquals(4, c1.getCol());
 
@@ -71,6 +74,7 @@ public final class TextTest {
         final String c2cs1_2 = c2.getText();
         Assert.assertEquals(c2c1, c2cs1_2);
         Assert.assertSame(c2cs1_2, c2.getText());
+        Assert.assertNull(c2.getTemplateName());
         Assert.assertEquals(-1, c2.getLine());
         Assert.assertEquals(-1, c2.getCol());
 
