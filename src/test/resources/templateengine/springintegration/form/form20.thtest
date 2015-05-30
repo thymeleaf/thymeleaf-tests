@@ -4,7 +4,7 @@
 date.format = yyyy-MM-dd
 # ------------------------------------------------------------
 %CONTEXT
-entity = new org.thymeleaf.engine.springintegration.model.FormBean05()
+entity = new org.thymeleaf.templateengine.springintegration.model.FormBean05()
 entity.properties['alpha'] = 'one alpha'
 entity.properties['beta'] = 'two beta'
 columns = {'alpha','beta'}

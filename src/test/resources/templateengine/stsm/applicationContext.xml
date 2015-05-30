@@ -13,7 +13,7 @@
 
   <mvc:annotation-driven conversion-service="conversionService"/>
 
-  <context:component-scan base-package="org.thymeleaf.engine.stsm"/>
+  <context:component-scan base-package="org.thymeleaf.templateengine.stsm"/>
 
   <bean id="conversionService"
         class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
