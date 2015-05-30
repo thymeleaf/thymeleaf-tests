@@ -1,0 +1,8 @@
+%EXTENDS domselector2.common
+# ------------------------------------------------------------
+%FRAGMENT[evaluator] org.thymeleaf.templateengine.domselector.TestFragmentTestFieldEvaluator
+# ------------------------------------------------------------
+%FRAGMENT h2%two
+# ------------------------------------------------------------
+%OUTPUT
+<h2 ref="two">Standard and SpringStandard Dialects</h2>
