@@ -17,35 +17,33 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.engine30.aggregation.dialect;
+package org.thymeleaf.templateengine.aggregation.dialect;
 
 import org.thymeleaf.Arguments;
-import org.thymeleaf.dom.AbstractTextNode;
 import org.thymeleaf.dom.Element;
 import org.thymeleaf.dom.Text;
-import org.thymeleaf.processor.AbstractProcessor;
 import org.thymeleaf.processor.ProcessorResult;
-import org.thymeleaf.processor.TextNodeProcessorMatcher;
 import org.thymeleaf.processor.element.AbstractElementProcessor;
-import org.thymeleaf.processor.text.AbstractTextNodeProcessor;
 
-public class Dialect01TextProcessor extends AbstractTextNodeProcessor {
+public class Dialect02DivProcessor extends AbstractElementProcessor {
 
 
-    public Dialect01TextProcessor() {
-        super(new TextNodeProcessorMatcher());
+    public Dialect02DivProcessor() {
+        super("div");
     }
 
     @Override
     public int getPrecedence() {
-        return 100;
+        return 200;
     }
-
 
 
     @Override
-    protected ProcessorResult processTextNode(final Arguments arguments, final AbstractTextNode textNode) {
-        textNode.setContent(textNode.getContent() + "[01]");
+    protected ProcessorResult processElement(Arguments arguments, Element element) {
+
+        element.addChild(new Text("[From Dialect 02]"));
+
         return ProcessorResult.OK;
     }
+
 }
