@@ -2,10 +2,10 @@
 # ------------------------------------------------------------
 %CONTEXT
 # Initialize the bean and set its "choice" property to TWO
-formBean03 = new org.thymeleaf.engine.springintegration.model.FormBean03()
-formBean03.choice = @org.thymeleaf.engine.springintegration.model.FormEnum01@TWO
+formBean03 = new org.thymeleaf.templateengine.springintegration.model.FormBean03()
+formBean03.choice = @org.thymeleaf.templateengine.springintegration.model.FormEnum01@TWO
 # Create a variable with all the possible enum values (ONE, TWO, TREE)
-enumValues = @org.thymeleaf.engine.springintegration.model.FormEnum01@values()
+enumValues = @org.thymeleaf.templateengine.springintegration.model.FormEnum01@values()
 # Specify the Spring form binding object
 # ------------------------------------------------------------
 %INPUT
