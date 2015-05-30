@@ -73,7 +73,7 @@ public class FragmentSelectionTest {
     private static void checkFragmentSelection(final String fragmentSelectionSpec,
             final String templateExpression, final String fragmentExpression, final String parametersExpression) {
 
-        final FragmentSelection fragmentSelection =
+        final ParsedFragmentSelection fragmentSelection =
                 FragmentSelectionUtils.internalParseFragmentSelection(fragmentSelectionSpec);
 
         final IStandardExpression parsedTemplateExpression = fragmentSelection.getTemplateName();

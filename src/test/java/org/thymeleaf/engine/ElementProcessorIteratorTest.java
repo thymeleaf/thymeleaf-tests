@@ -29,10 +29,10 @@ import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IOpenElementTag;
-import org.thymeleaf.templateparser.HTMLTemplateParser;
-import org.thymeleaf.templateparser.XMLTemplateParser;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.HTMLTemplateParser;
+import org.thymeleaf.templateparser.XMLTemplateParser;
 
 
 public final class ElementProcessorIteratorTest {
@@ -358,7 +358,7 @@ public final class ElementProcessorIteratorTest {
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
         final IEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
 
-        HTML_PARSER.parse(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), handler);
+        HTML_PARSER.parseTemplate(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), null, handler);
 
         return handler;
 
@@ -377,7 +377,7 @@ public final class ElementProcessorIteratorTest {
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
         final IEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
 
-        XML_PARSER.parse(templateEngineContext, TemplateMode.XML, new StringResource(templateName, input), handler);
+        XML_PARSER.parseTemplate(templateEngineContext, TemplateMode.XML, new StringResource(templateName, input), null, handler);
 
         return handler;
 

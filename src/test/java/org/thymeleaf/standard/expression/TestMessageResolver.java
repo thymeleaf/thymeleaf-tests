@@ -22,7 +22,7 @@ package org.thymeleaf.standard.expression;
 import java.text.MessageFormat;
 import java.util.Properties;
 
-import org.thymeleaf.Arguments;
+import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.messageresolver.IMessageResolver;
 import org.thymeleaf.messageresolver.MessageResolution;
 
@@ -53,10 +53,10 @@ public class TestMessageResolver implements IMessageResolver {
         return Integer.valueOf(1);
     }
 
-    
-    public MessageResolution resolveMessage(Arguments arguments, String key, Object[] messageParameters) {
 
-        
+
+    public MessageResolution resolveMessage(final ITemplateProcessingContext processingContext, final String key, final Object[] messageParameters) {
+
         final String messageValue = this.properties.getProperty(key);
         if (messageValue == null) {
             return null;
@@ -64,12 +64,12 @@ public class TestMessageResolver implements IMessageResolver {
         if (messageParameters == null || messageParameters.length == 0) {
             return new MessageResolution(messageValue);
         }
-        
-        final MessageFormat messageFormat = new MessageFormat(messageValue, arguments.getContext().getLocale());
+
+        final MessageFormat messageFormat = new MessageFormat(messageValue, processingContext.getLocale());
         return new MessageResolution(messageFormat.format(messageParameters));
-        
+
     }
-    
+
 
     public void initialize() {
         // Nothing to initialize

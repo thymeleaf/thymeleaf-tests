@@ -20,10 +20,20 @@
 package org.thymeleaf.engine;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.dialect.AbstractProcessorDialect;
+import org.thymeleaf.model.ICDATASection;
+import org.thymeleaf.model.IComment;
+import org.thymeleaf.model.IDocType;
+import org.thymeleaf.model.INode;
+import org.thymeleaf.model.IProcessableElementTag;
+import org.thymeleaf.model.IProcessingInstruction;
+import org.thymeleaf.model.IText;
+import org.thymeleaf.model.IXMLDeclaration;
 import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.processor.cdatasection.AbstractCDATASectionProcessor;
 import org.thymeleaf.processor.comment.AbstractCommentProcessor;
@@ -37,6 +47,9 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 
 public final class ProcessorAggregationTestDialect extends AbstractProcessorDialect {
+
+
+    private final Set<IProcessor> processors;
 
 
 
@@ -62,14 +75,14 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
 
         final Set<IProcessor> processors = new LinkedHashSet<IProcessor>();
-        processors.addAll(buildProcessors(TemplateMode.HTML, htmlProcSpecification));
-        processors.addAll(buildProcessors(TemplateMode.XML, xmlProcSpecification));
+        processors.addAll(buildProcessors(TemplateMode.HTML, prefix, htmlProcSpecification));
+        processors.addAll(buildProcessors(TemplateMode.XML, prefix, xmlProcSpecification));
         return new ProcessorAggregationTestDialect(name, prefix, processors);
 
     }
 
 
-    private static Set<IProcessor> buildProcessors(final TemplateMode templateMode, final String specification) {
+    private static Set<IProcessor> buildProcessors(final TemplateMode templateMode, final String dialectPrefix, final String specification) {
 
         final Set<IProcessor> processors = new LinkedHashSet<IProcessor>();
         final StringTokenizer specTok = new StringTokenizer(specification,", ");
@@ -127,6 +140,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                 }
                 processors.add(
                         new ElementProcessorAggregationTestTagProcessor(
+                                dialectPrefix,
                                 (elementName.equals("null")? null : elementName), prefixElementName,
                                 (attributeName.equals("null")? null : attributeName), prefixAttributeName,
                                 templateMode, precedence));
@@ -147,6 +161,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                 }
                 processors.add(
                         new ElementNodeProcessorAggregationTestProcessor(
+                                dialectPrefix,
                                 (elementName.equals("null")? null : elementName), prefixElementName,
                                 (attributeName.equals("null")? null : attributeName), prefixAttributeName,
                                 templateMode, precedence));
@@ -163,12 +178,18 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
 
     protected ProcessorAggregationTestDialect(final String name, final String prefix, final Set<IProcessor> processors) {
-        super(name, prefix, processors);
+        super(name, prefix);
+        this.processors = processors;
+    }
+
+
+    public Set<IProcessor> getProcessors(final String dialectPrefix) {
+        return this.processors;
     }
 
 
     public String toString() {
-        return "[" + getName() + "," + getPrefix() + "," + getProcessors() + "]";
+        return "[" + getName() + "," + getPrefix() + "," + getProcessors(getPrefix()) + "]";
     }
 
 
@@ -195,6 +216,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
             return getName();
         }
 
+        @Override
+        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final ICDATASection icdataSection, final ICDATASectionStructureHandler icdataSectionStructureHandler) {
+            // Nothing to be done here - nothing to process!
+        }
+
     }
 
 
@@ -213,6 +239,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         public String toString() {
             return getName();
+        }
+
+        @Override
+        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IComment iComment, final ICommentStructureHandler iCommentStructureHandler) {
+            // Nothing to be done here - nothing to process!
         }
 
     }
@@ -235,6 +266,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
             return getName();
         }
 
+        @Override
+        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IDocType iDocType, final IDocTypeStructureHandler iDocTypeStructureHandler) {
+            // Nothing to be done here - nothing to process!
+        }
+
     }
 
 
@@ -253,6 +289,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         public String toString() {
             return getName();
+        }
+
+        @Override
+        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IProcessingInstruction iProcessingInstruction, final IProcessingInstructionStructureHandler iProcessingInstructionStructureHandler) {
+            // Nothing to be done here - nothing to process!
         }
 
     }
@@ -275,6 +316,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
             return getName();
         }
 
+        @Override
+        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IText iText, final ITextStructureHandler iTextStructureHandler) {
+            // Nothing to be done here - nothing to process!
+        }
+
     }
 
 
@@ -295,16 +341,22 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
             return getName();
         }
 
+        @Override
+        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IXMLDeclaration ixmlDeclaration, final IXMLDeclarationStructureHandler ixmlDeclarationStructureHandler) {
+            // Nothing to be done here - nothing to process!
+        }
+
     }
 
 
     private static class ElementProcessorAggregationTestTagProcessor extends AbstractElementTagProcessor implements NamedTestProcessor {
 
         ElementProcessorAggregationTestTagProcessor(
+                final String dialectPrefix,
                 final String elementName, final boolean prefixElementName,
                 final String attributeName, final boolean prefixAttributeName,
                 final TemplateMode templateMode, final int precedence) {
-            super(templateMode, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
+            super(templateMode, dialectPrefix, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
         }
 
         public String getName() {
@@ -315,6 +367,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
             return getName();
         }
 
+        @Override
+        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IProcessableElementTag iProcessableElementTag, final IElementStructureHandler iElementStructureHandler) {
+            // Nothing to be done here - nothing to process!
+        }
+
     }
 
 
@@ -323,15 +380,17 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         private final String name;
 
         ElementNodeProcessorAggregationTestProcessor(
+                final String dialectPrefix,
                 final String elementName, final boolean prefixElementName,
                 final String attributeName, final boolean prefixAttributeName,
                 final TemplateMode templateMode, final int precedence) {
-            super(templateMode, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
+            super(templateMode, dialectPrefix, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
             this.name = null;
         }
 
-        ElementNodeProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
-            super(templateMode, null, false, null, false, precedence);
+        ElementNodeProcessorAggregationTestProcessor(
+                final String dialectPrefix, final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, dialectPrefix, null, false, null, false, precedence);
             this.name = name;
         }
 
@@ -341,6 +400,12 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         public String toString() {
             return getName();
+        }
+
+        @Override
+        protected List<INode> doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final INode iNode) {
+            // Nothing to be done here - nothing to process!
+            return null;
         }
 
     }

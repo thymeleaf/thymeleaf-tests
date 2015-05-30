@@ -57,7 +57,7 @@ public final class XmlDeclarationTest {
                 version1,
                 encodingUtf,
                 standaloneno,
-                11, 4
+                "template", 11, 4
         );
 
         Assert.assertSame(xmlDeclar1utfno, d1.getXmlDeclaration());
@@ -65,6 +65,7 @@ public final class XmlDeclarationTest {
         Assert.assertSame(version1, d1.getVersion());
         Assert.assertSame(encodingUtf, d1.getEncoding());
         Assert.assertSame(standaloneno, d1.getStandalone());
+        Assert.assertEquals("template", d1.getTemplateName());
         Assert.assertEquals(11, d1.getLine());
         Assert.assertEquals(4, d1.getCol());
 
@@ -74,7 +75,7 @@ public final class XmlDeclarationTest {
                 version1,
                 encodingUtf,
                 standaloneno,
-                10, 3
+                "template", 10, 3
         );
 
         Assert.assertSame(xmlDeclar1utfno, d1.getXmlDeclaration());
@@ -82,6 +83,7 @@ public final class XmlDeclarationTest {
         Assert.assertSame(version1, d1.getVersion());
         Assert.assertSame(encodingUtf, d1.getEncoding());
         Assert.assertSame(standaloneno, d1.getStandalone());
+        Assert.assertEquals("template", d1.getTemplateName());
         Assert.assertEquals(10, d1.getLine());
         Assert.assertEquals(3, d1.getCol());
 
@@ -92,6 +94,7 @@ public final class XmlDeclarationTest {
         Assert.assertSame(version1, d1.getVersion());
         Assert.assertSame(encodingUtf, d1.getEncoding());
         Assert.assertNull(d1.getStandalone());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -102,6 +105,7 @@ public final class XmlDeclarationTest {
         Assert.assertSame(version1, d1.getVersion());
         Assert.assertNull(d1.getEncoding());
         Assert.assertNull(d1.getStandalone());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -114,6 +118,7 @@ public final class XmlDeclarationTest {
         Assert.assertSame(version11, d1.getVersion());
         Assert.assertSame(encodingIso, d1.getEncoding());
         Assert.assertSame(standaloneyes, d1.getStandalone());
+        Assert.assertNull(d1.getTemplateName());
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
@@ -130,6 +135,7 @@ public final class XmlDeclarationTest {
         Assert.assertSame(version1, d2.getVersion());
         Assert.assertSame(encodingIso, d2.getEncoding());
         Assert.assertSame(standaloneno, d2.getStandalone());
+        Assert.assertNull(d2.getTemplateName());
         Assert.assertEquals(-1, d2.getLine());
         Assert.assertEquals(-1, d2.getCol());
 
@@ -145,8 +151,9 @@ public final class XmlDeclarationTest {
         Assert.assertSame(version1, d3.getVersion());
         Assert.assertNull(d3.getEncoding());
         Assert.assertNull(d3.getStandalone());
-        Assert.assertEquals(-1, d2.getLine());
-        Assert.assertEquals(-1, d2.getCol());
+        Assert.assertNull(d3.getTemplateName());
+        Assert.assertEquals(-1, d3.getLine());
+        Assert.assertEquals(-1, d3.getCol());
 
 
     }
