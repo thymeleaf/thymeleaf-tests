@@ -1375,7 +1375,7 @@ public final class ElementAttributesTest {
         final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        HTML_PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), handler);
+        HTML_PARSER.parseTemplate(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), null, handler);
 
         return handler.elementAttributes;
 
@@ -1389,7 +1389,7 @@ public final class ElementAttributesTest {
         final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        XML_PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.XML, new StringResource(templateName, input), handler);
+        XML_PARSER.parseTemplate(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.XML, new StringResource(templateName, input), null, handler);
 
         return handler.elementAttributes;
 

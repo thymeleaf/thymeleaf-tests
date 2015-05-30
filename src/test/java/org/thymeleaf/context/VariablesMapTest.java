@@ -20,6 +20,7 @@
 package org.thymeleaf.context;
 
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -29,11 +30,13 @@ import org.junit.Test;
 public final class VariablesMapTest {
 
 
+    private static final Locale LOCALE = Locale.US;
+
 
     @Test
     public void test01() {
 
-        final VariablesMap vm = new VariablesMap(null);
+        final VariablesMap vm = new VariablesMap(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -209,7 +212,7 @@ public final class VariablesMapTest {
         starting.put("one", "ha");
         starting.put("ten", "tieen");
 
-        final VariablesMap vm = new VariablesMap(starting);
+        final VariablesMap vm = new VariablesMap(LOCALE, starting);
 
         Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
@@ -250,7 +253,7 @@ public final class VariablesMapTest {
     @Test
     public void test03() {
 
-        final VariablesMap vm = new VariablesMap(null);
+        final VariablesMap vm = new VariablesMap(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -491,7 +494,7 @@ public final class VariablesMapTest {
     @Test
     public void test04() {
 
-        final VariablesMap vm = new VariablesMap(null);
+        final VariablesMap vm = new VariablesMap(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -587,7 +590,7 @@ public final class VariablesMapTest {
     @Test
     public void test05() {
 
-        final VariablesMap vm = new VariablesMap(null);
+        final VariablesMap vm = new VariablesMap(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -753,7 +756,7 @@ public final class VariablesMapTest {
     @Test
     public void test06() {
 
-        final VariablesMap vm = new VariablesMap(null);
+        final VariablesMap vm = new VariablesMap(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -852,7 +855,7 @@ public final class VariablesMapTest {
     @Test
     public void test07() {
 
-        final VariablesMap vm = new VariablesMap(null);
+        final VariablesMap vm = new VariablesMap(LOCALE, null);
 
         vm.put("one", "a value");
         Assert.assertFalse(vm.hasSelectionTarget());
@@ -1081,7 +1084,7 @@ public final class VariablesMapTest {
     @Test
     public void test08() {
 
-        final VariablesMap vm = new VariablesMap(null);
+        final VariablesMap vm = new VariablesMap(LOCALE, null);
 
         vm.put("one", "a val1");
 

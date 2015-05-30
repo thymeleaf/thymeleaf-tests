@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.templateresolver.StringTemplateResolver;
 import org.thymeleaf.util.DateUtils;
 
 public class ScriptInlineTest {
@@ -49,7 +50,7 @@ public class ScriptInlineTest {
                 script +
                 "\n/* ]]> */\n</script>";
 
-        final ITemplateResolver templateResolver = new StringTemplateResolver(completeScript);
+        final ITemplateResolver templateResolver = new StringTemplateResolver();
         final TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
 
@@ -57,7 +58,7 @@ public class ScriptInlineTest {
         ctx.setVariables(variables);
 
         final StringWriter stringWriter = new StringWriter();
-        templateEngine.process("test-template", ctx, stringWriter);
+        templateEngine.process(completeScript, ctx, stringWriter);
 
         final String result = stringWriter.toString();
         final String extractedResult =

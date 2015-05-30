@@ -22,10 +22,10 @@ package org.thymeleaf.engine;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.model.ICloseElementTag;
-import org.thymeleaf.templateparser.HTMLTemplateParser;
-import org.thymeleaf.templateparser.XMLTemplateParser;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.HTMLTemplateParser;
+import org.thymeleaf.templateparser.XMLTemplateParser;
 
 
 public final class CloseElementTagTest {
@@ -44,7 +44,7 @@ public final class CloseElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        HTML_PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), handler);
+        HTML_PARSER.parseTemplate(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), null, handler);
 
         return handler.tag;
 
@@ -58,7 +58,7 @@ public final class CloseElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        XML_PARSER.parse(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.XML, new StringResource(templateName, input), handler);
+        XML_PARSER.parseTemplate(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.XML, new StringResource(templateName, input), null, handler);
 
         return handler.tag;
 

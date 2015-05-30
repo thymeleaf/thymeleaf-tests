@@ -23,7 +23,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
-import org.thymeleaf.Configuration;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.context.IProcessingContext;
 import org.thymeleaf.context.ProcessingContext;
@@ -48,17 +49,17 @@ public class ExpressionBenchmark {
 
         final Map<String,String> expressionsMap = ExpressionBenchmarkDefinitions.createExpressionsMap();
 
+        final TemplateEngine templateEngine = new TemplateEngine();
+        final IEngineConfiguration configuration = templateEngine.getConfiguration();
 
-        final Configuration configuration = new Configuration();
-        final IProcessingContext processingContext = new ProcessingContext(new Context());
+        final IProcessingContext processingContext = new ProcessingContext(configuration, new Context());
 
         final IStandardExpressionParser parser = new StandardExpressionParser();
 
         for (final Map.Entry<String,String> expressionEntry : expressionsMap.entrySet()) {
             final String expression = expressionEntry.getKey();
             final String expectedParsingResult = expressionEntry.getValue();
-            final IStandardExpression parsedExpression =
-                    parser.parseExpression(configuration, processingContext, expression);
+            final IStandardExpression parsedExpression = parser.parseExpression(processingContext, expression);
             Assert.assertNotNull(parsedExpression);
             final String exp = parsedExpression.getStringRepresentation();
             Assert.assertEquals(expectedParsingResult, exp);
@@ -73,7 +74,7 @@ public class ExpressionBenchmark {
         
         for (int x = 0; x < 1000; x++)
             for (final String expression : expressionsMap.keySet())
-                parser.parseExpression(configuration, processingContext, expression);
+                parser.parseExpression(processingContext, expression);
 
         sw.stop();
         
@@ -84,7 +85,7 @@ public class ExpressionBenchmark {
         
         for (int x = 0; x < 1000; x++)
             for (final String expression : expressionsMap.keySet())
-                parser.parseExpression(configuration, processingContext, expression);
+                parser.parseExpression(processingContext, expression);
 
 
         sw.stop();
