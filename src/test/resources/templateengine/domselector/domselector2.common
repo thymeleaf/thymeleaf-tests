@@ -15,15 +15,15 @@
 
 <ul>
   <li><b>Java template engine for XML, XHTML and HTML5</b>. Extensible to other template formats.</li>
-  <li ref="one">Works both in web and non-web (<i>offline</i>) environments. No hard dependency on the Servlet API.</li>
+  <li th:fragment="one">Works both in web and non-web (<i>offline</i>) environments. No hard dependency on the Servlet API.</li>
   <li>Based on modular <i>feature sets</i> called <b>dialects</b>.
     <ul>
       <li class="four">Dialect features (e.g.: evaluation, iteration, etc.) are applied by linking them to template's tags and/or attributes.</li>
       <li class="four five">Two dialects available out-of-the-box: <i>Standard</i> and <i>SpringStandard</i> (for Spring MVC apps, same syntax as <i>Standard</i>).</li>
-      <li ref="aOa">Developers can extend and create custom dialects.</li>
+      <li th:fragment="aOa">Developers can extend and create custom dialects.</li>
     </ul>
   </li>
-  <li>Several <i ref="two">template modes</i> out-of-the-box (extensible):
+  <li>Several <i th:fragment="two">template modes</i> out-of-the-box (extensible):
     <ul>
       <li id="xml" class="important"><b>XML</b>: validating against a DTD or not.</li>
       <li><b>XHTML 1.0 and 1.1</b>: validating against standard DTDs or not.</li>
@@ -36,7 +36,7 @@
   <li>Automatic DOCTYPE translations &mdash;from template DTD to result DTD&mdash; for (optional) validation of both
       template and result code.</li>
   <li class="last not-important">Extremely extensible: can be used as a <i>template engine framework</i> if needed.</li>
-  <li>Complete <a href="documentation.html" ref="two">documentation</a> including several example applications.</li>
+  <li>Complete <a href="documentation.html" th:fragment="two">documentation</a> including several example applications.</li>
 </ul>
 
-<h2 ref="two">Standard and SpringStandard Dialects</h2>
+<h2 th:fragment="two">Standard and SpringStandard Dialects</h2>

@@ -23,23 +23,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.thymeleaf.dialect.AbstractDialect;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
-public class ContextDialect extends AbstractDialect {
+public class ContextDialect extends AbstractDialect implements IProcessorDialect {
+
+
+
+    public ContextDialect() {
+        super("ContextDialect");
+    }
 
     public String getPrefix() {
         return "context";
     }
 
-    public boolean isLenient() {
-        return false;
-    }
-    
-    @Override
-    public Set<IProcessor> getProcessors() {
+    public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new AddContextVariableElementProcessor());
+        processors.add(new AddContextVariableElementProcessor("context"));
         return processors;
     }
+
 
 }
