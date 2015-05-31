@@ -49,7 +49,7 @@ public final class SpringResourceResourceResolverSpring4Test {
                 (SpringResourceResourceResolver) context.getBean("springResourceResourceResolver");
 
         final IResource resource =
-                resolver.getResource(configuration, new Context(), "classpath:" + templateLocation, "US-ASCII");
+                resolver.resolveResource(configuration, new Context(), "classpath:" + templateLocation, "US-ASCII");
 
         final String testResource = resource.readFully();
 
