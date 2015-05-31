@@ -5,4 +5,4 @@
 %FRAGMENT ul/li/two
 # ------------------------------------------------------------
 %OUTPUT
-<i ref="two">template modes</i><a href="documentation.html" ref="two">documentation</a>
+<i th:fragment="two">template modes</i><a href="documentation.html" th:fragment="two">documentation</a>

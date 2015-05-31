@@ -244,7 +244,7 @@ public final class EvaluationUtilTest {
     public void convertToListTest() {
 
         {
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(null);
+            final List<Object> result = EvaluationUtil.evaluateAsList(null);
             Assert.assertTrue(result != null && result.size() == 0);
         }
 
@@ -256,7 +256,7 @@ public final class EvaluationUtilTest {
             list.add(Integer.valueOf(2));
             list.add(Integer.valueOf(43));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(set);
+            final List<Object> result = EvaluationUtil.evaluateAsList(set);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
@@ -268,14 +268,14 @@ public final class EvaluationUtilTest {
             list.add(new EvaluationUtil.MapEntry<Object,Object>("a", Integer.valueOf(2)));
             list.add(new EvaluationUtil.MapEntry<Object,Object>("b", Integer.valueOf(43)));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(map);
+            final List<Object> result = EvaluationUtil.evaluateAsList(map);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
         {
             final byte[] arr0 = new byte[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -286,14 +286,14 @@ public final class EvaluationUtilTest {
             list.add(Byte.valueOf((byte)23));
             list.add(Byte.valueOf((byte)-127));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
         {
             final short[] arr0 = new short[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -304,14 +304,14 @@ public final class EvaluationUtilTest {
             list.add(Short.valueOf((short)23));
             list.add(Short.valueOf((short)-127));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
         {
             final int[] arr0 = new int[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -322,14 +322,14 @@ public final class EvaluationUtilTest {
             list.add(Integer.valueOf(23));
             list.add(Integer.valueOf(-127));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
         {
             final long[] arr0 = new long[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -340,14 +340,14 @@ public final class EvaluationUtilTest {
             list.add(Long.valueOf(23L));
             list.add(Long.valueOf(-127L));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
         {
             final float[] arr0 = new float[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -358,7 +358,7 @@ public final class EvaluationUtilTest {
             list.add(Float.valueOf(23.0f));
             list.add(Float.valueOf(-127.1f));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && result.size() == list.size());
             for (int i = 0; i < result.size(); i++) {
                 Assert.assertTrue(result.get(i) != null && result.get(i) instanceof Float &&
@@ -369,7 +369,7 @@ public final class EvaluationUtilTest {
         {
             final double[] arr0 = new double[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -380,7 +380,7 @@ public final class EvaluationUtilTest {
             list.add(Double.valueOf(23.0d));
             list.add(Double.valueOf(-127.1d));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && result.size() == list.size());
             for (int i = 0; i < result.size(); i++) {
                 Assert.assertTrue(result.get(i) != null && result.get(i) instanceof Double &&
@@ -391,7 +391,7 @@ public final class EvaluationUtilTest {
         {
             final boolean[] arr0 = new boolean[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -402,14 +402,14 @@ public final class EvaluationUtilTest {
             list.add(Boolean.TRUE);
             list.add(Boolean.FALSE);
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
         {
             final char[] arr0 = new char[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -422,14 +422,14 @@ public final class EvaluationUtilTest {
             list.add(Character.valueOf('x'));
             list.add(Character.valueOf((char)0));
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
         {
             final Class<?>[] arr0 = new Class<?>[0];
             final List<Object> list0 = new ArrayList<Object>();
-            final List<Object> result0 = EvaluationUtil.evaluateAsIterable(arr0);
+            final List<Object> result0 = EvaluationUtil.evaluateAsList(arr0);
             Assert.assertTrue(result0 != null && result0 instanceof List && list0.equals(result0));
 
 
@@ -440,7 +440,7 @@ public final class EvaluationUtilTest {
             list.add(EvaluationUtil.class);
             list.add(EvaluationUtilTest.class);
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(arr);
+            final List<Object> result = EvaluationUtil.evaluateAsList(arr);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 
@@ -448,7 +448,7 @@ public final class EvaluationUtilTest {
             final List<Object> list = new ArrayList<Object>();
             list.add(EvaluationUtil.class);
 
-            final List<Object> result = EvaluationUtil.evaluateAsIterable(EvaluationUtil.class);
+            final List<Object> result = EvaluationUtil.evaluateAsList(EvaluationUtil.class);
             Assert.assertTrue(result != null && result instanceof List && list.equals(result));
         }
 

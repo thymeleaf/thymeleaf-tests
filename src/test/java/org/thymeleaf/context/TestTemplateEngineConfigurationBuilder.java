@@ -26,6 +26,7 @@ import java.util.Set;
 import org.thymeleaf.DialectConfiguration;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.EngineConfiguration;
+import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.text.TextRepositories;
@@ -36,9 +37,8 @@ public final class TestTemplateEngineConfigurationBuilder {
 
 
     public static IEngineConfiguration build() {
-        final StandardDialect standardDialect = new StandardDialect();
-        final DialectConfiguration standardDialectConfiguration = new DialectConfiguration(standardDialect);
-        return new EngineConfiguration(Collections.singleton(standardDialectConfiguration), TextRepositories.createLimitedSizeCacheRepository());
+        final TemplateEngine templateEngine = new TemplateEngine();
+        return templateEngine.getConfiguration();
     }
 
 
@@ -48,11 +48,9 @@ public final class TestTemplateEngineConfigurationBuilder {
 
 
     public static IEngineConfiguration build(final Set<IDialect> dialects) {
-        final Set<DialectConfiguration> dialectConfigurations = new LinkedHashSet<DialectConfiguration>();
-        for (final IDialect dialect : dialects) {
-            dialectConfigurations.add(new DialectConfiguration(dialect));
-        }
-        return new EngineConfiguration(dialectConfigurations, TextRepositories.createLimitedSizeCacheRepository());
+        final TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setDialects(dialects);
+        return templateEngine.getConfiguration();
     }
 
 

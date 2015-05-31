@@ -24,7 +24,6 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
 import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
@@ -65,7 +64,7 @@ public class SpringBaseTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(), new ConditionalCommentsDialect() }));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance() }));
         executor.execute("classpath:templateengine/springbase/springbaseconditionalcomments.thindex");
 
         Assert.assertTrue(executor.isAllOK());
