@@ -19,45 +19,44 @@
  */
 package org.thymeleaf.templateengine.context.dialect;
 
-import java.util.Collections;
+import org.thymeleaf.context.ILocalVariableAwareVariablesMap;
+import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.context.IWebVariablesMap;
+import org.thymeleaf.engine.IElementStructureHandler;
+import org.thymeleaf.model.IProcessableElementTag;
+import org.thymeleaf.processor.element.AbstractElementTagProcessor;
+import org.thymeleaf.templatemode.TemplateMode;
 
-import org.thymeleaf.Arguments;
-import org.thymeleaf.context.AbstractContext;
-import org.thymeleaf.context.WebContext;
-import org.thymeleaf.dom.Element;
-import org.thymeleaf.processor.ProcessorResult;
-import org.thymeleaf.processor.element.AbstractElementProcessor;
-
-public class AddContextVariableElementProcessor extends AbstractElementProcessor {
+public class AddContextVariableElementProcessor extends AbstractElementTagProcessor {
 
     
-    public AddContextVariableElementProcessor() {
-        super("add-context-variable");
+    public AddContextVariableElementProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, "add-context-variable", true, null, false, 100);
     }
 
-    @Override
-    public int getPrecedence() {
-        return 100;
-    }
 
 
     @Override
-    protected ProcessorResult processElement(Arguments arguments, Element element) {
+    protected void doProcess(
+            final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
+            final IElementStructureHandler structureHandler) {
 
-        ((AbstractContext)arguments.getContext()).setVariable("newvar0", "VariablesNewVar0");
-        arguments.getContext().getVariables().put("newvar1", "VariablesNewVar1");
+        final IWebVariablesMap variablesMap = (IWebVariablesMap) processingContext.getVariablesMap();
+        final ILocalVariableAwareVariablesMap localVariableAwareVariablesMap = (ILocalVariableAwareVariablesMap) variablesMap;
 
-        ((WebContext)arguments.getContext()).getRequestAttributes().put("newvar2", "RequestAttributesNewVar2");
-        ((WebContext)arguments.getContext()).getHttpServletRequest().setAttribute("newvar3", "ServletRequestNewVar3");
+        localVariableAwareVariablesMap.put("newvar0", "VariablesNewVar0");
+        localVariableAwareVariablesMap.put("newvar1", "VariablesNewVar1");
 
-        ((WebContext)arguments.getContext()).getApplicationAttributes().put("newvar4", "ApplicationAttributesNewVar4");
-        ((WebContext)arguments.getContext()).getServletContext().setAttribute("newvar5", "ApplicationAttributesNewVar5");
+        variablesMap.getRequest().setAttribute("newvar2", "RequestAttributesNewVar2");
+        variablesMap.getRequest().setAttribute("newvar3", "ServletRequestNewVar3");
 
-        element.setAllNodeLocalVariables(Collections.singletonMap("one", (Object)"one"));
-        // Remove host element
-        element.getParent().extractChild(element);
+        variablesMap.getServletContext().setAttribute("newvar4", "ApplicationAttributesNewVar4");
+        variablesMap.getServletContext().setAttribute("newvar5", "ApplicationAttributesNewVar5");
 
-        return ProcessorResult.OK;
+        structureHandler.setLocalVariable("one", "one");
+        structureHandler.removeElement();
+
     }
+
 
 }

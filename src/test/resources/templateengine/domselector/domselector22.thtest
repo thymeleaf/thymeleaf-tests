@@ -5,4 +5,4 @@
 %FRAGMENT two
 # ------------------------------------------------------------
 %OUTPUT
-<i ref="two">template modes</i><a href="documentation.html" ref="two">documentation</a><h2 ref="two">Standard and SpringStandard Dialects</h2>
+<i th:fragment="two">template modes</i><a href="documentation.html" th:fragment="two">documentation</a><h2 th:fragment="two">Standard and SpringStandard Dialects</h2>

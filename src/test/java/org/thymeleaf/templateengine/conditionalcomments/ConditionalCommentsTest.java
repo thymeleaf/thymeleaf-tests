@@ -24,7 +24,6 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
@@ -43,7 +42,7 @@ public class ConditionalCommentsTest {
     public void testConditionalComments() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect(), new ConditionalCommentsDialect() }));
+        executor.setDialects(Arrays.asList(new IDialect[]{ new StandardDialect() }));
         executor.execute("classpath:templateengine/conditionalcomments");
         
         Assert.assertTrue(executor.isAllOK());
