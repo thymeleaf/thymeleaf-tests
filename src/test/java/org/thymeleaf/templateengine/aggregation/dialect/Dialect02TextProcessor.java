@@ -19,29 +19,25 @@
  */
 package org.thymeleaf.templateengine.aggregation.dialect;
 
-import org.thymeleaf.Arguments;
-import org.thymeleaf.dom.AbstractTextNode;
-import org.thymeleaf.processor.ProcessorResult;
-import org.thymeleaf.processor.TextNodeProcessorMatcher;
-import org.thymeleaf.processor.text.AbstractTextNodeProcessor;
+import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.engine.ITextStructureHandler;
+import org.thymeleaf.model.IText;
+import org.thymeleaf.processor.text.AbstractTextProcessor;
+import org.thymeleaf.templatemode.TemplateMode;
 
-public class Dialect02TextProcessor extends AbstractTextNodeProcessor {
+public class Dialect02TextProcessor extends AbstractTextProcessor {
 
 
     public Dialect02TextProcessor() {
-        super(new TextNodeProcessorMatcher());
+        super(TemplateMode.HTML, 1000);
     }
-
-    @Override
-    public int getPrecedence() {
-        return 200;
-    }
-
 
 
     @Override
-    protected ProcessorResult processTextNode(final Arguments arguments, final AbstractTextNode textNode) {
-        textNode.setContent(textNode.getContent() + "[02]");
-        return ProcessorResult.OK;
+    protected void doProcess(
+            final ITemplateProcessingContext processingContext, final IText text, final ITextStructureHandler structureHandler) {
+        text.setText(text.getText() + "[02]");
     }
+
+
 }
