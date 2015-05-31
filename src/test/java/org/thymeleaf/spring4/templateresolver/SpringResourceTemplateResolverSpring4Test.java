@@ -58,7 +58,7 @@ public final class SpringResourceTemplateResolverSpring4Test {
                 resolver.resolveTemplate(configuration, new Context(), "classpath:" + templateLocation);
 
         final IResourceResolver resourceResolver = resolution.getResourceResolver();
-        final IResource resource = resourceResolver.getResource(configuration, new Context(), resolution.getResourceName(), "US-ASCII");
+        final IResource resource = resourceResolver.resolveResource(configuration, new Context(), resolution.getResourceName(), "US-ASCII");
 
         final String testResource = resource.readFully();
 
