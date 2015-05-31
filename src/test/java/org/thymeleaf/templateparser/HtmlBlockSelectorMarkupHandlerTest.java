@@ -29,17 +29,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.thymeleaf.IEngineConfiguration;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.engine.ITemplateHandler;
 import org.thymeleaf.engine.OutputTemplateHandler;
-import org.thymeleaf.aurora.context.StandardProcessingContextFactory;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
 
@@ -122,10 +119,8 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
-        handler.setProcessingContext(
-                StandardProcessingContextFactory.build(TEMPLATE_ENGINE_CONFIGURATION, templateName, TemplateMode.HTML, new Context(Locale.US)));
 
-        parser.parse(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
+        parser.parseTemplate(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
 
         assertEquals("Test failed for file: " + templateName, output, writer.toString());
 

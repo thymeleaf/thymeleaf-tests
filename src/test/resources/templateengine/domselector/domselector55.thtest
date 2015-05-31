@@ -5,4 +5,4 @@
 %FRAGMENT %aOa
 # ------------------------------------------------------------
 %OUTPUT
-<li ref="aOa">Developers can extend and create custom dialects.</li>
+<li th:fragment="aOa">Developers can extend and create custom dialects.</li>

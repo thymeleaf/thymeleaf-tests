@@ -5,4 +5,4 @@
 %FRAGMENT %one
 # ------------------------------------------------------------
 %OUTPUT
-<li ref="one">Works both in web and non-web (<i>offline</i>) environments. No hard dependency on the Servlet API.</li>
+<li th:fragment="one">Works both in web and non-web (<i>offline</i>) environments. No hard dependency on the Servlet API.</li>
