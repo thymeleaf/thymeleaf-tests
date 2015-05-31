@@ -22,32 +22,21 @@ package org.thymeleaf.templateengine.aggregation.dialect;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.thymeleaf.dialect.AbstractDialect;
-import org.thymeleaf.dialect.IProcessorDialect;
+import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
-public class Dialect01 extends AbstractDialect implements IProcessorDialect {
+public class Dialect01 extends AbstractProcessorDialect {
 
 
     public Dialect01() {
-        super("Dialect01");
+        super("Dialect01", null);
     }
 
-
-    public String getPrefix() {
-        return null;
-    }
-
-    public boolean isLenient() {
-        return false;
-    }
     
-    @Override
-    public Set<IProcessor> getProcessors() {
+    public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new Dialect01DivProcessor());
+        processors.add(new Dialect01DivProcessor(dialectPrefix));
         processors.add(new Dialect01TextProcessor());
-        processors.add(new Dialect01DocumentProcessor());
         return processors;
     }
 
