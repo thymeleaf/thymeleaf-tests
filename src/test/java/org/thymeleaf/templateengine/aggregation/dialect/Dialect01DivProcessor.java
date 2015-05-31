@@ -19,31 +19,35 @@
  */
 package org.thymeleaf.templateengine.aggregation.dialect;
 
-import org.thymeleaf.Arguments;
-import org.thymeleaf.dom.Element;
-import org.thymeleaf.dom.Text;
-import org.thymeleaf.processor.ProcessorResult;
-import org.thymeleaf.processor.element.AbstractElementProcessor;
+import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.engine.IElementStructureHandler;
+import org.thymeleaf.engine.Markup;
+import org.thymeleaf.model.IProcessableElementTag;
+import org.thymeleaf.processor.element.AbstractElementTagProcessor;
+import org.thymeleaf.templatemode.TemplateMode;
 
-public class Dialect01DivProcessor extends AbstractElementProcessor {
+public class Dialect01DivProcessor extends AbstractElementTagProcessor {
 
     
-    public Dialect01DivProcessor() {
-        super("div");
+    public Dialect01DivProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, "div", true, null, false, 100);
     }
 
-    @Override
-    public int getPrecedence() {
-        return 100;
-    }
 
 
     @Override
-    protected ProcessorResult processElement(Arguments arguments, Element element) {
+    protected void doProcess(
+            final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
+            final IElementStructureHandler structureHandler) {
 
-        element.addChild(new Text("[From Dialect 01]"));
+        final Markup replacement = processingContext.getMarkupFactory().createMarkup();
 
-        return ProcessorResult.OK;
+        replacement.add(tag);
+        replacement.add(processingContext.getMarkupFactory().createText("[From Dialect 01]"));
+
+        structureHandler.replaceWith(replacement, false);
+
     }
+
 
 }
