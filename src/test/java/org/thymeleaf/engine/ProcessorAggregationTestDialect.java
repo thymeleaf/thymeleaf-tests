@@ -48,8 +48,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 public final class ProcessorAggregationTestDialect extends AbstractProcessorDialect {
 
-
-    private final Set<IProcessor> processors;
+    private final String htmlProcSpecification;
+    private final String xmlProcSpecification;
 
 
 
@@ -72,13 +72,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
     private static ProcessorAggregationTestDialect build(final String name, final String prefix,
                                           final String htmlProcSpecification, final String xmlProcSpecification) {
-
-
-        final Set<IProcessor> processors = new LinkedHashSet<IProcessor>();
-        processors.addAll(buildProcessors(TemplateMode.HTML, prefix, htmlProcSpecification));
-        processors.addAll(buildProcessors(TemplateMode.XML, prefix, xmlProcSpecification));
-        return new ProcessorAggregationTestDialect(name, prefix, processors);
-
+        return new ProcessorAggregationTestDialect(name, prefix, htmlProcSpecification, xmlProcSpecification);
     }
 
 
@@ -177,19 +171,23 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
     }
 
 
-    protected ProcessorAggregationTestDialect(final String name, final String prefix, final Set<IProcessor> processors) {
+    protected ProcessorAggregationTestDialect(final String name, final String prefix, final String htmlProcSpecification, final String xmlProcSpecification) {
         super(name, prefix);
-        this.processors = processors;
+        this.htmlProcSpecification = htmlProcSpecification;
+        this.xmlProcSpecification = xmlProcSpecification;
     }
 
 
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
-        return this.processors;
+        final Set<IProcessor> processors = new LinkedHashSet<IProcessor>();
+        processors.addAll(buildProcessors(TemplateMode.HTML, dialectPrefix, this.htmlProcSpecification));
+        processors.addAll(buildProcessors(TemplateMode.XML, dialectPrefix, this.xmlProcSpecification));
+        return processors;
     }
 
 
-    public String toString() {
-        return "[" + getName() + "," + getPrefix() + "," + getProcessors(getPrefix()) + "]";
+    public String toString(final String dialectPrefix) {
+        return "[" + getName() + "," + getPrefix() + "," + getProcessors(dialectPrefix) + "]";
     }
 
 
