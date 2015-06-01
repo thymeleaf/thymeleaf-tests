@@ -41,7 +41,7 @@ public final class DialectSetConfigurationTest {
     @Test
     public void testProcessorComputation01() {
 
-        final IProcessorDialect dialect =
+        final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildDialect("standard", "th",
                         "CD-10-cdataone,CD-5-cdatatwo,C-20-comone,E-20-null-src,N-ELEMENT-10-test-null",
                         "CD-5-cdataxml");
@@ -49,7 +49,7 @@ public final class DialectSetConfigurationTest {
         final DialectConfiguration dialectConfiguration = new DialectConfiguration("wo",dialect);
         final DialectSetConfiguration dialectSetConfiguration = DialectSetConfiguration.build(Collections.singleton(dialectConfiguration));
 
-        Assert.assertEquals("[standard,th,[CD-10-cdataone, CD-5-cdatatwo, C-20-comone, E-20-null-{wo:src,data-wo-src}, N-ELEMENT-10-{wo:test,wo-test}-null, CD-5-cdataxml]]", dialect.toString());
+        Assert.assertEquals("[standard,th,[CD-10-cdataone, CD-5-cdatatwo, C-20-comone, E-20-null-{wo:src,data-wo-src}, N-ELEMENT-10-{wo:test,wo-test}-null, CD-5-cdataxml]]", dialect.toString(dialectConfiguration.getPrefix()));
         Assert.assertEquals("[CD-5-cdatatwo, CD-10-cdataone]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.HTML).toString());
         Assert.assertEquals("[CD-5-cdataxml]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.XML).toString());
 
@@ -59,7 +59,7 @@ public final class DialectSetConfigurationTest {
     @Test
     public void testProcessorComputation02() {
 
-        final IProcessorDialect dialect =
+        final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildHTMLDialect("standard", "TH",
                         "E-20-null-src, E-10-null-src,E-20-null-href,E-20-null-text,E-10-null-text,E-10-*div-text,E-15-*div-src,E-1-form-*action,E-20-form-null,E-10-null-*action,E-50-null-null");
 
@@ -82,7 +82,7 @@ public final class DialectSetConfigurationTest {
     @Test
     public void testProcessorComputation03() {
 
-        final IProcessorDialect dialect =
+        final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildDialect("standard", "TH",
                         "E-20-null-src, E-10-null-src,E-20-null-href,E-20-null-text,E-10-null-text,E-10-*div-text,E-15-*div-src,E-1-form-*action,E-20-form-null,E-10-null-*action,E-50-null-null",
                         "E-200-null-src, E-100-null-src,E-200-null-href,E-200-null-text,E-100-null-text,E-100-*div-text,E-150-*div-src,E-10-form-*action,E-200-form-null,E-100-null-*action,E-500-null-null");
@@ -114,7 +114,7 @@ public final class DialectSetConfigurationTest {
     @Test
     public void testProcessorComputation04() {
 
-        final IProcessorDialect dialect =
+        final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildDialect("standard", "TH",
                         "N-ELEMENT-20-null-src, N-ELEMENT-10-null-src,N-ELEMENT-20-null-href,N-ELEMENT-20-null-text,N-ELEMENT-10-null-text,N-ELEMENT-10-*div-text,N-ELEMENT-15-*div-src,N-ELEMENT-1-form-*action,N-ELEMENT-20-form-null,N-ELEMENT-10-null-*action,N-ELEMENT-50-null-null",
                         "N-ELEMENT-200-null-src, N-ELEMENT-100-null-src,N-ELEMENT-200-null-href,N-ELEMENT-200-null-text,N-ELEMENT-100-null-text,N-ELEMENT-100-*div-text,N-ELEMENT-150-*div-src,N-ELEMENT-10-form-*action,N-ELEMENT-200-form-null,N-ELEMENT-100-null-*action,N-ELEMENT-500-null-null");
@@ -146,7 +146,7 @@ public final class DialectSetConfigurationTest {
     @Test
     public void testProcessorComputation05() {
 
-        final IProcessorDialect dialect =
+        final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildDialect("standard", "TH",
                         "N-ELEMENT-20-null-src, N-CDATA_SECTION-10-some,N-DOC_TYPE-20-other,E-20-null-text,E-10-null-text,N-TEXT-10-whoa!,E-15-*div-src,E-1-form-*action,N-ELEMENT-20-form-null,E-10-null-*action,E-50-null-null,N-CDATA_SECTION-5-someother,T-25-uye,T-10-eo",
                         "N-TEXT-20-whoaX!,T-10-eoX");
@@ -186,7 +186,7 @@ public final class DialectSetConfigurationTest {
     @Test
     public void testProcessorComputation06() {
 
-        final IProcessorDialect dialect =
+        final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildHTMLDialect("standard", "TH",
                         "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other");
 
@@ -217,7 +217,7 @@ public final class DialectSetConfigurationTest {
     @Test
     public void testProcessorComputation07() {
 
-        final IProcessorDialect dialect =
+        final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildXMLDialect("standard", "TH",
                         "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other");
 
@@ -248,7 +248,7 @@ public final class DialectSetConfigurationTest {
     @Test
     public void testProcessorComputation08() {
 
-        final IProcessorDialect dialect =
+        final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildDialect("standard", "TH",
                         "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other",
                         "N-CDATA_SECTION-100-some,CD-40-other,N-COMMENT-100-some,C-40-other,N-DOC_TYPE-100-some,DT-40-other,N-PROCESSING_INSTRUCTION-100-some,PI-40-other,N-TEXT-100-some,T-40-other,N-XML_DECLARATION-100-some,XD-40-other");
