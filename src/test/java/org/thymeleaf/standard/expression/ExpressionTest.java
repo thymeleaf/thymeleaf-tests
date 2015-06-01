@@ -47,7 +47,7 @@ public class ExpressionTest extends TestCase {
     private static final Locale LOCALE_EN = new Locale("en", "US");
 
     private static final String TEMPLATE = "<!DOCTYPE html><html><body><span th:text=\"{%%}\">PLACEHOLDER</span></body></html>";
-    private static final String RESULT_PREFIX = "<!DOCTYPE html>\n<html><body><span>";
+    private static final String RESULT_PREFIX = "<!DOCTYPE html><html><body><span>";
     private static final String RESULT_SUFFIX = "</span></body></html>";
     
     

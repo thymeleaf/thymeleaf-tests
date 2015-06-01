@@ -40,12 +40,7 @@ public class Dialect02DivProcessor extends AbstractElementTagProcessor {
             final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
             final IElementStructureHandler structureHandler) {
 
-        final Markup replacement = processingContext.getMarkupFactory().createMarkup();
-
-        replacement.add(tag);
-        replacement.add(processingContext.getMarkupFactory().createText("[From Dialect 02]"));
-
-        structureHandler.replaceWith(replacement, false);
+        structureHandler.insertBeforeBody("[From Dialect 02]", true);
 
     }
 
