@@ -43,22 +43,22 @@ public class TemplateFragmentMarkupReferenceResolverTest extends TestCase {
 
         final String result01 = rr01.resolveSelectorFromReference("abc");
         final String result02 = rr01.resolveSelectorFromReference("abc");
-        assertEquals("/[fragment='abc' or data-fragment='abc']", result01);
+        assertEquals("/[fragment='abc' or data-fragment='abc' or fragment^='abc(' or data-fragment^='abc(' or fragment^='abc (' or data-fragment^='abc (']", result01);
         assertSame(result01, result02);
 
         final String result03 = rr02.resolveSelectorFromReference("abc");
         final String result04 = rr02.resolveSelectorFromReference("abc");
-        assertEquals("/[th:fragment='abc' or data-th-fragment='abc']", result03);
+        assertEquals("/[th:fragment='abc' or data-th-fragment='abc' or th:fragment^='abc(' or data-th-fragment^='abc(' or th:fragment^='abc (' or data-th-fragment^='abc (']", result03);
         assertSame(result03, result04);
 
         final String result05 = rr05.resolveSelectorFromReference("abc");
         final String result06 = rr05.resolveSelectorFromReference("abc");
-        assertEquals("/[q:fragment='abc' or data-q-fragment='abc']", result05);
+        assertEquals("/[q:fragment='abc' or data-q-fragment='abc' or q:fragment^='abc(' or data-q-fragment^='abc(' or q:fragment^='abc (' or data-q-fragment^='abc (']", result05);
         assertSame(result05, result06);
 
         final String result07 = rr02.resolveSelectorFromReference("abc");
         final String result08 = rr02.resolveSelectorFromReference("abc");
-        assertEquals("/[th:fragment='abc' or data-th-fragment='abc']", result07);
+        assertEquals("/[th:fragment='abc' or data-th-fragment='abc' or th:fragment^='abc(' or data-th-fragment^='abc(' or th:fragment^='abc (' or data-th-fragment^='abc (']", result07);
         assertSame(result07, result08);
 
     }
@@ -78,22 +78,22 @@ public class TemplateFragmentMarkupReferenceResolverTest extends TestCase {
 
         final String result01 = rr01.resolveSelectorFromReference("abc");
         final String result02 = rr01.resolveSelectorFromReference("abc");
-        assertEquals("/[fragment='abc']", result01);
+        assertEquals("/[fragment='abc' or fragment^='abc(' or fragment^='abc (']", result01);
         assertSame(result01, result02);
 
         final String result03 = rr02.resolveSelectorFromReference("abc");
         final String result04 = rr02.resolveSelectorFromReference("abc");
-        assertEquals("/[th:fragment='abc']", result03);
+        assertEquals("/[th:fragment='abc' or th:fragment^='abc(' or th:fragment^='abc (']", result03);
         assertSame(result03, result04);
 
         final String result05 = rr05.resolveSelectorFromReference("abc");
         final String result06 = rr05.resolveSelectorFromReference("abc");
-        assertEquals("/[q:fragment='abc']", result05);
+        assertEquals("/[q:fragment='abc' or q:fragment^='abc(' or q:fragment^='abc (']", result05);
         assertSame(result05, result06);
 
         final String result07 = rr02.resolveSelectorFromReference("abc");
         final String result08 = rr02.resolveSelectorFromReference("abc");
-        assertEquals("/[th:fragment='abc']", result07);
+        assertEquals("/[th:fragment='abc' or th:fragment^='abc(' or th:fragment^='abc (']", result07);
         assertSame(result07, result08);
 
     }
