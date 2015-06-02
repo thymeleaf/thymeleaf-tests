@@ -1,8 +1,6 @@
 %EXTENDS domselector2.common
 # ------------------------------------------------------------
-%FRAGMENT[evaluator] org.thymeleaf.engine.domselector.TestFragmentTestFieldEvaluator
-# ------------------------------------------------------------
-%FRAGMENT h2[class!='panda']
+%FRAGMENT h2[!class or class!='panda']
 # ------------------------------------------------------------
 %OUTPUT
-<h2 class="not-important">Core Features</h2><h2 th:fragment="two">Standard and SpringStandard Dialects</h2>
+<h2 class="not-important">Core Features</h2><h2>Standard and SpringStandard Dialects</h2>
