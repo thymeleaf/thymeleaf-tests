@@ -3,4 +3,4 @@
 %FRAGMENT /h2[1]
 # ------------------------------------------------------------
 %OUTPUT
-<h2 th:fragment="two">Standard and SpringStandard Dialects</h2>
+<h2>Standard and SpringStandard Dialects</h2>

@@ -41,17 +41,20 @@ public class AddContextVariableElementProcessor extends AbstractElementTagProces
             final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
             final IElementStructureHandler structureHandler) {
 
-        final IWebVariablesMap variablesMap = (IWebVariablesMap) processingContext.getVariablesMap();
+        final IWebVariablesMap variablesMap = (IWebVariablesMap) processingContext.getVariables();
         final ILocalVariableAwareVariablesMap localVariableAwareVariablesMap = (ILocalVariableAwareVariablesMap) variablesMap;
 
-        localVariableAwareVariablesMap.put("newvar0", "VariablesNewVar0");
-        localVariableAwareVariablesMap.put("newvar1", "VariablesNewVar1");
+        localVariableAwareVariablesMap.put("newvar0", "LocalVariablesNewVar0");
+        localVariableAwareVariablesMap.put("newvar1", "LocalVariablesNewVar1");
 
         variablesMap.getRequest().setAttribute("newvar2", "RequestAttributesNewVar2");
-        variablesMap.getRequest().setAttribute("newvar3", "ServletRequestNewVar3");
+        variablesMap.getRequest().setAttribute("newvar3", "RequestAttributesNewVar3");
 
         variablesMap.getServletContext().setAttribute("newvar4", "ApplicationAttributesNewVar4");
         variablesMap.getServletContext().setAttribute("newvar5", "ApplicationAttributesNewVar5");
+
+        variablesMap.getSession().setAttribute("newvar6", "SessionAttributesNewVar6");
+        variablesMap.getSession().setAttribute("newvar7", "SessionAttributesNewVar7");
 
         structureHandler.setLocalVariable("one", "one");
         structureHandler.removeElement();

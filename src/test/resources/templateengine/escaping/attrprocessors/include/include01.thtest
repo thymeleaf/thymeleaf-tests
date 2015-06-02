@@ -14,7 +14,8 @@ products = { product1, product2 }
 </table>
 # ------------------------------------------------------------
 %INPUT[product]
-<tr th:fragment="&#112;&#114;&#111;&#100;&#117;&#99;&#116;&#84;&#101;&#109;&#112;&#108;&#97;&#116;&#101;">
+# Note that we cannot use HTML entities in th:fragment, because attoparser would not be able to locate the fragment
+<tr th:fragment="productTemplate">
     <td th:text="&dollar;&lbrace;&#112;&#114;&#111;&#100;&#117;&#99;&#116;&#78;&#97;&#109;&#101;&rbrace;">product name</td>
     <td th:text="${productPrice}">product price</td>
     <td class="&rarr;&lt;">&rarr;&lt;</td>

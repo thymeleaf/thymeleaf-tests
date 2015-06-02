@@ -26,11 +26,11 @@ import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class Dialect01DivProcessor extends AbstractElementTagProcessor {
+public class Dialect02Div2Processor extends AbstractElementTagProcessor {
 
-    
-    public Dialect01DivProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, "div", true, null, false, 100);
+
+    public Dialect02Div2Processor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, "div", true, null, false, 110);
     }
 
 
@@ -41,10 +41,9 @@ public class Dialect01DivProcessor extends AbstractElementTagProcessor {
             final IElementStructureHandler structureHandler) {
 
         final Markup markup = processingContext.getMarkupFactory().createMarkup();
-        markup.add(processingContext.getMarkupFactory().createText("[From Dialect 01]"));
-        structureHandler.insertAfter(markup, true);
+        markup.add(processingContext.getMarkupFactory().createText("[From Dialect 02-2]"));
+        structureHandler.insertBefore(markup);
 
     }
-
 
 }
