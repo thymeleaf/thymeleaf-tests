@@ -1,7 +1,5 @@
 %EXTENDS domselector2.common
 # ------------------------------------------------------------
-%FRAGMENT[evaluator] org.thymeleaf.engine.domselector.TestFragmentTestFieldEvaluator
-# ------------------------------------------------------------
 %FRAGMENT a[href^='index']
 # ------------------------------------------------------------
 %OUTPUT
