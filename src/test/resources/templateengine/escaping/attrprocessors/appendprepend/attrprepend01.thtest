@@ -22,12 +22,12 @@ text03 = '4<&nbsp;6'
 <div abbr="a&aacute;a" th:attrprepend="abbr=${'4&lt;&nbsp;6'}">...</div>
 # ------------------------------------------------------------
 %OUTPUT
-<div abbr="\u00E1\u00E2\u00E3\u00E4\uD840\uDC00a\u00E1a">...</div>
-<div abbr="4&amp;lt;&amp;nbsp;6a\u00E1a">...</div>
-<div abbr="4&lt;\u00A06a\u00E1a">...</div>
-<div abbr="4&lt;&amp;nbsp;6a\u00E1a">...</div>
-<div abbr="4&amp;lt;&amp;nbsp;6a\u00E1a">...</div>
-<div abbr="4&lt;\u00A06a\u00E1a">...</div>
-<div abbr="4&lt;&amp;nbsp;6a\u00E1a">...</div>
-<div abbr="4&lt;\u00A06a\u00E1a">...</div>
-<div abbr="4&lt;\u00A06a\u00E1a">...</div>
+<div abbr="\u00E1\u00E2\u00E3\u00E4\uD840\uDC00a&aacute;a">...</div>
+<div abbr="4&amp;lt;&amp;nbsp;6a&aacute;a">...</div>
+<div abbr="4&lt;\u00A06a&aacute;a">...</div>
+<div abbr="4&lt;&amp;nbsp;6a&aacute;a">...</div>
+<div abbr="4&amp;lt;&amp;nbsp;6a&aacute;a">...</div>
+<div abbr="4&lt;\u00A06a&aacute;a">...</div>
+<div abbr="4&lt;&amp;nbsp;6a&aacute;a">...</div>
+<div abbr="4&lt;\u00A06a&aacute;a">...</div>
+<div abbr="4&lt;\u00A06a&aacute;a">...</div>

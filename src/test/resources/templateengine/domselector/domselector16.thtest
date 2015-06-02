@@ -1,8 +1,6 @@
 %EXTENDS domselector2.common
 # ------------------------------------------------------------
-%FRAGMENT[evaluator] org.thymeleaf.engine.domselector.TestFragmentTestFieldEvaluator
-# ------------------------------------------------------------
 %FRAGMENT //one
 # ------------------------------------------------------------
 %OUTPUT
-<li th:fragment="one">Works both in web and non-web (<i>offline</i>) environments. No hard dependency on the Servlet API.</li>
+<li>Works both in web and non-web (<i>offline</i>) environments. No hard dependency on the Servlet API.</li>

@@ -40,7 +40,9 @@ public class Dialect02DivProcessor extends AbstractElementTagProcessor {
             final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
             final IElementStructureHandler structureHandler) {
 
-        structureHandler.insertBeforeBody("[From Dialect 02]", true);
+        final Markup markup = processingContext.getMarkupFactory().createMarkup();
+        markup.add(processingContext.getMarkupFactory().createText("[From Dialect 02]"));
+        structureHandler.insertAfter(markup, true);
 
     }
 
