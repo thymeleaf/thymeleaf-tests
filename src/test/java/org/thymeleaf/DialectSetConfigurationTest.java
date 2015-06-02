@@ -148,8 +148,8 @@ public final class DialectSetConfigurationTest {
 
         final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildDialect("standard", "TH",
-                        "N-ELEMENT-20-null-src, N-CDATA_SECTION-10-some,N-DOC_TYPE-20-other,E-20-null-text,E-10-null-text,N-TEXT-10-whoa!,E-15-*div-src,E-1-form-*action,N-ELEMENT-20-form-null,E-10-null-*action,E-50-null-null,N-CDATA_SECTION-5-someother,T-25-uye,T-10-eo",
-                        "N-TEXT-20-whoaX!,T-10-eoX");
+                        "N-ELEMENT-20-null-src,E-20-null-text,E-10-null-text,E-15-*div-src,E-1-form-*action,N-ELEMENT-20-form-null,E-10-null-*action,E-50-null-null,T-25-uye,T-10-eo",
+                        "T-10-eoX");
 
         final DialectConfiguration dialectConfiguration = new DialectConfiguration(dialect);
         final DialectSetConfiguration dialectSetConfiguration = DialectSetConfiguration.build(Collections.singleton(dialectConfiguration));
@@ -163,10 +163,10 @@ public final class DialectSetConfigurationTest {
         Assert.assertEquals("[N-ELEMENT-20-{th:form,th-form}-null, E-50-null-null]",elementDefinitions.forHTMLName("th", "form").getAssociatedProcessors().toString());
         Assert.assertEquals("[]",attributeDefinitions.forHTMLName("th", "utext").getAssociatedProcessors().toString());
         Assert.assertEquals("[E-50-null-null]",elementDefinitions.forHTMLName("p").getAssociatedProcessors().toString());
-        Assert.assertEquals("[N-CDATA_SECTION-5-someother, N-CDATA_SECTION-10-some]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[N-TEXT-10-whoa!, T-10-eo, T-25-uye]", dialectSetConfiguration.getTextProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[T-10-eoX, N-TEXT-20-whoaX!]", dialectSetConfiguration.getTextProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[N-DOC_TYPE-20-other]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[T-10-eo, T-25-uye]", dialectSetConfiguration.getTextProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[T-10-eoX]", dialectSetConfiguration.getTextProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.HTML).toString());
 
         Assert.assertEquals("[]", dialectSetConfiguration.getCommentProcessors(TemplateMode.HTML).toString());
         Assert.assertEquals("[]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.HTML).toString());
@@ -188,19 +188,19 @@ public final class DialectSetConfigurationTest {
 
         final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildHTMLDialect("standard", "TH",
-                        "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other");
+                        "CD-4-other,C-4-other,DT-4-other,PI-4-other,T-4-other,XD-4-other");
 
         final DialectConfiguration dialectConfiguration = new DialectConfiguration(dialect);
         final DialectSetConfiguration dialectSetConfiguration = DialectSetConfiguration.build(Collections.singleton(dialectConfiguration));
 
         Assert.assertEquals("TH", dialect.getPrefix());
 
-        Assert.assertEquals("[CD-4-other, N-CDATA_SECTION-10-some]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[C-4-other, N-COMMENT-10-some]", dialectSetConfiguration.getCommentProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[DT-4-other, N-DOC_TYPE-10-some]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[PI-4-other, N-PROCESSING_INSTRUCTION-10-some]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[T-4-other, N-TEXT-10-some]", dialectSetConfiguration.getTextProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[XD-4-other, N-XML_DECLARATION-10-some]", dialectSetConfiguration.getXMLDeclarationProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[CD-4-other]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[C-4-other]", dialectSetConfiguration.getCommentProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[DT-4-other]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[PI-4-other]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[T-4-other]", dialectSetConfiguration.getTextProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[XD-4-other]", dialectSetConfiguration.getXMLDeclarationProcessors(TemplateMode.HTML).toString());
 
         Assert.assertEquals("[]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.XML).toString());
         Assert.assertEquals("[]", dialectSetConfiguration.getCommentProcessors(TemplateMode.XML).toString());
@@ -219,19 +219,19 @@ public final class DialectSetConfigurationTest {
 
         final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildXMLDialect("standard", "TH",
-                        "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other");
+                        "CD-4-other,C-4-other,DT-4-other,PI-4-other,T-4-other,XD-4-other");
 
         final DialectConfiguration dialectConfiguration = new DialectConfiguration(dialect);
         final DialectSetConfiguration dialectSetConfiguration = DialectSetConfiguration.build(Collections.singleton(dialectConfiguration));
 
         Assert.assertEquals("TH", dialect.getPrefix());
 
-        Assert.assertEquals("[CD-4-other, N-CDATA_SECTION-10-some]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[C-4-other, N-COMMENT-10-some]", dialectSetConfiguration.getCommentProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[DT-4-other, N-DOC_TYPE-10-some]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[PI-4-other, N-PROCESSING_INSTRUCTION-10-some]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[T-4-other, N-TEXT-10-some]", dialectSetConfiguration.getTextProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[XD-4-other, N-XML_DECLARATION-10-some]", dialectSetConfiguration.getXMLDeclarationProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[CD-4-other]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[C-4-other]", dialectSetConfiguration.getCommentProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[DT-4-other]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[PI-4-other]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[T-4-other]", dialectSetConfiguration.getTextProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[XD-4-other]", dialectSetConfiguration.getXMLDeclarationProcessors(TemplateMode.XML).toString());
 
         Assert.assertEquals("[]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.HTML).toString());
         Assert.assertEquals("[]", dialectSetConfiguration.getCommentProcessors(TemplateMode.HTML).toString());
@@ -250,27 +250,27 @@ public final class DialectSetConfigurationTest {
 
         final ProcessorAggregationTestDialect dialect =
                 ProcessorAggregationTestDialect.buildDialect("standard", "TH",
-                        "N-CDATA_SECTION-10-some,CD-4-other,N-COMMENT-10-some,C-4-other,N-DOC_TYPE-10-some,DT-4-other,N-PROCESSING_INSTRUCTION-10-some,PI-4-other,N-TEXT-10-some,T-4-other,N-XML_DECLARATION-10-some,XD-4-other",
-                        "N-CDATA_SECTION-100-some,CD-40-other,N-COMMENT-100-some,C-40-other,N-DOC_TYPE-100-some,DT-40-other,N-PROCESSING_INSTRUCTION-100-some,PI-40-other,N-TEXT-100-some,T-40-other,N-XML_DECLARATION-100-some,XD-40-other");
+                        "CD-4-other,C-4-other,DT-4-other,PI-4-other,T-4-other,XD-4-other",
+                        "CD-40-other,C-40-other,DT-40-other,PI-40-other,T-40-other,XD-40-other");
 
         final DialectConfiguration dialectConfiguration = new DialectConfiguration(dialect);
         final DialectSetConfiguration dialectSetConfiguration = DialectSetConfiguration.build(Collections.singleton(dialectConfiguration));
 
         Assert.assertEquals("TH", dialect.getPrefix());
 
-        Assert.assertEquals("[CD-4-other, N-CDATA_SECTION-10-some]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[C-4-other, N-COMMENT-10-some]", dialectSetConfiguration.getCommentProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[DT-4-other, N-DOC_TYPE-10-some]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[PI-4-other, N-PROCESSING_INSTRUCTION-10-some]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[T-4-other, N-TEXT-10-some]", dialectSetConfiguration.getTextProcessors(TemplateMode.HTML).toString());
-        Assert.assertEquals("[XD-4-other, N-XML_DECLARATION-10-some]", dialectSetConfiguration.getXMLDeclarationProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[CD-4-other]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[C-4-other]", dialectSetConfiguration.getCommentProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[DT-4-other]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[PI-4-other]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[T-4-other]", dialectSetConfiguration.getTextProcessors(TemplateMode.HTML).toString());
+        Assert.assertEquals("[XD-4-other]", dialectSetConfiguration.getXMLDeclarationProcessors(TemplateMode.HTML).toString());
 
-        Assert.assertEquals("[CD-40-other, N-CDATA_SECTION-100-some]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[C-40-other, N-COMMENT-100-some]", dialectSetConfiguration.getCommentProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[DT-40-other, N-DOC_TYPE-100-some]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[PI-40-other, N-PROCESSING_INSTRUCTION-100-some]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[T-40-other, N-TEXT-100-some]", dialectSetConfiguration.getTextProcessors(TemplateMode.XML).toString());
-        Assert.assertEquals("[XD-40-other, N-XML_DECLARATION-100-some]", dialectSetConfiguration.getXMLDeclarationProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[CD-40-other]", dialectSetConfiguration.getCDATASectionProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[C-40-other]", dialectSetConfiguration.getCommentProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[DT-40-other]", dialectSetConfiguration.getDocTypeProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[PI-40-other]", dialectSetConfiguration.getProcessingInstructionProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[T-40-other]", dialectSetConfiguration.getTextProcessors(TemplateMode.XML).toString());
+        Assert.assertEquals("[XD-40-other]", dialectSetConfiguration.getXMLDeclarationProcessors(TemplateMode.XML).toString());
 
     }
 
