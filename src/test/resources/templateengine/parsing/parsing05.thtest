@@ -4,4 +4,4 @@
 <div><p>Something here<p>And something here too
 # ------------------------------------------------------------
 %OUTPUT
-<div><p>Something here</p><p>And something here too</p></div>
+<div><p>Something here<p>And something here too
