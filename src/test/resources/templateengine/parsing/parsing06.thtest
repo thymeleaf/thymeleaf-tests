@@ -4,4 +4,4 @@
 <html><body><p>Something here<p>And something here too<div>one</body></html>
 # ------------------------------------------------------------
 %OUTPUT
-<html><head></head><body><p>Something here</p><p>And something here too</p><div>one</div></body></html>
+<html><body><p>Something here<p>And something here too<div>one</body></html>
