@@ -23,9 +23,6 @@ import java.util.Collections;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.DialectConfiguration;
-import org.thymeleaf.DialectSetConfiguration;
-import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeDefinitions;
 import org.thymeleaf.engine.ElementDefinitions;
 import org.thymeleaf.engine.ProcessorAggregationTestDialect;

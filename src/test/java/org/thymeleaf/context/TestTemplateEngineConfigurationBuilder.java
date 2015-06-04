@@ -20,16 +20,11 @@
 package org.thymeleaf.context;
 
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.thymeleaf.DialectConfiguration;
 import org.thymeleaf.IEngineConfiguration;
-import org.thymeleaf.EngineConfiguration;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.standard.StandardDialect;
-import org.thymeleaf.text.TextRepositories;
 
 
 public final class TestTemplateEngineConfigurationBuilder {

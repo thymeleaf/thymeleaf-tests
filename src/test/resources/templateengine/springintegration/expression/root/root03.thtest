@@ -8,5 +8,5 @@ class = 'This is a class text'
 <p th:text="${class}">...</p>
 # ------------------------------------------------------------
 %OUTPUT
-<p>class org.thymeleaf.context.WrappingVariablesMap</p>
-<p>class org.thymeleaf.context.WrappingVariablesMap</p>
+<p>This is a class text</p>
+<p>This is a class text</p>
