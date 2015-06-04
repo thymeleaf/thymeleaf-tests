@@ -7,23 +7,10 @@
   </ul>
 </body>
 # ------------------------------------------------------------
-%OUTPUT
-<body>
-  <ul>
-    <li>ONE1</li>
-    <li>TWO2</li>
-    <li>THREE3</li>
-    <li>FOUR4</li>
-    <li>FIVE5</li>
-    <li>SIX6</li>
-    <li>SEVEN7</li>
-    <li>EIGHT8</li>
-    <li>NINE9</li>
-    <li>TEN10</li>
-    <li>ELEVEN11</li>
-    <li>TWELVE12</li>
-    <li>THIRTEEN13</li>
-    <li>FOURTEEN14</li>
-    <li>FIFTEEN15</li>
-  </ul>
-</body>
+%EXCEPTION
+org.thymeleaf.exceptions.TemplateProcessingException
+# ------------------------------------------------------------
+%EXCEPTION_MESSAGE_PATTERN
+# The 'beans.name' access utility for Spring beans was deprecated in 2.1 and removed in 3.0 in favour of
+# the more SpringEL-integrated '@name'
+(.*?)Exception evaluating SpringEL expression\: \"beans\.domainValues\"(.*?)

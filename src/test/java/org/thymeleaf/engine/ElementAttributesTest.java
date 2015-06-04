@@ -26,10 +26,10 @@ import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.model.IElementAttributes;
 import org.thymeleaf.model.IOpenElementTag;
 import org.thymeleaf.model.IStandaloneElementTag;
-import org.thymeleaf.templateparser.HTMLTemplateParser;
-import org.thymeleaf.templateparser.XMLTemplateParser;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.HTMLTemplateParser;
+import org.thymeleaf.templateparser.XMLTemplateParser;
 
 
 public final class ElementAttributesTest {

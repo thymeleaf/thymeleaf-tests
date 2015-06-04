@@ -19,12 +19,12 @@
  */
 package org.thymeleaf.spring4.view;
 
+import java.util.Locale;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.servlet.View;
-
-import java.util.Locale;
 
 public class ThymeleafViewResolverTest {
 
