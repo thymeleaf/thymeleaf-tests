@@ -26,7 +26,7 @@ caps = {cap1, cap2, cap3}
 # ------------------------------------------------------------
 %OUTPUT
 <table>
-  <TBODY><tr>
+  <tr>
     <td>Madrid</td>
     <td>Spain</td>
   </tr>
@@ -37,5 +37,5 @@ caps = {cap1, cap2, cap3}
   <tr>
     <td>Paris</td>
     <td>France</td>
-  </tr></TBODY>
+  </tr>
 </table>

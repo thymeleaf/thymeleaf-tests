@@ -19,18 +19,10 @@
  */
 package org.thymeleaf.templateengine.springintegration.mvc.controllers;
 
-import java.util.Arrays;
-
-import org.junit.Assert;
-import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
-import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
 @Controller

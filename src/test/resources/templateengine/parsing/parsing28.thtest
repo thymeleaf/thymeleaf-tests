@@ -6,6 +6,8 @@
 </script>
 # ------------------------------------------------------------
 %OUTPUT
+# Note <script type="text/template"> are CDATA, so they are not processed. Also note this
+# is different to <template>, which will be processed
 <script type="text/template">
-    <span>Executed</span>
+    <span th:text="Executed">Not executed</span>
 </script>

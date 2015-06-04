@@ -24,9 +24,9 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.aggregation.dialect.Dialect01;
 import org.thymeleaf.templateengine.aggregation.dialect.Dialect02;
-import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 

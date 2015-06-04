@@ -19,9 +19,9 @@ columns = {'alpha','beta'}
 %OUTPUT
 <form>
 <div>
-  <input value="entityON" type="checkbox" id="properties&#39;alpha&#39;1" name="properties[&#39;alpha&#39;]" /><input type="hidden" name="_properties[&#39;alpha&#39;]" value="on" />
+  <input value="entityON" type="checkbox" id="properties'alpha'1" name="properties['alpha']" /><input type="hidden" name="_properties['alpha']" value="on" />
 </div>
 <div>
-  <input value="entityON" type="checkbox" id="properties&#39;beta&#39;1" name="properties[&#39;beta&#39;]" /><input type="hidden" name="_properties[&#39;beta&#39;]" value="on" />
+  <input value="entityON" type="checkbox" id="properties'beta'1" name="properties['beta']" /><input type="hidden" name="_properties['beta']" value="on" />
 </div>
 </form>
