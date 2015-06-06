@@ -75,10 +75,10 @@ date.format=MMMM dd'','' yyyy
     
     <p>Please select an option</p>
     <ol>
-      <li><a href="/testing/product/list" shape="rect">Product List</a></li>
-      <li><a href="/testing/order/list" shape="rect">Order List</a></li>
-      <li><a href="/testing/subscribe" shape="rect">Subscribe to our Newsletter</a></li>
-      <li><a href="/testing/userprofile" shape="rect">See User Profile</a></li>
+      <li><a href="/testing/product/list">Product List</a></li>
+      <li><a href="/testing/order/list">Order List</a></li>
+      <li><a href="/testing/subscribe">Subscribe to our Newsletter</a></li>
+      <li><a href="/testing/userprofile">See User Profile</a></li>
     </ol>
       
     <p>Now you are looking at a <span>working web application</span>.</p>

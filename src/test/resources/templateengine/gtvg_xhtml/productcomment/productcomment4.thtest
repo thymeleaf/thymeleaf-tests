@@ -21,12 +21,12 @@ prod = prod4
   
     <table>
       <tr>
-        <td rowspan="1" colspan="1">Very tasty! I&#39;d definitely buy it again!</td>
+        <td>Very tasty! I&#39;d definitely buy it again!</td>
       </tr>
     </table>
   
     <p>
-      <a href="/testing/product/list" shape="rect">Return to product list</a>
+      <a href="/testing/product/list">Return to product list</a>
     </p>
     
   </body>
