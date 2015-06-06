@@ -30,7 +30,8 @@ m9 = 'This nested comment is displayed in IE 7.'
 <!--[if true]><![if IE 7]><p th:text="${m9}">...</p><![endif]><![endif]-->
 # ------------------------------------------------------------
 %OUTPUT
-<!--[if IE]><p>You are using Internet Explorer.</p><![endif]-->...
+<!--[if IE]><p>You are using Internet Explorer.</p><![endif]-->
+...
 <!--[if IE 7]><p>Welcome to Internet Explorer 7!</p><![endif]-->
 ...
 <!--[if !(IE 7)]><p>You are not using version 7.</p><![endif]-->
