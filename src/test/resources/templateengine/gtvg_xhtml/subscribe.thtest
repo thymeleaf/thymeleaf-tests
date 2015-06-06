@@ -37,7 +37,6 @@ subscribe.submit=Subscribe me!
 %OUTPUT 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 
   <head>
@@ -50,7 +49,7 @@ subscribe.submit=Subscribe me!
   
     <p>Subscribe to our newsletter:</p>
   
-    <form action="/testing/subscribe" method="get" enctype="application/x-www-form-urlencoded">
+    <form action="/testing/subscribe">
       <fieldset>
         <input type="text" name="email" />
         <input type="submit" value="Subscribe me!" />
@@ -58,7 +57,7 @@ subscribe.submit=Subscribe me!
     </form>
   
     <p>
-      <a href="/testing/" shape="rect">Return to home</a>
+      <a href="/testing/">Return to home</a>
     </p>
   
   </body>

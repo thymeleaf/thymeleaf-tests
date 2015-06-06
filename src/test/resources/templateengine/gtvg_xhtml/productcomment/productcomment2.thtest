@@ -21,14 +21,14 @@ prod = prod2
   
     <table>
       <tr>
-        <td rowspan="1" colspan="1">I&#39;m so sad this product is no longer available!</td>
+        <td>I&#39;m so sad this product is no longer available!</td>
       </tr><tr class="odd">
-        <td rowspan="1" colspan="1">When do you expect to have it back?</td>
+        <td>When do you expect to have it back?</td>
       </tr>
     </table>
   
     <p>
-      <a href="/testing/product/list" shape="rect">Return to product list</a>
+      <a href="/testing/product/list">Return to product list</a>
     </p>
     
   </body>

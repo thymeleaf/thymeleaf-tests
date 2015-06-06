@@ -23,7 +23,7 @@ prod = prod3
     </table>
   
     <p>
-      <a href="/testing/product/list" shape="rect">Return to product list</a>
+      <a href="/testing/product/list">Return to product list</a>
     </p>
     
   </body>
