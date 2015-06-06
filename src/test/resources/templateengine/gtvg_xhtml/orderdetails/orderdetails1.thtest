@@ -35,22 +35,22 @@ order = order1
   
     <table>
       <tr>
-        <th rowspan="1" colspan="1">PRODUCT</th>
-        <th rowspan="1" colspan="1">AMOUNT</th>
-        <th rowspan="1" colspan="1">PURCHASE PRICE</th>
+        <th>PRODUCT</th>
+        <th>AMOUNT</th>
+        <th>PURCHASE PRICE</th>
       </tr>
       <tr>
-        <td rowspan="1" colspan="1">Italian Tomato</td>
-        <td class="number" rowspan="1" colspan="1">2</td>
-        <td class="number" rowspan="1" colspan="1">0.99</td>
+        <td>Italian Tomato</td>
+        <td class="number">2</td>
+        <td class="number">0.99</td>
       </tr><tr class="odd">
-        <td rowspan="1" colspan="1">Yellow Bell Pepper</td>
-        <td class="number" rowspan="1" colspan="1">4</td>
-        <td class="number" rowspan="1" colspan="1">2.50</td>
+        <td>Yellow Bell Pepper</td>
+        <td class="number">4</td>
+        <td class="number">2.50</td>
       </tr><tr>
-        <td rowspan="1" colspan="1">Old Cheddar</td>
-        <td class="number" rowspan="1" colspan="1">1</td>
-        <td class="number" rowspan="1" colspan="1">15.50</td>
+        <td>Old Cheddar</td>
+        <td class="number">1</td>
+        <td class="number">15.50</td>
       </tr>
     </table>
 
@@ -59,7 +59,7 @@ order = order1
     </div>
   
     <p>
-      <a href="/testing/order/list" shape="rect">Return to order list</a>
+      <a href="/testing/order/list">Return to order list</a>
     </p>
     
   </body>

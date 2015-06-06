@@ -35,14 +35,14 @@ order = order3
   
     <table>
       <tr>
-        <th rowspan="1" colspan="1">PRODUCT</th>
-        <th rowspan="1" colspan="1">AMOUNT</th>
-        <th rowspan="1" colspan="1">PURCHASE PRICE</th>
+        <th>PRODUCT</th>
+        <th>AMOUNT</th>
+        <th>PURCHASE PRICE</th>
       </tr>
       <tr>
-        <td rowspan="1" colspan="1">Fresh Sweet Basil</td>
-        <td class="number" rowspan="1" colspan="1">8</td>
-        <td class="number" rowspan="1" colspan="1">5.99</td>
+        <td>Fresh Sweet Basil</td>
+        <td class="number">8</td>
+        <td class="number">5.99</td>
       </tr>
     </table>
 
@@ -51,7 +51,7 @@ order = order3
     </div>
   
     <p>
-      <a href="/testing/order/list" shape="rect">Return to order list</a>
+      <a href="/testing/order/list">Return to order list</a>
     </p>
     
   </body>
