@@ -15,9 +15,9 @@
 <a href="{this/url}">...</a>
 <a href="{/testing/this/url}">...</a>
 <a href="{http://this/url}">...</a>
-<form action="[/testing/doit]" method="post">
+<form action="[/testing/doit]" method="post"><input type="hidden" name="extra-field1" value="The value of the First Extra field" /><input type="hidden" name="extra-field2" value="The value of the Second Extra field" />
    <a href="{this/url}">...</a>
    <a href="{/testing/this/url}">...</a>
    <a href="{http://this/url}">...</a>
    <input type="text" id="name" name="name" value="(Mark Lettuce,name,text)" />
-<input type="hidden" name="extra-field1" value="The value of the First Extra field" /><input type="hidden" name="extra-field2" value="The value of the Second Extra field" /></form>
+</form>

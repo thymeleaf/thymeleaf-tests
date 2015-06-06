@@ -22,7 +22,7 @@
 </form>
 # ------------------------------------------------------------
 %OUTPUT
-<form action="[/testing/doit]" method="post"><input type="hidden" name="_method" value="(delete,_method,hidden)" />
+<form action="[/testing/doit]" method="post"><input type="hidden" name="extra-field1" value="The value of the First Extra field" /><input type="hidden" name="extra-field2" value="The value of the Second Extra field" /><input type="hidden" name="_method" value="(delete,_method,hidden)" />
    <input type="text" id="name" name="name" value="(Mark Lettuce,name,text)" />
    <input type="hidden" id="name" name="name" value="(Mark Lettuce,name,hidden)" />
    <input type="email" id="name" name="name" value="(Mark Lettuce,name,email)" />
@@ -40,4 +40,4 @@
      <option value="(true,valid,option)" selected="selected">Yes</option>
      <option value="(false,valid,option)">No</option>
    </select>
-<input type="hidden" name="extra-field1" value="The value of the First Extra field" /><input type="hidden" name="extra-field2" value="The value of the Second Extra field" /></form>
+</form>
