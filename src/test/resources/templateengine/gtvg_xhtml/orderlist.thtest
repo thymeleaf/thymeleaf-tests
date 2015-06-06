@@ -60,38 +60,38 @@
   
     <table>
       <tr>
-        <th rowspan="1" colspan="1">DATE</th>
-        <th rowspan="1" colspan="1">CUSTOMER</th>
-        <th rowspan="1" colspan="1">TOTAL</th>
-        <th rowspan="1" colspan="1"></th>
+        <th>DATE</th>
+        <th>CUSTOMER</th>
+        <th>TOTAL</th>
+        <th></th>
       </tr>
       <tr>
-        <td rowspan="1" colspan="1">12/Jan/2009</td>
-        <td rowspan="1" colspan="1">Shannon Parsley</td>
-        <td rowspan="1" colspan="1">27.48</td>
-        <td rowspan="1" colspan="1">
-          <a href="/testing/order/details?orderId=1" shape="rect">view</a>
+        <td>12/Jan/2009</td>
+        <td>Shannon Parsley</td>
+        <td>27.48</td>
+        <td>
+          <a href="/testing/order/details?orderId=1">view</a>
         </td>
       </tr><tr class="odd">
-        <td rowspan="1" colspan="1">09/Jun/2010</td>
-        <td rowspan="1" colspan="1">George Garlic</td>
-        <td rowspan="1" colspan="1">54.73</td>
-        <td rowspan="1" colspan="1">
-          <a href="/testing/order/details?orderId=2" shape="rect">view</a>
+        <td>09/Jun/2010</td>
+        <td>George Garlic</td>
+        <td>54.73</td>
+        <td>
+          <a href="/testing/order/details?orderId=2">view</a>
         </td>
       </tr><tr>
-        <td rowspan="1" colspan="1">18/Jul/2010</td>
-        <td rowspan="1" colspan="1">James Cucumber</td>
-        <td rowspan="1" colspan="1">47.92</td>
-        <td rowspan="1" colspan="1">
-          <a href="/testing/order/details?orderId=3" shape="rect">view</a>
+        <td>18/Jul/2010</td>
+        <td>James Cucumber</td>
+        <td>47.92</td>
+        <td>
+          <a href="/testing/order/details?orderId=3">view</a>
         </td>
       </tr>
     </table>
 
   
     <p>
-      <a href="/testing/" shape="rect">Return to home</a>
+      <a href="/testing/">Return to home</a>
     </p>
     
   </body>
