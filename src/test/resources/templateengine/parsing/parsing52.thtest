@@ -7,12 +7,12 @@ data = {'alpha','beta'}
 # ------------------------------------------------------------
 %INPUT
 <div>
-    <p th:each="d : ${data}" th:text="${d}">...</p>
+    <span th:each="d : ${data}" th:text="${d}">...</span>
 </div>
 # ------------------------------------------------------------
 %OUTPUT
 # This is XML mode, so the engine should not mind the element being iterated, whitespace will be added always
 <div>
-    <p>alpha</p>
-    <p>beta</p>
+    <span>alpha</span>
+    <span>beta</span>
 </div>
