@@ -30,7 +30,7 @@ import org.thymeleaf.resource.IResource;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.resourceresolver.IResourceResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateparser.HTMLTemplateParser;
+import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
 
 public final class BareHtmlEngineTest {
