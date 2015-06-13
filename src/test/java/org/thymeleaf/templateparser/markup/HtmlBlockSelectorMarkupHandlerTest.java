@@ -17,7 +17,7 @@
  *
  * =============================================================================
  */
-package org.thymeleaf.templateparser;
+package org.thymeleaf.templateparser.markup;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,6 +39,7 @@ import org.thymeleaf.engine.ITemplateHandler;
 import org.thymeleaf.engine.OutputTemplateHandler;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
 /*
  *

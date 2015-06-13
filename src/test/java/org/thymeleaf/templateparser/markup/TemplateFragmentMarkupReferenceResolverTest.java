@@ -17,9 +17,10 @@
  *
  * =============================================================================
  */
-package org.thymeleaf.templateparser;
+package org.thymeleaf.templateparser.markup;
 
 import junit.framework.TestCase;
+import org.thymeleaf.templateparser.markup.TemplateFragmentMarkupReferenceResolver;
 
 /*
  *

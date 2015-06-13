@@ -28,8 +28,8 @@ import org.thymeleaf.model.IOpenElementTag;
 import org.thymeleaf.model.IStandaloneElementTag;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateparser.HTMLTemplateParser;
-import org.thymeleaf.templateparser.XMLTemplateParser;
+import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
+import org.thymeleaf.templateparser.markup.XMLTemplateParser;
 
 
 public final class ElementAttributesTest {
