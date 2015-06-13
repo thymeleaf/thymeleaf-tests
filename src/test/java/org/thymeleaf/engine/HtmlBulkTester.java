@@ -31,7 +31,7 @@ import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.resource.ReaderResource;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateparser.HTMLTemplateParser;
+import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
 public class HtmlBulkTester {
 
