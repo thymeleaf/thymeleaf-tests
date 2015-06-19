@@ -25,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.thymeleaf.templateparser.markup.ThymeleafMarkupTemplateReader;
 
 
-public final class ThymeleafTemplateReaderTest {
+public final class ThymeleafMarkupTemplateReaderTest {
 
 
     @Test
@@ -44,7 +45,7 @@ public final class ThymeleafTemplateReaderTest {
                     for (int l = 0; l < k; l++) {
 
                         final Reader stringReader =
-                                new ThymeleafTemplateReader(new StringReader(allMessages[i]));
+                                new ThymeleafMarkupTemplateReader(new StringReader(allMessages[i]));
 
                         final char[] buffer = new char[j];
 
