@@ -32,9 +32,9 @@ public final class ThymeleafMarkupTemplateReaderTest {
 
 
     @Test
-    public void testReader() throws Exception {
+    public void testPrototypeOnlyComments() throws Exception {
 
-        final String[] allMessages = computeAllMessages();
+        final String[] allMessages = computeAllPrototypeOnlyMessages();
 
         for (int i = 0; i < allMessages.length; i++) {
 
@@ -73,12 +73,9 @@ public final class ThymeleafMarkupTemplateReaderTest {
                             }
                         }
 
-                        System.out.println(result);
-
                     }
 
                 }
-
 
             }
 
@@ -89,7 +86,63 @@ public final class ThymeleafMarkupTemplateReaderTest {
 
 
 
-    private static String[] computeAllMessages() {
+    @Test
+    public void testParserLevelComments() throws Exception {
+
+        final String[] allMessages = computeAllParserLevelMessages();
+for (final String message: allMessages) {
+    System.out.println(message + " - " + computeParserLevelEquivalent(message));
+}
+        for (int i = 0; i < allMessages.length; i++) {
+
+            for (int j = 1; j <= (allMessages[i].length() + 10); j++) {
+
+                for (int k = 1; k <= j; k++) {
+
+                    for (int l = 0; l < k; l++) {
+
+                        final Reader stringReader =
+                                new ThymeleafMarkupTemplateReader(new StringReader(allMessages[i]));
+
+                        final char[] buffer = new char[j];
+
+                        final StringBuilder strBuilder = new StringBuilder();
+                        int read = 0;
+                        while (read >= 0) {
+                            read = stringReader.read(buffer, l, (k - l));
+                            if (read >= 0) {
+                                strBuilder.append(buffer, l, read);
+                            }
+                        }
+
+                        final String result = strBuilder.toString();
+
+                        if (result.equals("0123456789")) {
+                            continue;
+                        }
+
+                        final int suffixIdx = result.indexOf("/*/-->");
+                        if (suffixIdx != -1) {
+                            final StringBuilder resultBuilder = new StringBuilder(result);
+                            resultBuilder.delete(suffixIdx, suffixIdx + ("/*/-->".length()));
+                            if (resultBuilder.toString().equals("0123456789")) {
+                                continue;
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+
+    private static String[] computeAllPrototypeOnlyMessages() {
 
         final List<String> allMessages = new ArrayList<String>();
 
@@ -132,6 +185,76 @@ public final class ThymeleafMarkupTemplateReaderTest {
 
         return allMessages.toArray(new String[allMessages.size()]);
 
+    }
+
+
+
+
+    private static String[] computeAllParserLevelMessages() {
+
+        final List<String> allMessages = new ArrayList<String>();
+
+        final String prefix = "<!--/*";
+        final String suffix = "*/-->";
+        final String message = "0123456789";
+
+
+        for (int i = 0; i <= message.length(); i++) {
+
+            final StringBuilder msb1 = new StringBuilder(message);
+            msb1.insert(i, suffix);
+
+            for (int j = 0; j <= i; j++) {
+
+                final StringBuilder msb2 = new StringBuilder(msb1);
+                msb2.insert(j, prefix);
+
+                for (int k = 0; k <= j; k++) {
+
+                    final StringBuilder msb3 = new StringBuilder(msb2);
+                    msb3.insert(k, suffix);
+
+                    allMessages.add(msb3.toString());
+
+                    for (int l = 0; l <= k; l++) {
+
+                        final StringBuilder msb4 = new StringBuilder(msb3);
+                        msb4.insert(l, prefix);
+
+                        allMessages.add(msb4.toString());
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return allMessages.toArray(new String[allMessages.size()]);
+
+    }
+
+
+
+    private static String computeParserLevelEquivalent(final String message) {
+
+        final StringBuilder stringBuilder = new StringBuilder();
+        final int messageLen = message.length();
+        boolean inComment = false;
+        for (int i = 0; i < messageLen; i++) {
+            if (message.charAt(i) == '<') {
+                inComment = true;
+                continue;
+            } else if (inComment && message.charAt(i) == '>') {
+                inComment = false;
+                continue;
+            }
+            if (!inComment) {
+                stringBuilder.append(message.charAt(i));
+            }
+        }
+        return stringBuilder.toString();
     }
 
 
