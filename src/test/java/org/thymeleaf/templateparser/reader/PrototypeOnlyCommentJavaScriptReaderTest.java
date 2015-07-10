@@ -29,7 +29,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public final class PrototypeOnlyCommentMarkupReaderTest {
+public final class PrototypeOnlyCommentJavaScriptReaderTest {
 
 
     @Test
@@ -48,41 +48,41 @@ public final class PrototypeOnlyCommentMarkupReaderTest {
     @Test
     public void test02() throws Exception {
 
-        testMessage("<!-- hello -->", "<!-- hello -->");
-        testMessage("<!-- <!--/* hello /*/--> -->", "<!-- <!--/* hello /*/--> -->");
-        testMessage("<!-- <!--/* hello /*/--> */-->", "<!-- <!--/* hello /*/--> */-->");
-        testMessage("<!-- <!--/* hello /*/--> */--> -->", "<!-- <!--/* hello /*/--> */--> -->");
-        testMessage("<!-- <!--/*/ hello /*/--> */--> -->", "<!--  hello  */--> -->");
-        testMessage("<!-- <!--/*/ hello /*/--> */--> <!--/* -->", "<!--  hello  */--> <!--/* -->");
-        testMessage("<!-- <!--/*/ hello /*/--> */--> <!--/* */-->-->", "<!--  hello  */--> <!--/* */-->-->");
+        testMessage("/* hello */", "/* hello */");
+        testMessage("/* /*[[[ hello +]*/ */", "/* /*[[[ hello +]*/ */");
+        testMessage("/* /*[[[ hello +]*/ +]]]*///", "/* /*[[[ hello +]*/ +]]]*///");
+        testMessage("/* /*[[[ hello +]*/ +]]]*/// */", "/* /*[[[ hello +]*/ +]]]*/// */");
+        testMessage("/* /*[+ hello +]*/ +]]]*/// */", "/*  hello  +]]]*/// */");
+        testMessage("/* /*[+ hello +]*/ +]]]*/// /*[[[ */", "/*  hello  +]]]*/// /*[[[ */");
+        testMessage("/* /*[+ hello +]*/ +]]]*/// /*[[[ +]]]*///*/", "/*  hello  +]]]*/// /*[[[ +]]]*///*/");
         testMessage("hello", "hello");
-        testMessage("<!--/* hello /*/-->", "<!--/* hello /*/-->");
-        testMessage("<!--/* hello /*/--> a*/-->a", "<!--/* hello /*/--> a*/-->a");
-        testMessage("<!--/* hello /*/--> */-->", "<!--/* hello /*/--> */-->");
-        testMessage("<!--/*/ hello /*/-->", " hello ");
-        testMessage("<!--/*/ hello /*/--> */-->", " hello  */-->");
-        testMessage("<!--/*/ hello /*/--> aa*/-->bb", " hello  aa*/-->bb");
-        testMessage("<!--/*/hello/*/-->", "hello");
-        testMessage("<!--/*/hello/*/--> */--> aa", "hello */--> aa");
-        testMessage("<!--/*/hello/*/--> */-->", "hello */-->");
-        testMessage("hey <!--/*/hello/*/-->", "hey hello");
-        testMessage("hey <!--/*/hello/*/--> */-->", "hey hello */-->");
-        testMessage("hey <!--/*/hello/*/--> */-->", "hey hello */-->");
-        testMessage("hey <!--/*/hello/*/--> /*/-->", "hey hello /*/-->");
-        testMessage("hey <!--/*/hello/*/--> /*/-->", "hey hello /*/-->");
-        testMessage("<!--/*/ hello /*/--> */-->", " hello  */-->");
-        testMessage("<!--/*/ hello /*/--> */--> -->", " hello  */--> -->");
-        testMessage("<!--/*/ hello /*/--> */--> <!--/*", " hello  */--> <!--/*");
-        testMessage("<!--/*/ hello /*/--> */--> <!--/* -->", " hello  */--> <!--/* -->");
-        testMessage("<!--/*/ hello /*/--> */--> <!--/* */-->-->", " hello  */--> <!--/* */-->-->");
-        testMessage("<!--/*/ hello /*/--> */--> <!--/* */-->", " hello  */--> <!--/* */-->");
-        testMessage("<!--/*/hello /*/--> */-->", "hello  */-->");
-        testMessage("<!--/*/hello /*/--> */--> -->", "hello  */--> -->");
-        testMessage("<!--/*/hello /*/--> */--> <!--/*", "hello  */--> <!--/*");
-        testMessage("<!--/*/hello /*/--> */--> <!--/* -->", "hello  */--> <!--/* -->");
-        testMessage("<!--/*/hello /*/--> */--> <!--/* */-->-->", "hello  */--> <!--/* */-->-->");
-        testMessage("<!--/*/hello /*/--> */--> <!--/* */-->", "hello  */--> <!--/* */-->");
-        testMessage("<!--/*<!--/*/hello /*/--> */--> <!--/* */-->", "<!--/*hello  */--> <!--/* */-->");
+        testMessage("/*[[[ hello +]*/", "/*[[[ hello +]*/");
+        testMessage("/*[[[ hello +]*/ a+]]]*///a", "/*[[[ hello +]*/ a+]]]*///a");
+        testMessage("/*[[[ hello +]*/ +]]]*///", "/*[[[ hello +]*/ +]]]*///");
+        testMessage("/*[+ hello +]*/", " hello ");
+        testMessage("/*[+ hello +]*/ +]]]*///", " hello  +]]]*///");
+        testMessage("/*[+ hello +]*/ aa+]]]*///bb", " hello  aa+]]]*///bb");
+        testMessage("/*[+hello+]*/", "hello");
+        testMessage("/*[+hello+]*/ +]]]*/// aa", "hello +]]]*/// aa");
+        testMessage("/*[+hello+]*/ +]]]*///", "hello +]]]*///");
+        testMessage("hey /*[+hello+]*/", "hey hello");
+        testMessage("hey /*[+hello+]*/ +]]]*///", "hey hello +]]]*///");
+        testMessage("hey /*[+hello+]*/ +]]]*///", "hey hello +]]]*///");
+        testMessage("hey /*[+hello+]*/ +]*/", "hey hello +]*/");
+        testMessage("hey /*[+hello+]*/ +]*/", "hey hello +]*/");
+        testMessage("/*[+ hello +]*/ +]]]*///", " hello  +]]]*///");
+        testMessage("/*[+ hello +]*/ +]]]*/// */", " hello  +]]]*/// */");
+        testMessage("/*[+ hello +]*/ +]]]*/// /*[[[", " hello  +]]]*/// /*[[[");
+        testMessage("/*[+ hello +]*/ +]]]*/// /*[[[ */", " hello  +]]]*/// /*[[[ */");
+        testMessage("/*[+ hello +]*/ +]]]*/// /*[[[ +]]]*///*/", " hello  +]]]*/// /*[[[ +]]]*///*/");
+        testMessage("/*[+ hello +]*/ +]]]*/// /*[[[ +]]]*///", " hello  +]]]*/// /*[[[ +]]]*///");
+        testMessage("/*[+hello +]*/ +]]]*///", "hello  +]]]*///");
+        testMessage("/*[+hello +]*/ +]]]*/// */", "hello  +]]]*/// */");
+        testMessage("/*[+hello +]*/ +]]]*/// /*[[[", "hello  +]]]*/// /*[[[");
+        testMessage("/*[+hello +]*/ +]]]*/// /*[[[ */", "hello  +]]]*/// /*[[[ */");
+        testMessage("/*[+hello +]*/ +]]]*/// /*[[[ +]]]*///*/", "hello  +]]]*/// /*[[[ +]]]*///*/");
+        testMessage("/*[+hello +]*/ +]]]*/// /*[[[ +]]]*///", "hello  +]]]*/// /*[[[ +]]]*///");
+        testMessage("/*[[[/*[+hello +]*/ +]]]*/// /*[[[ +]]]*///", "/*[[[hello  +]]]*/// /*[[[ +]]]*///");
 
     }
 
@@ -101,7 +101,7 @@ public final class PrototypeOnlyCommentMarkupReaderTest {
                 for (int l = 0; l < k; l++) {
 
                     final Reader stringReader =
-                            new PrototypeOnlyCommentMarkupReader(new StringReader(message));
+                            new PrototypeOnlyCommentJavaScriptReader(new StringReader(message));
 
                     final char[] buffer = new char[j];
 
@@ -132,8 +132,8 @@ public final class PrototypeOnlyCommentMarkupReaderTest {
 
         final List<String> allMessages = new ArrayList<String>();
 
-        final String prefix = "<!--/*/";
-        final String suffix = "/*/-->";
+        final String prefix = "/*[+";
+        final String suffix = "+]*/";
         final String message = "0123456789";
 
 
@@ -183,17 +183,17 @@ public final class PrototypeOnlyCommentMarkupReaderTest {
         boolean inOpenStructure = false;
         boolean inCloseStructure = false;
         for (int i = 0; i < messageLen; i++) {
-            if (!inOpenStructure && !inCloseStructure && message.charAt(i) == '<') {
+            if (!inOpenStructure && !inCloseStructure && message.charAt(i) == '/' && (i + 1) < messageLen && message.charAt(i + 1) == '*') {
                 inOpenStructure = true;
                 continue;
-            } else if (!inOpenStructure && !inCloseStructure && wasOpen && message.charAt(i) == '/') {
+            } else if (!inOpenStructure && !inCloseStructure && wasOpen && message.charAt(i) == '+') {
                 inCloseStructure = true;
                 continue;
-            } else if (inCloseStructure && message.charAt(i) == '>') {
+            } else if (inCloseStructure && message.charAt(i) == '/' && i > 0 && message.charAt(i - 1) == '*') {
                 inCloseStructure = false;
                 wasOpen = false;
                 continue;
-            } else if (inOpenStructure && message.charAt(i) == '/' && i > 0 && message.charAt(i - 1) == '*') {
+            } else if (inOpenStructure && message.charAt(i) == '+') {
                 inOpenStructure = false;
                 wasOpen = true;
                 continue;
