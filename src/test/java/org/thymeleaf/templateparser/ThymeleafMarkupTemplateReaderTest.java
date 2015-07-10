@@ -90,17 +90,17 @@ public final class ThymeleafMarkupTemplateReaderTest {
     public void testParserLevelComments() throws Exception {
 
         final String[] allMessages = computeAllParserLevelMessages();
-for (final String message: allMessages) {
-    System.out.println(message + " - " + computeParserLevelEquivalent(message));
-}
+
         for (int i = 0; i < allMessages.length; i++) {
 
-            for (int j = 1; j <= (allMessages[i].length() + 10); j++) {
+//            for (int j = 1; j <= (allMessages[i].length() + 10); j++) {
+            for (int j = (allMessages[i].length() + 10); j <= (allMessages[i].length() + 10); j++) {
 
                 for (int k = 1; k <= j; k++) {
 
                     for (int l = 0; l < k; l++) {
 
+System.out.print(allMessages[i] + " ---- " + computeParserLevelEquivalent(allMessages[i]) + " ---- ");
                         final Reader stringReader =
                                 new ThymeleafMarkupTemplateReader(new StringReader(allMessages[i]));
 
@@ -116,6 +116,8 @@ for (final String message: allMessages) {
                         }
 
                         final String result = strBuilder.toString();
+System.out.println("[" + result + "](" + j + "," + k + "," + l + ")");
+if ((2 - 1) == 1) continue;
 
                         if (result.equals("0123456789")) {
                             continue;
@@ -184,6 +186,39 @@ for (final String message: allMessages) {
         }
 
         return allMessages.toArray(new String[allMessages.size()]);
+
+    }
+
+
+
+    @Test
+    public void testParserLevelComments01() throws Exception {
+
+
+        final String msg = "*/--><!--/**/-->0123456789";
+        final int j = 36;
+        final int k = 1;
+        final int l = 0;
+
+        System.out.print(msg + " ---- " + computeParserLevelEquivalent(msg) + " ---- ");
+
+        final Reader stringReader =
+                new ThymeleafMarkupTemplateReader(new StringReader(msg));
+
+        final char[] buffer = new char[j];
+
+        final StringBuilder strBuilder = new StringBuilder();
+        int read = 0;
+        while (read >= 0) {
+            read = stringReader.read(buffer, l, (k - l));
+            if (read >= 0) {
+                strBuilder.append(buffer, l, read);
+            }
+        }
+
+        final String result = strBuilder.toString();
+
+        System.out.println("[" + result + "]");
 
     }
 
