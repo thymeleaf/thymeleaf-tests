@@ -70,11 +70,7 @@ public final class TraceBuilderTextHandler extends AbstractTextHandler {
             final boolean minimized, final int line, final int col)
             throws TextParseException {
         final String elementName = new String(buffer, nameOffset, nameLen);
-        if (minimized) {
-            this.trace.add(new TextTraceEvent.StandaloneElementStartTraceEvent(elementName, line, col));
-        } else {
-            this.trace.add(new TextTraceEvent.NonMinimizedStandaloneElementStartTraceEvent(elementName, line, col));
-        }
+        this.trace.add(new TextTraceEvent.StandaloneElementStartTraceEvent(elementName, line, col));
     }
 
 
@@ -86,11 +82,7 @@ public final class TraceBuilderTextHandler extends AbstractTextHandler {
             final boolean minimized, final int line, final int col)
             throws TextParseException {
         final String elementName = new String(buffer, nameOffset, nameLen);
-        if (minimized) {
-            this.trace.add(new TextTraceEvent.StandaloneElementEndTraceEvent(elementName, line, col));
-        } else {
-            this.trace.add(new TextTraceEvent.NonMinimizedStandaloneElementEndTraceEvent(elementName, line, col));
-        }
+        this.trace.add(new TextTraceEvent.StandaloneElementEndTraceEvent(elementName, line, col));
     }
 
 
