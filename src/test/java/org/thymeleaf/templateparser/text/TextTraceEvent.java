@@ -29,7 +29,6 @@ public abstract class TextTraceEvent {
         DOCUMENT_START("DS"), DOCUMENT_END("DE"),
 
         STANDALONE_ELEMENT_START("SES"), STANDALONE_ELEMENT_END("SEE"),
-        NON_MINIMIZED_STANDALONE_ELEMENT_START("NSES"), NON_MINIMIZED_STANDALONE_ELEMENT_END("NSEE"),
 
         OPEN_ELEMENT_START("OES"), OPEN_ELEMENT_END("OEE"),
 
@@ -323,18 +322,6 @@ public abstract class TextTraceEvent {
     public static final class StandaloneElementEndTraceEvent extends AbstractElementTraceEvent {
         public StandaloneElementEndTraceEvent(final String elementName, final int line, final int col) {
             super(EventType.STANDALONE_ELEMENT_END, elementName, line, col);
-        }
-    }
-
-    public static final class NonMinimizedStandaloneElementStartTraceEvent extends AbstractElementTraceEvent {
-        public NonMinimizedStandaloneElementStartTraceEvent(final String elementName, final int line, final int col) {
-            super(EventType.NON_MINIMIZED_STANDALONE_ELEMENT_START, elementName, line, col);
-        }
-    }
-
-    public static final class NonMinimizedStandaloneElementEndTraceEvent extends AbstractElementTraceEvent {
-        public NonMinimizedStandaloneElementEndTraceEvent(final String elementName, final int line, final int col) {
-            super(EventType.NON_MINIMIZED_STANDALONE_ELEMENT_END, elementName, line, col);
         }
     }
 
