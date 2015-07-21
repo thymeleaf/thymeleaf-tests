@@ -29,7 +29,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public final class PrototypeOnlyCommentDartReaderTest {
+public final class PrototypeOnlyCommentCSSReaderTest {
 
 
     @Test
@@ -101,7 +101,7 @@ public final class PrototypeOnlyCommentDartReaderTest {
                 for (int l = 0; l < k; l++) {
 
                     final Reader stringReader =
-                            new PrototypeOnlyCommentDartReader(new StringReader(message));
+                            new PrototypeOnlyCommentCSSReader(new StringReader(message));
 
                     final char[] buffer = new char[j];
 
