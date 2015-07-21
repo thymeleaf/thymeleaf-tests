@@ -29,7 +29,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public final class ParserLevelCommentDartReaderTest {
+public final class ParserLevelCommentCSSReaderTest {
 
 
 
@@ -87,7 +87,7 @@ public final class ParserLevelCommentDartReaderTest {
                 for (int l = 0; l < k; l++) {
 
                     final Reader stringReader =
-                            new ParserLevelCommentDartReader(new StringReader(message));
+                            new ParserLevelCommentCSSReader(new StringReader(message));
 
                     final char[] buffer = new char[j];
 
