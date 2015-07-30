@@ -33,20 +33,31 @@ public class FeaturesTest {
     public FeaturesTest() {
         super();
     }
-    
-    
-    
-    
+
+
+
+
     @Test
     public void testText() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.execute("classpath:templateengine/features/text");
-        
+
         Assert.assertTrue(executor.isAllOK());
-        
+
     }
-    
+
+
+    @Test
+    public void testText27() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/features/text/text27.thtest");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
     
     
     @Test
