@@ -1,11 +1,11 @@
 %TEMPLATE_MODE JAVASCRIPT
 # ------------------------------------------------------------
 %INPUT
-<[[-!DOCTYPE html-]]>
+<[-!DOCTYPE html-]>
 <html>
 </html>
 # ------------------------------------------------------------
 %OUTPUT
-<[[-!DOCTYPE html-]]>
+<[-!DOCTYPE html-]>
 <html>
 </html>

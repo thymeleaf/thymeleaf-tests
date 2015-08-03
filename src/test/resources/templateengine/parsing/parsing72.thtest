@@ -1,7 +1,7 @@
 %TEMPLATE_MODE TEXT
 # ------------------------------------------------------------
 %INPUT
-Some text [[-
+Some text [-
 over
 and over
 and over
@@ -11,5 +11,4 @@ and oooooover.... here...
 ...and here
 # ------------------------------------------------------------
 %OUTPUT
-Some text 
-
+Some text

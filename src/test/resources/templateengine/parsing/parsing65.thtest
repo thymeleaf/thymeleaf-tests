@@ -1,11 +1,11 @@
 %TEMPLATE_MODE CSS
 # ------------------------------------------------------------
 %INPUT
-<[[-!DOCTYPE html-]]>
+<[-!DOCTYPE html-]>
 <html>
 </html>
 # ------------------------------------------------------------
 %OUTPUT
-<[[-!DOCTYPE html-]]>
+<[-!DOCTYPE html-]>
 <html>
 </html>
