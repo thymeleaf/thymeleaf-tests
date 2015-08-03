@@ -1,7 +1,7 @@
-%TEMPLATE_MODE JAVASCRIPT
+%TEMPLATE_MODE TEXT
 # ------------------------------------------------------------
 %INPUT
-Some text [-over -]here...
+Some text |[-over -]|here...
 ...and here
 # ------------------------------------------------------------
 %OUTPUT
