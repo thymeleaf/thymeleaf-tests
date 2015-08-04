@@ -50,26 +50,25 @@ public final class ParserLevelCommentTextReaderTest {
     @Test
     public void test02() throws Exception {
 
-        testMessage("[[ hello ]]", "[[ hello ]]");
-        testMessage("[[ [[- hello ----]] ]]", "[[  ]]");
-        testMessage("[[ [[- hello --]] -]]", "[[  -]]");
-        testMessage("[[ [[- hello ----]] -]] ]]", "[[  -]] ]]");
-        testMessage("[[ [[-- hello --]] -]] ]]", "[[  -]] ]]");
-        testMessage("[[ [[-- hello ----]] -]] [[- ]]", "[[  -]] ");
-        testMessage("[[ [[-- hello --]] -]] [[- -]]]]", "[[  -]] ]]");
+        testMessage("[ hello ]", "[ hello ]");
+        testMessage("[ [- hello ----] ]", "[  ]");
+        testMessage("[ [- hello --] -]", "[  -]");
+        testMessage("[ [- hello ----] -] ]", "[  -] ]");
+        testMessage("[ [-- hello --] -] ]", "[  -] ]");
+        testMessage("[ [-- hello ----] -] [- ]", "[  -] ");
+        testMessage("[ [-- hello --] -] [- -]]", "[  -] ]");
         testMessage("hello", "hello");
-        testMessage("[[- hello -]]]]", "]]");
-        testMessage("[[- hello -]]]] -]]", "]] -]]");
-        testMessage("[[- hello -]]]] aaa-]]bb", "]] aaa-]]bb");
-        testMessage("[[[[- hello -]]]] -]]", "[[]] -]]");
-        testMessage("[[[[- hello -]]]] -]] ]]", "[[]] -]] ]]");
-        testMessage("[[[[- hello -]]]] -]] [[-", "[[]] -]] ");
-        testMessage("[[[[- hello -]]]] -]] [[- ]]", "[[]] -]] ");
-        testMessage("[[[[- hello -]]]] -]] [[- -]]]]", "[[]] -]] ]]");
-        testMessage("[[[[- hello -]]]] -]] [[- -]]", "[[]] -]] ");
+        testMessage("[- hello -]]", "]");
+        testMessage("[- hello -]] -]", "] -]");
+        testMessage("[- hello -]] aaa-]bb", "] aaa-]bb");
+        testMessage("[[- hello -]] -]", "[] -]");
+        testMessage("[[- hello -]] -] ]", "[] -] ]");
+        testMessage("[[- hello -]] -] [-", "[] -] ");
+        testMessage("[[- hello -]] -] [- ]", "[] -] ");
+        testMessage("[[- hello -]] -] [- -]]", "[] -] ]");
+        testMessage("[[- hello -]] -] [- -]", "[] -] ");
 
     }
-
 
 
 
@@ -117,8 +116,8 @@ public final class ParserLevelCommentTextReaderTest {
 
         final List<String> allMessages = new ArrayList<String>();
 
-        final String prefix = "[[-";
-        final String suffix = "-]]";
+        final String prefix = "[-";
+        final String suffix = "-]";
         final String message = "0123456789";
 
 
@@ -171,7 +170,7 @@ public final class ParserLevelCommentTextReaderTest {
             if (!inComment && message.charAt(i) == '[') {
                 inComment = true;
                 continue;
-            } else if (inComment && message.charAt(i) == ']' && i > 0 && message.charAt(i - 1) == ']') {
+            } else if (inComment && message.charAt(i) == ']') {
                 inComment = false;
                 continue;
             }
