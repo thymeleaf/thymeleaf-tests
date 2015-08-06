@@ -34,7 +34,7 @@ public abstract class TextTraceEvent {
 
         CLOSE_ELEMENT_START("CES"), CLOSE_ELEMENT_END("CEE"),
 
-        ATTRIBUTE("A"),
+        ATTRIBUTE("A"), COMMENT("C"),
 
         TEXT("T");
 
@@ -287,6 +287,12 @@ public abstract class TextTraceEvent {
     public static final class TextTextTraceEvent extends AbstractContentTraceEvent {
         public TextTextTraceEvent(final String content, final int line, final int col) {
             super(EventType.TEXT, content, line, col);
+        }
+    }
+
+    public static final class CommentTraceEvent extends AbstractContentTraceEvent {
+        public CommentTraceEvent(final String content, final int line, final int col) {
+            super(EventType.COMMENT, content, line, col);
         }
     }
 

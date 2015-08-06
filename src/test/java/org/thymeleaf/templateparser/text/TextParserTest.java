@@ -325,62 +325,73 @@ public class TextParserTest extends TestCase {
     }
 
     
-    static void testDocError(final String input, final String outputBreakDown, final int offset, final int len, final int errorLine, final int errorCol) {
-        try {
-            testDoc(input, outputBreakDown, offset, len);
-            throw new ComparisonFailure(null, "exception", "no exception");
-            
-        } catch (final TextParseException e) {
-            if (errorLine != -1 && errorCol != -1) {
-                assertEquals(Integer.valueOf(errorLine), e.getLine());
-                assertEquals(Integer.valueOf(errorCol), e.getCol());
-            } else {
-                assertNull(e.getLine());
-                assertNull(e.getCol());
-            }
-        }
+    static void testDoc(final String input, final String output) throws TextParseException {
+        testDoc(input.toCharArray(), output, 0, input.length());
     }
     
-    
-    static void testDoc(final String input, final String outputBreakDown) throws TextParseException {
-        testDoc(input.toCharArray(), outputBreakDown, 0, input.length());
+    static void testDoc(String input, final String output, final int offset, final int len) throws TextParseException {
+        testDoc(input.toCharArray(), output, offset, len);
     }
-    
-    static void testDoc(String input, final String outputBreakDown, final int offset, final int len) throws TextParseException {
-        testDoc(input.toCharArray(), outputBreakDown, offset, len);
+
+
+    static void testDoc(final String input, final String outputCommentsProcessed, final String outputCommentsUnprocessed) throws TextParseException {
+        testDoc(input.toCharArray(), outputCommentsProcessed, outputCommentsUnprocessed, 0, input.length());
     }
-    
-    static void testDoc(final String input, final String outputBreakDown, final int bufferSize) throws TextParseException {
-        testDoc(input.toCharArray(), outputBreakDown, 0, input.length(), bufferSize);
+
+    static void testDoc(String input, final String outputCommentsProcessed, final String outputCommentsUnprocessed, final int offset, final int len) throws TextParseException {
+        testDoc(input.toCharArray(), outputCommentsProcessed, outputCommentsUnprocessed, offset, len);
     }
-    
-    static void testDoc(String input, final String outputBreakDown, final int offset, final int len, final int bufferSize) throws TextParseException {
-        testDoc(input.toCharArray(), outputBreakDown, offset, len, bufferSize);
-    }
+
     
     
     
-    
-    static void testDoc(final char[] input, final String outputBreakDown, 
+    static void testDoc(final char[] input, final String output,
             final int offset, final int len) throws TextParseException {
+        testDoc(input, output, output, offset, len);
+    }
+
+
+    static void testDoc(final char[] input, final String outputCommentsProcessed, final String outputCommentsUnprocessed,
+                        final int offset, final int len) throws TextParseException {
 
         final int maxBufferSize = 16384;
         for (int bufferSize = 1; bufferSize <= maxBufferSize; bufferSize++) {
-            testDoc(input, outputBreakDown, offset, len, bufferSize);
+            testDoc(input, outputCommentsProcessed, outputCommentsUnprocessed, offset, len, bufferSize);
         }
-        
+
     }
 
-    
+
+    static void testDoc(
+            final char[] input,
+            final String output,
+            final int offset, final int len, final int bufferSize)
+            throws TextParseException {
+        testDoc(input, output, output, offset, len, bufferSize);
+    }
+
+
+    static void testDoc(
+            final char[] input,
+            final String outputCommentsProcessed, final String outputCommentsUnprocessed,
+            final int offset, final int len, final int bufferSize)
+            throws TextParseException {
+        testDoc(input, outputCommentsProcessed, offset, len, bufferSize, true);
+        testDoc(input, outputCommentsUnprocessed, offset, len, bufferSize, false);
+    }
+
+
+
     static void testDoc(
             final char[] input, 
-            final String outputBreakDown,
-            final int offset, final int len, final int bufferSize)
+            final String output,
+            final int offset, final int len, final int bufferSize,
+            final boolean processComments)
             throws TextParseException {
 
         try {
 
-            final TextParser parser = new TextParser();
+            final TextParser parser = new TextParser(2, bufferSize, processComments);
 
             // TEST WITH TRACING HANDLER AND READER
             {
@@ -407,8 +418,8 @@ public class TextParserTest extends TestCase {
                 }
 
                 final String result = strBuilder.toString();
-                if (outputBreakDown != null) {
-                    assertEquals(outputBreakDown, result);
+                if (output != null) {
+                    assertEquals(output, result);
                 }
             }
 
@@ -446,8 +457,8 @@ public class TextParserTest extends TestCase {
                 }
 
                 final String result = strBuilder.toString();
-                if (outputBreakDown != null) {
-                    assertEquals(outputBreakDown, result);
+                if (output != null) {
+                    assertEquals(output, result);
                 }
             }
 
