@@ -171,5 +171,17 @@ public final class TraceBuilderTextHandler extends AbstractTextHandler {
         this.trace.add(new TextTraceEvent.TextTextTraceEvent(content, line, col));
     }
 
+
+    @Override
+    public void handleComment(
+            final char[] buffer,
+            final int contentOffset, final int contentLen,
+            final int outerOffset, final int outerLen,
+            final int line, final int col)
+            throws TextParseException {
+        final String content = new String(buffer, contentOffset, contentLen);
+        this.trace.add(new TextTraceEvent.CommentTraceEvent(content, line, col));
+    }
+
     
 }

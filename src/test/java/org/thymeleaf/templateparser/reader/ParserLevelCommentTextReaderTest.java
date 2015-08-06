@@ -50,25 +50,29 @@ public final class ParserLevelCommentTextReaderTest {
     @Test
     public void test02() throws Exception {
 
-        testMessage("[ hello ]", "[ hello ]");
-        testMessage("[ [- hello ----] ]", "[  ]");
-        testMessage("[ [- hello --] -]", "[  -]");
-        testMessage("[ [- hello ----] -] ]", "[  -] ]");
-        testMessage("[ [-- hello --] -] ]", "[  -] ]");
-        testMessage("[ [-- hello ----] -] [- ]", "[  -] ");
-        testMessage("[ [-- hello --] -] [- -]]", "[  -] ]");
+        testMessage("/* hello */", "/* hello */");
+        testMessage("/* /*[- hello -]]*/ */", "/* ");
+        testMessage("/* /*[- hello -]]*/ -]*/", "/* ");
+        testMessage("/* /*[- hello -]]*/ -]*/ */", "/*  */");
+        testMessage("/* /*[[- hello -]]*/ -]*/ */", "/* /*[[- hello -]]*/ -]*/ */");
+        testMessage("/* /*[[- hello -]]*/ -]*/ /*[- */", "/* /*[[- hello -]]*/ -]*/ ");
+        testMessage("/* /*[[- hello -]]*/ -]*/ /*[- -]*/*/", "/* /*[[- hello -]]*/ -]*/ */");
+        testMessage("/* /*[[--- hello ---]]*/ -]*/ */", "/* /*[[--- hello ---]]*/ -]*/ */");
+        testMessage("/* /*[[--- hello ---]]*/ -]*/ /*[- */", "/* /*[[--- hello ---]]*/ -]*/ ");
+        testMessage("/* /*[[--- hello ---]]*/ -]*/ /*[- -]*/*/", "/* /*[[--- hello ---]]*/ -]*/ */");
         testMessage("hello", "hello");
-        testMessage("[- hello -]]", "]");
-        testMessage("[- hello -]] -]", "] -]");
-        testMessage("[- hello -]] aaa-]bb", "] aaa-]bb");
-        testMessage("[[- hello -]] -]", "[] -]");
-        testMessage("[[- hello -]] -] ]", "[] -] ]");
-        testMessage("[[- hello -]] -] [-", "[] -] ");
-        testMessage("[[- hello -]] -] [- ]", "[] -] ");
-        testMessage("[[- hello -]] -] [- -]]", "[] -] ]");
-        testMessage("[[- hello -]] -] [- -]", "[] -] ");
+        testMessage("/*[- hello -]***/", "");
+        testMessage("/*[- hello -]***/ -]*/", "");
+        testMessage("/*[- hello -]***/ -]*/", "");
+        testMessage("/***[- hello -]***/ -]*/", "/***[- hello -]***/ -]*/");
+        testMessage("/***[- hello -]***/ -]*/ */", "/***[- hello -]***/ -]*/ */");
+        testMessage("/***[- hello -]***/ -]*/ /*[-", "/***[- hello -]***/ -]*/ ");
+        testMessage("/***[- hello -]***/ -]*/ /*[- */", "/***[- hello -]***/ -]*/ ");
+        testMessage("/***[- hello -]***/ -]*/ /*[- -]*/*/", "/***[- hello -]***/ -]*/ */");
+        testMessage("/***[- hello -]***/ -]*/ /*[- -]*/", "/***[- hello -]***/ -]*/ ");
 
     }
+
 
 
 
@@ -116,8 +120,8 @@ public final class ParserLevelCommentTextReaderTest {
 
         final List<String> allMessages = new ArrayList<String>();
 
-        final String prefix = "[-";
-        final String suffix = "-]";
+        final String prefix = "/*[-";
+        final String suffix = "-]*/";
         final String message = "0123456789";
 
 
@@ -167,10 +171,10 @@ public final class ParserLevelCommentTextReaderTest {
         final int messageLen = message.length();
         boolean inComment = false;
         for (int i = 0; i < messageLen; i++) {
-            if (!inComment && message.charAt(i) == '[') {
+            if (!inComment && message.charAt(i) == '/' && (i + 1) < messageLen && message.charAt(i + 1) == '*') {
                 inComment = true;
                 continue;
-            } else if (inComment && message.charAt(i) == ']') {
+            } else if (inComment && message.charAt(i) == '/' && i > 0 && message.charAt(i - 1) == '*') {
                 inComment = false;
                 continue;
             }
