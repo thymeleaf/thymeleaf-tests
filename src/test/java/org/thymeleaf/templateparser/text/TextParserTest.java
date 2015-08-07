@@ -38,11 +38,74 @@ public class TextParserTest extends TestCase {
 
     public void test() throws Exception {
 
-
-//        testDoc(
-//                "/*hello*/",
-//                "[C(hello){1,1}]",
-//                "[T(hello){1,1}]");
+        testDoc(
+                "/*hello*/",
+                "[T(/*hello*/){1,1}]",
+                "[T(/*hello*/){1,1}]");
+        testDoc(
+                "a/*hello*/a/* bye! */",
+                "[T(a){1,1}T(/*hello*/){1,2}T(a){1,11}T(/* bye! */){1,12}]",
+                "[T(a/*hello*/a/* bye! */){1,1}]");
+        testDoc(
+                "/*[#hello/]*/",
+                "[SES(hello){1,3}SEE(hello){1,10}]",
+                "[T(/*){1,1}SES(hello){1,3}SEE(hello){1,10}T(*/){1,12}]");
+        testDoc(
+                "/*[#hello]*/.../*[/hello]*/",
+                "[OES(hello){1,3}OEE(hello){1,10}T(...){1,13}CES(hello){1,18}CEE(hello){1,25}]",
+                "[T(/*){1,1}OES(hello){1,3}OEE(hello){1,10}T(*/.../*){1,11}CES(hello){1,18}CEE(hello){1,25}T(*/){1,26}]");
+        testDoc(
+                "/*[#]*/.../*[/]*/",
+                "[OES(){1,3}OEE(){1,5}T(...){1,8}CES(){1,13}CEE(){1,15}]",
+                "[T(/*){1,1}OES(){1,3}OEE(){1,5}T(*/.../*){1,6}CES(){1,13}CEE(){1,15}T(*/){1,16}]");
+        testDoc(
+                "/*[# one]*/.../*[/]*/",
+                "[OES(){1,3}A(one){1,6}(){1,9}(){1,9}OEE(){1,9}T(...){1,12}CES(){1,17}CEE(){1,19}]",
+                "[T(/*){1,1}OES(){1,3}A(one){1,6}(){1,9}(){1,9}OEE(){1,9}T(*/.../*){1,10}CES(){1,17}CEE(){1,19}T(*/){1,20}]");
+        testDoc(
+                ".../*[#hello \nsrc=\"hello\" bee ]*/.../*[#bye alt  /]*//*[/hello]*/...",
+                "[T(...){1,1}OES(hello){1,6}A(src){2,1}(=){2,4}(\"hello\"){2,5}A(bee){2,13}(){2,16}(){2,16}OEE(hello){2,17}T(...){2,20}SES(bye){2,25}A(alt){2,31}(){2,34}(){2,34}SEE(bye){2,36}CES(hello){2,42}CEE(hello){2,49}T(...){2,52}]",
+                "[T(.../*){1,1}OES(hello){1,6}A(src){2,1}(=){2,4}(\"hello\"){2,5}A(bee){2,13}(){2,16}(){2,16}OEE(hello){2,17}T(*/.../*){2,18}SES(bye){2,25}A(alt){2,31}(){2,34}(){2,34}SEE(bye){2,36}T(*//*){2,38}CES(hello){2,42}CEE(hello){2,49}T(*/...){2,50}]");
+        testDoc(
+                "/*[hello]*/something;",
+                "[T([hello]){1,1}T(;){1,21}]",
+                "[T(/*[hello]*/something;){1,1}]");
+        testDoc(
+                "/*[#hello/]*/something;",
+                "[SES(hello){1,3}SEE(hello){1,10}T(something;){1,14}]",
+                "[T(/*){1,1}SES(hello){1,3}SEE(hello){1,10}T(*/something;){1,12}]");
+        testDoc(
+                "{/*[hello]*/, {asdasd}}",
+                "[T({){1,1}T([hello]){1,2}T(, {asdasd}}){1,13}]",
+                "[T({/*[hello]*/, {asdasd}}){1,1}]");
+        testDoc(
+                "{/*[hello]*/ {asdasd}}",
+                "[T({){1,1}T([hello]){1,2}T(}){1,22}]",
+                "[T({/*[hello]*/ {asdasd}}){1,1}]");
+        testDoc(
+                "{/*[hello]*/ /*lalala*/",
+                "[T({){1,1}T([hello]){1,2}T(/*lalala*/){1,14}]",
+                "[T({/*[hello]*/ /*lalala*/){1,1}]");
+        testDoc(
+                "{/*[hello]*/ /*[lalala]*/ab",
+                "[T({){1,1}T([hello]){1,2}T([lalala]){1,14}]",
+                "[T({/*[hello]*/ /*[lalala]*/ab){1,1}]");
+        testDoc(
+                "{/*[hello]*/ [lalala]ab",
+                "[T({){1,1}T([hello]){1,2}]",
+                "[T({/*[hello]*/ [lalala]ab){1,1}]");
+        testDoc(
+                "{/*[hello]*/ /*[#lalala/]*/ab",
+                "[T({){1,1}T([hello]){1,2}SES(lalala){1,16}SEE(lalala){1,24}T(ab){1,28}]",
+                "[T({/*[hello]*/ /*){1,1}SES(lalala){1,16}SEE(lalala){1,24}T(*/ab){1,26}]");
+        testDoc(
+                "{/*[hello]*/ [#lalala/]ab",
+                "[T({){1,1}T([hello]){1,2}SES(lalala){1,14}SEE(lalala){1,22}T(ab){1,24}]",
+                "[T({/*[hello]*/ ){1,1}SES(lalala){1,14}SEE(lalala){1,22}T(ab){1,24}]");
+        testDoc(
+                "/*[hello]*/",
+                "[C([hello]){1,1}]",
+                "[T(/*[hello]*/){1,1}]");
         testDoc(
                 "",
                 "[]");
@@ -81,49 +144,49 @@ public class TextParserTest extends TestCase {
                 "[T([){1,1}OES(hello){1,2}OEE(hello){1,9}T(]...[){1,10}CES(hello){1,15}CEE(hello){1,22}T(]){1,23}]");
         testDoc(
                 "[#hello]...[/hello]",
-                "[OES(hello){1,1}OEE(hello){1,9}T(...){1,11}CES(hello){1,14}CEE(hello){1,22}]");
+                "[OES(hello){1,1}OEE(hello){1,8}T(...){1,9}CES(hello){1,12}CEE(hello){1,19}]");
         testDoc(
                 "...[#hello]...[/hello]...",
-                "[T(...){1,1}OES(hello){1,4}OEE(hello){1,12}T(...){1,14}CES(hello){1,17}CEE(hello){1,25}T(...){1,27}]");
+                "[T(...){1,1}OES(hello){1,4}OEE(hello){1,11}T(...){1,12}CES(hello){1,15}CEE(hello){1,22}T(...){1,23}]");
         testDoc(
                 "...[#hello]...[#bye/][/hello]...",
-                "[T(...){1,1}OES(hello){1,4}OEE(hello){1,12}T(...){1,14}SES(bye){1,17}SEE(bye){1,23}CES(hello){1,26}CEE(hello){1,34}T(...){1,36}]");
+                "[T(...){1,1}OES(hello){1,4}OEE(hello){1,11}T(...){1,12}SES(bye){1,15}SEE(bye){1,20}CES(hello){1,22}CEE(hello){1,29}T(...){1,30}]");
         testDoc(
                 "...[#hello src=\"hello\"]...[#bye/][/hello]...",
-                "[T(...){1,1}OES(hello){1,4}A(src){1,13}(=){1,16}(\"hello\"){1,17}OEE(hello){1,24}T(...){1,26}SES(bye){1,29}SEE(bye){1,35}CES(hello){1,38}CEE(hello){1,46}T(...){1,48}]");
+                "[T(...){1,1}OES(hello){1,4}A(src){1,12}(=){1,15}(\"hello\"){1,16}OEE(hello){1,23}T(...){1,24}SES(bye){1,27}SEE(bye){1,32}CES(hello){1,34}CEE(hello){1,41}T(...){1,42}]");
         testDoc(
                 "...[#hello src=\"hello\"]...[#bye alt=\"hello\"/][/hello]...",
-                "[T(...){1,1}OES(hello){1,4}A(src){1,13}(=){1,16}(\"hello\"){1,17}OEE(hello){1,24}T(...){1,26}SES(bye){1,29}A(alt){1,36}(=){1,39}(\"hello\"){1,40}SEE(bye){1,47}CES(hello){1,50}CEE(hello){1,58}T(...){1,60}]");
+                "[T(...){1,1}OES(hello){1,4}A(src){1,12}(=){1,15}(\"hello\"){1,16}OEE(hello){1,23}T(...){1,24}SES(bye){1,27}A(alt){1,33}(=){1,36}(\"hello\"){1,37}SEE(bye){1,44}CES(hello){1,46}CEE(hello){1,53}T(...){1,54}]");
         testDoc(
                 "...[#hello   src=\"hello\"  ]...[#bye alt=\"hello\"  /][/hello]...",
-                "[T(...){1,1}OES(hello){1,4}A(src){1,15}(=){1,18}(\"hello\"){1,19}OEE(hello){1,28}T(...){1,30}SES(bye){1,33}A(alt){1,40}(=){1,43}(\"hello\"){1,44}SEE(bye){1,53}CES(hello){1,56}CEE(hello){1,64}T(...){1,66}]");
+                "[T(...){1,1}OES(hello){1,4}A(src){1,14}(=){1,17}(\"hello\"){1,18}OEE(hello){1,27}T(...){1,28}SES(bye){1,31}A(alt){1,37}(=){1,40}(\"hello\"){1,41}SEE(bye){1,50}CES(hello){1,52}CEE(hello){1,59}T(...){1,60}]");
         testDoc(
                 "...[#hello \nsrc=\"hello\" ]...[#bye   /][/hello]...",
-                "[T(...){1,1}OES(hello){1,4}A(src){2,1}(=){2,4}(\"hello\"){2,5}OEE(hello){2,13}T(...){2,15}SES(bye){2,18}SEE(bye){2,27}CES(hello){2,30}CEE(hello){2,38}T(...){2,40}]");
+                "[T(...){1,1}OES(hello){1,4}A(src){2,1}(=){2,4}(\"hello\"){2,5}OEE(hello){2,13}T(...){2,14}SES(bye){2,17}SEE(bye){2,25}CES(hello){2,27}CEE(hello){2,34}T(...){2,35}]");
         testDoc(
                 "...[#hello \nsrc=\"hello\" bee ]...[#bye alt  /][/hello]...",
-                "[T(...){1,1}OES(hello){1,4}A(src){2,1}(=){2,4}(\"hello\"){2,5}A(bee){2,13}(){2,16}(){2,16}OEE(hello){2,17}T(...){2,19}SES(bye){2,22}A(alt){2,29}(){2,32}(){2,32}SEE(bye){2,34}CES(hello){2,37}CEE(hello){2,45}T(...){2,47}]");
+                "[T(...){1,1}OES(hello){1,4}A(src){2,1}(=){2,4}(\"hello\"){2,5}A(bee){2,13}(){2,16}(){2,16}OEE(hello){2,17}T(...){2,18}SES(bye){2,21}A(alt){2,27}(){2,30}(){2,30}SEE(bye){2,32}CES(hello){2,34}CEE(hello){2,41}T(...){2,42}]");
         testDoc(
                 "[#hello][/hello]",
-                "[OES(hello){1,1}OEE(hello){1,9}CES(hello){1,11}CEE(hello){1,19}]");
+                "[OES(hello){1,1}OEE(hello){1,8}CES(hello){1,9}CEE(hello){1,16}]");
         testDoc(
                 "[#hello/]",
-                "[SES(hello){1,1}SEE(hello){1,9}]");
+                "[SES(hello){1,1}SEE(hello){1,8}]");
         testDoc(
                 "[#][/]",
-                "[OES(){1,1}OEE(){1,4}CES(){1,6}CEE(){1,9}]");
+                "[OES(){1,1}OEE(){1,3}CES(){1,4}CEE(){1,6}]");
         testDoc(
                 "[#/]",
-                "[SES(){1,1}SEE(){1,4}]");
+                "[SES(){1,1}SEE(){1,3}]");
         testDoc(
                 "...[#   src=\"hello\"  ]...[# alt=\"hello\"  /][/]...",
-                "[T(...){1,1}OES(){1,4}A(src){1,10}(=){1,13}(\"hello\"){1,14}OEE(){1,23}T(...){1,25}SES(){1,28}A(alt){1,32}(=){1,35}(\"hello\"){1,36}SEE(){1,45}CES(){1,48}CEE(){1,51}T(...){1,53}]");
+                "[T(...){1,1}OES(){1,4}A(src){1,9}(=){1,12}(\"hello\"){1,13}OEE(){1,22}T(...){1,23}SES(){1,26}A(alt){1,29}(=){1,32}(\"hello\"){1,33}SEE(){1,42}CES(){1,44}CEE(){1,46}T(...){1,47}]");
         testDoc(
                 "...[#   src='hello'  ]...[# alt='hello'  /][/]...",
-                "[T(...){1,1}OES(){1,4}A(src){1,10}(=){1,13}('hello'){1,14}OEE(){1,23}T(...){1,25}SES(){1,28}A(alt){1,32}(=){1,35}('hello'){1,36}SEE(){1,45}CES(){1,48}CEE(){1,51}T(...){1,53}]");
+                "[T(...){1,1}OES(){1,4}A(src){1,9}(=){1,12}('hello'){1,13}OEE(){1,22}T(...){1,23}SES(){1,26}A(alt){1,29}(=){1,32}('hello'){1,33}SEE(){1,42}CES(){1,44}CEE(){1,46}T(...){1,47}]");
         testDoc(
                 "...[#   src=hello  ]...[# alt=hello  /][/]...",
-                "[T(...){1,1}OES(){1,4}A(src){1,10}(=){1,13}(hello){1,14}OEE(){1,21}T(...){1,23}SES(){1,26}A(alt){1,30}(=){1,33}(hello){1,34}SEE(){1,41}CES(){1,44}CEE(){1,47}T(...){1,49}]");
+                "[T(...){1,1}OES(){1,4}A(src){1,9}(=){1,12}(hello){1,13}OEE(){1,20}T(...){1,21}SES(){1,24}A(alt){1,27}(=){1,30}(hello){1,31}SEE(){1,38}CES(){1,40}CEE(){1,42}T(...){1,43}]");
         testDocError(
                 "...[#   src=\"hello\"  ]...[# alt=\"hello\"  /]...",
                 null,
@@ -133,13 +196,13 @@ public class TextParserTest extends TestCase {
                 "[T([#{hello}/]){1,1}]");
         testDoc(
                 "[#template] if (a < 0) { do this} [/template]",
-                "[OES(template){1,1}OEE(template){1,12}T( if (a < 0) { do this} ){1,14}CES(template){1,37}CEE(template){1,48}]");
+                "[OES(template){1,1}OEE(template){1,11}T( if (a < 0) { do this} ){1,12}CES(template){1,35}CEE(template){1,45}]");
         testDoc(
                 "[#template a='zero' b='one' /]",
-                "[SES(template){1,1}A(a){1,13}(=){1,14}('zero'){1,15}A(b){1,22}(=){1,23}('one'){1,24}SEE(template){1,30}]");
+                "[SES(template){1,1}A(a){1,12}(=){1,13}('zero'){1,14}A(b){1,21}(=){1,22}('one'){1,23}SEE(template){1,29}]");
         testDoc(
                 "[#template a='zero' b='one']\n\naaaaa\n\n[/template]",
-                "[OES(template){1,1}A(a){1,13}(=){1,14}('zero'){1,15}A(b){1,22}(=){1,23}('one'){1,24}OEE(template){1,29}T(\n\naaaaa\n\n){1,31}CES(template){5,1}CEE(template){5,12}]");
+                "[OES(template){1,1}A(a){1,12}(=){1,13}('zero'){1,14}A(b){1,21}(=){1,22}('one'){1,23}OEE(template){1,28}T(\n\naaaaa\n\n){1,29}CES(template){5,1}CEE(template){5,11}]");
         testDoc(
                 "Hello, World!",
                 "[T(Hello, World!){1,1}]");
@@ -149,27 +212,27 @@ public class TextParserTest extends TestCase {
                 1, 10);
         testDoc(
                 "[#img src=\"hello\"/]Something",
-                "[SES(img){1,1}A(src){1,8}(=){1,11}(\"hello\"){1,12}SEE(img){1,19}T(Something){1,22}]");
+                "[SES(img){1,1}A(src){1,7}(=){1,10}(\"hello\"){1,11}SEE(img){1,18}T(Something){1,20}]");
         testDoc(
                 "[#li a=\"a [# 0]\"]Hello[/li]",
-                "[OES(li){1,1}A(a){1,7}(=){1,8}(\"a [# 0]\"){1,9}OEE(li){1,20}T(Hello){1,22}CES(li){1,27}CEE(li){1,32}]");
+                "[OES(li){1,1}A(a){1,6}(=){1,7}(\"a [# 0]\"){1,8}OEE(li){1,17}T(Hello){1,18}CES(li){1,23}CEE(li){1,27}]");
         testDoc(
                 "Hello, [#p]lal'a[/p]",
-                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,12}T(lal'a){1,14}CES(p){1,19}CEE(p){1,23}]");
+                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(lal'a){1,12}CES(p){1,17}CEE(p){1,20}]");
         testDoc(
                 "Hello, [#p]l'al'a[/p]",
-                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,12}T(l'al'a){1,14}CES(p){1,20}CEE(p){1,24}]");
+                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(l'al'a){1,12}CES(p){1,18}CEE(p){1,21}]");
         testDoc(
                 "Hello, [#br th:text =   'll'a=2/]",
-                "[T(Hello, ){1,1}SES(br){1,8}A(th:text){1,14}( =   ){1,21}('ll'){1,26}A(a){1,30}(=){1,31}(2){1,32}SEE(br){1,33}]");
+                "[T(Hello, ){1,1}SES(br){1,8}A(th:text){1,13}( =   ){1,20}('ll'){1,25}A(a){1,29}(=){1,30}(2){1,31}SEE(br){1,32}]");
         testDoc(
                 "Hello, [#br th:text = a=b/]",
-                "[T(Hello, ){1,1}SES(br){1,8}A(th:text){1,14}( = ){1,21}(a=b){1,24}SEE(br){1,27}]");
+                "[T(Hello, ){1,1}SES(br){1,8}A(th:text){1,13}( = ){1,20}(a=b){1,23}SEE(br){1,26}]");
         testDoc(
                 "Hello, World! [#br/]\n[#div\n l\n     a=\"12 3\" zas    o=\"\"  b=\"lelo\n  = s\"]lala[/div] [#p th=\"lala\" ]liool[/p]",
-                "[T(Hello, World! ){1,1}SES(br){1,15}SEE(br){1,20}T(\n){1,23}" +
-                        "OES(div){2,1}A(l){3,2}(){3,3}(){3,3}A(a){4,6}(=){4,7}(\"12 3\"){4,8}A(zas){4,15}(){4,18}(){4,18}A(o){4,22}(=){4,23}(\"\"){4,24}A(b){4,28}(=){4,29}(\"lelo\n  = s\"){4,30}" +
-                        "OEE(div){5,7}T(lala){5,9}CES(div){5,13}CEE(div){5,19}T( ){5,21}OES(p){5,22}A(th){5,27}(=){5,29}(\"lala\"){5,30}OEE(p){5,37}T(liool){5,39}CES(p){5,44}CEE(p){5,48}]");
+                "[T(Hello, World! ){1,1}SES(br){1,15}SEE(br){1,19}T(\n" +
+                        "){1,21}OES(div){2,1}A(l){3,2}(){3,3}(){3,3}A(a){4,6}(=){4,7}(\"12 3\"){4,8}A(zas){4,15}(){4,18}(){4,18}A(o){4,22}(=){4,23}(\"\"){4,24}A(b){4,28}(=){4,29}(\"lelo\n" +
+                        "  = s\"){4,30}OEE(div){5,7}T(lala){5,8}CES(div){5,12}CEE(div){5,17}T( ){5,18}OES(p){5,19}A(th){5,23}(=){5,25}(\"lala\"){5,26}OEE(p){5,33}T(liool){5,34}CES(p){5,39}CEE(p){5,42}]");
         testDoc(
                 "kl\njasdl kjaslkj asjqq9\nk fiuh 23kj hdfkjh assd\nflkjh lkjh fdfasdfkjlh dfs" +
                         "llk\nd8u u hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9\n))sad lkjsalkja aslk" +
@@ -236,7 +299,7 @@ public class TextParserTest extends TestCase {
                         "sdfkjlh dfsllkd8u u \n" +
                         "hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9))sad l\n" +
                         "kjsalkja aslkla &aacute;\n" +
-                        " lasd &amp; ){1,1}OES(p){11,13}OEE(p){11,17}T( aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hh\n" +
+                        " lasd &amp; ){1,1}OES(p){11,13}OEE(p){11,16}T( aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hh\n" +
                         "jhkl\n" +
                         "jasdl kjaslkj asjqq9\n" +
                         "k fiuh 23kj hdfkjh assd\n" +
@@ -247,18 +310,7 @@ public class TextParserTest extends TestCase {
                         "sdfkjlh dfsllkd8u u \n" +
                         "hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9))sad l\n" +
                         "kjsalkja aslkla &aacute;\n" +
-                        " lasd &amp; aiass da & asdll . asi ua&$\" ){11,19}CES(p){22,42}CEE(p){22,46}T( khj askjh 1 kh ak hh\n" +
-                        "jhkl\n" +
-                        "jasdl kjaslkj asjqq9\n" +
-                        "k fiuh 23kj hdfkjh assd\n" +
-                        "flkjh lkjh fdfasdfkjlh dfsllk\n" +
-                        "d8u u hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9\n" +
-                        "))sad lkjsalkja aslkla \n" +
-                        "&aacute; lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hhjhkljasdl kjaslkj asjqq9k fiuh 23kj hdfkjh assdflkjh lkjh fdfa\n" +
-                        "sdfkjlh dfsllkd8u u \n" +
-                        "hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9))sad l\n" +
-                        "kjsalkja aslkla &aacute;\n" +
-                        " lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hh\n" +
+                        " lasd &amp; aiass da & asdll . asi ua&$\" ){11,17}CES(p){22,42}CEE(p){22,45}T( khj askjh 1 kh ak hh\n" +
                         "jhkl\n" +
                         "jasdl kjaslkj asjqq9\n" +
                         "k fiuh 23kj hdfkjh assd\n" +
@@ -303,10 +355,26 @@ public class TextParserTest extends TestCase {
                         "hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9))sad l\n" +
                         "kjsalkja aslkla &aacute;\n" +
                         " lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hh\n" +
-                        "jh){22,48}]");
+                        "jhkl\n" +
+                        "jasdl kjaslkj asjqq9\n" +
+                        "k fiuh 23kj hdfkjh assd\n" +
+                        "flkjh lkjh fdfasdfkjlh dfsllk\n" +
+                        "d8u u hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9\n" +
+                        "))sad lkjsalkja aslkla \n" +
+                        "&aacute; lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hhjhkljasdl kjaslkj asjqq9k fiuh 23kj hdfkjh assdflkjh lkjh fdfa\n" +
+                        "sdfkjlh dfsllkd8u u \n" +
+                        "hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9))sad l\n" +
+                        "kjsalkja aslkla &aacute;\n" +
+                        " lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hh\n" +
+                        "jh){22,46}]");
         testDoc(
                 "[#div class \n\n= \n'lala'li=\nlla][/div]",
-                "[OES(div){1,1}A(class){1,8}( \n\n= \n){1,13}('lala'){4,1}A(li){4,7}(=\n){4,9}(lla){5,1}OEE(div){5,4}CES(div){5,6}CEE(div){5,12}]");
+                "[OES(div){1,1}A(class){1,7}( \n" +
+                        "\n" +
+                        "= \n" +
+                        "){1,12}('lala'){4,1}A(li){4,7}(=\n" +
+                        "){4,9}(lla){5,1}OEE(div){5,4}CES(div){5,5}CEE(div){5,10}]");
+
 
         System.out.println("TOTAL Test executions: " + totalTestExecutions);
         
@@ -401,18 +469,23 @@ public class TextParserTest extends TestCase {
 
         try {
 
-            final TextParser parser = new TextParser(2, bufferSize, processComments);
+            final TextParser parser = new TextParser(2, bufferSize, processComments, "th");
 
             // TEST WITH TRACING HANDLER AND READER
             {
 
                 final TraceBuilderTextHandler traceHandler = new TraceBuilderTextHandler();
-                ITextHandler handler = new TextEventProcessorHandler(traceHandler);
+                ITextHandler handlerChain = traceHandler;
+                handlerChain = new EventProcessorTextHandler(handlerChain);
+                handlerChain = new InlinedExpressionProcessorTextHandler(handlerChain, "th");
+                if (processComments) {
+                    handlerChain = new CommentProcessorTextHandler(handlerChain);
+                }
 
                 if (offset == 0 && len == input.length) {
-                    parser.parseDocument(new CharArrayReader(input), bufferSize, handler);
+                    parser.parseDocument(new CharArrayReader(input), bufferSize, handlerChain);
                 } else { 
-                    parser.parseDocument(new CharArrayReader(input, offset, len), bufferSize, handler);
+                    parser.parseDocument(new CharArrayReader(input, offset, len), bufferSize, handlerChain);
                 }
 
                 final List<TextTraceEvent> trace = traceHandler.getTrace();
@@ -450,9 +523,14 @@ public class TextParserTest extends TestCase {
                 newInput[newInput.length - 5] = 'X';
 
                 final TraceBuilderTextHandler traceHandler = new TraceBuilderTextHandler();
-                ITextHandler handler = new TextEventProcessorHandler(traceHandler);
+                ITextHandler handlerChain = traceHandler;
+                handlerChain = new EventProcessorTextHandler(handlerChain);
+                handlerChain = new InlinedExpressionProcessorTextHandler(handlerChain, "th");
+                if (processComments) {
+                    handlerChain = new CommentProcessorTextHandler(handlerChain);
+                }
 
-                parser.parseDocument(new CharArrayReader(newInput, 5, len), bufferSize, handler);
+                parser.parseDocument(new CharArrayReader(newInput, 5, len), bufferSize, handlerChain);
 
                 final List<TextTraceEvent> trace = traceHandler.getTrace();
                 final StringBuilder strBuilder = new StringBuilder();
