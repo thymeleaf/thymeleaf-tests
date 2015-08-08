@@ -644,7 +644,7 @@ public final class VariablesMapTest {
         Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.put("two", "twello");
-        vm.setTextInliner(StandardTextInliner.INSTANCE);
+        vm.setInliner(StandardTextInliner.INSTANCE);
 
         Assert.assertEquals("{1:{two=twello, one=hello}[STANDARDTEXT],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{two=twello, one=hello}[STANDARDTEXT]", vm.toString());
