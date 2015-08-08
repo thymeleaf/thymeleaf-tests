@@ -47,17 +47,6 @@ public class FeaturesTest {
 
     }
 
-
-    @Test
-    public void testText27() throws Exception {
-
-        final TestExecutor executor = new TestExecutor();
-        executor.execute("classpath:templateengine/features/text/text27.thtest");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
     
     
     @Test
