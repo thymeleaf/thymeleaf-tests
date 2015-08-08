@@ -1,7 +1,7 @@
 %TEMPLATE_MODE TEXT
 # ------------------------------------------------------------
 %INPUT
-Hello this is a [# th:text="'working template'"]test[/]!
+Some text: [# th:utext="'a&b'"/]
 # ------------------------------------------------------------
 %OUTPUT
-Hello this is a working template!
+Some text: a&b
