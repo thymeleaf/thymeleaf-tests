@@ -182,6 +182,36 @@ public final class ElementDefinitionsTest {
             Assert.assertTrue(true);
         }
 
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "");
+        Assert.assertEquals("{}", thtextDefinition_4.getElementName().toString());
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forTextName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "");
+        Assert.assertEquals("{}", thtextDefinition_4.getElementName().toString());
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "");
+        Assert.assertEquals("{}", thtextDefinition_4.getElementName().toString());
+
+        try {
+            thtextDefinition_4 = elementDefinitions.forCSSName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
         thtextDefinition_4 = elementDefinitions.forHTMLName(null, "data:teeee");
         Assert.assertEquals("{data:teeee,data-teeee}", thtextDefinition_4.getElementName().toString());
 
@@ -229,6 +259,81 @@ public final class ElementDefinitionsTest {
         Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getElementName().toString());
 
         thtextDefinition_4 = elementDefinitions.forXMLName(null, "DATA:DATA");
+        Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getElementName().toString());
+
+
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "data:data");
+        Assert.assertEquals("{data:data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "DATA:TEEEE");
+        Assert.assertEquals("{DATA:TEEEE}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "DATA");
+        Assert.assertEquals("{DATA}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forTextName(null, "DATA:DATA");
+        Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getElementName().toString());
+
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "data:data");
+        Assert.assertEquals("{data:data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "DATA:TEEEE");
+        Assert.assertEquals("{DATA:TEEEE}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "DATA");
+        Assert.assertEquals("{DATA}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forJavaScriptName(null, "DATA:DATA");
+        Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getElementName().toString());
+
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "data:data");
+        Assert.assertEquals("{data:data}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "DATA:TEEEE");
+        Assert.assertEquals("{DATA:TEEEE}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "DATA");
+        Assert.assertEquals("{DATA}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getElementName().toString());
+
+        thtextDefinition_4 = elementDefinitions.forCSSName(null, "DATA:DATA");
         Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getElementName().toString());
 
     }
