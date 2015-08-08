@@ -646,20 +646,20 @@ public final class VariablesMapTest {
         vm.put("two", "twello");
         vm.setInliner(StandardTextInliner.INSTANCE);
 
-        Assert.assertEquals("{1:{two=twello, one=hello}[STANDARDTEXT],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twello, one=hello}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{1:{two=twello, one=hello}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twello, one=hello}[StandardTextInliner]", vm.toString());
         Assert.assertEquals("[two, one]", vm.getVariableNames().toString());
 
         vm.remove("two");
 
-        Assert.assertEquals("{1:{one=hello}[STANDARDTEXT],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{one=hello}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{1:{one=hello}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello}[StandardTextInliner]", vm.toString());
         Assert.assertEquals("[one]", vm.getVariableNames().toString());
 
         vm.remove("one");
 
-        Assert.assertEquals("{1:{one=(*removed*)}[STANDARDTEXT],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{1:{one=(*removed*)}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{}[StandardTextInliner]", vm.toString());
         Assert.assertEquals("[]", vm.getVariableNames().toString());
 
         vm.decreaseLevel();
