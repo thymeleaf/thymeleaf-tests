@@ -885,7 +885,7 @@ public final class WebVariablesMapTest {
 
         vm.increaseLevel();
         vm.put("two", "twellor");
-        vm.setTextInliner(StandardTextInliner.INSTANCE);
+        vm.setInliner(StandardTextInliner.INSTANCE);
 
         Assert.assertEquals("{1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{two=twellor, one=two values}[STANDARDTEXT]", vm.toString());
