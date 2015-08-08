@@ -32,7 +32,7 @@ import org.junit.Test;
  * @since 3.0.0
  *
  */
-public final class AggregateStringTest {
+public final class AggregateCharSequenceTest {
 
 
 
@@ -49,7 +49,7 @@ public final class AggregateStringTest {
 
                 final String text = base.substring(0, textLen);
 
-                final List<AggregateString> allAS = new ArrayList<AggregateString>();
+                final List<AggregateCharSequence> allAS = new ArrayList<AggregateCharSequence>();
 
                 for (int initialCapacity = 1; initialCapacity < 10; initialCapacity++) {
 
@@ -61,8 +61,8 @@ public final class AggregateStringTest {
                             final String textStr1 = new String(text.substring(textx, (textx + texty)));
                             final String textStr2 = new String(text.substring((textx + texty), textLen));
 
-                            final AggregateString as =
-                                    new AggregateString(textStr0, textStr1, textStr2);
+                            final AggregateCharSequence as =
+                                    new AggregateCharSequence(textStr0, textStr1, textStr2);
 
                             allAS.add(as);
 
@@ -89,8 +89,8 @@ public final class AggregateStringTest {
 
                 }
 
-                for (final AggregateString as1 : allAS) {
-                    for (final AggregateString as2 : allAS) {
+                for (final AggregateCharSequence as1 : allAS) {
+                    for (final AggregateCharSequence as2 : allAS) {
                         assertTrue(as1.equals(as2));
                         assertTrue(as1.contentEquals(as2));
                         assertTrue(as1.hashCode() == as2.hashCode());
