@@ -497,7 +497,6 @@ public class TextParserTest extends TestCase {
                 final TraceBuilderTextHandler traceHandler = new TraceBuilderTextHandler();
                 ITextHandler handlerChain = traceHandler;
                 handlerChain = new EventProcessorTextHandler(handlerChain);
-                handlerChain = new InlinedExpressionProcessorTextHandler(handlerChain, "th");
                 if (processComments) {
                     handlerChain = new CommentProcessorTextHandler(handlerChain);
                 }
@@ -545,7 +544,6 @@ public class TextParserTest extends TestCase {
                 final TraceBuilderTextHandler traceHandler = new TraceBuilderTextHandler();
                 ITextHandler handlerChain = traceHandler;
                 handlerChain = new EventProcessorTextHandler(handlerChain);
-                handlerChain = new InlinedExpressionProcessorTextHandler(handlerChain, "th");
                 if (processComments) {
                     handlerChain = new CommentProcessorTextHandler(handlerChain);
                 }
