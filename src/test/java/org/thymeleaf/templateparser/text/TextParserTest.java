@@ -72,7 +72,7 @@ public class TextParserTest extends TestCase {
                 "[T(/*[hello]*/something;){1,1}]");
         testDoc(
                 "/*[(hello)]*/something;",
-                "[T([(hello)]){1,1}T(;){1,23}]",
+                "[T([(hello)]){1,3}T(;){1,23}]",
                 "[T(/*[(hello)]*/something;){1,1}]");
         testDoc(
                 "/*[#hello/]*/something;",
@@ -84,47 +84,47 @@ public class TextParserTest extends TestCase {
                 "[T({/*[hello]*/, {asdasd}}){1,1}]");
         testDoc(
                 "{/*[(hello)]*/, {asdasd}}",
-                "[T({){1,1}T([(hello)]){1,2}T(, {asdasd}}){1,15}]",
+                "[T({){1,1}T([(hello)]){1,4}T(, {asdasd}}){1,15}]",
                 "[T({/*[(hello)]*/, {asdasd}}){1,1}]");
         testDoc(
                 "{/*[(hello)]*/ {asdasd}}",
-                "[T({){1,1}T([(hello)]){1,2}T(}){1,24}]",
+                "[T({){1,1}T([(hello)]){1,4}T(}){1,24}]",
                 "[T({/*[(hello)]*/ {asdasd}}){1,1}]");
         testDoc(
                 "{/*[(hello)]*/\n {asdasd}}",
-                "[T({){1,1}T([(hello)]){1,2}T(}){2,10}]",
+                "[T({){1,1}T([(hello)]){1,4}T(}){2,10}]",
                 "[T({/*[(hello)]*/\n {asdasd}}){1,1}]");
         testDoc(
                 "{/*[(hello)]*/ /*lalala*/",
-                "[T({){1,1}T([(hello)]){1,2}T(/*lalala*/){1,16}]",
+                "[T({){1,1}T([(hello)]){1,4}T(/*lalala*/){1,16}]",
                 "[T({/*[(hello)]*/ /*lalala*/){1,1}]");
         testDoc(
                 "{/*[(hello)]*/ /*[lalala]*/ab",
-                "[T({){1,1}T([(hello)]){1,2}T(/*[lalala]*/){1,16}T(ab){1,28}]",
+                "[T({){1,1}T([(hello)]){1,4}T(/*[lalala]*/){1,16}T(ab){1,28}]",
                 "[T({/*[(hello)]*/ /*[lalala]*/ab){1,1}]");
         testDoc(
                 "{/*[(hello)]*/ /*[(lalala)]*/ab",
-                "[T({){1,1}T([(hello)]){1,2}T([(lalala)]){1,16}]",
+                "[T({){1,1}T([(hello)]){1,4}T([(lalala)]){1,18}]",
                 "[T({/*[(hello)]*/ /*[(lalala)]*/ab){1,1}]");
         testDoc(
                 "{/*[(hello)]*/ /*[(lalala)]*/ab, 1",
-                "[T({){1,1}T([(hello)]){1,2}T([(lalala)]){1,16}T(, 1){1,32}]",
+                "[T({){1,1}T([(hello)]){1,4}T([(lalala)]){1,18}T(, 1){1,32}]",
                 "[T({/*[(hello)]*/ /*[(lalala)]*/ab, 1){1,1}]");
         testDoc(
                 "{/*[(hello)]*/ [lalala]ab",
-                "[T({){1,1}T([(hello)]){1,2}]",
+                "[T({){1,1}T([(hello)]){1,4}]",
                 "[T({/*[(hello)]*/ [lalala]ab){1,1}]");
         testDoc(
                 "{/*[(hello)]*/ /*[#lalala/]*/ab",
-                "[T({){1,1}T([(hello)]){1,2}SES(lalala){1,18}SEE(lalala){1,26}T(ab){1,30}]",
+                "[T({){1,1}T([(hello)]){1,4}SES(lalala){1,18}SEE(lalala){1,26}T(ab){1,30}]",
                 "[T({/*[(hello)]*/ /*){1,1}SES(lalala){1,18}SEE(lalala){1,26}T(*/ab){1,28}]");
         testDoc(
                 "{/*[(hello)]*/ [#lalala/]ab",
-                "[T({){1,1}T([(hello)]){1,2}SES(lalala){1,16}SEE(lalala){1,24}T(ab){1,26}]",
+                "[T({){1,1}T([(hello)]){1,4}SES(lalala){1,16}SEE(lalala){1,24}T(ab){1,26}]",
                 "[T({/*[(hello)]*/ ){1,1}SES(lalala){1,16}SEE(lalala){1,24}T(ab){1,26}]");
         testDoc(
                 "/*[(hello)]*/",
-                "[C([hello]){1,1}]",
+                "[T([(hello)]){1,3}]",
                 "[T(/*[(hello)]*/){1,1}]");
         testDoc(
                 "",
