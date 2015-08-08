@@ -229,6 +229,69 @@ public final class AttributeDefinitionsTest {
             Assert.assertTrue(true);
         }
 
+        try {
+            thtextDefinition_4 = attributeDefinitions.forTextName(null, null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forTextName(null, "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forTextName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forCSSName(null, null);
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forCSSName(null, "");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
+        try {
+            thtextDefinition_4 = attributeDefinitions.forCSSName(null, " ");
+            Assert.assertTrue(false);
+        } catch (final IllegalArgumentException e) {
+            Assert.assertTrue(true);
+        }
+
         thtextDefinition_4 = attributeDefinitions.forHTMLName(null, "data:teeee");
         Assert.assertEquals("{data:teeee,data-data-teeee}", thtextDefinition_4.getAttributeName().toString());
 
@@ -276,6 +339,81 @@ public final class AttributeDefinitionsTest {
         Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
 
         thtextDefinition_4 = attributeDefinitions.forXMLName(null, "DATA:DATA");
+        Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getAttributeName().toString());
+
+
+        thtextDefinition_4 = attributeDefinitions.forTextName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forTextName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forTextName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forTextName(null, "data:data");
+        Assert.assertEquals("{data:data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forTextName(null, "DATA:TEEEE");
+        Assert.assertEquals("{DATA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forTextName(null, "DATA");
+        Assert.assertEquals("{DATA}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forTextName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forTextName(null, "DATA:DATA");
+        Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getAttributeName().toString());
+
+
+        thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "data:data");
+        Assert.assertEquals("{data:data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "DATA:TEEEE");
+        Assert.assertEquals("{DATA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "DATA");
+        Assert.assertEquals("{DATA}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forJavaScriptName(null, "DATA:DATA");
+        Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getAttributeName().toString());
+
+
+        thtextDefinition_4 = attributeDefinitions.forCSSName(null, "data:teeee");
+        Assert.assertEquals("{data:teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forCSSName(null, "data");
+        Assert.assertEquals("{data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forCSSName(null, "dataa:teeee");
+        Assert.assertEquals("{dataa:teeee}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forCSSName(null, "data:data");
+        Assert.assertEquals("{data:data}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forCSSName(null, "DATA:TEEEE");
+        Assert.assertEquals("{DATA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forCSSName(null, "DATA");
+        Assert.assertEquals("{DATA}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forCSSName(null, "DATAA:TEEEE");
+        Assert.assertEquals("{DATAA:TEEEE}", thtextDefinition_4.getAttributeName().toString());
+
+        thtextDefinition_4 = attributeDefinitions.forCSSName(null, "DATA:DATA");
         Assert.assertEquals("{DATA:DATA}", thtextDefinition_4.getAttributeName().toString());
 
     }

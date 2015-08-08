@@ -887,56 +887,56 @@ public final class WebVariablesMapTest {
         vm.put("two", "twellor");
         vm.setInliner(StandardTextInliner.INSTANCE);
 
-        Assert.assertEquals("{1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{1:{two=twellor}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=two values}[StandardTextInliner]", vm.toString());
 
         vm.increaseLevel();
         vm.put("three", "twelloree");
 
-        Assert.assertEquals("{2:{three=twelloree},1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values, three=twelloree}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{2:{three=twelloree},1:{two=twellor}[StandardTextInliner],0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=two values, three=twelloree}[StandardTextInliner]", vm.toString());
 
         vm.put("one", "atwe");
 
-        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[StandardTextInliner],0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[StandardTextInliner]", vm.toString());
 
         vm.increaseLevel();
         vm.increaseLevel();
         vm.increaseLevel();
 
-        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[StandardTextInliner],0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[StandardTextInliner]", vm.toString());
 
         vm.put("four", "lotwss");
 
-        Assert.assertEquals("{5:{four=lotwss},2:{one=atwe, three=twelloree},1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree, four=lotwss}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{5:{four=lotwss},2:{one=atwe, three=twelloree},1:{two=twellor}[StandardTextInliner],0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree, four=lotwss}[StandardTextInliner]", vm.toString());
 
         vm.put("two", "itwiii");
 
-        Assert.assertEquals("{5:{two=itwiii, four=lotwss},2:{one=atwe, three=twelloree},1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=itwiii, one=atwe, three=twelloree, four=lotwss}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{5:{two=itwiii, four=lotwss},2:{one=atwe, three=twelloree},1:{two=twellor}[StandardTextInliner],0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=itwiii, one=atwe, three=twelloree, four=lotwss}[StandardTextInliner]", vm.toString());
 
         vm.decreaseLevel();
 
-        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[StandardTextInliner],0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[StandardTextInliner]", vm.toString());
 
         vm.decreaseLevel();
 
-        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[StandardTextInliner],0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[StandardTextInliner]", vm.toString());
 
         vm.decreaseLevel();
 
-        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor}[StandardTextInliner],0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}[StandardTextInliner]", vm.toString());
 
         vm.decreaseLevel();
 
-        Assert.assertEquals("{1:{two=twellor}[STANDARDTEXT],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values}[STANDARDTEXT]", vm.toString());
+        Assert.assertEquals("{1:{two=twellor}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{two=twellor, one=two values}[StandardTextInliner]", vm.toString());
 
         vm.decreaseLevel();
 
