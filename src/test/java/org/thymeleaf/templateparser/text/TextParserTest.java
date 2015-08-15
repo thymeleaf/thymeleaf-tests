@@ -91,9 +91,13 @@ public class TextParserTest extends TestCase {
                 "[T({){1,1}T([(hello)]){1,4}T(}){1,24}]",
                 "[T({/*[(hello)]*/ {asdasd}}){1,1}]");
         testDoc(
-                "{/*[(hello)]*/\n {asdasd}}",
-                "[T({){1,1}T([(hello)]){1,4}T(}){2,10}]",
-                "[T({/*[(hello)]*/\n {asdasd}}){1,1}]");
+                "/*[(hello)]*/   \n [1,2,3] one;",
+                "[T([(hello)]){1,3}T(\n [1,2,3] one;){1,17}]",
+                "[T(/*[(hello)]*/   \n [1,2,3] one;){1,1}]");
+        testDoc(
+                "/*[(hello)]*/ [1, \n      2,3] one;",
+                "[T([(hello)]){1,3}T(;){2,15}]",
+                "[T(/*[(hello)]*/ [1, \n      2,3] one;){1,1}]");
         testDoc(
                 "{/*[(hello)]*/ /*lalala*/",
                 "[T({){1,1}T([(hello)]){1,4}T(/*lalala*/){1,16}]",
