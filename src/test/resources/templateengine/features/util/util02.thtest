@@ -1,0 +1,11 @@
+%TEMPLATE_MODE TEXT
+# ------------------------------------------------------------
+%INPUT
+[# th:with="date = ${#calendars.createToday()}"
+   th:text="${date.get(@java.util.Calendar@HOUR_OF_DAY) + ' ' + 
+              date.get(@java.util.Calendar@MINUTE) + ' ' + 
+              date.get(@java.util.Calendar@SECOND) + ' ' + 
+              date.get(@java.util.Calendar@MILLISECOND)}"]should all be zero[/]
+# ------------------------------------------------------------
+%OUTPUT
+0 0 0 0
