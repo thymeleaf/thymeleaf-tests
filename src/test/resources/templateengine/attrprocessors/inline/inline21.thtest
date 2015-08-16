@@ -4,11 +4,11 @@
 etb = new org.thymeleaf.templateengine.attrprocessors.model.ExceptionThrowingBean()
 # ------------------------------------------------------------
 %INPUT
-<script th:inline="dart">
-    var foo = /*[[$etbthrowException(...)]]*/ 'hello!';
-</script>
+<style th:inline="css">
+    foo: /*[[$etbthrowException(...)]]*/ 'hello!';
+</style>
 # ------------------------------------------------------------
 %OUTPUT
-<script>
-    var foo = [[$etbthrowException(...)]];
-</script>
+<style>
+    foo: [[$etbthrowException(...)]];
+</style>
