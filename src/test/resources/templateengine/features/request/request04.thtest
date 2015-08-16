@@ -1,0 +1,32 @@
+%TEMPLATE_MODE JAVASCRIPT
+# ------------------------------------------------------------
+%CONTEXT
+param.a = 'Hello, World!'
+param.b = 12
+param.b = 244
+# ------------------------------------------------------------
+%INPUT
+[# th:text="${#httpServletRequest.contentType}"]some text[/]
+[# th:text="${#httpServletRequest.method}"]some text[/]
+[# th:text="${#httpServletRequest.protocol}"]some text[/]
+[# th:text="${#httpServletRequest.scheme}"]some text[/]
+[# th:text="${#httpServletRequest.serverName}"]some text[/]
+[# th:text="${#httpServletRequest.serverPort}"]some text[/]
+[# th:text="${#httpServletRequest.contextPath}"]some text[/]
+[# th:text="${#httpServletRequest.servletPath}"]some text[/]
+[# th:text="${#httpServletRequest.requestURI}"]some text[/]
+[# th:text="${#httpServletRequest.requestURL}"]some text[/]
+[# th:text="${#httpServletRequest.queryString} ?: '[null]'"]some text[/]
+# ------------------------------------------------------------
+%OUTPUT
+'text/html'
+'GET'
+'HTTP/1.1'
+'http'
+'testing-server'
+80
+'/testing'
+'/request04'
+'/testing/request04'
+'http://testing-server/testing/request04'
+'a=Hello%2C+World%21&b=12&b=244'
