@@ -1,0 +1,16 @@
+%TEMPLATE_MODE TEXT
+# ------------------------------------------------------------
+%CONTEXT
+param.templateParam = 'something'
+# ------------------------------------------------------------
+# Access to request parameters is NOT restricted for fragment
+# parameters (only for template names)
+%INPUT
+[# th:insert="other (p=${param.templateParam[0]})"]...[/]
+# ------------------------------------------------------------
+%INPUT[other]
+[[${p}]]
+# ------------------------------------------------------------
+%OUTPUT
+something
+
