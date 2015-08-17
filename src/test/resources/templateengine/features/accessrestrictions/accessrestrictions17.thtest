@@ -1,0 +1,15 @@
+%EXTENDS ../html5.01.common
+# ------------------------------------------------------------
+%CONTEXT
+param.templateParam = 'something'
+# ------------------------------------------------------------
+# Access to request parameters is NOT restricted for fragment
+# parameters (only for template names)
+%INPUT
+<div th:insert="other (p=${param.templateParam[0]})">...</div>
+# ------------------------------------------------------------
+%INPUT[other]
+<p th:text="${p}">some text over here, that should never be included...</p>
+# ------------------------------------------------------------
+%OUTPUT
+<div><p>something</p></div>
