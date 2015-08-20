@@ -83,6 +83,7 @@ public final class PrototypeOnlyCommentMarkupReaderTest {
         testMessage("<!--/*/hello /*/--> */--> <!--/* */-->-->", "hello  */--> <!--/* */-->-->");
         testMessage("<!--/*/hello /*/--> */--> <!--/* */-->", "hello  */--> <!--/* */-->");
         testMessage("<!--/*<!--/*/hello /*/--> */--> <!--/* */-->", "<!--/*hello  */--> <!--/* */-->");
+        testMessage("<!--/*/hello/*/*/-->", "hello/*");
 
     }
 
