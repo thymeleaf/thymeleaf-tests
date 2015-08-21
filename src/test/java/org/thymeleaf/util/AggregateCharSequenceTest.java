@@ -69,7 +69,7 @@ public final class AggregateCharSequenceTest {
                             final String asText = as.toString();
                             assertEquals(text, asText);
                             assertTrue(text.hashCode() == as.hashCode());
-                            assertTrue(text.hashCode() == TextUtil.hashCode(textStr0, textStr1, textStr2));
+                            assertTrue(text.hashCode() == TextUtils.hashCode(textStr0, textStr1, textStr2));
                             assertTrue(textLen == as.length());
 
                             final int asLen = as.length();
