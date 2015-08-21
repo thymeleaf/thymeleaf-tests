@@ -2,6 +2,7 @@
 %NAME execinfotest01
 # ------------------------------------------------------------
 %INPUT
+# Note this syntax is deprecated as of 3.0, and only #execInfo will be allowed since 3.1
 <p th:text="${execInfo.templateName}">the test name will be used...</p>
 <p th:if="${execInfo.now != null}">there is a now</p>
 # ------------------------------------------------------------
