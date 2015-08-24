@@ -19,9 +19,12 @@
  */
 package org.thymeleaf.context;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -515,8 +518,8 @@ public final class VariablesMapTest {
 
         vm.put("two", "twello");
 
-        Assert.assertEquals("{1:{two=twello, one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twello, one=hello}", vm.toString());
+        Assert.assertEquals("{1:{one=hello, two=twello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, two=twello}", vm.toString());
 
         vm.decreaseLevel();
 
@@ -527,55 +530,55 @@ public final class VariablesMapTest {
         vm.put("two", "twellor");
 
         Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values}", vm.toString());
+        Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
 
         vm.increaseLevel();
         vm.put("three", "twelloree");
 
         Assert.assertEquals("{2:{three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values, three=twelloree}", vm.toString());
+        Assert.assertEquals("{one=two values, two=twellor, three=twelloree}", vm.toString());
 
         vm.put("one", "atwe");
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
 
         vm.increaseLevel();
         vm.increaseLevel();
         vm.increaseLevel();
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
 
         vm.put("four", "lotwss");
 
         Assert.assertEquals("{5:{four=lotwss},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree, four=lotwss}", vm.toString());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree, four=lotwss}", vm.toString());
 
         vm.put("two", "itwiii");
 
-        Assert.assertEquals("{5:{two=itwiii, four=lotwss},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=itwiii, one=atwe, three=twelloree, four=lotwss}", vm.toString());
+        Assert.assertEquals("{5:{four=lotwss, two=itwiii},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=itwiii, three=twelloree, four=lotwss}", vm.toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values}", vm.toString());
+        Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
 
         vm.decreaseLevel();
 
@@ -597,25 +600,25 @@ public final class VariablesMapTest {
 
         Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=a value}", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.put("one", "two values");
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.remove("one");
 
         Assert.assertEquals("{0:{}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}", vm.toString());
-        Assert.assertEquals("[]", vm.getVariableNames().toString());
+        Assert.assertEquals(Collections.emptySet(), vm.getVariableNames());
 
         vm.put("one", "two values");
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.increaseLevel();
 
@@ -623,70 +626,70 @@ public final class VariablesMapTest {
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.remove("one");
 
         Assert.assertEquals("{1:{one=(*removed*)},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}", vm.toString());
-        Assert.assertEquals("[]", vm.getVariableNames().toString());
+        Assert.assertEquals(Collections.emptySet(), vm.getVariableNames());
 
         vm.put("one", "hello");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.remove("two");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.put("two", "twello");
         vm.setInliner(StandardTextInliner.INSTANCE);
 
-        Assert.assertEquals("{1:{two=twello, one=hello}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twello, one=hello}[StandardTextInliner]", vm.toString());
-        Assert.assertEquals("[two, one]", vm.getVariableNames().toString());
+        Assert.assertEquals("{1:{one=hello, two=twello}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, two=twello}[StandardTextInliner]", vm.toString());
+        Assert.assertEquals(createSet("one","two"), vm.getVariableNames());
 
         vm.remove("two");
 
         Assert.assertEquals("{1:{one=hello}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}[StandardTextInliner]", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.remove("one");
 
         Assert.assertEquals("{1:{one=(*removed*)}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}[StandardTextInliner]", vm.toString());
-        Assert.assertEquals("[]", vm.getVariableNames().toString());
+        Assert.assertEquals(Collections.emptySet(), vm.getVariableNames());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.increaseLevel();
         vm.put("two", "twellor");
 
         Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values}", vm.toString());
-        Assert.assertEquals("[two, one]", vm.getVariableNames().toString());
+        Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
+        Assert.assertEquals(createSet("one","two"), vm.getVariableNames());
 
         vm.increaseLevel();
         vm.put("three", "twelloree");
 
         Assert.assertEquals("{2:{three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values, three=twelloree}", vm.toString());
-        Assert.assertEquals("[two, one, three]", vm.getVariableNames().toString());
+        Assert.assertEquals("{one=two values, two=twellor, three=twelloree}", vm.toString());
+        Assert.assertEquals(createSet("one","three","two"), vm.getVariableNames());
 
         vm.put("one", "atwe");
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}", vm.toString());
-        Assert.assertEquals("[two, one, three]", vm.getVariableNames().toString());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+        Assert.assertEquals(createSet("one","three","two"), vm.getVariableNames());
 
         vm.increaseLevel();
 
@@ -694,7 +697,7 @@ public final class VariablesMapTest {
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
-        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one","three"), vm.getVariableNames());
 
         vm.increaseLevel();
 
@@ -702,55 +705,55 @@ public final class VariablesMapTest {
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
-        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one","three"), vm.getVariableNames());
 
         vm.increaseLevel();
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
-        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one","three"), vm.getVariableNames());
 
         vm.put("four", "lotwss");
 
         Assert.assertEquals("{5:{four=lotwss},3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss}", vm.toString());
-        Assert.assertEquals("[one, three, four]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one","three","four"), vm.getVariableNames());
 
         vm.put("two", "itwiii");
 
-        Assert.assertEquals("{5:{two=itwiii, four=lotwss},3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=itwiii, one=atwe, three=twelloree, four=lotwss}", vm.toString());
-        Assert.assertEquals("[two, one, three, four]", vm.getVariableNames().toString());
+        Assert.assertEquals("{5:{four=lotwss, two=itwiii},3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss, two=itwiii}", vm.toString());
+        Assert.assertEquals(createSet("one","three","four","two"), vm.getVariableNames());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
-        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one","three"), vm.getVariableNames());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
-        Assert.assertEquals("[one, three]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one","three"), vm.getVariableNames());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}", vm.toString());
-        Assert.assertEquals("[two, one, three]", vm.getVariableNames().toString());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
+        Assert.assertEquals(createSet("one","three","two"), vm.getVariableNames());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=two values}", vm.toString());
-        Assert.assertEquals("[two, one]", vm.getVariableNames().toString());
+        Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
+        Assert.assertEquals(createSet("one","two"), vm.getVariableNames());
 
         vm.decreaseLevel();
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
-        Assert.assertEquals("[one]", vm.getVariableNames().toString());
+        Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
     }
 
@@ -875,8 +878,8 @@ public final class VariablesMapTest {
         vm.put("two", "twellor");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
-        Assert.assertEquals("{1:{two=twellor, one=hello},0:{one=a value}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=hello}", vm.toString());
+        Assert.assertEquals("{1:{one=hello, two=twellor},0:{one=a value}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, two=twellor}", vm.toString());
 
         vm.increaseLevel();
 
@@ -884,8 +887,8 @@ public final class VariablesMapTest {
         vm.put("one", "atwe");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
-        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor, one=hello},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
 
         vm.setSelectionTarget("BIGFORM");
 
@@ -898,8 +901,8 @@ public final class VariablesMapTest {
         Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("BIGFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{2:{one=atwe, three=twelloree}<BIGFORM>,1:{two=twellor, one=hello},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}<BIGFORM>", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}<BIGFORM>", vm.toString());
 
         vm.increaseLevel();
 
@@ -914,7 +917,7 @@ public final class VariablesMapTest {
         Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("BIGFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{two=twellor, one=hello},0:{one=a value}}[3]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[3]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}<BIGFORM>", vm.toString());
 
         vm.increaseLevel();
@@ -931,7 +934,7 @@ public final class VariablesMapTest {
         Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("SMALLFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{two=twellor, one=hello},0:{one=a value}}[4]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[4]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}<SMALLFORM>", vm.toString());
 
 
@@ -946,7 +949,7 @@ public final class VariablesMapTest {
         Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("SMALLFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{two=twellor, one=hello},0:{one=a value}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}<SMALLFORM>", vm.toString());
 
         vm.put("four", "lotwss");
@@ -962,7 +965,7 @@ public final class VariablesMapTest {
         Assert.assertEquals("lotwss", vm.getVariable("four"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("SMALLFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{5:{four=lotwss},4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{two=twellor, one=hello},0:{one=a value}}[5]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{5:{four=lotwss},4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss}<SMALLFORM>", vm.toString());
 
         vm.decreaseLevel();
@@ -978,7 +981,7 @@ public final class VariablesMapTest {
         Assert.assertNull(vm.getVariable("four"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("SMALLFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{two=twellor, one=hello},0:{one=a value}}[4]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[4]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}<SMALLFORM>", vm.toString());
 
         vm.decreaseLevel();
@@ -994,7 +997,7 @@ public final class VariablesMapTest {
         Assert.assertNull(vm.getVariable("four"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("BIGFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{two=twellor, one=hello},0:{one=a value}}[3]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[3]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}<BIGFORM>", vm.toString());
 
         vm.decreaseLevel();
@@ -1010,8 +1013,8 @@ public final class VariablesMapTest {
         Assert.assertNull(vm.getVariable("four"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("BIGFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{2:{one=atwe, three=twelloree}<BIGFORM>,1:{two=twellor, one=hello},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}<BIGFORM>", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}<BIGFORM>", vm.toString());
 
         vm.setSelectionTarget("MEDIUMFORM");
 
@@ -1026,8 +1029,8 @@ public final class VariablesMapTest {
         Assert.assertNull(vm.getVariable("four"));
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("MEDIUMFORM", vm.getSelectionTarget());
-        Assert.assertEquals("{2:{one=atwe, three=twelloree}<MEDIUMFORM>,1:{two=twellor, one=hello},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=atwe, three=twelloree}<MEDIUMFORM>", vm.toString());
+        Assert.assertEquals("{2:{one=atwe, three=twelloree}<MEDIUMFORM>,1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}<MEDIUMFORM>", vm.toString());
 
 
         vm.decreaseLevel();
@@ -1035,8 +1038,8 @@ public final class VariablesMapTest {
         Assert.assertEquals(1, vm.level());
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
-        Assert.assertEquals("{1:{two=twellor, one=hello},0:{one=a value}}[1]", vm.getStringRepresentationByLevel());
-        Assert.assertEquals("{two=twellor, one=hello}", vm.toString());
+        Assert.assertEquals("{1:{one=hello, two=twellor},0:{one=a value}}[1]", vm.getStringRepresentationByLevel());
+        Assert.assertEquals("{one=hello, two=twellor}", vm.toString());
 
 
         vm.decreaseLevel();
@@ -1119,4 +1122,14 @@ public final class VariablesMapTest {
     }
 
 
+    
+    private static Set<String> createSet(final String... elements) {
+        final Set<String> result = new LinkedHashSet<String>();
+        for (final String element : elements) {
+            result.add(element);
+        }
+        return result;
+    }
+    
+    
 }
