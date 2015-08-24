@@ -1,10 +1,19 @@
-language: java
+# Use docker-based build environment (instead of openvz)
+sudo: false
 
+# Select JDKs >= Java 6 for testing
+language: java
 jdk:
   - openjdk6
   - openjdk7
   - oraclejdk7
   - oraclejdk8
 
+# Enable the Travis CI cache for the maven folder (dependencies and plugins)
+cache:
+  directories:
+    - $HOME/.m2
+
+# Test execution
 install: true
 script: "mvn -P ${PROFILE} clean compile test"
