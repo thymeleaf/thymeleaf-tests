@@ -1,13 +1,13 @@
-%TEMPLATE_MODE HTML5
+%TEMPLATE_MODE TEXT
 # ------------------------------------------------------------
 %CONTEXT
 obj = #{ 'valnum' : 1234, 'valstr' : 'Hello' }
 # ------------------------------------------------------------
 %INPUT
-<p th:object="${obj}" th:text="*{valstr}">...</p>
-<p th:object="${obj}" th:text="*{valnum}">...</p>
-<p th:object="${obj}" th:text="*{{valstr}}">...</p>
-<p th:object="${obj}" th:text="*{{valnum}}">...</p>
+<p>[# th:object="${obj}" th:text="*{valstr}"/]</p>
+<p>[# th:object="${obj}" th:text="*{valnum}"/]</p>
+<p>[# th:object="${obj}" th:text="*{{valstr}}"/]</p>
+<p>[# th:object="${obj}" th:text="*{{valnum}}"/]</p>
 # ------------------------------------------------------------
 %OUTPUT
 <p>Hello</p>
