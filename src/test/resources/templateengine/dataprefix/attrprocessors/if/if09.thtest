@@ -1,9 +1,8 @@
 %TEMPLATE_MODE TEXT
 # ------------------------------------------------------------
-%DESCRIPTION
-The idea of this test is to see how data-th-* attributes are
-not processed at all in TEXT templates, given it makes no
-sense to apply HTML5-specific infrastructure to TEXT modes.
+# The idea of this test is to see how data-th-* attributes are
+# not processed at all in TEXT templates, given it makes no
+# sense to apply HTML5-specific infrastructure to TEXT modes.
 # ------------------------------------------------------------
 %CONTEXT
 user = #{ 'age': 24 }
