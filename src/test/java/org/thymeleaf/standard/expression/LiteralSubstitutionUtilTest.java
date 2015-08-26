@@ -60,6 +60,8 @@ public class LiteralSubstitutionUtilTest extends TestCase {
         test("${one}", "${one}");
         test("${one}${two}", "${one}${two}");
         test("|${one}${two}|", "${one} + '' + ${two}");
+        test("|a \'one\' b|", "'a \\'one\\' b'");
+        test("|a \\'one\\' b|", "'a \\\'one\\\' b'");
 
     }
 
