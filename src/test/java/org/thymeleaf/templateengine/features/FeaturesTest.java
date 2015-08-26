@@ -19,8 +19,12 @@
  */
 package org.thymeleaf.templateengine.features;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.templateengine.aggregation.dialect.Dialect01;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
@@ -131,6 +135,29 @@ public class FeaturesTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.execute("classpath:templateengine/features/accessrestrictions");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testInliningStandard() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/features/inlining/standard");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testInliningNoStandard() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new Dialect01()}));
+        executor.execute("classpath:templateengine/features/inlining/nostandard");
 
         Assert.assertTrue(executor.isAllOK());
 
