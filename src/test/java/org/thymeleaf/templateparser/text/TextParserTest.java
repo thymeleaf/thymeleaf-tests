@@ -493,7 +493,7 @@ public class TextParserTest extends TestCase {
 
         try {
 
-            final TextParser parser = new TextParser(2, bufferSize, processComments, "th");
+            final TextParser parser = new TextParser(2, bufferSize, processComments, true, "th");
 
             // TEST WITH TRACING HANDLER AND READER
             {
@@ -502,7 +502,7 @@ public class TextParserTest extends TestCase {
                 ITextHandler handlerChain = traceHandler;
                 handlerChain = new EventProcessorTextHandler(handlerChain);
                 if (processComments) {
-                    handlerChain = new CommentProcessorTextHandler(handlerChain);
+                    handlerChain = new CommentProcessorTextHandler(handlerChain, true);
                 }
 
                 if (offset == 0 && len == input.length) {
@@ -549,7 +549,7 @@ public class TextParserTest extends TestCase {
                 ITextHandler handlerChain = traceHandler;
                 handlerChain = new EventProcessorTextHandler(handlerChain);
                 if (processComments) {
-                    handlerChain = new CommentProcessorTextHandler(handlerChain);
+                    handlerChain = new CommentProcessorTextHandler(handlerChain, true);
                 }
 
                 parser.parseDocument(new CharArrayReader(newInput, 5, len), bufferSize, handlerChain);
