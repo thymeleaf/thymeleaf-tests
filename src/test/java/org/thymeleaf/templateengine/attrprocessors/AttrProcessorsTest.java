@@ -88,6 +88,16 @@ public class AttrProcessorsTest {
     }
 
     @Test
+    public void testInsert() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/attrprocessors/insert");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+    @Test
     public void testSubstituteby() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
