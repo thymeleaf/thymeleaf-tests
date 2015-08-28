@@ -12,9 +12,9 @@ var = 10
 <script language="javascript">
 alert("Congratulations! You are running Internet Explorer 7 or a later version of Internet Explorer.");
 </script>
-<p>[[${var.do()}</p>
+<p>[[${var.do()}]]</p>
 <![endif]-->
 ...
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*?)\"frag\"\ \-\ line\ 6\,\ col\ 4(.*?)
+%EXCEPTION_MESSAGE_PATTERN (.*?)\"frag\"\ \-\ line\ 6\,\ col\ 6(.*?)

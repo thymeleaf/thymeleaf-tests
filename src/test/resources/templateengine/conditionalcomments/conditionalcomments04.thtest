@@ -14,4 +14,4 @@ alert("Congratulations! You are running Internet Explorer 7 or a later version o
 ...
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*?)conditionalcomments04\.thtest-001\"\ \-\ line\ 6\,\ col\ 4(.*?)
+%EXCEPTION_MESSAGE_PATTERN (.*?)alcomments04\.thtest-001\"\ \-\ line\ 6\,\ col\ 4(.*?)
