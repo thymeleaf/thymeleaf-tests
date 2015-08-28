@@ -31,6 +31,7 @@ import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.resource.ReaderResource;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.ParsableArtifactType;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
 public class HtmlBulkTester {
@@ -81,7 +82,7 @@ public class HtmlBulkTester {
 
             System.out.print("[PARSING]");
 
-            PARSER.parseTemplate(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new ReaderResource(fileInTestFolderName, fileInTestFolderReader), null, handler);
+            PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, ParsableArtifactType.TEMPLATE, new ReaderResource(fileInTestFolderName, fileInTestFolderReader), null, TemplateMode.HTML, handler);
 
             // Input stream will be closed by parser
             testOutputWriter.close();

@@ -39,6 +39,7 @@ import org.thymeleaf.engine.ITemplateHandler;
 import org.thymeleaf.engine.OutputTemplateHandler;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.ParsableArtifactType;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
 /*
@@ -121,7 +122,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
 
-        parser.parseTemplate(templateEngineContext, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
+        parser.parseStandalone(templateEngineContext, ParsableArtifactType.TEMPLATE, new StringResource(templateName, input), blockSelectors, TemplateMode.HTML, handler);
 
         assertEquals("Test failed for file: " + templateName, output, writer.toString());
 
