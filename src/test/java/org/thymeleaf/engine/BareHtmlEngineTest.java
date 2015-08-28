@@ -30,6 +30,7 @@ import org.thymeleaf.resource.IResource;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.resourceresolver.IResourceResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateparser.ParsableArtifactType;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
 
@@ -95,7 +96,7 @@ public final class BareHtmlEngineTest {
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
 
-        PARSER.parseTemplate(TEMPLATE_ENGINE_CONFIGURATION, TemplateMode.HTML, new StringResource(templateName, input), blockSelectors, handler);
+        PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, ParsableArtifactType.TEMPLATE, new StringResource(templateName, input), blockSelectors, TemplateMode.HTML, handler);
 
         Assert.assertEquals("Test failed for file: " + templateName, output, writer.toString());
 

@@ -11,10 +11,12 @@ var = 10
 # ------------------------------------------------------------
 %INPUT[frag]
 ...
+...
+...
 <p>
   <span>[[${var.do()}]]</span>
 </p>
 ...
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*?)\"frag\"\ \-\ line\ 3\,\ col\ 9(.*?)
+%EXCEPTION_MESSAGE_PATTERN (.*?)\"frag\"\ \-\ line\ 5\,\ col\ 11(.*?)
