@@ -8,7 +8,5 @@ etb = new org.thymeleaf.templateengine.attrprocessors.model.ExceptionThrowingBea
     var foo = /*[[$etbthrowException(...)]]*/ 'hello!';
 </script>
 # ------------------------------------------------------------
-%OUTPUT
-<script>
-    var foo = [[$etbthrowException(...)]];
-</script>
+%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
+%EXCEPTION_MESSAGE_PATTERN (.*?)Could not parse(.*?)

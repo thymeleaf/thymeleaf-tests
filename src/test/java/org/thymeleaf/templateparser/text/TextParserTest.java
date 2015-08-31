@@ -29,7 +29,7 @@ import junit.framework.TestCase;
 /*
  *
  * @author Daniel Fernandez
- * @since 2.0.0
+ * @since 3.0.0
  */
 public class TextParserTest extends TestCase {
 
@@ -502,7 +502,7 @@ public class TextParserTest extends TestCase {
                 ITextHandler handlerChain = traceHandler;
                 handlerChain = new EventProcessorTextHandler(handlerChain);
                 if (processComments) {
-                    handlerChain = new CommentProcessorTextHandler(handlerChain, true);
+                    handlerChain = new CommentProcessorTextHandler(true, handlerChain);
                 }
 
                 if (offset == 0 && len == input.length) {
@@ -549,7 +549,7 @@ public class TextParserTest extends TestCase {
                 ITextHandler handlerChain = traceHandler;
                 handlerChain = new EventProcessorTextHandler(handlerChain);
                 if (processComments) {
-                    handlerChain = new CommentProcessorTextHandler(handlerChain, true);
+                    handlerChain = new CommentProcessorTextHandler(true, handlerChain);
                 }
 
                 parser.parseDocument(new CharArrayReader(newInput, 5, len), bufferSize, handlerChain);
