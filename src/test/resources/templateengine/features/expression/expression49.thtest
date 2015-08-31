@@ -11,9 +11,8 @@ size = 123
 [# th:text="'00__something__00'"]...[/]
 # ------------------------------------------------------------
 %OUTPUT
-# The second line is valid escaping in JavaScript
-'0012300'
-'0012300'
-'00__${size}00'
-'00something00'
-'00something00'
+\30 012300
+\30 012300
+\30 0__\$\{size\}00
+\30 0something00
+\30 0something00
