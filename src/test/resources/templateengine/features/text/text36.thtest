@@ -4,4 +4,4 @@
 Hello this is a [# th:text="'working template'"/]!
 # ------------------------------------------------------------
 %OUTPUT
-Hello this is a 'working template'!
+Hello this is a working\ template!
