@@ -21,7 +21,7 @@ package org.thymeleaf.templateengine.aggregation.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.engine.IElementStructureHandler;
-import org.thymeleaf.engine.Markup;
+import org.thymeleaf.engine.MutableMarkup;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -40,7 +40,7 @@ public class Dialect02DivProcessor extends AbstractElementTagProcessor {
             final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
             final IElementStructureHandler structureHandler) {
 
-        final Markup markup = processingContext.getMarkupFactory().createMarkup();
+        final MutableMarkup markup = processingContext.getMarkupFactory().createMarkup();
         markup.add(processingContext.getMarkupFactory().createText("[From Dialect 02]"));
         structureHandler.insertAfter(markup, true);
 
