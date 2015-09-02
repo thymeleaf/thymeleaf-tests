@@ -1,0 +1,15 @@
+%TEMPLATE_MODE HTML
+# ------------------------------------------------------------
+%INPUT
+<section>
+  <div agg:aggregate="...">
+    <p>Hello!</p>
+  </div>
+</section>
+# ------------------------------------------------------------
+%OUTPUT
+<section>
+  <div agg="xxx">
+    <p>Hello!</p>
+  </div>
+</section>
