@@ -38,7 +38,7 @@ import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.processor.cdatasection.AbstractCDATASectionProcessor;
 import org.thymeleaf.processor.comment.AbstractCommentProcessor;
 import org.thymeleaf.processor.doctype.AbstractDocTypeProcessor;
-import org.thymeleaf.processor.element.AbstractElementNodeProcessor;
+import org.thymeleaf.processor.element.AbstractElementMarkupProcessor;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.processinginstruction.AbstractProcessingInstructionProcessor;
 import org.thymeleaf.processor.text.AbstractTextProcessor;
@@ -154,7 +154,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                     attributeName = attributeName.substring(1);
                 }
                 processors.add(
-                        new ElementNodeProcessorAggregationTestProcessor(
+                        new ElementMarkupProcessorAggregationTestProcessor(
                                 dialectPrefix,
                                 (elementName.equals("null")? null : elementName), prefixElementName,
                                 (attributeName.equals("null")? null : attributeName), prefixAttributeName,
@@ -373,11 +373,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
     }
 
 
-    private static class ElementNodeProcessorAggregationTestProcessor extends AbstractElementNodeProcessor implements NamedTestProcessor {
+    private static class ElementMarkupProcessorAggregationTestProcessor extends AbstractElementMarkupProcessor implements NamedTestProcessor {
 
         private final String name;
 
-        ElementNodeProcessorAggregationTestProcessor(
+        ElementMarkupProcessorAggregationTestProcessor(
                 final String dialectPrefix,
                 final String elementName, final boolean prefixElementName,
                 final String attributeName, final boolean prefixAttributeName,
@@ -386,7 +386,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
             this.name = null;
         }
 
-        ElementNodeProcessorAggregationTestProcessor(
+        ElementMarkupProcessorAggregationTestProcessor(
                 final String dialectPrefix, final String name, final TemplateMode templateMode, final int precedence) {
             super(templateMode, dialectPrefix, null, false, null, false, precedence);
             this.name = name;
@@ -401,7 +401,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected List<INode> doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final INode iNode) {
+        protected IMarkup doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IMarkup markup) {
             // Nothing to be done here - nothing to process!
             return null;
         }
