@@ -25,19 +25,20 @@ import java.util.Set;
 import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
-public class AggDialect extends AbstractProcessorDialect {
+public class MarkupDialect extends AbstractProcessorDialect {
 
-    public static final String PREFIX = "agg";
+    public static final String PREFIX = "markup";
 
-    public AggDialect() {
-        super("AggDialect", PREFIX);
+    public MarkupDialect() {
+        super("MarkupDialect", PREFIX);
     }
 
     
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new AggAggregatorElementMarkupProcessor(PREFIX));
-        processors.add(new AggBadAggregatorElementMarkupProcessor(PREFIX));
+        processors.add(new MarkupPrintElementMarkupProcessor(PREFIX));
+        processors.add(new MarkupReplaceElementMarkupProcessor(PREFIX));
+        processors.add(new MarkupReplaceBodyElementMarkupProcessor(PREFIX));
         return processors;
     }
 

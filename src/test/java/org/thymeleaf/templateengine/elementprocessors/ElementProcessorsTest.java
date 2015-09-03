@@ -25,7 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
-import org.thymeleaf.templateengine.elementprocessors.dialect.AggDialect;
+import org.thymeleaf.templateengine.elementprocessors.dialect.MarkupDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
@@ -57,7 +57,7 @@ public class ElementProcessorsTest {
     public void testElementMarkupProcessors() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new AggDialect()}));
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new MarkupDialect()}));
         executor.execute("classpath:templateengine/elementprocessors/markup");
 
         Assert.assertTrue(executor.isAllOK());
