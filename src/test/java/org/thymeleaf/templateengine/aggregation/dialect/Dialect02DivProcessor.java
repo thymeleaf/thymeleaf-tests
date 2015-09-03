@@ -38,6 +38,7 @@ public class Dialect02DivProcessor extends AbstractElementTagProcessor {
     @Override
     protected void doProcess(
             final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
+            final String tagTemplateName, final int tagLine, final int tagCol,
             final IElementStructureHandler structureHandler) {
 
         final Markup markup = processingContext.getMarkupFactory().createMarkup();
