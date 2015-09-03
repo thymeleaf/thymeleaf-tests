@@ -4,10 +4,12 @@
 # This test executes a processor (badaggregate) that tries to
 # modify immutable markup, and should therefore raise an exception
 <section>
-  <div agg:badaggregate="...">
+  <div markup:replace="...">
     <p>Hello!</p>
   </div>
 </section>
 # ------------------------------------------------------------
-%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*?)markup02\.thtest-001\"\ \-\ line\ 2\,\ col\ 1(.*?)
+%OUTPUT
+<section>
+  <p>This is a <span>replacement</span></p>
+</section>
