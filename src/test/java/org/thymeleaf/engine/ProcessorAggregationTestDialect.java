@@ -366,7 +366,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IProcessableElementTag iProcessableElementTag, final IElementStructureHandler iElementStructureHandler) {
+        protected void doProcess(
+                final ITemplateProcessingContext iTemplateProcessingContext,
+                final IProcessableElementTag iProcessableElementTag,
+                final String tagTemplateName, final int tagLine, final int tagCol,
+                final IElementStructureHandler iElementStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
