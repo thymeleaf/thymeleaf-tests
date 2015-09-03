@@ -20,7 +20,6 @@
 package org.thymeleaf.engine;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -29,7 +28,6 @@ import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.model.ICDATASection;
 import org.thymeleaf.model.IComment;
 import org.thymeleaf.model.IDocType;
-import org.thymeleaf.model.INode;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.model.IProcessingInstruction;
 import org.thymeleaf.model.IText;
@@ -405,9 +403,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected IMarkup doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IMarkup markup) {
+        protected void doProcess(
+                final ITemplateProcessingContext iTemplateProcessingContext,
+                final Markup markup,
+                final String markupTemplateName, final int markupLine, final int markupCol) {
             // Nothing to be done here - nothing to process!
-            return null;
         }
 
     }
