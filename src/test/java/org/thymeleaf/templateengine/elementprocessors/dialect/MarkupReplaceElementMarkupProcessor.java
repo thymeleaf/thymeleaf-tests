@@ -20,32 +20,35 @@
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.engine.IMarkup;
-import org.thymeleaf.model.IOpenElementTag;
+import org.thymeleaf.engine.Markup;
+import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
 import org.thymeleaf.processor.element.AbstractElementMarkupProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class AggBadAggregatorElementMarkupProcessor extends AbstractElementMarkupProcessor {
+public class MarkupReplaceElementMarkupProcessor extends AbstractAttributeMarkupProcessor {
 
-    public static final String ATTR_NAME = "badaggregate";
+    public static final String ATTR_NAME = "replace";
+
+    public static final String REPLACEMENT = "<p>This is a <span th:text=\"replacement\">prototype</span></p>";
 
 
-    public AggBadAggregatorElementMarkupProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000);
+    public MarkupReplaceElementMarkupProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000, true);
     }
 
 
 
     @Override
-    protected IMarkup doProcess(final ITemplateProcessingContext processingContext, final IMarkup markup) {
+    protected void doProcess(final ITemplateProcessingContext processingContext, final Markup markup,
+                             final AttributeName attributeName, final String attributeValue,
+                             final String attributeTemplateName, final int attributeLine, final int attributeCol) {
 
-        /*
-         * This should raise an exception, as the event object returned by markup.get(0) should be IMMUTABLE
-         */
-        final String markupStr = markup.renderMarkup();
-        ((IOpenElementTag) markup.get(0)).getAttributes().setAttribute("agg", markupStr);
-        ((IOpenElementTag) markup.get(0)).getAttributes().removeAttribute(getMatchingAttributeName().getMatchingAttributeName());
-        return markup;
+        final IMarkup replacementMarkup = processingContext.getMarkupFactory().parseAsMarkup(REPLACEMENT);
+
+        markup.reset();
+        markup.addMarkup(replacementMarkup);
 
     }
 

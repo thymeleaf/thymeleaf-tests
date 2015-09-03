@@ -20,31 +20,32 @@
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
-import org.thymeleaf.engine.IMarkup;
-import org.thymeleaf.engine.MutableMarkup;
+import org.thymeleaf.engine.AttributeName;
+import org.thymeleaf.engine.Markup;
 import org.thymeleaf.model.IOpenElementTag;
+import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
 import org.thymeleaf.processor.element.AbstractElementMarkupProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.unbescape.html.HtmlEscape;
 
-public class AggAggregatorElementMarkupProcessor extends AbstractElementMarkupProcessor {
+public class MarkupPrintElementMarkupProcessor extends AbstractAttributeMarkupProcessor {
 
-    public static final String ATTR_NAME = "aggregate";
+    public static final String ATTR_NAME = "print";
 
 
-    public AggAggregatorElementMarkupProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000);
+    public MarkupPrintElementMarkupProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000, true);
     }
 
 
 
     @Override
-    protected IMarkup doProcess(final ITemplateProcessingContext processingContext, final IMarkup markup) {
+    protected void doProcess(final ITemplateProcessingContext processingContext, final Markup markup,
+                             final AttributeName attributeName, final String attributeValue,
+                             final String attributeTemplateName, final int attributeLine, final int attributeCol) {
 
-        final String markupStr = markup.renderMarkup().replaceAll("\\r\\n|\\r|\\n", "\\n");
-        final MutableMarkup mutableMarkup = markup.cloneAsMutable();
-        ((IOpenElementTag) mutableMarkup.get(0)).getAttributes().setAttribute("agg", markupStr);
-        ((IOpenElementTag) mutableMarkup.get(0)).getAttributes().removeAttribute(getMatchingAttributeName().getMatchingAttributeName());
-        return mutableMarkup;
+        final String markupStr = HtmlEscape.escapeHtml4Xml(markup.renderMarkup().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
+        ((IOpenElementTag)markup.get(0)).getAttributes().setAttribute("agg", markupStr);
 
     }
 
