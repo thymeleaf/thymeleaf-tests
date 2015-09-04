@@ -22,7 +22,7 @@ package org.thymeleaf.templateengine.elementprocessors.dialect;
 import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.engine.Markup;
-import org.thymeleaf.model.IOpenElementTag;
+import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.unbescape.html.HtmlEscape;
@@ -44,7 +44,7 @@ public class MarkupPrintAfterElementMarkupProcessor extends AbstractAttributeMar
                              final String attributeTemplateName, final int attributeLine, final int attributeCol) {
 
         final String markupStr = HtmlEscape.escapeHtml4Xml(markup.renderMarkup().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
-        ((IOpenElementTag)markup.get(0)).getAttributes().setAttribute("aggafter", markupStr);
+        ((IProcessableElementTag)markup.get(0)).getAttributes().setAttribute("aggafter", markupStr);
 
     }
 
