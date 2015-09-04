@@ -36,7 +36,8 @@ public class MarkupDialect extends AbstractProcessorDialect {
     
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new MarkupPrintElementMarkupProcessor(PREFIX));
+        processors.add(new MarkupPrintBeforeElementMarkupProcessor(PREFIX));
+        processors.add(new MarkupPrintAfterElementMarkupProcessor(PREFIX));
         processors.add(new MarkupReplaceElementMarkupProcessor(PREFIX));
         processors.add(new MarkupReplaceBodyElementMarkupProcessor(PREFIX));
         return processors;
