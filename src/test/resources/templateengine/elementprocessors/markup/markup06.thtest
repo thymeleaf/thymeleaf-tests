@@ -2,14 +2,12 @@
 # ------------------------------------------------------------
 %INPUT
 <section>
-  <div markup:printbefore="...">
-    <p>Hello!</p>
+  <div markup:replacebody="...">
+    <p th:assert="${false}">Hello!</p>
   </div>
 </section>
 # ------------------------------------------------------------
 %OUTPUT
 <section>
-  <div aggbefore="&lt;div&gt;\n    &lt;p&gt;Hello!&lt;/p&gt;\n  &lt;/div&gt;">
-    <p>Hello!</p>
-  </div>
+  <div><p>This is a <span>replacement</span></p></div>
 </section>
