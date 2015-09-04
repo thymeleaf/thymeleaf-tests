@@ -24,7 +24,6 @@ import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.engine.IMarkup;
 import org.thymeleaf.engine.Markup;
 import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
-import org.thymeleaf.processor.element.AbstractElementMarkupProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
 public class MarkupReplaceBodyElementMarkupProcessor extends AbstractAttributeMarkupProcessor {

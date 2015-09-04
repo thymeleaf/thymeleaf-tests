@@ -40,7 +40,6 @@ import org.thymeleaf.engine.OutputTemplateHandler;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateparser.ParsableArtifactType;
-import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
 /*
  *
