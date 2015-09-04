@@ -24,17 +24,16 @@ import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.engine.Markup;
 import org.thymeleaf.model.IOpenElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
-import org.thymeleaf.processor.element.AbstractElementMarkupProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.unbescape.html.HtmlEscape;
 
-public class MarkupPrintElementMarkupProcessor extends AbstractAttributeMarkupProcessor {
+public class MarkupPrintAfterElementMarkupProcessor extends AbstractAttributeMarkupProcessor {
 
-    public static final String ATTR_NAME = "print";
+    public static final String ATTR_NAME = "printafter";
 
 
-    public MarkupPrintElementMarkupProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000, true);
+    public MarkupPrintAfterElementMarkupProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1500, true);
     }
 
 
@@ -45,7 +44,7 @@ public class MarkupPrintElementMarkupProcessor extends AbstractAttributeMarkupPr
                              final String attributeTemplateName, final int attributeLine, final int attributeCol) {
 
         final String markupStr = HtmlEscape.escapeHtml4Xml(markup.renderMarkup().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
-        ((IOpenElementTag)markup.get(0)).getAttributes().setAttribute("agg", markupStr);
+        ((IOpenElementTag)markup.get(0)).getAttributes().setAttribute("aggafter", markupStr);
 
     }
 

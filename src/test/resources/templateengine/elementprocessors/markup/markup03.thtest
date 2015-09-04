@@ -1,8 +1,6 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %INPUT
-# This test executes a processor (badaggregate) that tries to
-# modify immutable markup, and should therefore raise an exception
 <section>
   <div markup:replacebody="...">
     <p>Hello!</p>
