@@ -28,6 +28,7 @@ import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.model.ICDATASection;
 import org.thymeleaf.model.IComment;
 import org.thymeleaf.model.IDocType;
+import org.thymeleaf.model.IModel;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.model.IProcessingInstruction;
 import org.thymeleaf.model.IText;
@@ -39,7 +40,7 @@ import org.thymeleaf.processor.comment.AbstractCommentProcessor;
 import org.thymeleaf.processor.comment.ICommentStructureHandler;
 import org.thymeleaf.processor.doctype.AbstractDocTypeProcessor;
 import org.thymeleaf.processor.doctype.IDocTypeStructureHandler;
-import org.thymeleaf.processor.element.AbstractElementMarkupProcessor;
+import org.thymeleaf.processor.element.AbstractElementModelProcessor;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.processor.processinginstruction.AbstractProcessingInstructionProcessor;
@@ -159,7 +160,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                     attributeName = attributeName.substring(1);
                 }
                 processors.add(
-                        new ElementMarkupProcessorAggregationTestProcessor(
+                        new ElementModelProcessorAggregationTestProcessor(
                                 dialectPrefix,
                                 (elementName.equals("null")? null : elementName), prefixElementName,
                                 (attributeName.equals("null")? null : attributeName), prefixAttributeName,
@@ -382,11 +383,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
     }
 
 
-    private static class ElementMarkupProcessorAggregationTestProcessor extends AbstractElementMarkupProcessor implements NamedTestProcessor {
+    private static class ElementModelProcessorAggregationTestProcessor extends AbstractElementModelProcessor implements NamedTestProcessor {
 
         private final String name;
 
-        ElementMarkupProcessorAggregationTestProcessor(
+        ElementModelProcessorAggregationTestProcessor(
                 final String dialectPrefix,
                 final String elementName, final boolean prefixElementName,
                 final String attributeName, final boolean prefixAttributeName,
@@ -395,7 +396,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
             this.name = null;
         }
 
-        ElementMarkupProcessorAggregationTestProcessor(
+        ElementModelProcessorAggregationTestProcessor(
                 final String dialectPrefix, final String name, final TemplateMode templateMode, final int precedence) {
             super(templateMode, dialectPrefix, null, false, null, false, precedence);
             this.name = name;
@@ -412,8 +413,8 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         @Override
         protected void doProcess(
                 final ITemplateProcessingContext iTemplateProcessingContext,
-                final Markup markup,
-                final String markupTemplateName, final int markupLine, final int markupCol) {
+                final IModel model,
+                final String modelTemplateName, final int modelLine, final int modelCol) {
             // Nothing to be done here - nothing to process!
         }
 
