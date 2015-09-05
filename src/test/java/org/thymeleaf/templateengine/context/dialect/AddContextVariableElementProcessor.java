@@ -22,9 +22,9 @@ package org.thymeleaf.templateengine.context.dialect;
 import org.thymeleaf.context.ILocalVariableAwareVariablesMap;
 import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.context.IWebVariablesMap;
-import org.thymeleaf.engine.IElementStructureHandler;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
+import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
 public class AddContextVariableElementProcessor extends AbstractElementTagProcessor {
@@ -41,7 +41,7 @@ public class AddContextVariableElementProcessor extends AbstractElementTagProces
             final ITemplateProcessingContext processingContext,
             final IProcessableElementTag tag,
             final String tagTemplateName, final int tagLine, final int tagCol,
-            final IElementStructureHandler structureHandler) {
+            final IElementTagStructureHandler structureHandler) {
 
         final IWebVariablesMap variablesMap = (IWebVariablesMap) processingContext.getVariables();
         final ILocalVariableAwareVariablesMap localVariableAwareVariablesMap = (ILocalVariableAwareVariablesMap) variablesMap;
