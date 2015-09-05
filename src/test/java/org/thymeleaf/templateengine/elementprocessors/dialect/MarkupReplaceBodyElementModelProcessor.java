@@ -21,30 +21,36 @@ package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.engine.AttributeName;
-import org.thymeleaf.engine.Markup;
-import org.thymeleaf.model.IProcessableElementTag;
-import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
+import org.thymeleaf.model.IModel;
+import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.unbescape.html.HtmlEscape;
 
-public class MarkupPrintAfterElementMarkupProcessor extends AbstractAttributeMarkupProcessor {
+public class MarkupReplaceBodyElementModelProcessor extends AbstractAttributeModelProcessor {
 
-    public static final String ATTR_NAME = "printafter";
+    public static final String ATTR_NAME = "replacebody";
+
+    public static final String REPLACEMENT = "<p>This is a <span th:text=\"replacement\">prototype</span></p>";
 
 
-    public MarkupPrintAfterElementMarkupProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1500, true);
+    public MarkupReplaceBodyElementModelProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000, true);
     }
 
 
 
     @Override
-    protected void doProcess(final ITemplateProcessingContext processingContext, final Markup markup,
+    protected void doProcess(final ITemplateProcessingContext processingContext, final IModel model,
                              final AttributeName attributeName, final String attributeValue,
                              final String attributeTemplateName, final int attributeLine, final int attributeCol) {
 
-        final String markupStr = HtmlEscape.escapeHtml4Xml(markup.renderMarkup().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
-        ((IProcessableElementTag)markup.get(0)).getAttributes().setAttribute("aggafter", markupStr);
+        final IModel replacementMarkup = processingContext.getModelFactory().parse(REPLACEMENT);
+
+
+        for (int i = model.size() - 2; i > 0; i--) {
+            model.remove(i);
+        }
+
+        model.insertModel(1, replacementMarkup);
 
     }
 

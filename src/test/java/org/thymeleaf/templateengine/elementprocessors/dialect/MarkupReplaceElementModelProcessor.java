@@ -21,30 +21,32 @@ package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.engine.AttributeName;
-import org.thymeleaf.engine.Markup;
-import org.thymeleaf.model.IProcessableElementTag;
-import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
+import org.thymeleaf.model.IModel;
+import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.unbescape.html.HtmlEscape;
 
-public class MarkupPrintBeforeElementMarkupProcessor extends AbstractAttributeMarkupProcessor {
+public class MarkupReplaceElementModelProcessor extends AbstractAttributeModelProcessor {
 
-    public static final String ATTR_NAME = "printbefore";
+    public static final String ATTR_NAME = "replace";
+
+    public static final String REPLACEMENT = "<p>This is a <span th:text=\"replacement\">prototype</span></p>";
 
 
-    public MarkupPrintBeforeElementMarkupProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 500, true);
+    public MarkupReplaceElementModelProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000, true);
     }
 
 
 
     @Override
-    protected void doProcess(final ITemplateProcessingContext processingContext, final Markup markup,
+    protected void doProcess(final ITemplateProcessingContext processingContext, final IModel model,
                              final AttributeName attributeName, final String attributeValue,
                              final String attributeTemplateName, final int attributeLine, final int attributeCol) {
 
-        final String markupStr = HtmlEscape.escapeHtml4Xml(markup.renderMarkup().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
-        ((IProcessableElementTag)markup.get(0)).getAttributes().setAttribute("aggbefore", markupStr);
+        final IModel replacementMarkup = processingContext.getModelFactory().parse(REPLACEMENT);
+
+        model.reset();
+        model.addModel(replacementMarkup);
 
     }
 
