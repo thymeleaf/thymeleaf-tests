@@ -21,37 +21,30 @@ package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.engine.AttributeName;
-import org.thymeleaf.engine.Markup;
-import org.thymeleaf.model.IMarkup;
-import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
+import org.thymeleaf.model.IModel;
+import org.thymeleaf.model.IProcessableElementTag;
+import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.unbescape.html.HtmlEscape;
 
-public class MarkupReplaceBodyElementMarkupProcessor extends AbstractAttributeMarkupProcessor {
+public class MarkupPrintBeforeElementModelProcessor extends AbstractAttributeModelProcessor {
 
-    public static final String ATTR_NAME = "replacebody";
-
-    public static final String REPLACEMENT = "<p>This is a <span th:text=\"replacement\">prototype</span></p>";
+    public static final String ATTR_NAME = "printbefore";
 
 
-    public MarkupReplaceBodyElementMarkupProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000, true);
+    public MarkupPrintBeforeElementModelProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 500, true);
     }
 
 
 
     @Override
-    protected void doProcess(final ITemplateProcessingContext processingContext, final Markup markup,
+    protected void doProcess(final ITemplateProcessingContext processingContext, final IModel model,
                              final AttributeName attributeName, final String attributeValue,
                              final String attributeTemplateName, final int attributeLine, final int attributeCol) {
 
-        final IMarkup replacementMarkup = processingContext.getMarkupFactory().parseAsMarkup(REPLACEMENT);
-
-
-        for (int i = markup.size() - 2; i > 0; i--) {
-            markup.remove(i);
-        }
-
-        markup.insertMarkup(1, replacementMarkup);
+        final String markupStr = HtmlEscape.escapeHtml4Xml(model.toString().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
+        ((IProcessableElementTag) model.get(0)).getAttributes().setAttribute("aggbefore", markupStr);
 
     }
 
