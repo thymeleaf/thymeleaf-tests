@@ -20,7 +20,7 @@
 package org.thymeleaf.templateengine.aggregation.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
-import org.thymeleaf.engine.Model;
+import org.thymeleaf.model.IModel;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
@@ -42,7 +42,7 @@ public class Dialect02Div2Processor extends AbstractElementTagProcessor {
             final String tagTemplateName, final int tagLine, final int tagCol,
             final IElementTagStructureHandler structureHandler) {
 
-        final Model markup = processingContext.getModelFactory().createModel();
+        final IModel markup = processingContext.getModelFactory().createModel();
         markup.add(processingContext.getModelFactory().createText("[From Dialect 02-2]"));
         structureHandler.insertBefore(markup);
 
