@@ -215,7 +215,7 @@ public final class OpenElementTagTest {
 
         @Override
         public void handleOpenElement(final IOpenElementTag openElementTag) {
-            this.tag = openElementTag.cloneElementTag();
+            this.tag = openElementTag.cloneEvent();
         }
 
     }

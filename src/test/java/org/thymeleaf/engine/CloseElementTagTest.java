@@ -76,7 +76,7 @@ public final class CloseElementTagTest {
 
         @Override
         public void handleCloseElement(final ICloseElementTag closeElementTag) {
-            this.tag = closeElementTag.cloneElementTag();
+            this.tag = closeElementTag.cloneEvent();
         }
 
     }
