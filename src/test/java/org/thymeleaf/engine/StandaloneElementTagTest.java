@@ -259,7 +259,7 @@ public final class StandaloneElementTagTest {
 
         @Override
         public void handleStandaloneElement(final IStandaloneElementTag standaloneElementTag) {
-            this.tag = standaloneElementTag.cloneElementTag();
+            this.tag = standaloneElementTag.cloneEvent();
         }
 
     }

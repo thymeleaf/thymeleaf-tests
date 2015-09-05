@@ -1407,12 +1407,12 @@ public final class ElementAttributesTest {
 
         @Override
         public void handleStandaloneElement(final IStandaloneElementTag standaloneElementTag) {
-            this.elementAttributes = standaloneElementTag.cloneElementTag().getAttributes();
+            this.elementAttributes = standaloneElementTag.cloneEvent().getAttributes();
         }
 
         @Override
         public void handleOpenElement(final IOpenElementTag openElementTag) {
-            this.elementAttributes = openElementTag.cloneElementTag().getAttributes();
+            this.elementAttributes = openElementTag.cloneEvent().getAttributes();
         }
 
     }
