@@ -21,8 +21,8 @@ package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.engine.AttributeName;
-import org.thymeleaf.engine.IMarkup;
 import org.thymeleaf.engine.Markup;
+import org.thymeleaf.model.IMarkup;
 import org.thymeleaf.processor.element.AbstractAttributeMarkupProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
