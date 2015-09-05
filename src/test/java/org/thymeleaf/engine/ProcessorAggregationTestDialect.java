@@ -34,13 +34,20 @@ import org.thymeleaf.model.IText;
 import org.thymeleaf.model.IXMLDeclaration;
 import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.processor.cdatasection.AbstractCDATASectionProcessor;
+import org.thymeleaf.processor.cdatasection.ICDATASectionStructureHandler;
 import org.thymeleaf.processor.comment.AbstractCommentProcessor;
+import org.thymeleaf.processor.comment.ICommentStructureHandler;
 import org.thymeleaf.processor.doctype.AbstractDocTypeProcessor;
+import org.thymeleaf.processor.doctype.IDocTypeStructureHandler;
 import org.thymeleaf.processor.element.AbstractElementMarkupProcessor;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
+import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.processor.processinginstruction.AbstractProcessingInstructionProcessor;
+import org.thymeleaf.processor.processinginstruction.IProcessingInstructionStructureHandler;
 import org.thymeleaf.processor.text.AbstractTextProcessor;
+import org.thymeleaf.processor.text.ITextStructureHandler;
 import org.thymeleaf.processor.xmldeclaration.AbstractXMLDeclarationProcessor;
+import org.thymeleaf.processor.xmldeclaration.IXMLDeclarationStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
 
@@ -368,7 +375,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                 final ITemplateProcessingContext iTemplateProcessingContext,
                 final IProcessableElementTag iProcessableElementTag,
                 final String tagTemplateName, final int tagLine, final int tagCol,
-                final IElementStructureHandler iElementStructureHandler) {
+                final IElementTagStructureHandler iElementTagStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
