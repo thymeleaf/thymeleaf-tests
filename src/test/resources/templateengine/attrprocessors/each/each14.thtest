@@ -1,19 +1,19 @@
-%TEMPLATE_MODE JAVASCRIPT
+%TEMPLATE_MODE TEXT
 # ------------------------------------------------------------
 %EXACT_MATCH true
 # ------------------------------------------------------------
 %INPUT
 <table>
-[# th:each="num : ${#numbers.sequence(1,5000)}"]
+   _[# th:each="num : ${#numbers.sequence(1,5000)}"]
   <tr>
     <td>[[${num}]]</td>
   </tr>
-[/]
+   [/]_
 </table>
 # ------------------------------------------------------------
 %OUTPUT
 <table>
-
+   _
   <tr>
     <td>1</td>
   </tr>
@@ -15014,5 +15014,5 @@
   <tr>
     <td>5000</td>
   </tr>
-
+   _
 </table>
