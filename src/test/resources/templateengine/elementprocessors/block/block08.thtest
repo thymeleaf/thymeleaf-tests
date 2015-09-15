@@ -16,10 +16,8 @@ caps = {cap1, cap2, cap3}
 <div>
     <p>Madrid</p>
     <span>Spain</span>
-
     <p>Lisboa</p>
     <span>Portugal</span>
-
     <p>Paris</p>
     <span>France</span>
 </div>
