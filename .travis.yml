@@ -9,6 +9,11 @@ jdk:
   - oraclejdk7
   - oraclejdk8
 
+# Enable the Travis CI cache for the maven folder (dependencies and plugins)
+cache:
+  directories:
+    - $HOME/.m2
+
 # Test execution
 install: true
 script: "mvn -e clean compile test"
