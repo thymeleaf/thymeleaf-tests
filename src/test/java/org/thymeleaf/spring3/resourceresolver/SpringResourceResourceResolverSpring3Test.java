@@ -51,12 +51,12 @@ public final class SpringResourceResourceResolverSpring3Test {
         final IResource resource =
                 resolver.resolveResource(configuration, new Context(), "classpath:" + templateLocation, "US-ASCII");
 
-        final String testResource = resource.readFully();
+        final String testResource = resource.readFully().replace("\r", "");
 
         final String expected =
                 ResourceUtils.read(
                         ClassLoaderUtils.getClassLoader(SpringResourceResourceResolverSpring3Test.class).getResourceAsStream(templateLocation),
-                        "US-ASCII", true);
+                        "US-ASCII", true).replace("\r", "");
 
         Assert.assertEquals(expected, testResource);
 
