@@ -17,4 +17,4 @@ jdk:
 
 # Test execution
 install: true
-script: "mvn -P ${PROFILE} clean compile test"
+script: "mvn clean compile test"
