@@ -1,6 +1,12 @@
 # Use docker-based build environment (instead of openvz)
 sudo: false
 
+# Force the update of the JDK8 installation due to bugs in jdk1.8.0_31
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
 # Select JDKs >= Java 6 for testing
 language: java
 jdk:
