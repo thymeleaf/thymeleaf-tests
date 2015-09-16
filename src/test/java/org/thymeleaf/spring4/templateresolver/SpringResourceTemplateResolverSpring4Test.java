@@ -60,12 +60,12 @@ public final class SpringResourceTemplateResolverSpring4Test {
         final IResourceResolver resourceResolver = resolution.getResourceResolver();
         final IResource resource = resourceResolver.resolveResource(configuration, new Context(), resolution.getResourceName(), "US-ASCII");
 
-        final String testResource = resource.readFully();
+        final String testResource = resource.readFully().replace("\r","");
 
         final String expected =
                 ResourceUtils.read(
                         ClassLoaderUtils.getClassLoader(SpringResourceTemplateResolverSpring4Test.class).getResourceAsStream(templateLocation),
-                        "US-ASCII", true);
+                        "US-ASCII", true).replace("\r","");
 
         Assert.assertEquals(expected, testResource);
 
