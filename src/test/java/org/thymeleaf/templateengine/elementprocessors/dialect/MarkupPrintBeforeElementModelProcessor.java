@@ -24,6 +24,7 @@ import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
+import org.thymeleaf.processor.element.IElementModelStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.unbescape.html.HtmlEscape;
 
@@ -41,7 +42,8 @@ public class MarkupPrintBeforeElementModelProcessor extends AbstractAttributeMod
     @Override
     protected void doProcess(final ITemplateProcessingContext processingContext, final IModel model,
                              final AttributeName attributeName, final String attributeValue,
-                             final String attributeTemplateName, final int attributeLine, final int attributeCol) {
+                             final String attributeTemplateName, final int attributeLine, final int attributeCol,
+                             final IElementModelStructureHandler structureHandler) {
 
         final String markupStr = HtmlEscape.escapeHtml4Xml(model.toString().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
         ((IProcessableElementTag) model.get(0)).getAttributes().setAttribute("aggbefore", markupStr);

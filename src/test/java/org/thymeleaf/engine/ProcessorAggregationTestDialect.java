@@ -42,6 +42,7 @@ import org.thymeleaf.processor.doctype.AbstractDocTypeProcessor;
 import org.thymeleaf.processor.doctype.IDocTypeStructureHandler;
 import org.thymeleaf.processor.element.AbstractElementModelProcessor;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
+import org.thymeleaf.processor.element.IElementModelStructureHandler;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.processor.processinginstruction.AbstractProcessingInstructionProcessor;
 import org.thymeleaf.processor.processinginstruction.IProcessingInstructionStructureHandler;
@@ -414,7 +415,8 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         protected void doProcess(
                 final ITemplateProcessingContext iTemplateProcessingContext,
                 final IModel model,
-                final String modelTemplateName, final int modelLine, final int modelCol) {
+                final String modelTemplateName, final int modelLine, final int modelCol,
+                final IElementModelStructureHandler structureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
