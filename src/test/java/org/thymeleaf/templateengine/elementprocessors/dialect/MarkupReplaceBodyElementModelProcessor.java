@@ -23,6 +23,7 @@ import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
+import org.thymeleaf.processor.element.IElementModelStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
 public class MarkupReplaceBodyElementModelProcessor extends AbstractAttributeModelProcessor {
@@ -41,7 +42,8 @@ public class MarkupReplaceBodyElementModelProcessor extends AbstractAttributeMod
     @Override
     protected void doProcess(final ITemplateProcessingContext processingContext, final IModel model,
                              final AttributeName attributeName, final String attributeValue,
-                             final String attributeTemplateName, final int attributeLine, final int attributeCol) {
+                             final String attributeTemplateName, final int attributeLine, final int attributeCol,
+                             final IElementModelStructureHandler structureHandler) {
 
         final IModel replacementMarkup = processingContext.getModelFactory().parse(REPLACEMENT);
 
