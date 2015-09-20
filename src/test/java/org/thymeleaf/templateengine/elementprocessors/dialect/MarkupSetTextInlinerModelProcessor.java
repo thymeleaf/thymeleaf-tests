@@ -22,19 +22,18 @@ package org.thymeleaf.templateengine.elementprocessors.dialect;
 import org.thymeleaf.context.ITemplateProcessingContext;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
-import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
 import org.thymeleaf.processor.element.IElementModelStructureHandler;
+import org.thymeleaf.standard.inline.StandardTextInliner;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.unbescape.html.HtmlEscape;
 
-public class MarkupPrintAfterElementModelProcessor extends AbstractAttributeModelProcessor {
+public class MarkupSetTextInlinerModelProcessor extends AbstractAttributeModelProcessor {
 
-    public static final String ATTR_NAME = "printafter";
+    public static final String ATTR_NAME = "set-text-inliner";
 
 
-    public MarkupPrintAfterElementModelProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1500, true);
+    public MarkupSetTextInlinerModelProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 600, true);
     }
 
 
@@ -45,8 +44,7 @@ public class MarkupPrintAfterElementModelProcessor extends AbstractAttributeMode
                              final String attributeTemplateName, final int attributeLine, final int attributeCol,
                              final IElementModelStructureHandler structureHandler) {
 
-        final String markupStr = HtmlEscape.escapeHtml4Xml(model.toString().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
-        ((IProcessableElementTag) model.get(0)).getAttributes().setAttribute("aggafter", markupStr);
+        structureHandler.setInliner(StandardTextInliner.INSTANCE);
 
     }
 
