@@ -181,7 +181,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
 
     protected ProcessorAggregationTestDialect(final String name, final String prefix, final String htmlProcSpecification, final String xmlProcSpecification) {
-        super(name, prefix);
+        super(name, prefix, 100);
         this.htmlProcSpecification = htmlProcSpecification;
         this.xmlProcSpecification = xmlProcSpecification;
     }
