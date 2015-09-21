@@ -100,7 +100,7 @@
 ../dataprefix/attrprocessors/unless/unless06.thtest
 ../dataprefix/attrprocessors/unless/unless07.thtest
 ../dataprefix/attrprocessors/with/with04.thtest
-../dataprefix/elementprocessors/block
+../dataprefix/elementprocessors
 ../dataprefix/features/expression/numbers
 ../dataprefix/features/expression/expression01.thtest
 ../dataprefix/features/expression/expression02.thtest
