@@ -20,6 +20,7 @@
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
@@ -32,8 +33,8 @@ public class MarkupSetTextInlinerModelProcessor extends AbstractAttributeModelPr
     public static final String ATTR_NAME = "set-text-inliner";
 
 
-    public MarkupSetTextInlinerModelProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 600, true);
+    public MarkupSetTextInlinerModelProcessor(final IProcessorDialect dialect, final String dialectPrefix) {
+        super(dialect, TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 600, true);
     }
 
 

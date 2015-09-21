@@ -20,6 +20,7 @@
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
@@ -31,8 +32,8 @@ public class MarkupAddLocalVariableModelProcessor extends AbstractAttributeModel
     public static final String ATTR_NAME = "add-local-variable";
 
 
-    public MarkupAddLocalVariableModelProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 500, true);
+    public MarkupAddLocalVariableModelProcessor(final IProcessorDialect dialect, final String dialectPrefix) {
+        super(dialect, TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 500, true);
     }
 
 
