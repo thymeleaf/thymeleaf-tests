@@ -20,6 +20,7 @@
 package org.thymeleaf.templateengine.aggregation.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IText;
 import org.thymeleaf.processor.text.AbstractTextProcessor;
 import org.thymeleaf.processor.text.ITextStructureHandler;
@@ -28,8 +29,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 public class Dialect01TextProcessor extends AbstractTextProcessor {
 
 
-    public Dialect01TextProcessor() {
-        super(TemplateMode.HTML, 1000);
+    public Dialect01TextProcessor(final IProcessorDialect dialect) {
+        super(dialect, TemplateMode.HTML, 1000);
     }
 
 
