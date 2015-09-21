@@ -30,7 +30,7 @@ public class MarkupDialect extends AbstractProcessorDialect {
     public static final String PREFIX = "markup";
 
     public MarkupDialect() {
-        super("MarkupDialect", PREFIX);
+        super("MarkupDialect", PREFIX, 100);
     }
 
 
