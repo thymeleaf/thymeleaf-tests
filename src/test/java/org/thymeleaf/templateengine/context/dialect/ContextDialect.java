@@ -38,6 +38,11 @@ public class ContextDialect extends AbstractDialect implements IProcessorDialect
         return "context";
     }
 
+
+    public int getDialectProcessorPrecedence() {
+        return 100;
+    }
+
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
         processors.add(new AddContextVariableElementProcessor(this, "context"));
