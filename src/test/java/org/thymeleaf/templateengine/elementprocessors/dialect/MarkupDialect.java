@@ -33,15 +33,15 @@ public class MarkupDialect extends AbstractProcessorDialect {
         super("MarkupDialect", PREFIX);
     }
 
-    
+
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new MarkupPrintBeforeElementModelProcessor(PREFIX));
-        processors.add(new MarkupPrintAfterElementModelProcessor(PREFIX));
-        processors.add(new MarkupReplaceElementModelProcessor(PREFIX));
-        processors.add(new MarkupReplaceBodyElementModelProcessor(PREFIX));
-        processors.add(new MarkupAddLocalVariableModelProcessor(PREFIX));
-        processors.add(new MarkupSetTextInlinerModelProcessor(PREFIX));
+        processors.add(new MarkupPrintBeforeElementModelProcessor(this, PREFIX));
+        processors.add(new MarkupPrintAfterElementModelProcessor(this, PREFIX));
+        processors.add(new MarkupReplaceElementModelProcessor(this, PREFIX));
+        processors.add(new MarkupReplaceBodyElementModelProcessor(this, PREFIX));
+        processors.add(new MarkupAddLocalVariableModelProcessor(this, PREFIX));
+        processors.add(new MarkupSetTextInlinerModelProcessor(this, PREFIX));
         return processors;
     }
 
