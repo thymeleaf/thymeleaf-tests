@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.elementprocessors.dialect.MarkupDialect;
+import org.thymeleaf.templateengine.elementprocessors.dialect.PrecedenceDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
@@ -59,6 +60,84 @@ public class ElementProcessorsTest {
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new MarkupDialect()}));
         executor.execute("classpath:templateengine/elementprocessors/markup");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testDialectPrecedenceModelBefore() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE - 1)}));
+        executor.execute("classpath:templateengine/elementprocessors/precedencemodelbefore");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testDialectPrecedenceModelSame() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE)}));
+        executor.execute("classpath:templateengine/elementprocessors/precedencemodelsame");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testDialectPrecedenceModelAfter() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE + 1)}));
+        executor.execute("classpath:templateengine/elementprocessors/precedencemodelafter");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testDialectPrecedenceTagBefore() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE - 1)}));
+        executor.execute("classpath:templateengine/elementprocessors/precedencetagbefore");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testDialectPrecedenceTagSame() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE)}));
+        executor.execute("classpath:templateengine/elementprocessors/precedencetagsame");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testDialectPrecedenceTagAfter() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE + 1)}));
+        executor.execute("classpath:templateengine/elementprocessors/precedencetagafter");
 
         Assert.assertTrue(executor.isAllOK());
 
