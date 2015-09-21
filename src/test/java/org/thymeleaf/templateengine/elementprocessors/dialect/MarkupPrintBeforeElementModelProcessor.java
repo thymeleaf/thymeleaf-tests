@@ -20,6 +20,7 @@
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.model.IProcessableElementTag;
@@ -33,8 +34,8 @@ public class MarkupPrintBeforeElementModelProcessor extends AbstractAttributeMod
     public static final String ATTR_NAME = "printbefore";
 
 
-    public MarkupPrintBeforeElementModelProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 500, true);
+    public MarkupPrintBeforeElementModelProcessor(final IProcessorDialect dialect, final String dialectPrefix) {
+        super(dialect, TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 500, true);
     }
 
 

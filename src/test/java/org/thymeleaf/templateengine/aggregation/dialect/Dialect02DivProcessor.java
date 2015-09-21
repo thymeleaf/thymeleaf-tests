@@ -20,6 +20,7 @@
 package org.thymeleaf.templateengine.aggregation.dialect;
 
 import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
@@ -29,8 +30,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 public class Dialect02DivProcessor extends AbstractElementTagProcessor {
 
 
-    public Dialect02DivProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, "div", true, null, false, 100);
+    public Dialect02DivProcessor(final IProcessorDialect dialect, final String dialectPrefix) {
+        super(dialect, TemplateMode.HTML, dialectPrefix, "div", true, null, false, 100);
     }
 
 

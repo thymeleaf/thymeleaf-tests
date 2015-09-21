@@ -35,9 +35,9 @@ public class Dialect02 extends AbstractProcessorDialect {
 
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new Dialect02DivProcessor(dialectPrefix));
-        processors.add(new Dialect02Div2Processor(dialectPrefix));
-        processors.add(new Dialect02TextProcessor());
+        processors.add(new Dialect02DivProcessor(this, dialectPrefix));
+        processors.add(new Dialect02Div2Processor(this, dialectPrefix));
+        processors.add(new Dialect02TextProcessor(this));
         return processors;
     }
 
