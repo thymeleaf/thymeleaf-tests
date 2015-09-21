@@ -29,7 +29,7 @@ public class Dialect01 extends AbstractProcessorDialect {
 
 
     public Dialect01() {
-        super("Dialect01", null);
+        super("Dialect01", null, 100);
     }
 
 
