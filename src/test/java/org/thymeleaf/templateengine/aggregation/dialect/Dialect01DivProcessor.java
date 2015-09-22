@@ -44,7 +44,7 @@ public class Dialect01DivProcessor extends AbstractElementTagProcessor {
 
         final IModel markup = processingContext.getModelFactory().createModel();
         markup.add(processingContext.getModelFactory().createText("[From Dialect 01]"));
-        structureHandler.insertAfter(markup, true);
+        structureHandler.insertImmediatelyAfter(markup, true);
 
     }
 
