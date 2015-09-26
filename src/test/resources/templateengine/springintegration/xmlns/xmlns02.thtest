@@ -4,7 +4,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
   <body>
-    <p th:unknown="oh!">Something!</p>
+    <p th:unknown='oh'>Something!</p>
   </body>
 </html>
 # ------------------------------------------------------------
@@ -12,6 +12,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
   <body>
-    <p th:unknown="oh!">Something!</p>
+    <p unknown='oh'>Something!</p>
   </body>
 </html>
