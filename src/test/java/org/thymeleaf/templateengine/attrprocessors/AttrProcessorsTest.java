@@ -232,6 +232,16 @@ public class AttrProcessorsTest {
 
     }
 
+    @Test
+    public void testDefault() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/attrprocessors/default");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
 
     
 }
