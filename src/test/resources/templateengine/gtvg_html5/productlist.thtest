@@ -91,7 +91,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="odd">
           <td>Fresh Sweet Basil</td>
           <td>4.99</td>
           <td>yes</td>
@@ -99,7 +99,7 @@
             <span>0</span> comment/s
             
           </td>
-        </tr><tr class="odd">
+        </tr><tr>
           <td>Italian Tomato</td>
           <td>1.25</td>
           <td>no</td>
@@ -107,7 +107,7 @@
             <span>2</span> comment/s
             <a href="/testing/product/comments?prodId=2">view</a>
           </td>
-        </tr><tr>
+        </tr><tr class="odd">
           <td>Yellow Bell Pepper</td>
           <td>2.50</td>
           <td>yes</td>
@@ -115,7 +115,7 @@
             <span>0</span> comment/s
             
           </td>
-        </tr><tr class="odd">
+        </tr><tr>
           <td>Old Cheddar</td>
           <td>18.75</td>
           <td>yes</td>
