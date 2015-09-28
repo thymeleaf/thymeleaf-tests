@@ -20,7 +20,7 @@ prod = prod4
     <h1>Comments for product: <span>Old Cheddar</span></h1>
   
     <table>
-      <tr>
+      <tr class="odd">
         <td>Very tasty! I&#39;d definitely buy it again!</td>
       </tr>
     </table>

@@ -20,9 +20,9 @@ prod = prod2
     <h1>Comments for product: <span>Italian Tomato</span></h1>
   
     <table>
-      <tr>
+      <tr class="odd">
         <td>I&#39;m so sad this product is no longer available!</td>
-      </tr><tr class="odd">
+      </tr><tr>
         <td>When do you expect to have it back?</td>
       </tr>
     </table>

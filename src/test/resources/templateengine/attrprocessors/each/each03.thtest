@@ -42,8 +42,8 @@ products = { product1, product2, product3, product4 }
     <td>4</td>
     <td>Lettuce</td>
     <td>12.0</td>
-    <td>T</td>
     <td>F</td>
+    <td>T</td>
     <td>T</td>
     <td>F</td>
     <td>Lettuce</td>
@@ -55,8 +55,8 @@ products = { product1, product2, product3, product4 }
     <td>4</td>
     <td>Apricot</td>
     <td>8.0</td>
-    <td>F</td>
     <td>T</td>
+    <td>F</td>
     <td>F</td>
     <td>F</td>
     <td>Apricot</td>
@@ -68,8 +68,8 @@ products = { product1, product2, product3, product4 }
     <td>4</td>
     <td>Thyme</td>
     <td>1.23</td>
-    <td>T</td>
     <td>F</td>
+    <td>T</td>
     <td>F</td>
     <td>F</td>
     <td>Thyme</td>
@@ -81,8 +81,8 @@ products = { product1, product2, product3, product4 }
     <td>4</td>
     <td>Carrot</td>
     <td>2.0</td>
-    <td>F</td>
     <td>T</td>
+    <td>F</td>
     <td>F</td>
     <td>T</td>
     <td>Carrot</td>
