@@ -65,21 +65,21 @@
         <th>TOTAL</th>
         <th></th>
       </tr>
-      <tr>
+      <tr class="odd">
         <td>12/Jan/2009</td>
         <td>Shannon Parsley</td>
         <td>27.48</td>
         <td>
           <a href="/testing/order/details?orderId=1">view</a>
         </td>
-      </tr><tr class="odd">
+      </tr><tr>
         <td>09/Jun/2010</td>
         <td>George Garlic</td>
         <td>54.73</td>
         <td>
           <a href="/testing/order/details?orderId=2">view</a>
         </td>
-      </tr><tr>
+      </tr><tr class="odd">
         <td>18/Jul/2010</td>
         <td>James Cucumber</td>
         <td>47.92</td>
