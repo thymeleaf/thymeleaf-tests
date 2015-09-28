@@ -39,15 +39,15 @@ order = order1
         <th>AMOUNT</th>
         <th>PURCHASE PRICE</th>
       </tr>
-      <tr>
+      <tr class="odd">
         <td>Italian Tomato</td>
         <td class="number">2</td>
         <td class="number">0.99</td>
-      </tr><tr class="odd">
+      </tr><tr>
         <td>Yellow Bell Pepper</td>
         <td class="number">4</td>
         <td class="number">2.50</td>
-      </tr><tr>
+      </tr><tr class="odd">
         <td>Old Cheddar</td>
         <td class="number">1</td>
         <td class="number">15.50</td>

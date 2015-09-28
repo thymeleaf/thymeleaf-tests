@@ -39,11 +39,11 @@ order = order2
         <th>AMOUNT</th>
         <th>PURCHASE PRICE</th>
       </tr>
-      <tr>
+      <tr class="odd">
         <td>Fresh Sweet Basil</td>
         <td class="number">5</td>
         <td class="number">3.75</td>
-      </tr><tr class="odd">
+      </tr><tr>
         <td>Old Cheddar</td>
         <td class="number">2</td>
         <td class="number">17.99</td>
