@@ -205,6 +205,8 @@
 ../features/expression/expression50.thtest
 ../features/expression/expression51.thtest
 ../features/expression/expression52.thtest
+../features/expression/expression53.thtest
+../features/expression/expression54.thtest
 ../features/link
 ../features/normalization
 ../features/request
