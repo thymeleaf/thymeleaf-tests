@@ -1,0 +1,10 @@
+%TEMPLATE_MODE HTML
+# ------------------------------------------------------------
+%CONTEXT
+onevar = 'one'
+# ------------------------------------------------------------
+%INPUT
+<span th:each="name : ${#request.attributeNames}" th:text="${name}">...</span>
+# ------------------------------------------------------------
+%OUTPUT
+<span>onevar</span>

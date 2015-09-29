@@ -1,0 +1,7 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%INPUT
+<span th:text="${#servletContext.contextPath}">some text</span>
+# ------------------------------------------------------------
+%OUTPUT
+<span>/testing</span>

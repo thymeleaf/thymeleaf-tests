@@ -109,6 +109,28 @@ public class FeaturesTest {
 
 
     @Test
+    public void testResponse() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/features/response");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testServletContext() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/features/servletcontext");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
     public void testNormalization() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
