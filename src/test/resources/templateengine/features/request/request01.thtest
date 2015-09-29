@@ -1,17 +1,17 @@
 %TEMPLATE_MODE HTML5
 # ------------------------------------------------------------
 %INPUT
-<span th:text="${#httpServletRequest.contentType}">some text</span>
-<span th:text="${#httpServletRequest.method}">some text</span>
-<span th:text="${#httpServletRequest.protocol}">some text</span>
-<span th:text="${#httpServletRequest.scheme}">some text</span>
-<span th:text="${#httpServletRequest.serverName}">some text</span>
-<span th:text="${#httpServletRequest.serverPort}">some text</span>
-<span th:text="${#httpServletRequest.contextPath}">some text</span>
-<span th:text="${#httpServletRequest.servletPath}">some text</span>
-<span th:text="${#httpServletRequest.requestURI}">some text</span>
-<span th:text="${#httpServletRequest.requestURL}">some text</span>
-<span th:text="${#httpServletRequest.queryString} ?: '[null]'">some text</span>
+<span th:text="${#request.contentType}">some text</span>
+<span th:text="${#request.method}">some text</span>
+<span th:text="${#request.protocol}">some text</span>
+<span th:text="${#request.scheme}">some text</span>
+<span th:text="${#request.serverName}">some text</span>
+<span th:text="${#request.serverPort}">some text</span>
+<span th:text="${#request.contextPath}">some text</span>
+<span th:text="${#request.servletPath}">some text</span>
+<span th:text="${#request.requestURI}">some text</span>
+<span th:text="${#request.requestURL}">some text</span>
+<span th:text="${#request.queryString} ?: '[null]'">some text</span>
 # ------------------------------------------------------------
 %OUTPUT
 <span>text/html</span>
