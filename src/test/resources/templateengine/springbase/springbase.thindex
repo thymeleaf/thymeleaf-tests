@@ -161,6 +161,7 @@
 ../features/expression/expression01.thtest
 ../features/expression/expression02.thtest
 ../features/expression/expression03.thtest
+../features/expression/expression04.thtest
 ../features/expression/expression05.thtest
 ../features/expression/expression07.thtest
 ../features/expression/expression10.thtest
@@ -202,6 +203,8 @@
 ../features/expression/expression48.thtest
 ../features/expression/expression49.thtest
 ../features/expression/expression50.thtest
+../features/expression/expression51.thtest
+../features/expression/expression52.thtest
 ../features/link
 ../features/normalization
 ../features/request

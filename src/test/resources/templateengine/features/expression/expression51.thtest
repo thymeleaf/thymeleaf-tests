@@ -1,4 +1,4 @@
-%EXTENDS ../springintegration.common
+%EXTENDS ../html5.01.common
 # ------------------------------------------------------------
 %CONTEXT
 param.a = 'Some text'
@@ -9,11 +9,10 @@ param.c = 0
 # ------------------------------------------------------------
 %INPUT
 <p th:text="${param.a.length}">...</p>
-<p th:text="${param.a.size()}">...</p>
-<p th:text="${param.a[0]}">...</p>
 <p th:text="${param.a}">...</p>
+<p th:text="${param.a[0]}">...</p>
 <p th:text="${param.b.length}">...</p>
-<p th:text="${param.b[0]}">...</p>
+<p th:text="${param.b}">...</p>
 <p th:text="${param.b[0]}">...</p>
 <p th:text="${param.c.length}">...</p>
 <p th:text="${param.c[0]}">...</p>
@@ -21,7 +20,6 @@ param.c = 0
 <p th:text="${param.c[2]}">...</p>
 # ------------------------------------------------------------
 %OUTPUT
-<p>1</p>
 <p>1</p>
 <p>Some text</p>
 <p>Some text</p>
