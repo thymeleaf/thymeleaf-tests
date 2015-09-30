@@ -7,5 +7,5 @@
 # ------------------------------------------------------------
 %OUTPUT
 <script type="text/template">
-    <span th:text="Executed">Not executed</span>
+    <span>Executed</span>
 </script>
