@@ -186,6 +186,17 @@ public class FeaturesTest {
     }
 
 
+    @Test
+    public void testLazy() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/features/lazy");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
 
 
 
