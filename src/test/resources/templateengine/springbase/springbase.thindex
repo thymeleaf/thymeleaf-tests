@@ -207,6 +207,7 @@
 ../features/expression/expression52.thtest
 ../features/expression/expression53.thtest
 ../features/expression/expression54.thtest
+../features/lazy
 ../features/link
 ../features/normalization
 ../features/request
