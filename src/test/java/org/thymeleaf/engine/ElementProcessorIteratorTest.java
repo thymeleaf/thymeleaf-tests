@@ -31,7 +31,6 @@ import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IOpenElementTag;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateparser.ParsableArtifactType;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 import org.thymeleaf.templateparser.markup.XMLTemplateParser;
 
@@ -359,7 +358,7 @@ public final class ElementProcessorIteratorTest {
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
         final IEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
 
-        HTML_PARSER.parseStandalone(templateEngineContext, ParsableArtifactType.TEMPLATE, new StringResource(templateName, input), null, TemplateMode.HTML, handler);
+        HTML_PARSER.parseStandalone(templateEngineContext, new StringResource(templateName, input), null, TemplateMode.HTML, handler);
 
         return handler;
 
@@ -378,7 +377,7 @@ public final class ElementProcessorIteratorTest {
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
         final IEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
 
-        XML_PARSER.parseStandalone(templateEngineContext, ParsableArtifactType.TEMPLATE, new StringResource(templateName, input), null, TemplateMode.XML, handler);
+        XML_PARSER.parseStandalone(templateEngineContext, new StringResource(templateName, input), null, TemplateMode.XML, handler);
 
         return handler;
 
