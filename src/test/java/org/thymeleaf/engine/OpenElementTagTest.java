@@ -26,7 +26,6 @@ import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.model.IOpenElementTag;
 import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateparser.ParsableArtifactType;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 import org.thymeleaf.templateparser.markup.XMLTemplateParser;
 
@@ -184,7 +183,7 @@ public final class OpenElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, ParsableArtifactType.TEMPLATE, new StringResource(templateName, input), null, TemplateMode.HTML, handler);
+        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, new StringResource(templateName, input), null, TemplateMode.HTML, handler);
 
         return handler.tag;
 
@@ -198,7 +197,7 @@ public final class OpenElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, ParsableArtifactType.TEMPLATE, new StringResource(templateName, input), null, TemplateMode.XML, handler);
+        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, new StringResource(templateName, input), null, TemplateMode.XML, handler);
 
         return handler.tag;
 
