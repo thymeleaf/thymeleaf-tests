@@ -76,15 +76,15 @@ public class AttrProcessorsTest {
         Assert.assertTrue(executor.isAllOK());
         
     }
-    
+
     @Test
     public void testInclude() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.execute("classpath:templateengine/attrprocessors/include");
-        
+
         Assert.assertTrue(executor.isAllOK());
-        
+
     }
 
     @Test
