@@ -54,7 +54,7 @@ public class TestTemplateResolver implements ITemplateResolver {
         return Integer.valueOf(1);
     }
 
-    public TemplateResolution resolveTemplate(final IEngineConfiguration configuration, final IContext context, final String template) {
+    public TemplateResolution resolveTemplate(final IEngineConfiguration configuration, final String template) {
 
         final int placeholderPos = this.template.indexOf("{%%}");
         final String resource =
