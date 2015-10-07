@@ -48,8 +48,7 @@ public final class SpringResourceResourceResolverSpring3Test {
         final SpringResourceResourceResolver resolver =
                 (SpringResourceResourceResolver) context.getBean("springResourceResourceResolver");
 
-        final IResource resource =
-                resolver.resolveResource(configuration, new Context(), "classpath:" + templateLocation, "US-ASCII");
+        final IResource resource = resolver.resolveResource(configuration, "classpath:" + templateLocation, "US-ASCII");
 
         final String testResource = resource.readFully().replace("\r", "");
 
