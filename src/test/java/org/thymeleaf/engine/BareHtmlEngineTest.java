@@ -109,7 +109,7 @@ public final class BareHtmlEngineTest {
         }
 
         public IResource resolveResource(
-                final IEngineConfiguration engineConfiguration, final IContext context,
+                final IEngineConfiguration engineConfiguration,
                 final String resourceName, final String characterEncoding) {
             return new StringResource("stringresource", resourceName);
         }
