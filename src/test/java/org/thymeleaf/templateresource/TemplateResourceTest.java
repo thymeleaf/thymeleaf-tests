@@ -186,31 +186,31 @@ public final class TemplateResourceTest {
     @Test
     public void testURLResource() throws Exception {
 
-        Assert.assertEquals("http://www.thymeleaf.org/", (new URLTemplateResource("http://www.thymeleaf.org/", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org", (new URLTemplateResource("http://www.thymeleaf.org", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something", (new URLTemplateResource("http://www.thymeleaf.org/something", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/", (new URLTemplateResource("http://www.thymeleaf.org/something/", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/else", (new URLTemplateResource("http://www.thymeleaf.org/something/else", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/else.html", (new URLTemplateResource("http://www.thymeleaf.org/something/else.html", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/./else.html", (new URLTemplateResource("http://www.thymeleaf.org/something/./else.html", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/more/../else.html", (new URLTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/more/../else.html", (new URLTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/./more/../else.html", (new URLTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null)).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/./more/../else.html", (new URLTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/", (new UrlTemplateResource("http://www.thymeleaf.org/", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org", (new UrlTemplateResource("http://www.thymeleaf.org", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something", (new UrlTemplateResource("http://www.thymeleaf.org/something", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/", (new UrlTemplateResource("http://www.thymeleaf.org/something/", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/else", (new UrlTemplateResource("http://www.thymeleaf.org/something/else", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/else.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/else.html", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/./else.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./else.html", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/more/../else.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/more/../else.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/./more/../else.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null)).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/./more/../else.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null)).getName());
 
-        Assert.assertEquals("http://www.thymeleaf.org/", (new URLTemplateResource("http://www.thymeleaf.org/", null).relative("/")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org", (new URLTemplateResource("http://www.thymeleaf.org", null).relative("/")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something", (new URLTemplateResource("http://www.thymeleaf.org", null).relative("/something")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something", (new URLTemplateResource("http://www.thymeleaf.org", null).relative("something")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something", (new URLTemplateResource("http://www.thymeleaf.org/more", null).relative("something")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/more/something", (new URLTemplateResource("http://www.thymeleaf.org/more/", null).relative("something")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/more", (new URLTemplateResource("http://www.thymeleaf.org/something/else", null).relative("more")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/something/more.html", (new URLTemplateResource("http://www.thymeleaf.org/something/else.html", null).relative("more.html")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/more.html", (new URLTemplateResource("http://www.thymeleaf.org/something/else.html", null).relative("../more.html")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/less.html", (new URLTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null).relative("../less.html")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new URLTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null).relative("../even/less.html")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new URLTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null).relative("../even/less.html")).getName());
-        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new URLTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null).relative("../even/./less.html")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/", (new UrlTemplateResource("http://www.thymeleaf.org/", null).relative("/")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org", (new UrlTemplateResource("http://www.thymeleaf.org", null).relative("/")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something", (new UrlTemplateResource("http://www.thymeleaf.org", null).relative("/something")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something", (new UrlTemplateResource("http://www.thymeleaf.org", null).relative("something")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something", (new UrlTemplateResource("http://www.thymeleaf.org/more", null).relative("something")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/more/something", (new UrlTemplateResource("http://www.thymeleaf.org/more/", null).relative("something")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/more", (new UrlTemplateResource("http://www.thymeleaf.org/something/else", null).relative("more")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/something/more.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/else.html", null).relative("more.html")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/more.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/else.html", null).relative("../more.html")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null).relative("../less.html")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null).relative("../even/less.html")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null).relative("../even/less.html")).getName());
+        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null).relative("../even/./less.html")).getName());
 
     }
 
