@@ -22,7 +22,8 @@ package org.thymeleaf.standard.expression;
 import java.text.MessageFormat;
 import java.util.Properties;
 
-import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.messageresolver.IMessageResolver;
 import org.thymeleaf.messageresolver.MessageResolution;
 
@@ -55,7 +56,7 @@ public class TestMessageResolver implements IMessageResolver {
 
 
 
-    public MessageResolution resolveMessage(final ITemplateProcessingContext processingContext, final String key, final Object[] messageParameters) {
+    public MessageResolution resolveMessage(final ITemplateContext context, final String key, final Object[] messageParameters) {
 
         final String messageValue = this.properties.getProperty(key);
         if (messageValue == null) {

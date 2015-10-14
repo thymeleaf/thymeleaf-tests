@@ -31,7 +31,7 @@ import org.junit.Test;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 
 
-public final class VariablesMapTest {
+public final class EngineContextTest {
 
 
     private static final Locale LOCALE = Locale.US;
@@ -40,7 +40,7 @@ public final class VariablesMapTest {
     @Test
     public void test01() {
 
-        final VariablesMap vm = new VariablesMap(LOCALE, null);
+        final EngineContext vm = new EngineContext(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -216,7 +216,7 @@ public final class VariablesMapTest {
         starting.put("one", "ha");
         starting.put("ten", "tieen");
 
-        final VariablesMap vm = new VariablesMap(LOCALE, starting);
+        final EngineContext vm = new EngineContext(LOCALE, starting);
 
         Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
@@ -257,7 +257,7 @@ public final class VariablesMapTest {
     @Test
     public void test03() {
 
-        final VariablesMap vm = new VariablesMap(LOCALE, null);
+        final EngineContext vm = new EngineContext(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -498,7 +498,7 @@ public final class VariablesMapTest {
     @Test
     public void test04() {
 
-        final VariablesMap vm = new VariablesMap(LOCALE, null);
+        final EngineContext vm = new EngineContext(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -594,7 +594,7 @@ public final class VariablesMapTest {
     @Test
     public void test05() {
 
-        final VariablesMap vm = new VariablesMap(LOCALE, null);
+        final EngineContext vm = new EngineContext(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -761,7 +761,7 @@ public final class VariablesMapTest {
     @Test
     public void test06() {
 
-        final VariablesMap vm = new VariablesMap(LOCALE, null);
+        final EngineContext vm = new EngineContext(LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -860,7 +860,7 @@ public final class VariablesMapTest {
     @Test
     public void test07() {
 
-        final VariablesMap vm = new VariablesMap(LOCALE, null);
+        final EngineContext vm = new EngineContext(LOCALE, null);
 
         vm.put("one", "a value");
         Assert.assertFalse(vm.hasSelectionTarget());
@@ -1089,7 +1089,7 @@ public final class VariablesMapTest {
     @Test
     public void test08() {
 
-        final VariablesMap vm = new VariablesMap(LOCALE, null);
+        final EngineContext vm = new EngineContext(LOCALE, null);
 
         vm.put("one", "a val1");
 
