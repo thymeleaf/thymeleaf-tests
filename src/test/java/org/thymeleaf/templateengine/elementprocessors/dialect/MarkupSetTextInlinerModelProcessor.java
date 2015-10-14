@@ -19,7 +19,8 @@
  */
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
-import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
@@ -40,7 +41,8 @@ public class MarkupSetTextInlinerModelProcessor extends AbstractAttributeModelPr
 
 
     @Override
-    protected void doProcess(final ITemplateProcessingContext processingContext, final IModel model,
+    protected void doProcess(final ITemplateContext context,
+                             final IModel model,
                              final AttributeName attributeName, final String attributeValue,
                              final String attributeTemplateName, final int attributeLine, final int attributeCol,
                              final IElementModelStructureHandler structureHandler) {

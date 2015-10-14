@@ -19,7 +19,7 @@
  */
 package org.thymeleaf.templateengine.aggregation.dialect;
 
-import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.model.IProcessableElementTag;
@@ -38,7 +38,7 @@ public class Dialect02DivProcessor extends AbstractElementTagProcessor {
 
     @Override
     protected void doProcess(
-            final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
+            final ITemplateContext processingContext, final IProcessableElementTag tag,
             final String tagTemplateName, final int tagLine, final int tagCol,
             final IElementTagStructureHandler structureHandler) {
 
