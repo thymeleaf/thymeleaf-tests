@@ -8,4 +8,4 @@
 <p th:text="${#execInfo.templateName}">the test name will be used...</p>
 # ------------------------------------------------------------
 %OUTPUT
-<p>execinfotest07-001</p>
+<p>somefrag</p>
