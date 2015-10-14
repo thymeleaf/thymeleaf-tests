@@ -37,7 +37,7 @@ import org.thymeleaf.engine.TestMockServletUtil;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 
 
-public final class WebVariablesMapTest {
+public final class WebEngineContextTest {
 
 
     private static final Locale LOCALE = Locale.US;
@@ -57,7 +57,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -243,7 +243,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
@@ -294,7 +294,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -596,7 +596,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
@@ -739,7 +739,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
@@ -858,7 +858,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -968,7 +968,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals("{0:{one=ha, ten=tieen}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=ha, ten=tieen}", vm.toString());
@@ -1030,7 +1030,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -1206,7 +1206,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.put("one", "a value");
 
@@ -1321,7 +1321,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals("{0:{one=ha, ten=tieen}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=ha, ten=tieen}", vm.toString());
@@ -1390,7 +1390,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.put("one", "a value");
         Assert.assertFalse(vm.hasSelectionTarget());
@@ -1630,7 +1630,7 @@ public final class WebVariablesMapTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebVariablesMap vm = new WebVariablesMap(mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.put("one", "a val1");
 
