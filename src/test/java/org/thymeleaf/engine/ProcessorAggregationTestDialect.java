@@ -23,7 +23,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.ICDATASection;
@@ -224,7 +224,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final ICDATASection icdataSection, final ICDATASectionStructureHandler icdataSectionStructureHandler) {
+        protected void doProcess(final ITemplateContext iTemplateProcessingContext, final ICDATASection icdataSection, final ICDATASectionStructureHandler icdataSectionStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
@@ -249,7 +249,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IComment iComment, final ICommentStructureHandler iCommentStructureHandler) {
+        protected void doProcess(final ITemplateContext iTemplateProcessingContext, final IComment iComment, final ICommentStructureHandler iCommentStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
@@ -274,7 +274,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IDocType iDocType, final IDocTypeStructureHandler iDocTypeStructureHandler) {
+        protected void doProcess(final ITemplateContext iTemplateProcessingContext, final IDocType iDocType, final IDocTypeStructureHandler iDocTypeStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
@@ -299,7 +299,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IProcessingInstruction iProcessingInstruction, final IProcessingInstructionStructureHandler iProcessingInstructionStructureHandler) {
+        protected void doProcess(final ITemplateContext iTemplateProcessingContext, final IProcessingInstruction iProcessingInstruction, final IProcessingInstructionStructureHandler iProcessingInstructionStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
@@ -324,7 +324,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IText iText, final ITextStructureHandler iTextStructureHandler) {
+        protected void doProcess(final ITemplateContext iTemplateProcessingContext, final IText iText, final ITextStructureHandler iTextStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
@@ -349,7 +349,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         }
 
         @Override
-        protected void doProcess(final ITemplateProcessingContext iTemplateProcessingContext, final IXMLDeclaration ixmlDeclaration, final IXMLDeclarationStructureHandler ixmlDeclarationStructureHandler) {
+        protected void doProcess(final ITemplateContext iTemplateProcessingContext, final IXMLDeclaration ixmlDeclaration, final IXMLDeclarationStructureHandler ixmlDeclarationStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
 
@@ -376,7 +376,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         @Override
         protected void doProcess(
-                final ITemplateProcessingContext iTemplateProcessingContext,
+                final ITemplateContext iTemplateProcessingContext,
                 final IProcessableElementTag iProcessableElementTag,
                 final String tagTemplateName, final int tagLine, final int tagCol,
                 final IElementTagStructureHandler iElementTagStructureHandler) {
@@ -415,7 +415,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         @Override
         protected void doProcess(
-                final ITemplateProcessingContext iTemplateProcessingContext,
+                final ITemplateContext iTemplateProcessingContext,
                 final IModel model,
                 final String modelTemplateName, final int modelLine, final int modelCol,
                 final IElementModelStructureHandler structureHandler) {

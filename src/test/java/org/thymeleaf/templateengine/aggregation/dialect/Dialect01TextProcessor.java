@@ -19,7 +19,7 @@
  */
 package org.thymeleaf.templateengine.aggregation.dialect;
 
-import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IText;
 import org.thymeleaf.processor.text.AbstractTextProcessor;
@@ -38,7 +38,7 @@ public class Dialect01TextProcessor extends AbstractTextProcessor {
 
     @Override
     protected void doProcess(
-            final ITemplateProcessingContext processingContext, final IText text, final ITextStructureHandler structureHandler) {
+            final ITemplateContext processingContext, final IText text, final ITextStructureHandler structureHandler) {
 
         text.setText(text.getText() + "[01]");
 

@@ -19,7 +19,8 @@
  */
 package org.thymeleaf.templateengine.conversion.conversion5;
 
-import org.thymeleaf.context.IProcessingContext;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.IExpressionContext;
 import org.thymeleaf.standard.expression.AbstractStandardConversionService;
 
 
@@ -32,8 +33,9 @@ public class TestStandardConversionService5 extends AbstractStandardConversionSe
 
 
     @Override
-    protected String convertToString(final IProcessingContext processingContext, final Object object) {
-        return "[" + super.convertToString(processingContext, object) + "]";
+    protected String convertToString(
+            final IExpressionContext context, final Object object) {
+        return "[" + super.convertToString(configuration, context, object) + "]";
     }
 
 }

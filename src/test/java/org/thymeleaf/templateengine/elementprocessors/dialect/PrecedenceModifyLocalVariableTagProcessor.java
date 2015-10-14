@@ -19,7 +19,8 @@
  */
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
-import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IProcessableElementTag;
@@ -40,7 +41,8 @@ public class PrecedenceModifyLocalVariableTagProcessor extends AbstractAttribute
 
 
     @Override
-    protected void doProcess(final ITemplateProcessingContext processingContext, final IProcessableElementTag tag,
+    protected void doProcess(final ITemplateContext context,
+                             final IProcessableElementTag tag,
                              final AttributeName attributeName, final String attributeValue,
                              final String attributeTemplateName, final int attributeLine, final int attributeCol,
                              final IElementTagStructureHandler structureHandler) {
