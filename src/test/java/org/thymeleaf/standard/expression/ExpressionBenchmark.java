@@ -26,8 +26,8 @@ import org.junit.Assert;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.context.IProcessingContext;
-import org.thymeleaf.context.ProcessingContext;
+import org.thymeleaf.context.IExpressionContext;
+import org.thymeleaf.context.ExpressionContext;
 
 /**
  * 
@@ -52,14 +52,14 @@ public class ExpressionBenchmark {
         final TemplateEngine templateEngine = new TemplateEngine();
         final IEngineConfiguration configuration = templateEngine.getConfiguration();
 
-        final IProcessingContext processingContext = new ProcessingContext(configuration, new Context());
+        final IExpressionContext processingContext = new ExpressionContext(configuration);
 
         final IStandardExpressionParser parser = new StandardExpressionParser();
 
         for (final Map.Entry<String,String> expressionEntry : expressionsMap.entrySet()) {
             final String expression = expressionEntry.getKey();
             final String expectedParsingResult = expressionEntry.getValue();
-            final IStandardExpression parsedExpression = parser.parseExpression(processingContext, expression);
+            final IStandardExpression parsedExpression = parser.parseExpression(context, expression);
             Assert.assertNotNull(parsedExpression);
             final String exp = parsedExpression.getStringRepresentation();
             Assert.assertEquals(expectedParsingResult, exp);

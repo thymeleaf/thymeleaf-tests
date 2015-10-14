@@ -19,8 +19,8 @@
  */
 package org.thymeleaf.templateengine.context.dialect;
 
-import org.thymeleaf.context.ILocalVariableAwareVariablesMap;
-import org.thymeleaf.context.ITemplateProcessingContext;
+import org.thymeleaf.context.IMutableVariablesMap;
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.context.IWebVariablesMap;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IProcessableElementTag;
@@ -39,16 +39,16 @@ public class AddContextVariableElementProcessor extends AbstractElementTagProces
 
     @Override
     protected void doProcess(
-            final ITemplateProcessingContext processingContext,
+            final ITemplateContext processingContext,
             final IProcessableElementTag tag,
             final String tagTemplateName, final int tagLine, final int tagCol,
             final IElementTagStructureHandler structureHandler) {
 
-        final IWebVariablesMap variablesMap = (IWebVariablesMap) processingContext.getVariables();
-        final ILocalVariableAwareVariablesMap localVariableAwareVariablesMap = (ILocalVariableAwareVariablesMap) variablesMap;
+        final IWebVariablesMap variablesMap = (IWebVariablesMap) processingContext.getContext();
+        final IMutableVariablesMap mutableVariablesMap = (IMutableVariablesMap) variablesMap;
 
-        localVariableAwareVariablesMap.put("newvar0", "LocalVariablesNewVar0");
-        localVariableAwareVariablesMap.put("newvar1", "LocalVariablesNewVar1");
+        mutableVariablesMap.put("newvar0", "LocalVariablesNewVar0");
+        mutableVariablesMap.put("newvar1", "LocalVariablesNewVar1");
 
         variablesMap.getRequest().setAttribute("newvar2", "RequestAttributesNewVar2");
         variablesMap.getRequest().setAttribute("newvar3", "RequestAttributesNewVar3");
