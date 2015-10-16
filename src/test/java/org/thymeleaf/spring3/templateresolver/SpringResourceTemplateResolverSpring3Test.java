@@ -19,15 +19,15 @@
  */
 package org.thymeleaf.spring3.templateresolver;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.thymeleaf.IEngineConfiguration;
-import org.thymeleaf.resource.IResource;
-import org.thymeleaf.resourceresolver.IResourceResolver;
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.TemplateResolution;
+import org.thymeleaf.templateresource.ITemplateResource;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;
 import org.thymeleaf.util.ClassLoaderUtils;
 
@@ -55,10 +55,11 @@ public final class SpringResourceTemplateResolverSpring3Test {
 
         final TemplateResolution resolution = resolver.resolveTemplate(configuration, "classpath:" + templateLocation);
 
-        final IResourceResolver resourceResolver = resolution.getResourceResolver();
-        final IResource resource = resourceResolver.resolveResource(configuration, resolution.getResourceName(), "US-ASCII");
+        final ITemplateResource templateResource = resolution.getTemplateResource();
 
-        final String testResource = resource.readFully().replace("\r","");
+        final String templateResourceStr = IOUtils.toString(templateResource.reader());
+
+        final String testResource = templateResourceStr.replace("\r", "");
 
         final String expected =
                 ResourceUtils.read(
