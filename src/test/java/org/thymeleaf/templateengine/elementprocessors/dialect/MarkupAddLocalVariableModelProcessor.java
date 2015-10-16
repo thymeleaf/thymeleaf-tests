@@ -19,7 +19,6 @@
  */
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
-import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;

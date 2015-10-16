@@ -28,7 +28,10 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.standard.inline.StandardTextInliner;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.TemplateResolution;
 
 
 public final class EngineContextTest {
@@ -37,33 +40,35 @@ public final class EngineContextTest {
     private static final Locale LOCALE = Locale.US;
 
 
+    // TODO Add tests for stacked Template Resolutions
+
+
     @Test
     public void test01() {
 
-        final EngineContext vm = new EngineContext(LOCALE, null);
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
 
-        vm.put("one", "a value");
+        final EngineContext vm = new EngineContext(configuration, templateResolution1, LOCALE, null);
 
-        Assert.assertEquals(0, vm.level());
+        vm.setVariable("one", "a value");
+
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("a value", vm.getVariable("one"));
 
-        vm.put("one", "two values");
+        vm.setVariable("one", "two values");
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("two values", vm.getVariable("one"));
 
         vm.increaseLevel();
-        vm.put("one", "hello");
+        vm.setVariable("one", "hello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("hello", vm.getVariable("one"));
 
-        vm.put("two", "twello");
+        vm.setVariable("two", "twello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertEquals("hello", vm.getVariable("one"));
@@ -71,25 +76,22 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertEquals("two values", vm.getVariable("one"));
         Assert.assertNull(vm.getVariable("two"));
 
         vm.increaseLevel();
-        vm.put("two", "twellor");
+        vm.setVariable("two", "twellor");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertEquals("two values", vm.getVariable("one"));
         Assert.assertEquals("twellor", vm.getVariable("two"));
 
         vm.increaseLevel();
-        vm.put("three", "twelloree");
+        vm.setVariable("three", "twelloree");
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -97,9 +99,8 @@ public final class EngineContextTest {
         Assert.assertEquals("twellor", vm.getVariable("two"));
         Assert.assertEquals("twelloree", vm.getVariable("three"));
 
-        vm.put("one", "atwe");
+        vm.setVariable("one", "atwe");
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -111,7 +112,6 @@ public final class EngineContextTest {
         vm.increaseLevel();
         vm.increaseLevel();
 
-        Assert.assertEquals(5, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -119,9 +119,8 @@ public final class EngineContextTest {
         Assert.assertEquals("twellor", vm.getVariable("two"));
         Assert.assertEquals("twelloree", vm.getVariable("three"));
 
-        vm.put("four", "lotwss");
+        vm.setVariable("four", "lotwss");
 
-        Assert.assertEquals(5, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -131,9 +130,8 @@ public final class EngineContextTest {
         Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertEquals("lotwss", vm.getVariable("four"));
 
-        vm.put("two", "itwiii");
+        vm.setVariable("two", "itwiii");
 
-        Assert.assertEquals(5, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -146,7 +144,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(4, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -158,7 +155,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(3, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -170,7 +166,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -182,7 +177,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertFalse(vm.containsVariable("three"));
@@ -194,7 +188,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertFalse(vm.containsVariable("three"));
@@ -212,30 +205,30 @@ public final class EngineContextTest {
     @Test
     public void test02() {
 
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+
         final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
         starting.put("ten", "tieen");
 
-        final EngineContext vm = new EngineContext(LOCALE, starting);
+        final EngineContext vm = new EngineContext(configuration, templateResolution1, LOCALE, starting);
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
         Assert.assertEquals("ha", vm.getVariable("one"));
         Assert.assertEquals("tieen", vm.getVariable("ten"));
 
-        vm.put("one", "a value");
+        vm.setVariable("one", "a value");
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
         Assert.assertEquals("a value", vm.getVariable("one"));
         Assert.assertEquals("tieen", vm.getVariable("ten"));
 
         vm.increaseLevel();
-        vm.put("one", "hello");
+        vm.setVariable("one", "hello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
         Assert.assertEquals("hello", vm.getVariable("one"));
@@ -243,7 +236,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
         Assert.assertEquals("a value", vm.getVariable("one"));
@@ -257,79 +249,71 @@ public final class EngineContextTest {
     @Test
     public void test03() {
 
-        final EngineContext vm = new EngineContext(LOCALE, null);
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
 
-        vm.put("one", "a value");
+        final EngineContext vm = new EngineContext(configuration, templateResolution1, LOCALE, null);
 
-        Assert.assertEquals(0, vm.level());
+        vm.setVariable("one", "a value");
+
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("a value", vm.getVariable("one"));
 
-        vm.put("one", "two values");
+        vm.setVariable("one", "two values");
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("two values", vm.getVariable("one"));
 
-        vm.remove("one");
+        vm.removeVariable("one");
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertFalse(vm.containsVariable("one"));
         Assert.assertNull(vm.getVariable("one"));
 
-        vm.put("one", "two values");
+        vm.setVariable("one", "two values");
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("two values", vm.getVariable("one"));
 
         vm.increaseLevel();
 
-        vm.put("one", "hello");
+        vm.setVariable("one", "hello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("hello", vm.getVariable("one"));
 
-        vm.remove("one");
+        vm.removeVariable("one");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertFalse(vm.containsVariable("one"));
         Assert.assertNull(vm.getVariable("one"));
 
-        vm.put("one", "hello");
+        vm.setVariable("one", "hello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("hello", vm.getVariable("one"));
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertEquals("hello", vm.getVariable("one"));
         Assert.assertNull(vm.getVariable("twello"));
 
-        vm.put("two", "twello");
+        vm.setVariable("two", "twello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertEquals("hello", vm.getVariable("one"));
         Assert.assertEquals("twello", vm.getVariable("two"));
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertEquals("hello", vm.getVariable("one"));
         Assert.assertNull(vm.getVariable("twello"));
 
-        vm.remove("one");
+        vm.removeVariable("one");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertFalse(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertNull(vm.getVariable("one"));
@@ -337,25 +321,22 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertEquals("two values", vm.getVariable("one"));
         Assert.assertNull(vm.getVariable("two"));
 
         vm.increaseLevel();
-        vm.put("two", "twellor");
+        vm.setVariable("two", "twellor");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertEquals("two values", vm.getVariable("one"));
         Assert.assertEquals("twellor", vm.getVariable("two"));
 
         vm.increaseLevel();
-        vm.put("three", "twelloree");
+        vm.setVariable("three", "twelloree");
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -363,9 +344,8 @@ public final class EngineContextTest {
         Assert.assertEquals("twellor", vm.getVariable("two"));
         Assert.assertEquals("twelloree", vm.getVariable("three"));
 
-        vm.put("one", "atwe");
+        vm.setVariable("one", "atwe");
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -375,9 +355,8 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
-        Assert.assertEquals(3, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -387,9 +366,8 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
-        Assert.assertEquals(4, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -399,7 +377,6 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        Assert.assertEquals(5, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -407,9 +384,8 @@ public final class EngineContextTest {
         Assert.assertNull(vm.getVariable("two"));
         Assert.assertEquals("twelloree", vm.getVariable("three"));
 
-        vm.put("four", "lotwss");
+        vm.setVariable("four", "lotwss");
 
-        Assert.assertEquals(5, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -419,9 +395,8 @@ public final class EngineContextTest {
         Assert.assertEquals("twelloree", vm.getVariable("three"));
         Assert.assertEquals("lotwss", vm.getVariable("four"));
 
-        vm.put("two", "itwiii");
+        vm.setVariable("two", "itwiii");
 
-        Assert.assertEquals(5, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -434,7 +409,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(4, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -446,7 +420,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(3, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -458,7 +431,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -470,7 +442,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertFalse(vm.containsVariable("three"));
@@ -482,7 +453,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertFalse(vm.containsVariable("three"));
@@ -498,25 +468,28 @@ public final class EngineContextTest {
     @Test
     public void test04() {
 
-        final EngineContext vm = new EngineContext(LOCALE, null);
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
 
-        vm.put("one", "a value");
+        final EngineContext vm = new EngineContext(configuration, templateResolution1, LOCALE, null);
+
+        vm.setVariable("one", "a value");
 
         Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=a value}", vm.toString());
 
-        vm.put("one", "two values");
+        vm.setVariable("one", "two values");
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
 
         vm.increaseLevel();
-        vm.put("one", "hello");
+        vm.setVariable("one", "hello");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
 
-        vm.put("two", "twello");
+        vm.setVariable("two", "twello");
 
         Assert.assertEquals("{1:{one=hello, two=twello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello, two=twello}", vm.toString());
@@ -527,18 +500,18 @@ public final class EngineContextTest {
         Assert.assertEquals("{one=two values}", vm.toString());
 
         vm.increaseLevel();
-        vm.put("two", "twellor");
+        vm.setVariable("two", "twellor");
 
         Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
 
         vm.increaseLevel();
-        vm.put("three", "twelloree");
+        vm.setVariable("three", "twelloree");
 
         Assert.assertEquals("{2:{three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values, two=twellor, three=twelloree}", vm.toString());
 
-        vm.put("one", "atwe");
+        vm.setVariable("one", "atwe");
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
@@ -550,12 +523,12 @@ public final class EngineContextTest {
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
 
-        vm.put("four", "lotwss");
+        vm.setVariable("four", "lotwss");
 
         Assert.assertEquals("{5:{four=lotwss},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, two=twellor, three=twelloree, four=lotwss}", vm.toString());
 
-        vm.put("two", "itwiii");
+        vm.setVariable("two", "itwiii");
 
         Assert.assertEquals("{5:{four=lotwss, two=itwiii},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, two=itwiii, three=twelloree, four=lotwss}", vm.toString());
@@ -594,27 +567,30 @@ public final class EngineContextTest {
     @Test
     public void test05() {
 
-        final EngineContext vm = new EngineContext(LOCALE, null);
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
 
-        vm.put("one", "a value");
+        final EngineContext vm = new EngineContext(configuration, templateResolution1, LOCALE, null);
+
+        vm.setVariable("one", "a value");
 
         Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=a value}", vm.toString());
         Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
-        vm.put("one", "two values");
+        vm.setVariable("one", "two values");
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
         Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
-        vm.remove("one");
+        vm.removeVariable("one");
 
         Assert.assertEquals("{0:{}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}", vm.toString());
         Assert.assertEquals(Collections.emptySet(), vm.getVariableNames());
 
-        vm.put("one", "two values");
+        vm.setVariable("one", "two values");
 
         Assert.assertEquals("{0:{one=two values}}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values}", vm.toString());
@@ -622,44 +598,44 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.put("one", "hello");
+        vm.setVariable("one", "hello");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
         Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
-        vm.remove("one");
+        vm.removeVariable("one");
 
         Assert.assertEquals("{1:{one=(*removed*)},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}", vm.toString());
         Assert.assertEquals(Collections.emptySet(), vm.getVariableNames());
 
-        vm.put("one", "hello");
+        vm.setVariable("one", "hello");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
         Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
         Assert.assertEquals("{1:{one=hello},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}", vm.toString());
         Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
-        vm.put("two", "twello");
+        vm.setVariable("two", "twello");
         vm.setInliner(StandardTextInliner.INSTANCE);
 
         Assert.assertEquals("{1:{one=hello, two=twello}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello, two=twello}[StandardTextInliner]", vm.toString());
         Assert.assertEquals(createSet("one","two"), vm.getVariableNames());
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
         Assert.assertEquals("{1:{one=hello}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello}[StandardTextInliner]", vm.toString());
         Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
-        vm.remove("one");
+        vm.removeVariable("one");
 
         Assert.assertEquals("{1:{one=(*removed*)}[StandardTextInliner],0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{}[StandardTextInliner]", vm.toString());
@@ -672,20 +648,20 @@ public final class EngineContextTest {
         Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.increaseLevel();
-        vm.put("two", "twellor");
+        vm.setVariable("two", "twellor");
 
         Assert.assertEquals("{1:{two=twellor},0:{one=two values}}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values, two=twellor}", vm.toString());
         Assert.assertEquals(createSet("one","two"), vm.getVariableNames());
 
         vm.increaseLevel();
-        vm.put("three", "twelloree");
+        vm.setVariable("three", "twelloree");
 
         Assert.assertEquals("{2:{three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values, two=twellor, three=twelloree}", vm.toString());
         Assert.assertEquals(createSet("one","three","two"), vm.getVariableNames());
 
-        vm.put("one", "atwe");
+        vm.setVariable("one", "atwe");
 
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[2]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, two=twellor, three=twelloree}", vm.toString());
@@ -693,7 +669,7 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[3]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
@@ -701,7 +677,7 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
         Assert.assertEquals("{3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[4]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
@@ -713,13 +689,13 @@ public final class EngineContextTest {
         Assert.assertEquals("{one=atwe, three=twelloree}", vm.toString());
         Assert.assertEquals(createSet("one","three"), vm.getVariableNames());
 
-        vm.put("four", "lotwss");
+        vm.setVariable("four", "lotwss");
 
         Assert.assertEquals("{5:{four=lotwss},3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss}", vm.toString());
         Assert.assertEquals(createSet("one","three","four"), vm.getVariableNames());
 
-        vm.put("two", "itwiii");
+        vm.setVariable("two", "itwiii");
 
         Assert.assertEquals("{5:{four=lotwss, two=itwiii},3:{two=(*removed*)},2:{one=atwe, three=twelloree},1:{two=twellor},0:{one=two values}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree, four=lotwss, two=itwiii}", vm.toString());
@@ -761,32 +737,31 @@ public final class EngineContextTest {
     @Test
     public void test06() {
 
-        final EngineContext vm = new EngineContext(LOCALE, null);
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
 
-        vm.put("one", "a value");
+        final EngineContext vm = new EngineContext(configuration, templateResolution1, LOCALE, null);
 
-        Assert.assertEquals(0, vm.level());
+        vm.setVariable("one", "a value");
+
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("a value", vm.getVariable("one"));
 
         vm.increaseLevel();
-        vm.put("one", "hello");
+        vm.setVariable("one", "hello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertEquals("hello", vm.getVariable("one"));
 
-        vm.put("two", "twello");
+        vm.setVariable("two", "twello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertEquals("hello", vm.getVariable("one"));
         Assert.assertEquals("twello", vm.getVariable("two"));
 
-        vm.put("three", "trwello");
+        vm.setVariable("three", "trwello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -794,9 +769,8 @@ public final class EngineContextTest {
         Assert.assertEquals("twello", vm.getVariable("two"));
         Assert.assertEquals("trwello", vm.getVariable("three"));
 
-        vm.put("four", "fwello");
+        vm.setVariable("four", "fwello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -806,9 +780,8 @@ public final class EngineContextTest {
         Assert.assertEquals("trwello", vm.getVariable("three"));
         Assert.assertEquals("fwello", vm.getVariable("four"));
 
-        vm.put("five", "vwello");
+        vm.setVariable("five", "vwello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -820,9 +793,8 @@ public final class EngineContextTest {
         Assert.assertEquals("fwello", vm.getVariable("four"));
         Assert.assertEquals("vwello", vm.getVariable("five"));
 
-        vm.put("six", "swello");
+        vm.setVariable("six", "swello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -836,9 +808,8 @@ public final class EngineContextTest {
         Assert.assertEquals("vwello", vm.getVariable("five"));
         Assert.assertEquals("swello", vm.getVariable("six"));
 
-        vm.put("seven", "svwello");
+        vm.setVariable("seven", "svwello");
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -860,9 +831,12 @@ public final class EngineContextTest {
     @Test
     public void test07() {
 
-        final EngineContext vm = new EngineContext(LOCALE, null);
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
 
-        vm.put("one", "a value");
+        final EngineContext vm = new EngineContext(configuration, templateResolution1, LOCALE, null);
+
+        vm.setVariable("one", "a value");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
         Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
@@ -870,12 +844,12 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.put("one", "hello");
-        vm.remove("one");
-        vm.put("one", "hello");
-        vm.remove("two");
-        vm.put("two", "twello");
-        vm.put("two", "twellor");
+        vm.setVariable("one", "hello");
+        vm.removeVariable("one");
+        vm.setVariable("one", "hello");
+        vm.removeVariable("two");
+        vm.setVariable("two", "twello");
+        vm.setVariable("two", "twellor");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
         Assert.assertEquals("{1:{one=hello, two=twellor},0:{one=a value}}[1]", vm.getStringRepresentationByLevel());
@@ -883,8 +857,8 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.put("three", "twelloree");
-        vm.put("one", "atwe");
+        vm.setVariable("three", "twelloree");
+        vm.setVariable("one", "atwe");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
         Assert.assertEquals("{2:{one=atwe, three=twelloree},1:{one=hello, two=twellor},0:{one=a value}}[2]", vm.getStringRepresentationByLevel());
@@ -892,7 +866,6 @@ public final class EngineContextTest {
 
         vm.setSelectionTarget("BIGFORM");
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -906,9 +879,8 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.remove("two");
+        vm.removeVariable("two");
 
-        Assert.assertEquals(3, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -922,10 +894,9 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        vm.remove("two");
+        vm.removeVariable("two");
         vm.setSelectionTarget("SMALLFORM");
 
-        Assert.assertEquals(4, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -940,7 +911,6 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        Assert.assertEquals(5, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -952,9 +922,8 @@ public final class EngineContextTest {
         Assert.assertEquals("{4:<SMALLFORM>,3:{two=(*removed*)},2:{one=atwe, three=twelloree}<BIGFORM>,1:{one=hello, two=twellor},0:{one=a value}}[5]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=atwe, three=twelloree}<SMALLFORM>", vm.toString());
 
-        vm.put("four", "lotwss");
+        vm.setVariable("four", "lotwss");
 
-        Assert.assertEquals(5, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -970,7 +939,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(4, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -986,7 +954,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(3, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -1002,7 +969,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -1018,7 +984,6 @@ public final class EngineContextTest {
 
         vm.setSelectionTarget("MEDIUMFORM");
 
-        Assert.assertEquals(2, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
         Assert.assertTrue(vm.containsVariable("three"));
@@ -1035,7 +1000,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
         Assert.assertEquals("{1:{one=hello, two=twellor},0:{one=a value}}[1]", vm.getStringRepresentationByLevel());
@@ -1044,7 +1008,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
         Assert.assertEquals("{0:{one=a value}}[0]", vm.getStringRepresentationByLevel());
@@ -1052,7 +1015,6 @@ public final class EngineContextTest {
 
         vm.setSelectionTarget("TOTALFORM");
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("TOTALFORM", vm.getSelectionTarget());
         Assert.assertEquals("{0:{one=a value}<TOTALFORM>}[0]", vm.getStringRepresentationByLevel());
@@ -1061,7 +1023,6 @@ public final class EngineContextTest {
 
         vm.increaseLevel();
 
-        Assert.assertEquals(1, vm.level());
         Assert.assertTrue(vm.hasSelectionTarget());
         Assert.assertEquals("TOTALFORM", vm.getSelectionTarget());
         Assert.assertEquals("{0:{one=a value}<TOTALFORM>}[1]", vm.getStringRepresentationByLevel());
@@ -1069,7 +1030,6 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        Assert.assertEquals(0, vm.level());
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
         Assert.assertFalse(vm.containsVariable("three"));
@@ -1089,13 +1049,16 @@ public final class EngineContextTest {
     @Test
     public void test08() {
 
-        final EngineContext vm = new EngineContext(LOCALE, null);
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
 
-        vm.put("one", "a val1");
+        final EngineContext vm = new EngineContext(configuration, templateResolution1, LOCALE, null);
+
+        vm.setVariable("one", "a val1");
 
         vm.increaseLevel();
 
-        vm.put("one", "a val2");
+        vm.setVariable("one", "a val2");
         vm.setSelectionTarget("FORM");
 
         Assert.assertTrue(vm.hasSelectionTarget());
@@ -1103,19 +1066,19 @@ public final class EngineContextTest {
 
         vm.decreaseLevel();
 
-        vm.put("one", "a val3");
+        vm.setVariable("one", "a val3");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
 
         vm.increaseLevel();
 
-        vm.put("one", "a val4");
+        vm.setVariable("one", "a val4");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
 
         vm.increaseLevel();
 
-        vm.put("one", "a val5");
+        vm.setVariable("one", "a val5");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
 
