@@ -10,12 +10,9 @@
     <context:annotation-config/>
 
 
-    <!--                                      -->
-    <!-- THYMELEAF RESOURCE/TEMPLATE RESOLVER -->
-    <!--                                      -->
-    <bean id="springResourceResourceResolver"
-          class="org.thymeleaf.spring4.resourceresolver.SpringResourceResourceResolver" />
-
+    <!--                             -->
+    <!-- THYMELEAF TEMPLATE RESOLVER -->
+    <!--                             -->
     <bean id="springResourceTemplateResolver"
           class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
       <property name="templateMode" value="HTML" />
