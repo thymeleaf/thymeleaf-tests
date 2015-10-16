@@ -17,24 +17,27 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.templateengine.conversion.conversion1;
+package org.thymeleaf.context;
 
-import org.thymeleaf.context.IExpressionContext;
-import org.thymeleaf.standard.expression.AbstractStandardConversionService;
+import org.thymeleaf.cache.NonCacheableCacheEntryValidity;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.TemplateResolution;
+import org.thymeleaf.templateresource.StringTemplateResource;
 
 
-public class TestStandardConversionService1 extends AbstractStandardConversionService {
+public final class TestTemplateResolutionConfigurationBuilder {
 
 
-    public TestStandardConversionService1() {
-        super();
+
+    public static TemplateResolution build(final String template, final TemplateMode templateMode) {
+        return new TemplateResolution(template, new StringTemplateResource(template, "UTF-8"), templateMode, NonCacheableCacheEntryValidity.INSTANCE);
     }
 
 
-    @Override
-    protected String convertToString(
-            final IExpressionContext context, final Object object) {
-        return "[" + super.convertToString(context, object) + "]";
+
+
+    private TestTemplateResolutionConfigurationBuilder() {
+        super();
     }
 
 }

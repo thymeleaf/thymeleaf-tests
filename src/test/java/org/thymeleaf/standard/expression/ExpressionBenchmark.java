@@ -25,9 +25,8 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.context.IExpressionContext;
 import org.thymeleaf.context.ExpressionContext;
+import org.thymeleaf.context.IExpressionContext;
 
 /**
  * 
@@ -59,7 +58,7 @@ public class ExpressionBenchmark {
         for (final Map.Entry<String,String> expressionEntry : expressionsMap.entrySet()) {
             final String expression = expressionEntry.getKey();
             final String expectedParsingResult = expressionEntry.getValue();
-            final IStandardExpression parsedExpression = parser.parseExpression(context, expression);
+            final IStandardExpression parsedExpression = parser.parseExpression(processingContext, expression);
             Assert.assertNotNull(parsedExpression);
             final String exp = parsedExpression.getStringRepresentation();
             Assert.assertEquals(expectedParsingResult, exp);

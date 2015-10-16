@@ -21,12 +21,11 @@ package org.thymeleaf.standard.expression;
 
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.cache.NonCacheableCacheEntryValidity;
-import org.thymeleaf.context.IContext;
-import org.thymeleaf.resourceresolver.IResourceResolver;
-import org.thymeleaf.resourceresolver.StringResourceResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolution;
+import org.thymeleaf.templateresource.ITemplateResource;
+import org.thymeleaf.templateresource.StringTemplateResource;
 
 /**
  * 
@@ -62,12 +61,12 @@ public class TestTemplateResolver implements ITemplateResolver {
                         template +
                         this.template.substring(placeholderPos + 4);
 
-        final IResourceResolver resourceResolver = new StringResourceResolver();
+        final ITemplateResource templateResource = new StringTemplateResource(template);
 
         final TemplateResolution templateResolution =
                 new TemplateResolution(
-                        template, resource, resourceResolver,
-                        "UTF-8", TemplateMode.HTML,
+                        template, templateResource,
+                        TemplateMode.HTML,
                         new NonCacheableCacheEntryValidity());
 
         return templateResolution;
@@ -75,8 +74,5 @@ public class TestTemplateResolver implements ITemplateResolver {
     }
 
 
-    public void initialize() {
-        // nothing to be done;
-    }
 
 }

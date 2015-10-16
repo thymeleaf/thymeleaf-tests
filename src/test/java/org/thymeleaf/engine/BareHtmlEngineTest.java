@@ -24,13 +24,10 @@ import java.io.StringWriter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
-import org.thymeleaf.context.IContext;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
-import org.thymeleaf.resource.IResource;
-import org.thymeleaf.resource.StringResource;
-import org.thymeleaf.resourceresolver.IResourceResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
+import org.thymeleaf.templateresource.StringTemplateResource;
 
 
 public final class BareHtmlEngineTest {
@@ -95,26 +92,11 @@ public final class BareHtmlEngineTest {
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
 
-        PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, new StringResource(templateName, input), blockSelectors, TemplateMode.HTML, handler);
+        PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, new StringTemplateResource(templateName, input), blockSelectors, TemplateMode.HTML, handler);
 
         Assert.assertEquals("Test failed for file: " + templateName, output, writer.toString());
 
     }
-
-
-    private static final class TestStringResourceResolver implements IResourceResolver {
-
-        public String getName() {
-            return "StringResourceResolver";
-        }
-
-        public IResource resolveResource(
-                final IEngineConfiguration engineConfiguration,
-                final String resourceName, final String characterEncoding) {
-            return new StringResource("stringresource", resourceName);
-        }
-    }
-
 
 
 }
