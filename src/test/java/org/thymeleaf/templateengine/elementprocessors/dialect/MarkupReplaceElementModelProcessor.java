@@ -19,7 +19,6 @@
  */
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
-import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
@@ -48,7 +47,7 @@ public class MarkupReplaceElementModelProcessor extends AbstractAttributeModelPr
                              final String attributeTemplateName, final int attributeLine, final int attributeCol,
                              final IElementModelStructureHandler structureHandler) {
 
-        final IModel replacementMarkup = processingContext.getModelFactory().parse(REPLACEMENT);
+        final IModel replacementMarkup = context.getConfiguration().getModelFactory(context.getTemplateMode()).parse(attributeTemplateName, REPLACEMENT);
 
         model.reset();
         model.addModel(replacementMarkup);

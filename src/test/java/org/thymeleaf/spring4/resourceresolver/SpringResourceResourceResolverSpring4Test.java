@@ -23,7 +23,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.thymeleaf.IEngineConfiguration;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.resource.IResource;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;
