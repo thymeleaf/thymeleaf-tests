@@ -26,10 +26,10 @@ import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.model.IElementAttributes;
 import org.thymeleaf.model.IOpenElementTag;
 import org.thymeleaf.model.IStandaloneElementTag;
-import org.thymeleaf.resource.StringResource;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 import org.thymeleaf.templateparser.markup.XMLTemplateParser;
+import org.thymeleaf.templateresource.StringTemplateResource;
 
 
 public final class ElementAttributesTest {
@@ -1375,7 +1375,7 @@ public final class ElementAttributesTest {
         final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, new StringResource(templateName, input), null, TemplateMode.HTML, handler);
+        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, new StringTemplateResource(templateName, input), null, TemplateMode.HTML, handler);
 
         return handler.elementAttributes;
 
@@ -1389,7 +1389,7 @@ public final class ElementAttributesTest {
         final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, new StringResource(templateName, input), null, TemplateMode.XML, handler);
+        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, new StringTemplateResource(templateName, input), null, TemplateMode.XML, handler);
 
         return handler.elementAttributes;
 

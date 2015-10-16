@@ -19,9 +19,9 @@
  */
 package org.thymeleaf.templateengine.context.dialect;
 
-import org.thymeleaf.context.IMutableVariablesMap;
+import org.thymeleaf.context.IEngineContext;
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.context.IWebVariablesMap;
+import org.thymeleaf.context.IWebContext;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
@@ -44,20 +44,20 @@ public class AddContextVariableElementProcessor extends AbstractElementTagProces
             final String tagTemplateName, final int tagLine, final int tagCol,
             final IElementTagStructureHandler structureHandler) {
 
-        final IWebVariablesMap variablesMap = (IWebVariablesMap) processingContext.getContext();
-        final IMutableVariablesMap mutableVariablesMap = (IMutableVariablesMap) variablesMap;
+        final IWebContext webContext = (IWebContext) processingContext;
+        final IEngineContext engineContext = (IEngineContext) webContext;
 
-        mutableVariablesMap.put("newvar0", "LocalVariablesNewVar0");
-        mutableVariablesMap.put("newvar1", "LocalVariablesNewVar1");
+        engineContext.setVariable("newvar0", "LocalVariablesNewVar0");
+        engineContext.setVariable("newvar1", "LocalVariablesNewVar1");
 
-        variablesMap.getRequest().setAttribute("newvar2", "RequestAttributesNewVar2");
-        variablesMap.getRequest().setAttribute("newvar3", "RequestAttributesNewVar3");
+        webContext.getRequest().setAttribute("newvar2", "RequestAttributesNewVar2");
+        webContext.getRequest().setAttribute("newvar3", "RequestAttributesNewVar3");
 
-        variablesMap.getServletContext().setAttribute("newvar4", "ApplicationAttributesNewVar4");
-        variablesMap.getServletContext().setAttribute("newvar5", "ApplicationAttributesNewVar5");
+        webContext.getServletContext().setAttribute("newvar4", "ApplicationAttributesNewVar4");
+        webContext.getServletContext().setAttribute("newvar5", "ApplicationAttributesNewVar5");
 
-        variablesMap.getSession().setAttribute("newvar6", "SessionAttributesNewVar6");
-        variablesMap.getSession().setAttribute("newvar7", "SessionAttributesNewVar7");
+        webContext.getSession().setAttribute("newvar6", "SessionAttributesNewVar6");
+        webContext.getSession().setAttribute("newvar7", "SessionAttributesNewVar7");
 
         structureHandler.setLocalVariable("one", "one");
         structureHandler.removeElement();

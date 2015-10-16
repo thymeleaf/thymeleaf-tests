@@ -22,10 +22,8 @@ package org.thymeleaf.standard.expression;
 import java.text.MessageFormat;
 import java.util.Properties;
 
-import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.messageresolver.IMessageResolver;
-import org.thymeleaf.messageresolver.MessageResolution;
 
 
 /**
@@ -56,26 +54,27 @@ public class TestMessageResolver implements IMessageResolver {
 
 
 
-    public MessageResolution resolveMessage(final ITemplateContext context, final String key, final Object[] messageParameters) {
+    public String resolveMessage(final ITemplateContext context, final Class<?> origin, final String key, final Object[] messageParameters) {
 
         final String messageValue = this.properties.getProperty(key);
         if (messageValue == null) {
             return null;
         }
         if (messageParameters == null || messageParameters.length == 0) {
-            return new MessageResolution(messageValue);
+            return messageValue;
         }
 
-        final MessageFormat messageFormat = new MessageFormat(messageValue, processingContext.getLocale());
-        return new MessageResolution(messageFormat.format(messageParameters));
+        final MessageFormat messageFormat = new MessageFormat(messageValue, context.getLocale());
+        return messageFormat.format(messageParameters);
 
     }
 
 
-    public void initialize() {
-        // Nothing to initialize
+
+    public String createAbsentMessageRepresentation(final ITemplateContext context, final Class<?> origin, final String key, final Object[] messageParameters) {
+        return "??" + key + "_" + context.getLocale() +"??";
     }
-    
+
 
     
     
