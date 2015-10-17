@@ -65,7 +65,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("../something/else", TemplateResourceUtils.cleanPath("../something/else/more.html/.."));
         Assert.assertEquals("something/more_es.properties", TemplateResourceUtils.cleanPath("something/else/more.html/../../more_es.properties"));
 
-        Assert.assertEquals("/", TemplateResourceUtils.computeBaseName("/"));
+        Assert.assertNull(TemplateResourceUtils.computeBaseName("/"));
         Assert.assertEquals("something", TemplateResourceUtils.computeBaseName("something"));
         Assert.assertEquals("something", TemplateResourceUtils.computeBaseName("/something"));
         Assert.assertEquals("else", TemplateResourceUtils.computeBaseName("something/else"));
@@ -79,7 +79,8 @@ public final class TemplateResourceTest {
         Assert.assertEquals("more", TemplateResourceUtils.computeBaseName("./something/else/./more"));
         Assert.assertEquals("more", TemplateResourceUtils.computeBaseName("something/else/more.html"));
         Assert.assertEquals("more", TemplateResourceUtils.computeBaseName("../something/else/more.html"));
-        Assert.assertEquals("..", TemplateResourceUtils.computeBaseName("../something/else/more.html/.."));
+        // The following result might be weird, but the passed path will never exist as it should have been 'cleaned' first
+        Assert.assertEquals(".", TemplateResourceUtils.computeBaseName("../something/else/more.html/.."));
         Assert.assertEquals("more_es", TemplateResourceUtils.computeBaseName("something/else/more.html/../../more_es.properties"));
 
     }
@@ -121,7 +122,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("/something/more_es.properties", (new ServletContextTemplateResource(servletContext, "something/more/../else/more.html", null).relative("../more_es.properties")).getDescription());
         Assert.assertEquals("/more_es.properties", (new ServletContextTemplateResource(servletContext, "something/else/more.html", null).relative("../../more_es.properties")).getDescription());
 
-        Assert.assertEquals("/", (new ServletContextTemplateResource(servletContext, "/", null)).getBaseName());
+        Assert.assertNull((new ServletContextTemplateResource(servletContext, "/", null)).getBaseName());
         Assert.assertEquals("something", (new ServletContextTemplateResource(servletContext, "something", null)).getBaseName());
         Assert.assertEquals("something", (new ServletContextTemplateResource(servletContext, "/something", null)).getBaseName());
         Assert.assertEquals("else", (new ServletContextTemplateResource(servletContext, "something/else", null)).getBaseName());
@@ -136,7 +137,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("more", (new ServletContextTemplateResource(servletContext, "something/else/more.html", null)).getBaseName());
         Assert.assertEquals("more", (new ServletContextTemplateResource(servletContext, "../something/else/more.html", null)).getBaseName());
         Assert.assertEquals("more", (new ServletContextTemplateResource(servletContext, "../something/else/more.html/", null)).getBaseName());
-        Assert.assertEquals("more", (new ServletContextTemplateResource(servletContext, "../something/else/more.html/..", null)).getBaseName());
+        Assert.assertEquals("else", (new ServletContextTemplateResource(servletContext, "../something/else/more.html/..", null)).getBaseName());
         Assert.assertEquals("more_es", (new ServletContextTemplateResource(servletContext, "something/else/more.html/../../more_es.properties", null)).getBaseName());
 
     }
@@ -178,7 +179,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("something/more_es.properties", (new ClassLoaderTemplateResource(classLoader, "something/more/../else/more.html", null).relative("../more_es.properties")).getDescription());
         Assert.assertEquals("more_es.properties", (new ClassLoaderTemplateResource(classLoader, "something/else/more.html", null).relative("../../more_es.properties")).getDescription());
 
-        Assert.assertEquals("/", (new ClassLoaderTemplateResource(classLoader, "/", null)).getBaseName());
+        Assert.assertNull((new ClassLoaderTemplateResource(classLoader, "/", null)).getBaseName());
         Assert.assertEquals("something", (new ClassLoaderTemplateResource(classLoader, "something", null)).getBaseName());
         Assert.assertEquals("something", (new ClassLoaderTemplateResource(classLoader, "/something", null)).getBaseName());
         Assert.assertEquals("else", (new ClassLoaderTemplateResource(classLoader, "something/else", null)).getBaseName());
@@ -193,7 +194,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("more", (new ClassLoaderTemplateResource(classLoader, "something/else/more.html", null)).getBaseName());
         Assert.assertEquals("more", (new ClassLoaderTemplateResource(classLoader, "../something/else/more.html", null)).getBaseName());
         Assert.assertEquals("more", (new ClassLoaderTemplateResource(classLoader, "../something/else/more.html/", null)).getBaseName());
-        Assert.assertEquals("more", (new ClassLoaderTemplateResource(classLoader, "../something/else/more.html/..", null)).getBaseName());
+        Assert.assertEquals("else", (new ClassLoaderTemplateResource(classLoader, "../something/else/more.html/..", null)).getBaseName());
         Assert.assertEquals("more_es", (new ClassLoaderTemplateResource(classLoader, "something/else/more.html/../../more_es.properties", null)).getBaseName());
 
     }
@@ -233,7 +234,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals(new File("something/else/../more_es.properties").getAbsolutePath(), (new FileTemplateResource("something/more/../else/more.html", null).relative("../more_es.properties")).getDescription());
         Assert.assertEquals(new File("something/else/../../more_es.properties").getAbsolutePath(), (new FileTemplateResource("something/else/more.html", null).relative("../../more_es.properties")).getDescription());
 
-        Assert.assertEquals("/", (new FileTemplateResource("/", null)).getBaseName());
+        Assert.assertNull((new FileTemplateResource("/", null)).getBaseName());
         Assert.assertEquals("something", (new FileTemplateResource("something", null)).getBaseName());
         Assert.assertEquals("something", (new FileTemplateResource("/something", null)).getBaseName());
         Assert.assertEquals("else", (new FileTemplateResource("something/else", null)).getBaseName());
@@ -248,7 +249,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("more", (new FileTemplateResource("something/else/more.html", null)).getBaseName());
         Assert.assertEquals("more", (new FileTemplateResource("../something/else/more.html", null)).getBaseName());
         Assert.assertEquals("more", (new FileTemplateResource("../something/else/more.html/", null)).getBaseName());
-        Assert.assertEquals("more", (new FileTemplateResource("../something/else/more.html/..", null)).getBaseName());
+        Assert.assertEquals("else", (new FileTemplateResource("../something/else/more.html/..", null)).getBaseName());
         Assert.assertEquals("more_es", (new FileTemplateResource("something/else/more.html/../../more_es.properties", null)).getBaseName());
 
     }
@@ -283,21 +284,21 @@ public final class TemplateResourceTest {
         Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null).relative("../even/less.html")).getDescription());
         Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null).relative("../even/./less.html")).getDescription());
 
-        Assert.assertEquals("http://www.thymeleaf.org/", (new UrlTemplateResource("http://www.thymeleaf.org/", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org", (new UrlTemplateResource("http://www.thymeleaf.org", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/something", (new UrlTemplateResource("http://www.thymeleaf.org", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/something", (new UrlTemplateResource("http://www.thymeleaf.org", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/something", (new UrlTemplateResource("http://www.thymeleaf.org/more", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/more/something", (new UrlTemplateResource("http://www.thymeleaf.org/more/", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/something/more", (new UrlTemplateResource("http://www.thymeleaf.org/something/else", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/something/more.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/else.html", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/more.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/else.html", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html/", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html/a/..", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null).getBaseName()));
-        Assert.assertEquals("http://www.thymeleaf.org/even/less.html", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html?param=a", null).getBaseName()));
+        Assert.assertNull((new UrlTemplateResource("http://www.thymeleaf.org/", null).getBaseName()));
+        Assert.assertNull((new UrlTemplateResource("http://www.thymeleaf.org", null).getBaseName()));
+        Assert.assertNull((new UrlTemplateResource("http://www.thymeleaf.org", null).getBaseName()));
+        Assert.assertNull((new UrlTemplateResource("http://www.thymeleaf.org", null).getBaseName()));
+        Assert.assertEquals("more", (new UrlTemplateResource("http://www.thymeleaf.org/more", null).getBaseName()));
+        Assert.assertEquals("more", (new UrlTemplateResource("http://www.thymeleaf.org/more/", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/else", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/else.html", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/else.html", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html/", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/more/../else.html/a/..", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html", null).getBaseName()));
+        Assert.assertEquals("else", (new UrlTemplateResource("http://www.thymeleaf.org/something/./more/../else.html?param=a", null).getBaseName()));
 
     }
 
