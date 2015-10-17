@@ -19,6 +19,7 @@
  */
 package org.thymeleaf.context;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -45,8 +46,6 @@ public final class WebEngineContextTest {
 
     private static final Locale LOCALE = Locale.US;
 
-
-    // TODO Add tests for stacked Template Resolutions
 
 
     @Test
@@ -1617,6 +1616,328 @@ public final class WebEngineContextTest {
         vm.setVariable("one", "a val5");
         Assert.assertFalse(vm.hasSelectionTarget());
         Assert.assertNull(vm.getSelectionTarget());
+
+    }
+
+
+
+
+    @Test
+    public void test13() {
+
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateResolution templateResolution2 = TestTemplateResolutionConfigurationBuilder.build("test02", TemplateMode.HTML);
+        final TemplateResolution templateResolution3 = TestTemplateResolutionConfigurationBuilder.build("test03", TemplateMode.XML);
+        final TemplateResolution templateResolution4 = TestTemplateResolutionConfigurationBuilder.build("test04", TemplateMode.TEXT);
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
+        final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1), vm.getTemplateResolutionStack());
+
+        vm.setVariable("one", "a value");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1), vm.getTemplateResolutionStack());
+
+
+        vm.setVariable("one", "two values");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+
+        vm.removeVariable("one");
+
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
+
+        vm.setVariable("one", "two values");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+
+        vm.increaseLevel();
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
+
+        vm.setTemplateResolution(templateResolution2);
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution2, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1, templateResolution2), vm.getTemplateResolutionStack());
+
+        vm.setVariable("one", "hello");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+
+        vm.removeVariable("one");
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution2, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1, templateResolution2), vm.getTemplateResolutionStack());
+
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
+
+        vm.setVariable("one", "hello");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+
+        vm.removeVariable("two");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("twello"));
+
+        vm.setVariable("two", "twello");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertEquals("twello", vm.getVariable("two"));
+
+        vm.removeVariable("two");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertEquals("hello", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("twello"));
+
+        vm.removeVariable("one");
+
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertNull(vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("twello"));
+
+        vm.decreaseLevel();
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+
+        vm.increaseLevel();
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1), vm.getTemplateResolutionStack());
+
+        vm.setVariable("two", "twellor");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+
+        vm.setTemplateResolution(templateResolution2);
+
+        vm.increaseLevel();
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution2, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2), vm.getTemplateResolutionStack());
+
+        vm.setTemplateResolution(templateResolution3);
+
+        Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+
+        vm.setVariable("three", "twelloree");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+
+        vm.setVariable("one", "atwe");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+
+        Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+
+        vm.increaseLevel();
+
+        Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+
+        vm.removeVariable("two");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+
+        vm.increaseLevel();
+
+        Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+
+        vm.removeVariable("two");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+
+        vm.increaseLevel();
+
+        Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+
+        vm.setVariable("four", "lotwss");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertEquals("lotwss", vm.getVariable("four"));
+
+        vm.setVariable("two", "itwiii");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertTrue(vm.containsVariable("four"));
+        Assert.assertFalse(vm.containsVariable("five"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("itwiii", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertEquals("lotwss", vm.getVariable("four"));
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertTrue(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("atwe", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertEquals("twelloree", vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution2, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2), vm.getTemplateResolutionStack());
+
+        vm.setTemplateResolution(templateResolution4);
+
+        Assert.assertEquals(TemplateMode.TEXT, vm.getTemplateMode());
+        Assert.assertSame(templateResolution4, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution4), vm.getTemplateResolutionStack());
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertTrue(vm.containsVariable("two"));
+        Assert.assertFalse(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertEquals("twellor", vm.getVariable("two"));
+        Assert.assertNull(vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
+
+        vm.decreaseLevel();
+
+        Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
+        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution1), vm.getTemplateResolutionStack());
+
+        vm.setTemplateResolution(templateResolution4);
+
+        Assert.assertEquals(TemplateMode.TEXT, vm.getTemplateMode());
+        Assert.assertSame(templateResolution4, vm.getTemplateResolution());
+        Assert.assertEquals(Arrays.asList(templateResolution4), vm.getTemplateResolutionStack());
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertFalse(vm.containsVariable("two"));
+        Assert.assertFalse(vm.containsVariable("three"));
+        Assert.assertFalse(vm.containsVariable("four"));
+        Assert.assertEquals("two values", vm.getVariable("one"));
+        Assert.assertNull(vm.getVariable("two"));
+        Assert.assertNull(vm.getVariable("three"));
+        Assert.assertNull(vm.getVariable("four"));
 
     }
 
