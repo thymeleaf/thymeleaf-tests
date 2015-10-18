@@ -5,13 +5,13 @@ a = 'Letter A'
 b = 'Letter B'
 # ------------------------------------------------------------
 %INPUT
-<p th:text="${#ctx.variables} ? 'ctx.variables exists' : 'ctx.variables does not exist'">...</p>
-<p th:text="${#ctx.variables.class == null}">...</p>
-<p th:text="${#ctx.variables.a}">...</p>
-<p th:text="${#ctx.variables.b}">...</p>
+<p th:text="${#ctx} ? 'ctx exists' : 'ctx does not exist'">...</p>
+<p th:text="${#ctx.class == null}">...</p>
+<p th:text="${#ctx.a}">...</p>
+<p th:text="${#ctx.b}">...</p>
 # ------------------------------------------------------------
 %OUTPUT
-<p>ctx.variables exists</p>
+<p>ctx exists</p>
 <p>true</p>
 <p>Letter A</p>
 <p>Letter B</p>
