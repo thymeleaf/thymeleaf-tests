@@ -61,7 +61,7 @@ public class TestTemplateResolver implements ITemplateResolver {
                         template +
                         this.template.substring(placeholderPos + 4);
 
-        final ITemplateResource templateResource = new StringTemplateResource(template);
+        final ITemplateResource templateResource = new StringTemplateResource(resource);
 
         final TemplateResolution templateResolution =
                 new TemplateResolution(
