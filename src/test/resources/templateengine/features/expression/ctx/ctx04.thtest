@@ -8,7 +8,7 @@ product = #{ 'name': 'Lettuce',\
 # ------------------------------------------------------------
 %INPUT
 <div th:object="${product}">
-  <p th:text="${#ctx.variables.product.name}">...</p>
+  <p th:text="${#ctx.product.name}">...</p>
 </div>
 # ------------------------------------------------------------
 %OUTPUT

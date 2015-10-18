@@ -4,7 +4,7 @@
 class = 'This is a class text'
 # ------------------------------------------------------------
 %INPUT
-<p data-th-text="${#ctx.variables.class}">...</p>
+<p data-th-text="${#ctx.class}">...</p>
 <p data-th-text="${class}">...</p>
 # ------------------------------------------------------------
 %OUTPUT
