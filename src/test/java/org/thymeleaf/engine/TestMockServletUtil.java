@@ -21,6 +21,7 @@ package org.thymeleaf.engine;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -54,6 +55,7 @@ public final class TestMockServletUtil {
             final Map<String,Object[]> parameters, final Locale locale) {
 
         final String mimeType = "text/html";
+        final String characterEncoding = "UTF-8";
         final String method = "GET";
         final String contextName = "/tests";
         final String protocol = "HTTP/1.1";
@@ -64,10 +66,13 @@ public final class TestMockServletUtil {
         final String requestURI = contextName + servletPath;
         final String requestURL = scheme + "://" + serverName + requestURI;
         final String queryString = buildQueryString(parameters);
+        final int contentLength = -1; // -1 is HTTP standard for 'unknown'
+        final Enumeration<String> headerNames = new ObjectEnumeration<String>(null);
 
         final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 
         Mockito.when(request.getContentType()).thenReturn(mimeType);
+        Mockito.when(request.getCharacterEncoding()).thenReturn(characterEncoding);
         Mockito.when(request.getMethod()).thenReturn(method);
         Mockito.when(request.getProtocol()).thenReturn(protocol);
         Mockito.when(request.getScheme()).thenReturn(scheme);
@@ -80,6 +85,8 @@ public final class TestMockServletUtil {
         Mockito.when(request.getQueryString()).thenReturn(queryString);
         Mockito.when(request.getLocale()).thenReturn(locale);
         Mockito.when(request.getLocales()).thenReturn(new ObjectEnumeration<Locale>(Arrays.asList(new Locale[]{locale})));
+        Mockito.when(Integer.valueOf(request.getContentLength())).thenReturn(Integer.valueOf(contentLength));
+        Mockito.when(request.getHeaderNames()).thenReturn(headerNames);
 
         Mockito.when(request.getSession()).thenReturn(session);
         Mockito.when(request.getSession(Matchers.anyBoolean())).thenReturn(session);
@@ -128,12 +135,15 @@ public final class TestMockServletUtil {
 
     public static ServletContext createServletContext(final Map<String,Object> attributes) {
 
+        final String contextName = "/testing";
+
         final ServletContext servletContext = Mockito.mock(ServletContext.class);
 
         Mockito.when(servletContext.getAttributeNames()).thenAnswer(new GetVariableNamesAnswer(attributes));
         Mockito.when(servletContext.getAttribute(Matchers.anyString())).thenAnswer(new GetAttributeAnswer(attributes));
         Mockito.doAnswer(new SetAttributeAnswer(attributes)).when(servletContext).setAttribute(Matchers.anyString(), Matchers.anyObject());
         Mockito.doAnswer(new RemoveAttributeAnswer(attributes)).when(servletContext).removeAttribute(Matchers.anyString());
+        Mockito.when(servletContext.getContextPath()).thenReturn(contextName);
 
         Mockito.when(servletContext.getInitParameterNames()).thenReturn(new ObjectEnumeration<String>(null));
         Mockito.when(servletContext.getInitParameter(Matchers.anyString())).thenReturn(null);
@@ -199,7 +209,7 @@ public final class TestMockServletUtil {
         public ObjectEnumeration(final Collection<T> values) {
             super();
             if (values != null) {
-                this.iterator = values.iterator();
+                this.iterator = (new ArrayList<T>(values)).iterator();
             } else {
                 this.iterator = ((List<T>) Collections.emptyList()).iterator();
             }
@@ -265,7 +275,12 @@ public final class TestMockServletUtil {
         public Object answer(final InvocationOnMock invocation) throws Throwable {
             final String attributeName = (String) invocation.getArguments()[0];
             final Object attributeValue = invocation.getArguments()[1];
-            this.values.put(attributeName, attributeValue);
+            if (attributeValue == null) {
+                // According to the Servlet API, setting an attribute to null is the same as removing it
+                this.values.remove(attributeName);
+            } else {
+                this.values.put(attributeName, attributeValue);
+            }
             return null;
         }
 
