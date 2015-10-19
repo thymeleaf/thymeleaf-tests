@@ -27,6 +27,7 @@ import javax.servlet.ServletContext;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.engine.TestMockServletUtil;
 import org.thymeleaf.testing.templateengine.context.web.WebProcessingContextBuilder;
 
 
@@ -89,7 +90,7 @@ public final class TemplateResourceTest {
     @Test
     public void testServletContextResource() throws Exception {
 
-        final ServletContext servletContext = WebProcessingContextBuilder.createMockServletContext(new HashMap<String, Object>());
+        final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
         Assert.assertEquals("/", (new ServletContextTemplateResource(servletContext, "/", null)).getDescription());
         Assert.assertEquals("/something", (new ServletContextTemplateResource(servletContext, "something", null)).getDescription());
@@ -207,10 +208,10 @@ public final class TemplateResourceTest {
         Assert.assertEquals(new File("something").getAbsolutePath(), (new FileTemplateResource("something", null)).getDescription());
         Assert.assertEquals(new File("/something").getAbsolutePath(), (new FileTemplateResource("/something", null)).getDescription());
         Assert.assertEquals(new File("something/else").getAbsolutePath(), (new FileTemplateResource("something/else", null)).getDescription());
-        Assert.assertEquals(new File("/something/else").getAbsolutePath(), (new FileTemplateResource("//something//else", null)).getDescription());
-        Assert.assertEquals(new File("/something/a/../else").getAbsolutePath(), (new FileTemplateResource("//something//a//..//else", null)).getDescription());
+        Assert.assertEquals(new File("//something//else").getAbsolutePath(), (new FileTemplateResource("//something//else", null)).getDescription());
+        Assert.assertEquals(new File("//something//a//..//else").getAbsolutePath(), (new FileTemplateResource("//something//a//..//else", null)).getDescription());
         Assert.assertEquals(new File("something/else/more").getAbsolutePath(), (new FileTemplateResource("something/else/more", null)).getDescription());
-        Assert.assertEquals(new File("something/else/more").getAbsolutePath(), (new FileTemplateResource("something/else//more", null)).getDescription());
+        Assert.assertEquals(new File("something/else//more").getAbsolutePath(), (new FileTemplateResource("something/else//more", null)).getDescription());
         Assert.assertEquals(new File("something/else/../more").getAbsolutePath(), (new FileTemplateResource("something/else/../more", null)).getDescription());
         Assert.assertEquals(new File("something/else/./more").getAbsolutePath(), (new FileTemplateResource("something/else/./more", null)).getDescription());
         Assert.assertEquals(new File("../something/else/./more").getAbsolutePath(), (new FileTemplateResource("../something/else/./more", null)).getDescription());
