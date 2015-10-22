@@ -28,7 +28,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.engine.TestMockServletUtil;
-import org.thymeleaf.testing.templateengine.context.web.WebProcessingContextBuilder;
 
 
 public final class TemplateResourceTest {
@@ -37,17 +36,17 @@ public final class TemplateResourceTest {
     @Test
     public void testTemplateResourceUtils() throws Exception {
 
-        Assert.assertEquals("/", TemplateResourceUtils.computeRelativePath("/", "/"));
-        Assert.assertEquals("/something", TemplateResourceUtils.computeRelativePath("/", "something"));
-        Assert.assertEquals("/", TemplateResourceUtils.computeRelativePath("/something", "/"));
-        Assert.assertEquals("/", TemplateResourceUtils.computeRelativePath("something", "/"));
-        Assert.assertEquals("something/", TemplateResourceUtils.computeRelativePath("something/else", "/"));
-        Assert.assertEquals("something/else/", TemplateResourceUtils.computeRelativePath("something/else/more", "/"));
-        Assert.assertEquals("something/else/less", TemplateResourceUtils.computeRelativePath("something/else/more", "less"));
-        Assert.assertEquals("something/else/more.properties", TemplateResourceUtils.computeRelativePath("something/else/more.html", "more.properties"));
-        Assert.assertEquals("something/else/more_es.properties", TemplateResourceUtils.computeRelativePath("something/else/more.html", "more_es.properties"));
-        Assert.assertEquals("something/else/../more_es.properties", TemplateResourceUtils.computeRelativePath("something/else/more.html", "../more_es.properties"));
-        Assert.assertEquals("something/else/../../more_es.properties", TemplateResourceUtils.computeRelativePath("something/else/more.html", "../../more_es.properties"));
+        Assert.assertEquals("/", TemplateResourceUtils.computeRelativeLocation("/", "/"));
+        Assert.assertEquals("/something", TemplateResourceUtils.computeRelativeLocation("/", "something"));
+        Assert.assertEquals("/", TemplateResourceUtils.computeRelativeLocation("/something", "/"));
+        Assert.assertEquals("/", TemplateResourceUtils.computeRelativeLocation("something", "/"));
+        Assert.assertEquals("something/", TemplateResourceUtils.computeRelativeLocation("something/else", "/"));
+        Assert.assertEquals("something/else/", TemplateResourceUtils.computeRelativeLocation("something/else/more", "/"));
+        Assert.assertEquals("something/else/less", TemplateResourceUtils.computeRelativeLocation("something/else/more", "less"));
+        Assert.assertEquals("something/else/more.properties", TemplateResourceUtils.computeRelativeLocation("something/else/more.html", "more.properties"));
+        Assert.assertEquals("something/else/more_es.properties", TemplateResourceUtils.computeRelativeLocation("something/else/more.html", "more_es.properties"));
+        Assert.assertEquals("something/else/../more_es.properties", TemplateResourceUtils.computeRelativeLocation("something/else/more.html", "../more_es.properties"));
+        Assert.assertEquals("something/else/../../more_es.properties", TemplateResourceUtils.computeRelativeLocation("something/else/more.html", "../../more_es.properties"));
 
         Assert.assertEquals("/", TemplateResourceUtils.cleanPath("/"));
         Assert.assertEquals("something", TemplateResourceUtils.cleanPath("something"));
