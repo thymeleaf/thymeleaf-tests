@@ -3,7 +3,7 @@
 %CONTEXT
 param.templateFrag = '#frag'
 # ------------------------------------------------------------
-# Access to request parameters is NOT restricted for markup
+# Access to request parameters is NOT restricted for template
 # selectors (only for template names)
 %INPUT
 <div th:insert="other :: ${param.templateFrag[0]}">...</div>
