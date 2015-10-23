@@ -30,7 +30,7 @@ public final class TestTemplateResolutionConfigurationBuilder {
 
 
     public static TemplateResolution build(final String template, final TemplateMode templateMode) {
-        return new TemplateResolution(template, new StringTemplateResource(template, "UTF-8"), templateMode, NonCacheableCacheEntryValidity.INSTANCE);
+        return new TemplateResolution(new StringTemplateResource(template, "UTF-8"), templateMode, NonCacheableCacheEntryValidity.INSTANCE);
     }
 
 
