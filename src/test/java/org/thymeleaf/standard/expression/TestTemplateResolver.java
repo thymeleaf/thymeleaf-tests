@@ -19,6 +19,8 @@
  */
 package org.thymeleaf.standard.expression;
 
+import java.util.Map;
+
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.cache.NonCacheableCacheEntryValidity;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -53,7 +55,9 @@ public class TestTemplateResolver implements ITemplateResolver {
         return Integer.valueOf(1);
     }
 
-    public TemplateResolution resolveTemplate(final IEngineConfiguration configuration, final String template) {
+
+    public TemplateResolution resolveTemplate(
+            final IEngineConfiguration configuration, final String ownerTemplate, final String template, final Map<String, Object> templateResolutionAttributes) {
 
         final int placeholderPos = this.template.indexOf("{%%}");
         final String resource =
@@ -65,7 +69,7 @@ public class TestTemplateResolver implements ITemplateResolver {
 
         final TemplateResolution templateResolution =
                 new TemplateResolution(
-                        template, templateResource,
+                        templateResource,
                         TemplateMode.HTML,
                         new NonCacheableCacheEntryValidity());
 
