@@ -20,6 +20,8 @@
 package org.thymeleaf.engine;
 
 import java.io.StringWriter;
+import java.util.Collections;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -75,24 +77,24 @@ public final class BareHtmlEngineTest {
 
     private static void check(final String inputOutput)
             throws Exception{
-        check(inputOutput, inputOutput, (String[])null);
+        check(inputOutput, inputOutput, (Set<String>)null);
     }
 
 
     private static void check(final String input, final String output, final String blockSelector)
             throws Exception{
-        check(input, output, new String[] { blockSelector });
+        check(input, output, Collections.singleton(blockSelector));
     }
 
 
-    private static void check(final String input, final String output, final String[] blockSelectors)
+    private static void check(final String input, final String output, final Set<String> blockSelectors)
             throws Exception{
 
         final String templateName = "test";
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
 
-        PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, new StringTemplateResource(templateName, input), blockSelectors, TemplateMode.HTML, handler);
+        PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName,  blockSelectors, new StringTemplateResource(input), TemplateMode.HTML, handler);
 
         Assert.assertEquals("Test failed for file: " + templateName, output, writer.toString());
 

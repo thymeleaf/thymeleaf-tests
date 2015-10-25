@@ -18,4 +18,4 @@ name = 'John Apricot'
 
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*?)Selectors\ cannot\ be\ specified(.*?)
+%EXCEPTION_MESSAGE_PATTERN (.*?)Template\ selectors\ cannot\ be\ specified(.*?)
