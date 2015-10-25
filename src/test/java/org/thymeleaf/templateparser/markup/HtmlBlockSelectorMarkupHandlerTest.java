@@ -28,7 +28,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
@@ -99,7 +101,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
             resultFileLines.remove(0);
             final String resultFileContents = StringUtils.join(resultFileLines,'\n');
 
-            final String[] blockSelectors = StringUtils.split(blockSelector,",");
+            final Set<String> blockSelectors = new HashSet<String>(Arrays.asList(StringUtils.split(blockSelector,",")));
 
             check(parser, templateEngineContext, testFile.getName(), testFileContents, resultFileContents, blockSelectors);
 
@@ -114,13 +116,13 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
 
     private static void check(
             final HTMLTemplateParser parser, final IEngineConfiguration templateEngineContext,
-            final String templateName, final String input, final String output, final String[] blockSelectors)
+            final String templateName, final String input, final String output, final Set<String> blockSelectors)
             throws Exception{
 
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
 
-        parser.parseStandalone(templateEngineContext, templateName, new StringTemplateResource(templateName, input), blockSelectors, TemplateMode.HTML, handler);
+        parser.parseStandalone(templateEngineContext, templateName, templateName, blockSelectors, new StringTemplateResource(input), TemplateMode.HTML, handler);
 
         assertEquals("Test failed for file: " + templateName, output, writer.toString());
 

@@ -1372,10 +1372,9 @@ public final class ElementAttributesTest {
 
     private static IElementAttributes computeHtmlAttributes(final String input) {
 
-        final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, new StringTemplateResource(templateName, input), null, TemplateMode.HTML, handler);
+        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, "test", "test", null, new StringTemplateResource(input), TemplateMode.HTML, handler);
 
         return handler.elementAttributes;
 
@@ -1386,10 +1385,9 @@ public final class ElementAttributesTest {
 
     private static IElementAttributes computeXmlAttributes(final String input) {
 
-        final String templateName = "test";
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, new StringTemplateResource(templateName, input), null, TemplateMode.XML, handler);
+        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, "test", "test", null, new StringTemplateResource(input), TemplateMode.XML, handler);
 
         return handler.elementAttributes;
 

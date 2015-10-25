@@ -53,7 +53,7 @@ public final class SpringResourceTemplateResolverSpring4Test {
         final TemplateMode templateMode = resolver.getTemplateMode();
         Assert.assertEquals(TemplateMode.HTML, templateMode);
 
-        final TemplateResolution resolution = resolver.resolveTemplate(configuration, "classpath:" + templateLocation);
+        final TemplateResolution resolution = resolver.resolveTemplate(configuration, null, "classpath:" + templateLocation, null);
 
         final ITemplateResource templateResource = resolution.getTemplateResource();
 
