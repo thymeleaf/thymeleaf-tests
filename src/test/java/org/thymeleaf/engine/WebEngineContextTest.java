@@ -36,12 +36,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
-import org.thymeleaf.context.TestTemplateResolutionConfigurationBuilder;
-import org.thymeleaf.engine.TestMockServletUtil;
-import org.thymeleaf.engine.WebEngineContext;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.TemplateResolution;
 
 
 public final class WebEngineContextTest {
@@ -55,7 +51,7 @@ public final class WebEngineContextTest {
     public void test01() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
         final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
@@ -67,7 +63,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -224,7 +220,7 @@ public final class WebEngineContextTest {
     public void test02() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
@@ -240,7 +236,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
@@ -278,7 +274,7 @@ public final class WebEngineContextTest {
     public void test03() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
         final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
@@ -290,7 +286,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -554,7 +550,7 @@ public final class WebEngineContextTest {
     public void test04() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
@@ -570,7 +566,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
@@ -692,7 +688,7 @@ public final class WebEngineContextTest {
     public void test05() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
@@ -708,7 +704,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
@@ -810,7 +806,7 @@ public final class WebEngineContextTest {
     public void test06() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
         final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
@@ -822,7 +818,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -919,7 +915,7 @@ public final class WebEngineContextTest {
     public void test07() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
@@ -935,7 +931,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals("{0:{one=ha, ten=tieen}(test01)}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=ha, ten=tieen}(test01)", vm.toString());
@@ -988,7 +984,7 @@ public final class WebEngineContextTest {
     public void test08() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
         final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
@@ -1000,7 +996,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -1185,7 +1181,7 @@ public final class WebEngineContextTest {
     public void test09() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
         final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
@@ -1197,7 +1193,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -1291,7 +1287,7 @@ public final class WebEngineContextTest {
     public void test10() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> starting = new LinkedHashMap<String, Object>();
         starting.put("one", "ha");
@@ -1307,7 +1303,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals("{0:{one=ha, ten=tieen}(test01)}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=ha, ten=tieen}(test01)", vm.toString());
@@ -1371,7 +1367,7 @@ public final class WebEngineContextTest {
     public void test11() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
         final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
@@ -1383,7 +1379,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
         Assert.assertFalse(vm.hasSelectionTarget());
@@ -1600,7 +1596,7 @@ public final class WebEngineContextTest {
     public void test12() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
         final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
@@ -1612,7 +1608,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a val1");
 
@@ -1651,10 +1647,10 @@ public final class WebEngineContextTest {
     public void test13() {
 
         final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
-        final TemplateResolution templateResolution1 = TestTemplateResolutionConfigurationBuilder.build("test01", TemplateMode.HTML);
-        final TemplateResolution templateResolution2 = TestTemplateResolutionConfigurationBuilder.build("test02", TemplateMode.HTML);
-        final TemplateResolution templateResolution3 = TestTemplateResolutionConfigurationBuilder.build("test03", TemplateMode.XML);
-        final TemplateResolution templateResolution4 = TestTemplateResolutionConfigurationBuilder.build("test04", TemplateMode.TEXT);
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
+        final TemplateData templateData2 = TestTemplateDataConfigurationBuilder.build("test02", TemplateMode.HTML);
+        final TemplateData templateData3 = TestTemplateDataConfigurationBuilder.build("test03", TemplateMode.XML);
+        final TemplateData templateData4 = TestTemplateDataConfigurationBuilder.build("test04", TemplateMode.TEXT);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
         final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
@@ -1666,11 +1662,11 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateResolution1, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData1, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1), vm.getTemplateStack());
 
         vm.setVariable("one", "a value");
 
@@ -1678,8 +1674,8 @@ public final class WebEngineContextTest {
         Assert.assertEquals("a value", vm.getVariable("one"));
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData1, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1), vm.getTemplateStack());
 
 
         vm.setVariable("one", "two values");
@@ -1700,13 +1696,13 @@ public final class WebEngineContextTest {
         vm.increaseLevel();
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
+        Assert.assertSame(templateData1, vm.getTemplateData());
 
-        vm.setTemplateResolution(templateResolution2);
+        vm.setTemplateData(templateData2);
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution2, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1, templateResolution2), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData2, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1, templateData2), vm.getTemplateStack());
 
         vm.setVariable("one", "hello");
 
@@ -1716,8 +1712,8 @@ public final class WebEngineContextTest {
         vm.removeVariable("one");
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution2, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1, templateResolution2), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData2, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1, templateData2), vm.getTemplateStack());
 
         Assert.assertFalse(vm.containsVariable("one"));
         Assert.assertNull(vm.getVariable("one"));
@@ -1765,8 +1761,8 @@ public final class WebEngineContextTest {
         vm.increaseLevel();
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData1, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1), vm.getTemplateStack());
 
         vm.setVariable("two", "twellor");
 
@@ -1775,19 +1771,19 @@ public final class WebEngineContextTest {
         Assert.assertEquals("two values", vm.getVariable("one"));
         Assert.assertEquals("twellor", vm.getVariable("two"));
 
-        vm.setTemplateResolution(templateResolution2);
+        vm.setTemplateData(templateData2);
 
         vm.increaseLevel();
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution2, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData2, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2), vm.getTemplateStack());
 
-        vm.setTemplateResolution(templateResolution3);
+        vm.setTemplateData(templateData3);
 
         Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData3, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2,templateData3), vm.getTemplateStack());
 
         vm.setVariable("three", "twelloree");
 
@@ -1808,14 +1804,14 @@ public final class WebEngineContextTest {
         Assert.assertEquals("twelloree", vm.getVariable("three"));
 
         Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData3, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2,templateData3), vm.getTemplateStack());
 
         vm.increaseLevel();
 
         Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData3, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2,templateData3), vm.getTemplateStack());
 
         vm.removeVariable("two");
 
@@ -1829,8 +1825,8 @@ public final class WebEngineContextTest {
         vm.increaseLevel();
 
         Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData3, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2,templateData3), vm.getTemplateStack());
 
         vm.removeVariable("two");
 
@@ -1844,8 +1840,8 @@ public final class WebEngineContextTest {
         vm.increaseLevel();
 
         Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData3, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2,templateData3), vm.getTemplateStack());
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
@@ -1880,8 +1876,8 @@ public final class WebEngineContextTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData3, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2,templateData3), vm.getTemplateStack());
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
@@ -1895,8 +1891,8 @@ public final class WebEngineContextTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData3, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2,templateData3), vm.getTemplateStack());
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));
@@ -1910,8 +1906,8 @@ public final class WebEngineContextTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(TemplateMode.XML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution3, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2,templateResolution3), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData3, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2,templateData3), vm.getTemplateStack());
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
@@ -1925,14 +1921,14 @@ public final class WebEngineContextTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution2, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution2), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData2, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData2), vm.getTemplateStack());
 
-        vm.setTemplateResolution(templateResolution4);
+        vm.setTemplateData(templateData4);
 
         Assert.assertEquals(TemplateMode.TEXT, vm.getTemplateMode());
-        Assert.assertSame(templateResolution4, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1,templateResolution4), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData4, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1,templateData4), vm.getTemplateStack());
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("two"));
@@ -1946,14 +1942,14 @@ public final class WebEngineContextTest {
         vm.decreaseLevel();
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
-        Assert.assertSame(templateResolution1, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution1), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData1, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData1), vm.getTemplateStack());
 
-        vm.setTemplateResolution(templateResolution4);
+        vm.setTemplateData(templateData4);
 
         Assert.assertEquals(TemplateMode.TEXT, vm.getTemplateMode());
-        Assert.assertSame(templateResolution4, vm.getTemplateResolution());
-        Assert.assertEquals(Arrays.asList(templateResolution4), vm.getTemplateResolutionStack());
+        Assert.assertSame(templateData4, vm.getTemplateData());
+        Assert.assertEquals(Arrays.asList(templateData4), vm.getTemplateStack());
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertFalse(vm.containsVariable("two"));

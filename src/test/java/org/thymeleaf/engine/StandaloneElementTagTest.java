@@ -227,7 +227,7 @@ public final class StandaloneElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, new StringTemplateResource(templateName, input), null, TemplateMode.HTML, handler);
+        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.HTML, handler);
 
         return handler.tag;
 
@@ -241,7 +241,7 @@ public final class StandaloneElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, new StringTemplateResource(templateName, input), null, TemplateMode.XML, handler);
+        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.XML, handler);
 
         return handler.tag;
 
