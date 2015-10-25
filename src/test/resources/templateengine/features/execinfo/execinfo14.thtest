@@ -4,17 +4,17 @@
 %NAME execinfotest14
 # ------------------------------------------------------------
 %INPUT
-[# th:text="${#execInfo.templateNameStack}"]the template name will be used[/]
+[# th:text="${#execInfo.templateNames}"]the template name will be used[/]
 ...[# th:insert="somefrag"]to be replaced by the fragment[/]...
-[# th:text="${#execInfo.templateNameStack}"]the template name will be used[/]
+[# th:text="${#execInfo.templateNames}"]the template name will be used[/]
 # ------------------------------------------------------------
 %INPUT[somefrag]
-[# th:text="${#execInfo.templateNameStack}"]the fragment name will be used[/]
+[# th:text="${#execInfo.templateNames}"]the fragment name will be used[/]
 ([# th:insert="somefrag2"]to be replaced by the secondfragment[/])
-[# th:text="${#execInfo.templateNameStack}"]the fragment name will be used[/]
+[# th:text="${#execInfo.templateNames}"]the fragment name will be used[/]
 # ------------------------------------------------------------
 %INPUT[somefrag2]
-<span th:text="${#execInfo.templateNameStack}">the fragment name will be used</span>
+<span th:text="${#execInfo.templateNames}">the fragment name will be used</span>
 # ------------------------------------------------------------
 %OUTPUT
 [execinfotest14-001]

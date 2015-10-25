@@ -17,26 +17,25 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.context;
+package org.thymeleaf.engine;
 
 import org.thymeleaf.cache.NonCacheableCacheEntryValidity;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.TemplateResolution;
 import org.thymeleaf.templateresource.StringTemplateResource;
 
 
-public final class TestTemplateResolutionConfigurationBuilder {
+public final class TestTemplateDataConfigurationBuilder {
 
 
 
-    public static TemplateResolution build(final String template, final TemplateMode templateMode) {
-        return new TemplateResolution(new StringTemplateResource(template, "UTF-8"), templateMode, NonCacheableCacheEntryValidity.INSTANCE);
+    public static TemplateData build(final String template, final TemplateMode templateMode) {
+        return new TemplateData(template, null, new StringTemplateResource(template), templateMode, NonCacheableCacheEntryValidity.INSTANCE);
     }
 
 
 
 
-    private TestTemplateResolutionConfigurationBuilder() {
+    private TestTemplateDataConfigurationBuilder() {
         super();
     }
 
