@@ -46,7 +46,7 @@ public class MarkupSetTextInlinerModelProcessor extends AbstractAttributeModelPr
                              final String attributeTemplateName, final int attributeLine, final int attributeCol,
                              final IElementModelStructureHandler structureHandler) {
 
-        structureHandler.setInliner(StandardTextInliner.INSTANCE);
+        structureHandler.setInliner(new StandardTextInliner(context.getConfiguration()));
 
     }
 
