@@ -622,7 +622,7 @@ public final class EngineContextTest {
         Assert.assertEquals(createSet("one"), vm.getVariableNames());
 
         vm.setVariable("two", "twello");
-        vm.setInliner(StandardTextInliner.INSTANCE);
+        vm.setInliner(new StandardTextInliner(configuration));
 
         Assert.assertEquals("{1:{one=hello, two=twello}[StandardTextInliner],0:{one=two values}(test01)}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=hello, two=twello}[StandardTextInliner](test01)", vm.toString());
