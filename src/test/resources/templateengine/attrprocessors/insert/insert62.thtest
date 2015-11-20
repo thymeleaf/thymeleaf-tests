@@ -7,7 +7,7 @@
 </head>
 <body>
 <span>Before</span>
-<div th:replace="this::content">Content</div>
+<div th:insert="this::content">Content</div>
 <span>After</span>
 </body>
 </html>
@@ -30,7 +30,7 @@
 </head>
 <body>
 <span>Before</span>
-<div>Expected Content</div>
+<div><div>Expected Content</div></div>
 <span>After</span>
 </body>
 </html></html>
