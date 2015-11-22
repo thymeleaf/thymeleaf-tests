@@ -3,4 +3,5 @@
 %INPUT
 <p th:inline="text">[[${null.toUpperCase()}]]</p>
 # ------------------------------------------------------------
-%EXCEPTION java.lang.NullPointerException
+%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
+%EXCEPTION_MESSAGE_PATTERN (.*?)Exception\ evaluating\ (.*?)\ expression\:\ "null\.toUpperCase\(\)"(.*?)
