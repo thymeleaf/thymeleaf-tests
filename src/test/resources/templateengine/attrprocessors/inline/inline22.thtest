@@ -1,0 +1,6 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%INPUT
+<p th:inline="text">[[${null.toUpperCase()}]]</p>
+# ------------------------------------------------------------
+%EXCEPTION java.lang.NullPointerException
