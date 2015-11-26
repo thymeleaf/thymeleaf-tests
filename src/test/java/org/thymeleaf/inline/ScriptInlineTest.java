@@ -23,6 +23,7 @@ import java.io.StringWriter;
 import java.util.Collections;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
@@ -75,12 +76,12 @@ public class ScriptInlineTest {
 
         testInlineResult(
                 "[[${a}]]",
-                "'something'",
+                "\"something\"",
                 "a", "something");
 
         testInlineResult(
                 "   /*[[${a}]]*/ 'prototype';",
-                "   'something';",
+                "   \"something\";",
                 "a", "something");
 
         final java.util.Calendar calendar1 =
@@ -92,23 +93,74 @@ public class ScriptInlineTest {
                 "   /*[[${calendar1}]]*/ 'prototype';",
                 // Calendar should be inlined as ISO6801 date string literal
                 // e.g.  '2013-01-01T14:30:00.000+01:00'
-                "   '" + DateUtils.formatISO(calendar1) + "';",
+                "   \"" + DateUtils.formatISO(calendar1) + "\";",
                 "calendar1", calendar1);
 
         testInlineResult(
                 "   /*[[${date1}]]*/ 'prototype';",
                 // Date should be inlined as ISO6801 date string literal
                 // e.g.  '2013-01-01T14:30:00.000+01:00'
-                "   '" + DateUtils.formatISO(date1) + "';",
+                "   \"" + DateUtils.formatISO(date1) + "\";",
                 "date1", date1);
-
-        testInlineResult(
-                "   /*[[${date1}]]*/ 'prototype';",
-                // Date should be inlined as ISO6801 date string literal
-                // e.g.  '2013-01-01T14:30:00.000+01:00'
-                "   '" + DateUtils.formatISO(dateSql1) + "';",
-                "date1", dateSql1);
 
 
     }
+
+
+
+    @Test
+    public void testObjectInline() throws Exception {
+
+        final SomeObjectA obj01 = new SomeObjectA();
+        obj01.one = "value number one";
+        obj01.two = 1231;
+        obj01.three = 1231.12f;
+        obj01.four = true;
+
+        testInlineResult(
+                "   /*[[${obj01}]]*/ 'whatever';",
+                "   {\"one\":\"value number one\"};",
+                "obj01", obj01);
+
+        final SomeObjectB obj02 = new SomeObjectB();
+        obj02.one = "value number one";
+        obj02.two = 1231;
+        obj02.three = 1231.12f;
+        obj02.four = true;
+
+        testInlineResult(
+                "   /*[[${obj02}]]*/ 'whatever';",
+                "   {\"one\":\"value number one\",\"two\":1231,\"three\":1231.12,\"four\":true};",
+                "obj02", obj02);
+
+    }
+
+
+
+    public static class SomeObjectA {
+
+        private String one;
+        private int two;
+        private float three;
+        private boolean four;
+
+        public String getOne() {
+            return one;
+        }
+
+    }
+
+
+
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+    public static class SomeObjectB {
+
+        private String one;
+        private int two;
+        private float three;
+        private boolean four;
+
+    }
+
+
 }

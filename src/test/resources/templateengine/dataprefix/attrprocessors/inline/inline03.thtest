@@ -12,9 +12,9 @@ foo = fooo!
             attr13: /*[[#{foo}]]*/ 'Some text 13'
         },
         obj2:{
-            attr21: /*[[#{foo}]]*/ 'Some text 21',
-            attr22: /*[[#{foo}]]*/ 'Some text 22', // some comment here
-            attr23: /*[[#{foo}]]*/ 'Some text 23' // some comment here
+            attr21: /*[[#{foo}]]*/ "Some text 21",
+            attr22: /*[[#{foo}]]*/ "Some text 22", // some comment here
+            attr23: /*[[#{foo}]]*/ "Some text 23" // some comment here
         }
     }
 </script> 
@@ -23,14 +23,14 @@ foo = fooo!
 <script> 
     objArray: {
         obj1:{
-            attr11: 'fooo!',
-            attr12: 'fooo!',
-            attr13: 'fooo!'
+            attr11: "fooo!",
+            attr12: "fooo!",
+            attr13: "fooo!"
         },
         obj2:{
-            attr21: 'fooo!',
-            attr22: 'fooo!', // some comment here
-            attr23: 'fooo!'// some comment here
+            attr21: "fooo!",
+            attr22: "fooo!", // some comment here
+            attr23: "fooo!"// some comment here
         }
     }
 </script> 

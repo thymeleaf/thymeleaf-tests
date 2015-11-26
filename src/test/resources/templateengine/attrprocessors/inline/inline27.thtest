@@ -5,7 +5,7 @@ etb = new org.thymeleaf.templateengine.attrprocessors.model.ExceptionThrowingBea
 # ------------------------------------------------------------
 %INPUT
 <style th:inline="CSS">
-    foo: /*[[$etbthrowException(...)]]*/ 'hello!';
+    foo: /*[[$etbthrowException(...)]]*/ "hello!";
 </style>
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
