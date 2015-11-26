@@ -44,7 +44,7 @@ body {
   <script>var salute = function(n) {
     alert('Hello ' + n + '!');
 }
-salute('John Apricot');</script>
+salute("John Apricot");</script>
   <style>body {
   background-color: #3323bc;
 }</style>

@@ -5,14 +5,14 @@ referrer = 'ref'
 # ------------------------------------------------------------
 %INPUT
 <script th:inline="javascript"> 
-    ga(/*[[${referrer}]]*/ 'one', 'two', 'three');
-    ga('one', /*[[${referrer}]]*/ 'two', 'three');
-    ga('one', 'two', /*[[${referrer}]]*/ 'three');
+    ga(/*[[${referrer}]]*/ "one", "two", "three");
+    ga("one", /*[[${referrer}]]*/ "two", "three");
+    ga("one", "two", /*[[${referrer}]]*/ "three");
 </script>
 # ------------------------------------------------------------
 %OUTPUT
 <script> 
-    ga('ref', 'two', 'three');
-    ga('one', 'ref', 'three');
-    ga('one', 'two', 'ref');
+    ga("ref", "two", "three");
+    ga("one", "ref", "three");
+    ga("one", "two", "ref");
 </script>
