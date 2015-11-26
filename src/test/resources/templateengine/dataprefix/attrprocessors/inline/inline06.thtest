@@ -10,5 +10,5 @@ userRoles = {'MANAGER','SALES'}
 # ------------------------------------------------------------
 %OUTPUT
 <script> 
-    var userRoles = ['MANAGER','SALES'];
+    var userRoles = ["MANAGER","SALES"];
 </script> 

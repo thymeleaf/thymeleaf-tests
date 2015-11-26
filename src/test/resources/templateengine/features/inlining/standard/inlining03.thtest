@@ -1,10 +1,13 @@
 %TEMPLATE_MODE JAVASCRIPT
 # ------------------------------------------------------------
 %CONTEXT
-var = "something & 'something'"
+var1 = "something & 'something'"
+var2 = 'something & "something"'
 # ------------------------------------------------------------
 %INPUT
-[[${var}]]
+[[${var1}]]
+[[${var2}]]
 # ------------------------------------------------------------
 %OUTPUT
-'something & \'something\''
+"something & 'something'"
+"something & \"something\""

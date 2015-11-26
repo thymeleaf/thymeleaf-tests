@@ -5,12 +5,12 @@ foo = 'fooo!'
 # ------------------------------------------------------------
 %INPUT
 <script th:inline="JAVASCRIPT">
-    var foo1 = /*[[${foo}]]*/ 'hello!'; 
-    var foo2 = /*[[${foo}]]*/ 'hiya'; // some comment like "will be replaced by thymeleaf"
+    var foo1 = /*[[${foo}]]*/ "hello!";
+    var foo2 = /*[[${foo}]]*/ "hiya"; // some comment like "will be replaced by thymeleaf"
 </script> 
 # ------------------------------------------------------------
 %OUTPUT
 <script> 
-    var foo1 = 'fooo!';
-    var foo2 = 'fooo!'; // some comment like "will be replaced by thymeleaf"
+    var foo1 = "fooo!";
+    var foo2 = "fooo!"; // some comment like "will be replaced by thymeleaf"
 </script>
