@@ -7,4 +7,4 @@ param.something = 'hello'
 [[${param.something[0]}]]
 # ------------------------------------------------------------
 %OUTPUT
-'hello'
+"hello"

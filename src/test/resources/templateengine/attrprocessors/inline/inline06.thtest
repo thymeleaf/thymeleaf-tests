@@ -5,10 +5,10 @@ userRoles = {'MANAGER','SALES'}
 # ------------------------------------------------------------
 %INPUT
 <script th:inline="javascript"> 
-    var userRoles = /*[[${userRoles}]]*/ ['USER','ADMINISTRATOR'];
+    var userRoles = /*[[${userRoles}]]*/ ["USER","ADMINISTRATOR"];
 </script> 
 # ------------------------------------------------------------
 %OUTPUT
 <script> 
-    var userRoles = ['MANAGER','SALES'];
+    var userRoles = ["MANAGER","SALES"];
 </script> 

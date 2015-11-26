@@ -5,7 +5,7 @@ etb = new org.thymeleaf.templateengine.attrprocessors.model.ExceptionThrowingBea
 # ------------------------------------------------------------
 %INPUT
 <script th:inline="javascript"> 
-    var foo = /*[[${etb.throwException()}]]*/ 'hello!';
+    var foo = /*[[${etb.throwException()}]]*/ "hello!";
 </script>
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException

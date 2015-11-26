@@ -13,5 +13,5 @@ var = 10
 # NOT be unescaped because JAVASCRIPT unescape is performed,
 # and that won't modify a &gt;
 <script>
-  '10 is &gt; \'9\''
+  "10 is &gt; '9'"
 </script>

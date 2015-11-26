@@ -112,6 +112,7 @@
     <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
     <mockito.version>1.9.5</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
+    <jackson.version>2.6.3</jackson.version>
   </properties>
 
   
@@ -268,6 +269,13 @@
       <groupId>net.sourceforge.nekohtml</groupId>
       <artifactId>nekohtml</artifactId>
       <version>${nekohtml.version}</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
       <scope>compile</scope>
     </dependency>
 
