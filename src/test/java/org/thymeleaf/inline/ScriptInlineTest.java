@@ -20,7 +20,9 @@
 package org.thymeleaf.inline;
 
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -132,6 +134,34 @@ public class ScriptInlineTest {
                 "   /*[[${obj02}]]*/ 'whatever';",
                 "   {\"one\":\"value number one\",\"two\":1231,\"three\":1231.12,\"four\":true};",
                 "obj02", obj02);
+
+    }
+
+
+
+    @Test
+    public void testArrayInline() throws Exception {
+
+        final String[] array01 = new String[] { "hello", "goodbye" };
+
+        testInlineResult(
+                "   /*[[${array01}]]*/ 'whatever';",
+                "   [\"hello\",\"goodbye\"];",
+                "array01", array01);
+
+    }
+
+
+
+    @Test
+    public void testCollectionInline() throws Exception {
+
+        final List<String> list01 = Arrays.asList(new String[] { "hello", "goodbye" });
+
+        testInlineResult(
+                "   /*[[${list01}]]*/ 'whatever';",
+                "   [\"hello\",\"goodbye\"];",
+                "list01", list01);
 
     }
 
