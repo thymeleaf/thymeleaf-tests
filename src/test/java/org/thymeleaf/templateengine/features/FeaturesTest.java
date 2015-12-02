@@ -131,6 +131,17 @@ public class FeaturesTest {
 
 
     @Test
+    public void testSession() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/features/session");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
     public void testNormalization() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
