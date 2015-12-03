@@ -1,4 +1,4 @@
-%TEMPLATE_MODE HTML
+%TEMPLATE_MODE HTML5
 # ------------------------------------------------------------
 %INPUT
 <p th:each="n : ${#numbers.sequence(2, 7, 2)}">[[${n}]]</p>
