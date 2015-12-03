@@ -2,7 +2,7 @@
 # ------------------------------------------------------------
 %INPUT
 ..
-<p th:each="n : ${#numbers.sequence(2, 7, -1)}">[[${n}]]</p>
+<p th:each="n : ${#numbers.sequence(2, 7, -1)}" th:text="${n}"></p>
 ..
 # ------------------------------------------------------------
 %EXCEPTION java.lang.IllegalArgumentException
