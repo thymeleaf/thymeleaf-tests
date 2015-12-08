@@ -20,6 +20,7 @@
 package org.thymeleaf;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -30,8 +31,10 @@ import org.junit.Test;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.DefaultTemplateResolver;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 
 public final class TemplateEngineTest {
@@ -196,5 +199,151 @@ public final class TemplateEngineTest {
         Assert.assertEquals("Hello 58", templateEngine.process("Hello [[23+35]]", context));
 
     }
+
+
+    @Test
+    public void testDefaultTemplateResolver01() {
+
+        final TemplateEngine templateEngine = new TemplateEngine();
+        final Context context = new Context();
+        context.setLocale(Locale.ENGLISH);
+        context.setVariable("one", "this value");
+
+        final ClassLoaderTemplateResolver classLoaderTemplateResolver = new ClassLoaderTemplateResolver();
+        classLoaderTemplateResolver.setCheckExistence(true);
+        templateEngine.addTemplateResolver(classLoaderTemplateResolver);
+        final DefaultTemplateResolver defaultTemplateResolver = new DefaultTemplateResolver();
+        defaultTemplateResolver.setTemplate("<p>something</p>");
+        templateEngine.addTemplateResolver(defaultTemplateResolver);
+        templateEngine.initialize();
+
+        final List<ITemplateResolver> templateResolvers = new ArrayList<ITemplateResolver>(templateEngine.getTemplateResolvers());
+        Assert.assertEquals(2, templateResolvers.size());
+        Assert.assertEquals("org.thymeleaf.templateresolver.ClassLoaderTemplateResolver", templateResolvers.get(0).getName());
+        Assert.assertEquals("org.thymeleaf.templateresolver.DefaultTemplateResolver", templateResolvers.get(1).getName());
+
+        Assert.assertEquals("<p>something</p>", templateEngine.process("nonexisting", context));
+
+    }
+
+    @Test
+    public void testDefaultTemplateResolver02() {
+
+        final TemplateEngine templateEngine = new SpringTemplateEngine();
+        final Context context = new Context();
+        context.setLocale(Locale.ENGLISH);
+        context.setVariable("one", "this value");
+
+        final ClassLoaderTemplateResolver classLoaderTemplateResolver = new ClassLoaderTemplateResolver();
+        classLoaderTemplateResolver.setCheckExistence(true);
+        templateEngine.addTemplateResolver(classLoaderTemplateResolver);
+        final DefaultTemplateResolver defaultTemplateResolver = new DefaultTemplateResolver();
+        defaultTemplateResolver.setTemplate("<p>something</p>");
+        templateEngine.addTemplateResolver(defaultTemplateResolver);
+        templateEngine.initialize();
+
+        final List<ITemplateResolver> templateResolvers = new ArrayList<ITemplateResolver>(templateEngine.getTemplateResolvers());
+        Assert.assertEquals(2, templateResolvers.size());
+        Assert.assertEquals("org.thymeleaf.templateresolver.ClassLoaderTemplateResolver", templateResolvers.get(0).getName());
+        Assert.assertEquals("org.thymeleaf.templateresolver.DefaultTemplateResolver", templateResolvers.get(1).getName());
+
+        Assert.assertEquals("<p>something</p>", templateEngine.process("nonexisting", context));
+
+    }
+
+    @Test
+    public void testDefaultTemplateResolver03() {
+
+        final TemplateEngine templateEngine = new TemplateEngine();
+        final Context context = new Context();
+        context.setLocale(Locale.ENGLISH);
+        context.setVariable("one", "this value");
+
+        final ClassLoaderTemplateResolver classLoaderTemplateResolver = new ClassLoaderTemplateResolver();
+        classLoaderTemplateResolver.setCheckExistence(true);
+        templateEngine.addTemplateResolver(classLoaderTemplateResolver);
+        final DefaultTemplateResolver defaultTemplateResolver = new DefaultTemplateResolver();
+        defaultTemplateResolver.setTemplate("<p th:text=\"${one}\">something</p>");
+        templateEngine.addTemplateResolver(defaultTemplateResolver);
+        templateEngine.initialize();
+
+        final List<ITemplateResolver> templateResolvers = new ArrayList<ITemplateResolver>(templateEngine.getTemplateResolvers());
+        Assert.assertEquals(2, templateResolvers.size());
+        Assert.assertEquals("org.thymeleaf.templateresolver.ClassLoaderTemplateResolver", templateResolvers.get(0).getName());
+        Assert.assertEquals("org.thymeleaf.templateresolver.DefaultTemplateResolver", templateResolvers.get(1).getName());
+
+        Assert.assertEquals("<p>this value</p>", templateEngine.process("nonexisting", context));
+
+    }
+
+    @Test
+    public void testDefaultTemplateResolver04() {
+
+        final TemplateEngine templateEngine = new SpringTemplateEngine();
+        final Context context = new Context();
+        context.setLocale(Locale.ENGLISH);
+        context.setVariable("one", "this value");
+
+        final ClassLoaderTemplateResolver classLoaderTemplateResolver = new ClassLoaderTemplateResolver();
+        classLoaderTemplateResolver.setCheckExistence(true);
+        templateEngine.addTemplateResolver(classLoaderTemplateResolver);
+        final DefaultTemplateResolver defaultTemplateResolver = new DefaultTemplateResolver();
+        defaultTemplateResolver.setTemplate("<p th:text=\"${one}\">something</p>");
+        templateEngine.addTemplateResolver(defaultTemplateResolver);
+        templateEngine.initialize();
+
+        final List<ITemplateResolver> templateResolvers = new ArrayList<ITemplateResolver>(templateEngine.getTemplateResolvers());
+        Assert.assertEquals(2, templateResolvers.size());
+        Assert.assertEquals("org.thymeleaf.templateresolver.ClassLoaderTemplateResolver", templateResolvers.get(0).getName());
+        Assert.assertEquals("org.thymeleaf.templateresolver.DefaultTemplateResolver", templateResolvers.get(1).getName());
+
+        Assert.assertEquals("<p>this value</p>", templateEngine.process("nonexisting", context));
+
+    }
+
+    @Test
+    public void testDefaultTemplateResolver05() {
+
+        final TemplateEngine templateEngine = new TemplateEngine();
+        final Context context = new Context();
+        context.setLocale(Locale.ENGLISH);
+        context.setVariable("one", "this value");
+
+        final StringTemplateResolver stringTemplateResolver = new StringTemplateResolver();
+        stringTemplateResolver.setResolvablePatterns(Collections.singleton("<div*"));
+        templateEngine.addTemplateResolver(stringTemplateResolver);
+        final DefaultTemplateResolver defaultTemplateResolver = new DefaultTemplateResolver();
+        defaultTemplateResolver.setTemplate("<p>inserted!</p>");
+        templateEngine.addTemplateResolver(defaultTemplateResolver);
+        templateEngine.initialize();
+
+        Assert.assertEquals(
+                "<div>some text <p><p>inserted!</p></p> other text</div>",
+                templateEngine.process("<div>some text <p th:insert=\"nonexisting\">...</p> other text</div>", context));
+
+    }
+
+    @Test
+    public void testDefaultTemplateResolver06() {
+
+        final TemplateEngine templateEngine = new SpringTemplateEngine();
+        final Context context = new Context();
+        context.setLocale(Locale.ENGLISH);
+        context.setVariable("one", "this value");
+
+        final StringTemplateResolver stringTemplateResolver = new StringTemplateResolver();
+        stringTemplateResolver.setResolvablePatterns(Collections.singleton("<div*"));
+        templateEngine.addTemplateResolver(stringTemplateResolver);
+        final DefaultTemplateResolver defaultTemplateResolver = new DefaultTemplateResolver();
+        defaultTemplateResolver.setTemplate("<p>inserted!</p>");
+        templateEngine.addTemplateResolver(defaultTemplateResolver);
+        templateEngine.initialize();
+
+        Assert.assertEquals(
+                "<div>some text <p><p>inserted!</p></p> other text</div>",
+                templateEngine.process("<div>some text <p th:insert=\"nonexisting\">...</p> other text</div>", context));
+
+    }
+
 
 }
