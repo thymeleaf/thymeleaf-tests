@@ -24,7 +24,9 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.aggregation.dialect.Dialect01;
+import org.thymeleaf.templateengine.features.interaction.InteractionDialect01;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
@@ -191,6 +193,18 @@ public class FeaturesTest {
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new Dialect01()}));
         executor.execute("classpath:templateengine/features/inlining/nostandard");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testInliningInteraction() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new InteractionDialect01()}));
+        executor.execute("classpath:templateengine/features/inlining/interaction");
 
         Assert.assertTrue(executor.isAllOK());
 
