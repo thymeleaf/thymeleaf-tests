@@ -170,6 +170,35 @@ public final class CDATASectionTest {
 
     }
 
+
+
+
+
+    @Test
+    public void testContentFlags() {
+        testFlags("", false, false);
+        testFlags(" ", true, false);
+        testFlags("   ", true, false);
+        testFlags("\n", true, false);
+        testFlags("\n  \t", true, false);
+        testFlags("\n  [asd]", false, false);
+        testFlags("\n  asdasdasd 23123 [ [asd ]]", false, false);
+        testFlags("\n  asdasdasd 23123 [[asd ]]", false, true);
+        testFlags("\n  asdasdasd 23123 [[asd ]]    [[asd]]", false, true);
+        testFlags("\n  asdasdasd 23123  [ [asd ]]    [[asd] ]", false, false);
+        testFlags("[[asd]]", false, true);
+        testFlags("[[asd]", false, false);
+        testFlags("[asd]]", false, false);
+        testFlags("]]", false, false);
+        testFlags("[[", false, false);
+        testFlags("[[asd]]asd", false, true);
+        testFlags("asd[[asd]]", false, true);
+        testFlags("asd[[asd]]asd", false, true);
+    }
+
+
+
+
     private static String extractText(final CDATASection cdataSection) {
 
         final StringBuilder strBuilder = new StringBuilder();
@@ -180,5 +209,136 @@ public final class CDATASectionTest {
 
     }
 
-    
+
+
+    private static void testFlags(final String text, final boolean whitespace, final boolean inlineable) {
+
+        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
+
+        CDATASection t1 = new CDATASection(textRepository);
+        t1.reset(("<![CDATA[" + text + "]]>").toCharArray(), 0, 9 + text.length() + 3, "test", 1, 1);
+        t1.computeContentFlags();
+
+        if (whitespace) {
+            Assert.assertTrue(t1.isWhitespace());
+        } else {
+            Assert.assertFalse(t1.isWhitespace());
+        }
+        if (inlineable) {
+            Assert.assertTrue(t1.isInlineable());
+        } else {
+            Assert.assertFalse(t1.isInlineable());
+        }
+
+        t1 = new CDATASection(textRepository);
+        t1.reset(("----[[...]]" + ("<![CDATA[" + text + "]]>") + "[[...]]----").toCharArray(), 11, 9 + text.length() + 3, "test", 1, 1);
+        t1.computeContentFlags();
+
+        if (whitespace) {
+            Assert.assertTrue(t1.isWhitespace());
+        } else {
+            Assert.assertFalse(t1.isWhitespace());
+        }
+        if (inlineable) {
+            Assert.assertTrue(t1.isInlineable());
+        } else {
+            Assert.assertFalse(t1.isInlineable());
+        }
+
+        t1 = new CDATASection(textRepository);
+        t1.reset(("----" + ("<![CDATA[" + text + "]]>") + "----").toCharArray(), 4, 9 + text.length() + 3, "test", 1, 1);
+        t1.computeContentFlags();
+
+        if (whitespace) {
+            Assert.assertTrue(t1.isWhitespace());
+        } else {
+            Assert.assertFalse(t1.isWhitespace());
+        }
+        if (inlineable) {
+            Assert.assertTrue(t1.isInlineable());
+        } else {
+            Assert.assertFalse(t1.isInlineable());
+        }
+
+        t1.setContent(text);
+        t1.computeContentFlags();
+
+        if (whitespace) {
+            Assert.assertTrue(t1.isWhitespace());
+        } else {
+            Assert.assertFalse(t1.isWhitespace());
+        }
+        if (inlineable) {
+            Assert.assertTrue(t1.isInlineable());
+        } else {
+            Assert.assertFalse(t1.isInlineable());
+        }
+
+        t1 = new CDATASection(textRepository);
+        t1.reset(("<![CDATA[" + text + "]]>").toCharArray(), 0, 9 + text.length() + 3, "test", 1, 1);
+        t1.computeContentFlags();
+
+        CDATASection t2 = t1.cloneEvent();
+
+        if (whitespace) {
+            Assert.assertTrue(t2.isWhitespace());
+        } else {
+            Assert.assertFalse(t2.isWhitespace());
+        }
+        if (inlineable) {
+            Assert.assertTrue(t2.isInlineable());
+        } else {
+            Assert.assertFalse(t2.isInlineable());
+        }
+
+        t1 = new CDATASection(textRepository);
+        t1.setContent(text);
+        t1.computeContentFlags();
+
+        t2 = t1.cloneEvent();
+
+        if (whitespace) {
+            Assert.assertTrue(t2.isWhitespace());
+        } else {
+            Assert.assertFalse(t2.isWhitespace());
+        }
+        if (inlineable) {
+            Assert.assertTrue(t2.isInlineable());
+        } else {
+            Assert.assertFalse(t2.isInlineable());
+        }
+
+        t1 = new CDATASection(textRepository);
+        t1.reset(("<![CDATA[" + text + "]]>").toCharArray(), 0, 9 + text.length() + 3, "test", 1, 1);
+
+        if (whitespace) {
+            Assert.assertTrue(t1.isWhitespace());
+        } else {
+            Assert.assertFalse(t1.isWhitespace());
+        }
+        if (inlineable) {
+            Assert.assertTrue(t1.isInlineable());
+        } else {
+            Assert.assertFalse(t1.isInlineable());
+        }
+
+        t1 = new CDATASection(textRepository);
+        t1.setContent(text);
+
+        if (whitespace) {
+            Assert.assertTrue(t1.isWhitespace());
+        } else {
+            Assert.assertFalse(t1.isWhitespace());
+        }
+        if (inlineable) {
+            Assert.assertTrue(t1.isInlineable());
+        } else {
+            Assert.assertFalse(t1.isInlineable());
+        }
+
+
+    }
+
+
+
 }
