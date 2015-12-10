@@ -24,13 +24,14 @@ import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IText;
 import org.thymeleaf.processor.text.AbstractTextProcessor;
 import org.thymeleaf.processor.text.ITextStructureHandler;
+import org.thymeleaf.standard.processor.StandardInliningTextProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
 public class InteractionDialect01TextProcessor extends AbstractTextProcessor {
 
 
-    public InteractionDialect01TextProcessor(final IProcessorDialect dialect) {
-        super(dialect, TemplateMode.HTML, 1000);
+    public InteractionDialect01TextProcessor(final IProcessorDialect dialect, final TemplateMode templateMode) {
+        super(dialect, templateMode, StandardInliningTextProcessor.PRECEDENCE + 10); // We want this to happen AFTER inlining
     }
 
 
