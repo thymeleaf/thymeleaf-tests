@@ -147,6 +147,29 @@ public final class CDATASectionTest {
 
 
 
+
+    @Test
+    public void testSubsection() {
+
+        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
+
+        CDATASection c1 = new CDATASection(textRepository);
+
+        c1.setContent("something");
+
+        Assert.assertEquals("CDATA", c1.subSequence(3, 8));
+        Assert.assertEquals("some", c1.subSequence(9, 13));
+
+
+        c1 = new CDATASection(textRepository);
+
+        c1.reset("<![CDATA[something]]>".toCharArray(), 0, 21, "test", 1, 1);
+
+        Assert.assertEquals("CDATA", c1.subSequence(3, 8));
+        Assert.assertEquals("some", c1.subSequence(9, 13));
+
+    }
+
     private static String extractText(final CDATASection cdataSection) {
 
         final StringBuilder strBuilder = new StringBuilder();

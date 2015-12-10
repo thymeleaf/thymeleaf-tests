@@ -148,6 +148,29 @@ public final class CommentTest {
 
 
 
+
+    @Test
+    public void testSubsection() {
+
+        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
+
+        Comment c1 = new Comment(textRepository);
+
+        c1.setContent("something");
+
+        Assert.assertEquals("!--s", c1.subSequence(1, 5));
+        Assert.assertEquals("some", c1.subSequence(4, 8));
+
+
+        c1 = new Comment(textRepository);
+
+        c1.reset("<!--something-->".toCharArray(), 0, 16, "test", 1, 1);
+
+        Assert.assertEquals("!--s", c1.subSequence(1, 5));
+        Assert.assertEquals("some", c1.subSequence(4, 8));
+
+    }
+
     private static String extractText(final Comment comment) {
 
         final StringBuilder strBuilder = new StringBuilder();
