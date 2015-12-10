@@ -19,14 +19,19 @@
  */
 package org.thymeleaf.engine;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.model.IModelVisitor;
+import org.thymeleaf.model.IText;
 import org.thymeleaf.text.ITextRepository;
 import org.thymeleaf.text.TextRepositories;
 
 
 public final class TextTest {
-
 
 
     @Test
@@ -81,9 +86,6 @@ public final class TextTest {
     }
 
 
-
-
-
     @Test
     public void testSubsection() {
 
@@ -105,9 +107,6 @@ public final class TextTest {
         Assert.assertEquals("some", c1.subSequence(0, 4));
 
     }
-
-
-
 
 
     @Test
@@ -133,8 +132,6 @@ public final class TextTest {
     }
 
 
-
-
     private static String extractText(final Text text) {
 
         final StringBuilder strBuilder = new StringBuilder();
@@ -144,7 +141,6 @@ public final class TextTest {
         return strBuilder.toString();
 
     }
-
 
 
     private static void testFlags(final String text, final boolean whitespace, final boolean inlineable) {
@@ -273,8 +269,119 @@ public final class TextTest {
         }
 
 
+        t1 = new Text(textRepository);
+        t1.setText(text);
+        // By using the wrappers we avoid the utils methods calling the engine implementations (which are already tested above)
+        boolean bWhitespace1 = EngineEventUtils.isWhitespace(new TextWrapper(t1));
+        boolean bInlineable1 = EngineEventUtils.isInlineable(new TextWrapper(t1));
+        if (whitespace) {
+            Assert.assertTrue(bWhitespace1);
+        } else {
+            Assert.assertFalse(bWhitespace1);
+        }
+        if (inlineable) {
+            Assert.assertTrue(bInlineable1);
+        } else {
+            Assert.assertFalse(bInlineable1);
+        }
+
     }
 
 
-    
+    private static final class TextWrapper implements IText {
+
+        private final Text delegate;
+
+        TextWrapper(final Text delegate) {
+            super();
+            this.delegate = delegate;
+        }
+
+        public void resetTemplateEvent(final String templateName, final int line, final int col) {
+            delegate.resetTemplateEvent(templateName, line, col);
+        }
+
+        public boolean isWhitespace() {
+            return delegate.isWhitespace();
+        }
+
+        public void computeContentFlags() {
+            delegate.computeContentFlags();
+        }
+
+        public void resetAsCloneOf(final Text original) {
+            delegate.resetAsCloneOf(original);
+        }
+
+        public void resetAsCloneOfTemplateEvent(final AbstractTemplateEvent original) {
+            delegate.resetAsCloneOfTemplateEvent(original);
+        }
+
+        public static Text asEngineText(final IEngineConfiguration configuration, final IText text, final boolean cloneAlways) {
+            return Text.asEngineText(configuration, text, cloneAlways);
+        }
+
+        public boolean isInlineable() {
+            return delegate.isInlineable();
+        }
+
+        public String getText() {
+            return delegate.getText();
+        }
+
+        public int length() {
+            return delegate.length();
+        }
+
+        public char charAt(final int index) {
+            return delegate.charAt(index);
+        }
+
+        public CharSequence subSequence(final int start, final int end) {
+            return delegate.subSequence(start, end);
+        }
+
+        public void reset(final char[] buffer, final int offset, final int len, final String templateName, final int line, final int col) {
+            delegate.reset(buffer, offset, len, templateName, line, col);
+        }
+
+        public void setText(final CharSequence text) {
+            delegate.setText(text);
+        }
+
+        public void accept(final IModelVisitor visitor) {
+            delegate.accept(visitor);
+        }
+
+        public void write(final Writer writer) throws IOException {
+            delegate.write(writer);
+        }
+
+        public Text cloneEvent() {
+            return delegate.cloneEvent();
+        }
+
+        public String getTemplateName() {
+            return delegate.getTemplateName();
+        }
+
+        public int getLine() {
+            return delegate.getLine();
+        }
+
+        public int getCol() {
+            return delegate.getCol();
+        }
+
+        public boolean hasLocation() {
+            return delegate.hasLocation();
+        }
+
+        @Override
+        public String toString() {
+            return delegate.toString();
+        }
+    }
+
+
 }

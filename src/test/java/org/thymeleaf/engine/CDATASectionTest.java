@@ -19,8 +19,14 @@
  */
 package org.thymeleaf.engine;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.model.ICDATASection;
+import org.thymeleaf.model.IModelVisitor;
 import org.thymeleaf.text.ITextRepository;
 import org.thymeleaf.text.TextRepositories;
 
@@ -337,8 +343,123 @@ public final class CDATASectionTest {
         }
 
 
+        t1 = new CDATASection(textRepository);
+        t1.setContent(text);
+        // By using the wrappers we avoid the utils methods calling the engine implementations (which are already tested above)
+        boolean bWhitespace1 = EngineEventUtils.isWhitespace(new CDATASectionWrapper(t1));
+        boolean bInlineable1 = EngineEventUtils.isInlineable(new CDATASectionWrapper(t1));
+        if (whitespace) {
+            Assert.assertTrue(bWhitespace1);
+        } else {
+            Assert.assertFalse(bWhitespace1);
+        }
+        if (inlineable) {
+            Assert.assertTrue(bInlineable1);
+        } else {
+            Assert.assertFalse(bInlineable1);
+        }
+
     }
 
 
+
+    private static final class CDATASectionWrapper implements ICDATASection {
+
+        private final CDATASection delegate;
+
+        CDATASectionWrapper(final CDATASection delegate) {
+            super();
+            this.delegate = delegate;
+        }
+
+        public static CDATASection asEngineCDATASection(final IEngineConfiguration configuration, final ICDATASection cdataSection, final boolean cloneAlways) {
+            return CDATASection.asEngineCDATASection(configuration, cdataSection, cloneAlways);
+        }
+
+        public boolean isInlineable() {
+            return delegate.isInlineable();
+        }
+
+        public void resetAsCloneOf(final CDATASection original) {
+            delegate.resetAsCloneOf(original);
+        }
+
+        public void computeContentFlags() {
+            delegate.computeContentFlags();
+        }
+
+        public void resetTemplateEvent(final String templateName, final int line, final int col) {
+            delegate.resetTemplateEvent(templateName, line, col);
+        }
+
+        public boolean isWhitespace() {
+            return delegate.isWhitespace();
+        }
+
+        public void resetAsCloneOfTemplateEvent(final AbstractTemplateEvent original) {
+            delegate.resetAsCloneOfTemplateEvent(original);
+        }
+
+        public void reset(final char[] buffer, final int outerOffset, final int outerLen, final String templateName, final int line, final int col) {
+            delegate.reset(buffer, outerOffset, outerLen, templateName, line, col);
+        }
+
+        public String getCDATASection() {
+            return delegate.getCDATASection();
+        }
+
+        public String getContent() {
+            return delegate.getContent();
+        }
+
+        public int length() {
+            return delegate.length();
+        }
+
+        public char charAt(final int index) {
+            return delegate.charAt(index);
+        }
+
+        public CharSequence subSequence(final int start, final int end) {
+            return delegate.subSequence(start, end);
+        }
+
+        public void setContent(final String content) {
+            delegate.setContent(content);
+        }
+
+        public void accept(final IModelVisitor visitor) {
+            delegate.accept(visitor);
+        }
+
+        public void write(final Writer writer) throws IOException {
+            delegate.write(writer);
+        }
+
+        public CDATASection cloneEvent() {
+            return delegate.cloneEvent();
+        }
+
+        public boolean hasLocation() {
+            return delegate.hasLocation();
+        }
+
+        public String getTemplateName() {
+            return delegate.getTemplateName();
+        }
+
+        public int getLine() {
+            return delegate.getLine();
+        }
+
+        public int getCol() {
+            return delegate.getCol();
+        }
+
+        @Override
+        public String toString() {
+            return delegate.toString();
+        }
+    }
 
 }
