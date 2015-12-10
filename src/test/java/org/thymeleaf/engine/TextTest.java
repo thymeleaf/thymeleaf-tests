@@ -83,6 +83,29 @@ public final class TextTest {
 
 
 
+
+    @Test
+    public void testSubsection() {
+
+        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
+
+        Text c1 = new Text(textRepository);
+
+        c1.setText("something");
+
+        Assert.assertEquals("thing", c1.subSequence(4, 9));
+        Assert.assertEquals("some", c1.subSequence(0, 4));
+
+
+        c1 = new Text(textRepository);
+
+        c1.reset("something".toCharArray(), 0, 9, "test", 1, 1);
+
+        Assert.assertEquals("thing", c1.subSequence(4, 9));
+        Assert.assertEquals("some", c1.subSequence(0, 4));
+
+    }
+
     private static String extractText(final Text text) {
 
         final StringBuilder strBuilder = new StringBuilder();
