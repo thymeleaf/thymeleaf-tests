@@ -19,29 +19,27 @@
  */
 package org.thymeleaf.templateengine.features.interaction;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.thymeleaf.dialect.AbstractProcessorDialect;
-import org.thymeleaf.processor.IProcessor;
-import org.thymeleaf.standard.StandardDialect;
+import org.thymeleaf.context.ITemplateContext;
+import org.thymeleaf.dialect.IProcessorDialect;
+import org.thymeleaf.model.ICDATASection;
+import org.thymeleaf.processor.cdatasection.AbstractCDATASectionProcessor;
+import org.thymeleaf.processor.cdatasection.ICDATASectionStructureHandler;
+import org.thymeleaf.standard.processor.StandardInliningTextProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class InteractionDialect01 extends AbstractProcessorDialect {
+public class InteractionDialect01CDATASectionProcessor extends AbstractCDATASectionProcessor {
 
 
-    public InteractionDialect01() {
-        super("InteractionDialect01", null, StandardDialect.PROCESSOR_PRECEDENCE);
+    public InteractionDialect01CDATASectionProcessor(final IProcessorDialect dialect, final TemplateMode templateMode) {
+        super(dialect, templateMode, StandardInliningTextProcessor.PRECEDENCE + 10); // We want this to happen AFTER inlining
     }
 
+    @Override
+    protected void doProcess(
+            final ITemplateContext context, final ICDATASection cdataSection, final ICDATASectionStructureHandler structureHandler) {
 
-    public Set<IProcessor> getProcessors(final String dialectPrefix) {
-        final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new InteractionDialect01TextProcessor(this, TemplateMode.HTML));
-        processors.add(new InteractionDialect01CDATASectionProcessor(this, TemplateMode.HTML));
-        processors.add(new InteractionDialect01CommentProcessor(this, TemplateMode.HTML));
-        processors.add(new InteractionDialect01TextProcessor(this, TemplateMode.JAVASCRIPT));
-        return processors;
+        cdataSection.setContent("||" + cdataSection.getContent() + "||");
+
     }
 
 }
