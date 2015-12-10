@@ -424,7 +424,7 @@ public final class CDATASectionTest {
             return delegate.subSequence(start, end);
         }
 
-        public void setContent(final String content) {
+        public void setContent(final CharSequence content) {
             delegate.setContent(content);
         }
 
