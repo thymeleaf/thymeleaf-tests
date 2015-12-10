@@ -19,8 +19,14 @@
  */
 package org.thymeleaf.engine;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.model.IComment;
+import org.thymeleaf.model.IModelVisitor;
 import org.thymeleaf.text.ITextRepository;
 import org.thymeleaf.text.TextRepositories;
 
@@ -338,8 +344,123 @@ public final class CommentTest {
         }
 
 
+        t1 = new Comment(textRepository);
+        t1.setContent(text);
+        // By using the wrappers we avoid the utils methods calling the engine implementations (which are already tested above)
+        boolean bWhitespace1 = EngineEventUtils.isWhitespace(new CommentWrapper(t1));
+        boolean bInlineable1 = EngineEventUtils.isInlineable(new CommentWrapper(t1));
+        if (whitespace) {
+            Assert.assertTrue(bWhitespace1);
+        } else {
+            Assert.assertFalse(bWhitespace1);
+        }
+        if (inlineable) {
+            Assert.assertTrue(bInlineable1);
+        } else {
+            Assert.assertFalse(bInlineable1);
+        }
+
     }
 
 
+
+    private static final class CommentWrapper implements IComment {
+
+        private final Comment delegate;
+
+        CommentWrapper(final Comment delegate) {
+            super();
+            this.delegate = delegate;
+        }
+
+        public void computeContentFlags() {
+            delegate.computeContentFlags();
+        }
+
+        public static Comment asEngineComment(final IEngineConfiguration configuration, final IComment comment, final boolean cloneAlways) {
+            return Comment.asEngineComment(configuration, comment, cloneAlways);
+        }
+
+        public void resetTemplateEvent(final String templateName, final int line, final int col) {
+            delegate.resetTemplateEvent(templateName, line, col);
+        }
+
+        public boolean isWhitespace() {
+            return delegate.isWhitespace();
+        }
+
+        public void resetAsCloneOf(final Comment original) {
+            delegate.resetAsCloneOf(original);
+        }
+
+        public void resetAsCloneOfTemplateEvent(final AbstractTemplateEvent original) {
+            delegate.resetAsCloneOfTemplateEvent(original);
+        }
+
+        public boolean isInlineable() {
+            return delegate.isInlineable();
+        }
+
+        public void reset(final char[] buffer, final int outerOffset, final int outerLen, final String templateName, final int line, final int col) {
+            delegate.reset(buffer, outerOffset, outerLen, templateName, line, col);
+        }
+
+        public String getComment() {
+            return delegate.getComment();
+        }
+
+        public String getContent() {
+            return delegate.getContent();
+        }
+
+        public int length() {
+            return delegate.length();
+        }
+
+        public char charAt(final int index) {
+            return delegate.charAt(index);
+        }
+
+        public CharSequence subSequence(final int start, final int end) {
+            return delegate.subSequence(start, end);
+        }
+
+        public void setContent(final String content) {
+            delegate.setContent(content);
+        }
+
+        public void accept(final IModelVisitor visitor) {
+            delegate.accept(visitor);
+        }
+
+        public void write(final Writer writer) throws IOException {
+            delegate.write(writer);
+        }
+
+        public Comment cloneEvent() {
+            return delegate.cloneEvent();
+        }
+
+        @Override
+        public String toString() {
+            return delegate.toString();
+        }
+
+        public int getCol() {
+            return delegate.getCol();
+        }
+
+        public int getLine() {
+            return delegate.getLine();
+        }
+
+        public boolean hasLocation() {
+            return delegate.hasLocation();
+        }
+
+        public String getTemplateName() {
+            return delegate.getTemplateName();
+        }
+    }
 
 }
