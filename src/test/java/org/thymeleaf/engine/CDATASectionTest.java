@@ -200,6 +200,30 @@ public final class CDATASectionTest {
         testFlags("[[asd]]asd", false, true);
         testFlags("asd[[asd]]", false, true);
         testFlags("asd[[asd]]asd", false, true);
+        testFlags("\n  (asd)", false, false);
+        testFlags("\n  asdasdasd 23123 [ (asd )]", false, false);
+        testFlags("\n  asdasdasd 23123 [(asd )]", false, true);
+        testFlags("\n  asdasdasd 23123 [(asd )]    [(asd)]", false, true);
+        testFlags("\n  asdasdasd 23123  [ (asd )]    [(asd) ]", false, false);
+        testFlags("[(asd)]", false, true);
+        testFlags("[(asd)", false, false);
+        testFlags("[asd)]", false, false);
+        testFlags(")]", false, false);
+        testFlags("[(", false, false);
+        testFlags("[(asd)]asd", false, true);
+        testFlags("asd[(asd)]", false, true);
+        testFlags("asd[(asd)]asd", false, true);
+        testFlags("\n  (asd)", false, false);
+        testFlags("\n  asdasdasd 23123 [ (asd ]]", false, false);
+        testFlags("\n  asdasdasd 23123 [[asd )]", false, false);
+        testFlags("\n  asdasdasd 23123 [(asd ]]    [[asd)]", false, false); // Intertwined inlines are not supported
+        testFlags("\n  asdasdasd 23123  [ (asd ]]    [(asd) ]", false, false);
+        testFlags("[(asd]]", false, false);
+        testFlags("[(asd]", false, false);
+        testFlags("(asd)]", false, false);
+        testFlags("[(asd]]asd", false, false);
+        testFlags("asd[[asd)]", false, false);
+        testFlags("asd[(asd]])asd", false, false);
     }
 
 
