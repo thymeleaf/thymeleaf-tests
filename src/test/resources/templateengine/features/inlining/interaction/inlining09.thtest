@@ -1,13 +1,14 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %CONTEXT
-var = 10
+one = 'a value'
 # ------------------------------------------------------------
 %INPUT
-...
-<div th:inline="text">
-  [(${var.do()})]
-</div>
+<script th:inline="javascript">
+  something is [(${one})], and something isn't
+</script>
 # ------------------------------------------------------------
-%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*?)inlining085\.thtest-001\"\ \-\ line\ 3\,\ col\ 5(.*?)
+%OUTPUT
+<script>||||
+  something is "a value", and something isn't
+||||</script>
