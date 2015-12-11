@@ -1,13 +1,18 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %CONTEXT
-var = 10
+user = 'John Apricot'
 # ------------------------------------------------------------
 %INPUT
-...
-<div th:inline="text">
-  [(${var.do()})]
+<div th:inline="javascript">
+<![CDATA[
+  Hello, [(${user})]
+]]>
 </div>
 # ------------------------------------------------------------
-%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*?)inlining085\.thtest-001\"\ \-\ line\ 3\,\ col\ 5(.*?)
+%OUTPUT
+<div>
+<![CDATA[
+  Hello, John Apricot
+]]>
+</div>
