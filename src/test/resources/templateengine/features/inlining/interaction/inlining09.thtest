@@ -10,5 +10,5 @@ one = 'a value'
 # ------------------------------------------------------------
 %OUTPUT
 <script>||||
-  something is "a value", and something isn't
+  something is a value, and something isn't
 ||||</script>
