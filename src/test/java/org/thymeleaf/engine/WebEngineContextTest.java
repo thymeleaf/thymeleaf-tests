@@ -36,6 +36,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
+import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 import org.thymeleaf.templatemode.TemplateMode;
 
@@ -848,7 +849,7 @@ public final class WebEngineContextTest {
 
         vm.increaseLevel();
         vm.setVariable("two", "twellor");
-        vm.setInliner(new StandardTextInliner(configuration));
+        vm.setInliner(new StandardTextInliner(configuration, new StandardDialect()));
 
         Assert.assertEquals("{1:{two=twellor}[StandardTextInliner],0:{one=two values}(test01)}[1]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=two values, two=twellor}[StandardTextInliner](test01)", vm.toString());
