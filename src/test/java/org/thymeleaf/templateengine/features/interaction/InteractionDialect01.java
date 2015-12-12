@@ -41,6 +41,11 @@ public class InteractionDialect01 extends AbstractProcessorDialect {
         processors.add(new InteractionDialect01CDATASectionProcessor(this, TemplateMode.HTML));
         processors.add(new InteractionDialect01CommentProcessor(this, TemplateMode.HTML));
         processors.add(new InteractionDialect01TextProcessor(this, TemplateMode.JAVASCRIPT));
+        processors.add(new InteractionDialect01CDATASectionProcessor(this, TemplateMode.JAVASCRIPT));
+        processors.add(new InteractionDialect01CommentProcessor(this, TemplateMode.JAVASCRIPT));
+        processors.add(new InteractionDialect01TextProcessor(this, TemplateMode.CSS));
+        processors.add(new InteractionDialect01CDATASectionProcessor(this, TemplateMode.CSS));
+        processors.add(new InteractionDialect01CommentProcessor(this, TemplateMode.CSS));
         return processors;
     }
 
