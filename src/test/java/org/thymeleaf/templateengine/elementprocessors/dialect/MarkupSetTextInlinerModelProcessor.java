@@ -25,6 +25,7 @@ import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
 import org.thymeleaf.processor.element.IElementModelStructureHandler;
+import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 import org.thymeleaf.templatemode.TemplateMode;
 
@@ -46,7 +47,7 @@ public class MarkupSetTextInlinerModelProcessor extends AbstractAttributeModelPr
                              final String attributeTemplateName, final int attributeLine, final int attributeCol,
                              final IElementModelStructureHandler structureHandler) {
 
-        structureHandler.setInliner(new StandardTextInliner(context.getConfiguration()));
+        structureHandler.setInliner(new StandardTextInliner(context.getConfiguration(), new StandardDialect()));
 
     }
 
