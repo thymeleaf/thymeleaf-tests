@@ -4,5 +4,5 @@
 %INPUT
 <p>[[${null.toUpperCase()}]]</p>
 # ------------------------------------------------------------
-%EXCEPTION java.lang.NullPointerException
+%EXCEPTION java.lang.Exception
 
