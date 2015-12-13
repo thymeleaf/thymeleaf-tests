@@ -18,4 +18,4 @@ org.thymeleaf.exceptions.TemplateProcessingException
 # ------------------------------------------------------------
 # The line must be 3, not 2
 %EXCEPTION_MESSAGE_PATTERN
-(.*?)parsing39\.thtest\-001\" - line 3, col 8\)
+(.*?)parsing039\.thtest\-001\" - line 3, col 8\)
