@@ -41,7 +41,6 @@ public class AddContextVariableElementProcessor extends AbstractElementTagProces
     protected void doProcess(
             final ITemplateContext processingContext,
             final IProcessableElementTag tag,
-            final String tagTemplateName, final int tagLine, final int tagCol,
             final IElementTagStructureHandler structureHandler) {
 
         final IWebContext webContext = (IWebContext) processingContext;
