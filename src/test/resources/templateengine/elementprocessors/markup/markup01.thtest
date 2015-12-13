@@ -9,7 +9,7 @@
 # ------------------------------------------------------------
 %OUTPUT
 <section>
-  <div aggbefore="&lt;div&gt;\n    &lt;p&gt;Hello!&lt;/p&gt;\n  &lt;/div&gt;">
+  <div aggbefore="&lt;div markup:printbefore=&quot;...&quot;&gt;\n    &lt;p&gt;Hello!&lt;/p&gt;\n  &lt;/div&gt;">
     <p>Hello!</p>
   </div>
 </section>

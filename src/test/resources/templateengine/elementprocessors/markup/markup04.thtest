@@ -11,5 +11,5 @@
 # ------------------------------------------------------------
 %OUTPUT
 <section>
-  <div aggbefore="&lt;div markup:replacebody=&quot;...&quot;&gt;\n    &lt;p&gt;Hello!&lt;/p&gt;\n  &lt;/div&gt;"><p>This is a <span>replacement</span></p></div>
+  <div aggbefore="&lt;div markup:printbefore=&quot;...&quot; markup:replacebody=&quot;...&quot;&gt;\n    &lt;p&gt;Hello!&lt;/p&gt;\n  &lt;/div&gt;"><p>This is a <span>replacement</span></p></div>
 </section>
