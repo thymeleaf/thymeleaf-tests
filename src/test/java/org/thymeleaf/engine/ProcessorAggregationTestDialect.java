@@ -378,7 +378,6 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         protected void doProcess(
                 final ITemplateContext iTemplateProcessingContext,
                 final IProcessableElementTag iProcessableElementTag,
-                final String tagTemplateName, final int tagLine, final int tagCol,
                 final IElementTagStructureHandler iElementTagStructureHandler) {
             // Nothing to be done here - nothing to process!
         }
@@ -417,7 +416,6 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         protected void doProcess(
                 final ITemplateContext iTemplateProcessingContext,
                 final IModel model,
-                final String modelTemplateName, final int modelLine, final int modelCol,
                 final IElementModelStructureHandler structureHandler) {
             // Nothing to be done here - nothing to process!
         }
