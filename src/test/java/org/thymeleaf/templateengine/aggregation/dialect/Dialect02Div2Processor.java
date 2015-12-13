@@ -41,7 +41,6 @@ public class Dialect02Div2Processor extends AbstractElementTagProcessor {
     protected void doProcess(
             final ITemplateContext processingContext,
             final IProcessableElementTag tag,
-            final String tagTemplateName, final int tagLine, final int tagCol,
             final IElementTagStructureHandler structureHandler) {
 
         final IModelFactory modelFactory = processingContext.getConfiguration().getModelFactory(processingContext.getTemplateMode());

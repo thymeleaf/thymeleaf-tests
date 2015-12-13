@@ -43,7 +43,6 @@ public class PrecedenceModifyLocalVariableModelProcessor extends AbstractAttribu
     protected void doProcess(final ITemplateContext context,
                              final IModel model,
                              final AttributeName attributeName, final String attributeValue,
-                             final String attributeTemplateName, final int attributeLine, final int attributeCol,
                              final IElementModelStructureHandler structureHandler) {
 
         structureHandler.setLocalVariable("local", "modified!");
