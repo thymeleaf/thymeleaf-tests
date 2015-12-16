@@ -101,32 +101,32 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                 final int precedence = Integer.valueOf(procSpecTok.nextToken());
                 processors.add(
                         new CDATASectionProcessorAggregationTestProcessor(
-                                dialect, procSpecTok.nextToken(), templateMode, precedence));
+                                procSpecTok.nextToken(), templateMode, precedence));
             } else if (type.equals("C")) {
                 final int precedence = Integer.valueOf(procSpecTok.nextToken());
                 processors.add(
                         new CommentProcessorAggregationTestProcessor(
-                                dialect, procSpecTok.nextToken(), templateMode, precedence));
+                                procSpecTok.nextToken(), templateMode, precedence));
             } else if (type.equals("DT")) {
                 final int precedence = Integer.valueOf(procSpecTok.nextToken());
                 processors.add(
                         new DocTypeProcessorAggregationTestProcessor(
-                                dialect, procSpecTok.nextToken(), templateMode, precedence));
+                                procSpecTok.nextToken(), templateMode, precedence));
             } else if (type.equals("PI")) {
                 final int precedence = Integer.valueOf(procSpecTok.nextToken());
                 processors.add(
                         new ProcessingInstructionProcessorAggregationTestProcessor(
-                                dialect, procSpecTok.nextToken(), templateMode, precedence));
+                                procSpecTok.nextToken(), templateMode, precedence));
             } else if (type.equals("T")) {
                 final int precedence = Integer.valueOf(procSpecTok.nextToken());
                 processors.add(
                         new TextProcessorAggregationTestProcessor(
-                                dialect, procSpecTok.nextToken(), templateMode, precedence));
+                                procSpecTok.nextToken(), templateMode, precedence));
             } else if (type.equals("XD")) {
                 final int precedence = Integer.valueOf(procSpecTok.nextToken());
                 processors.add(
                         new XMLDeclarationProcessorAggregationTestProcessor(
-                                dialect, procSpecTok.nextToken(), templateMode, precedence));
+                                procSpecTok.nextToken(), templateMode, precedence));
             } else if (type.equals("E")) {
                 final int precedence = Integer.valueOf(procSpecTok.nextToken());
                 String elementName = procSpecTok.nextToken();
@@ -143,7 +143,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                 }
                 processors.add(
                         new ElementProcessorAggregationTestTagProcessor(
-                                dialect, dialectPrefix,
+                                dialectPrefix,
                                 (elementName.equals("null")? null : elementName), prefixElementName,
                                 (attributeName.equals("null")? null : attributeName), prefixAttributeName,
                                 templateMode, precedence));
@@ -164,7 +164,7 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
                 }
                 processors.add(
                         new ElementModelProcessorAggregationTestProcessor(
-                                dialect, dialectPrefix,
+                                dialectPrefix,
                                 (elementName.equals("null")? null : elementName), prefixElementName,
                                 (attributeName.equals("null")? null : attributeName), prefixAttributeName,
                                 templateMode, precedence));
@@ -210,8 +210,8 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         private final String name;
 
-        CDATASectionProcessorAggregationTestProcessor(final IProcessorDialect dialect, final String name, final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, precedence);
+        CDATASectionProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, precedence);
             this.name = name;
         }
 
@@ -235,8 +235,8 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         private final String name;
 
-        CommentProcessorAggregationTestProcessor(final IProcessorDialect dialect, final String name, final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, precedence);
+        CommentProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, precedence);
             this.name = name;
         }
 
@@ -260,8 +260,8 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         private final String name;
 
-        DocTypeProcessorAggregationTestProcessor(final IProcessorDialect dialect, final String name, final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, precedence);
+        DocTypeProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, precedence);
             this.name = name;
         }
 
@@ -285,8 +285,8 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         private final String name;
 
-        ProcessingInstructionProcessorAggregationTestProcessor(final IProcessorDialect dialect, final String name, final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, precedence);
+        ProcessingInstructionProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, precedence);
             this.name = name;
         }
 
@@ -310,8 +310,8 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         private final String name;
 
-        TextProcessorAggregationTestProcessor(final IProcessorDialect dialect, final String name, final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, precedence);
+        TextProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, precedence);
             this.name = name;
         }
 
@@ -335,8 +335,8 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
 
         private final String name;
 
-        XMLDeclarationProcessorAggregationTestProcessor(final IProcessorDialect dialect, final String name, final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, precedence);
+        XMLDeclarationProcessorAggregationTestProcessor(final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, precedence);
             this.name = name;
         }
 
@@ -359,11 +359,11 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
     private static class ElementProcessorAggregationTestTagProcessor extends AbstractElementTagProcessor implements NamedTestProcessor {
 
         ElementProcessorAggregationTestTagProcessor(
-                final IProcessorDialect dialect, final String dialectPrefix,
+                final String dialectPrefix,
                 final String elementName, final boolean prefixElementName,
                 final String attributeName, final boolean prefixAttributeName,
                 final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, dialectPrefix, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
+            super(templateMode, dialectPrefix, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
         }
 
         public String getName() {
@@ -390,17 +390,17 @@ public final class ProcessorAggregationTestDialect extends AbstractProcessorDial
         private final String name;
 
         ElementModelProcessorAggregationTestProcessor(
-                final IProcessorDialect dialect, final String dialectPrefix,
+                final String dialectPrefix,
                 final String elementName, final boolean prefixElementName,
                 final String attributeName, final boolean prefixAttributeName,
                 final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, dialectPrefix, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
+            super(templateMode, dialectPrefix, elementName, prefixElementName, attributeName, prefixAttributeName, precedence);
             this.name = null;
         }
 
         ElementModelProcessorAggregationTestProcessor(
-                final IProcessorDialect dialect, final String dialectPrefix, final String name, final TemplateMode templateMode, final int precedence) {
-            super(dialect, templateMode, dialectPrefix, null, false, null, false, precedence);
+                final String dialectPrefix, final String name, final TemplateMode templateMode, final int precedence) {
+            super(templateMode, dialectPrefix, null, false, null, false, precedence);
             this.name = name;
         }
 

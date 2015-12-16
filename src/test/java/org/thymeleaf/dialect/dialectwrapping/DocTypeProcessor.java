@@ -17,27 +17,22 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.templateengine.features.interaction;
+package org.thymeleaf.dialect.dialectwrapping;
 
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.model.IComment;
-import org.thymeleaf.processor.comment.AbstractCommentProcessor;
-import org.thymeleaf.processor.comment.ICommentStructureHandler;
-import org.thymeleaf.standard.processor.StandardInliningTextProcessor;
+import org.thymeleaf.model.IDocType;
+import org.thymeleaf.processor.doctype.AbstractDocTypeProcessor;
+import org.thymeleaf.processor.doctype.IDocTypeStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class InteractionDialect01CommentProcessor extends AbstractCommentProcessor {
+public class DocTypeProcessor extends AbstractDocTypeProcessor {
 
-
-    public InteractionDialect01CommentProcessor(final TemplateMode templateMode) {
-        super(templateMode, StandardInliningTextProcessor.PRECEDENCE + 10); // We want this to happen AFTER inlining
+    public DocTypeProcessor() {
+        super(TemplateMode.HTML, 100);
     }
 
     @Override
-    protected void doProcess(
-            final ITemplateContext context, final IComment comment, final ICommentStructureHandler structureHandler) {
-
-        comment.setContent("||" + comment.getContent() + "||");
+    protected void doProcess(final ITemplateContext context, final IDocType docType, final IDocTypeStructureHandler structureHandler) {
 
     }
 

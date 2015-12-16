@@ -17,35 +17,22 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.templateengine.aggregation.dialect;
+package org.thymeleaf.dialect.dialectwrapping;
 
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.model.IModel;
-import org.thymeleaf.model.IModelFactory;
-import org.thymeleaf.model.IProcessableElementTag;
-import org.thymeleaf.processor.element.AbstractElementTagProcessor;
-import org.thymeleaf.processor.element.IElementTagStructureHandler;
+import org.thymeleaf.processor.element.AbstractElementModelProcessor;
+import org.thymeleaf.processor.element.IElementModelStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class Dialect02DivProcessor extends AbstractElementTagProcessor {
+public class ElementModelProcessor extends AbstractElementModelProcessor {
 
-
-    public Dialect02DivProcessor(final String dialectPrefix) {
+    public ElementModelProcessor(final String dialectPrefix) {
         super(TemplateMode.HTML, dialectPrefix, "div", true, null, false, 100);
     }
 
-
-
     @Override
-    protected void doProcess(
-            final ITemplateContext processingContext, final IProcessableElementTag tag,
-            final IElementTagStructureHandler structureHandler) {
-
-        final IModelFactory modelFactory = processingContext.getConfiguration().getModelFactory(processingContext.getTemplateMode());
-
-        final IModel markup = modelFactory.createModel();
-        markup.add(modelFactory.createText("[From Dialect 02]"));
-        structureHandler.insertImmediatelyAfter(markup, true);
+    protected void doProcess(final ITemplateContext context, final IModel model, final IElementModelStructureHandler structureHandler) {
 
     }
 

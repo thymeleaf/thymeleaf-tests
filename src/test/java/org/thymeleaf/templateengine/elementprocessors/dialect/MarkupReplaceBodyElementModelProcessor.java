@@ -20,7 +20,6 @@
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
@@ -34,8 +33,8 @@ public class MarkupReplaceBodyElementModelProcessor extends AbstractAttributeMod
     public static final String REPLACEMENT = "<p>This is a <span th:text=\"replacement\">prototype</span></p>";
 
 
-    public MarkupReplaceBodyElementModelProcessor(final IProcessorDialect dialect, final String dialectPrefix) {
-        super(dialect, TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000, true);
+    public MarkupReplaceBodyElementModelProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 1000, true);
     }
 
 
