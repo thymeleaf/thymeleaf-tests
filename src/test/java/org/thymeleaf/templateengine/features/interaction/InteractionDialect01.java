@@ -37,15 +37,15 @@ public class InteractionDialect01 extends AbstractProcessorDialect {
 
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new InteractionDialect01TextProcessor(this, TemplateMode.HTML));
-        processors.add(new InteractionDialect01CDATASectionProcessor(this, TemplateMode.HTML));
-        processors.add(new InteractionDialect01CommentProcessor(this, TemplateMode.HTML));
-        processors.add(new InteractionDialect01TextProcessor(this, TemplateMode.JAVASCRIPT));
-        processors.add(new InteractionDialect01CDATASectionProcessor(this, TemplateMode.JAVASCRIPT));
-        processors.add(new InteractionDialect01CommentProcessor(this, TemplateMode.JAVASCRIPT));
-        processors.add(new InteractionDialect01TextProcessor(this, TemplateMode.CSS));
-        processors.add(new InteractionDialect01CDATASectionProcessor(this, TemplateMode.CSS));
-        processors.add(new InteractionDialect01CommentProcessor(this, TemplateMode.CSS));
+        processors.add(new InteractionDialect01TextProcessor(TemplateMode.HTML));
+        processors.add(new InteractionDialect01CDATASectionProcessor(TemplateMode.HTML));
+        processors.add(new InteractionDialect01CommentProcessor(TemplateMode.HTML));
+        processors.add(new InteractionDialect01TextProcessor(TemplateMode.JAVASCRIPT));
+        processors.add(new InteractionDialect01CDATASectionProcessor(TemplateMode.JAVASCRIPT));
+        processors.add(new InteractionDialect01CommentProcessor(TemplateMode.JAVASCRIPT));
+        processors.add(new InteractionDialect01TextProcessor(TemplateMode.CSS));
+        processors.add(new InteractionDialect01CDATASectionProcessor(TemplateMode.CSS));
+        processors.add(new InteractionDialect01CommentProcessor(TemplateMode.CSS));
         return processors;
     }
 

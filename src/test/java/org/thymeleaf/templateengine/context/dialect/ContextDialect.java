@@ -45,7 +45,7 @@ public class ContextDialect extends AbstractDialect implements IProcessorDialect
 
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new AddContextVariableElementProcessor(this, "context"));
+        processors.add(new AddContextVariableElementProcessor("context"));
         return processors;
     }
 
