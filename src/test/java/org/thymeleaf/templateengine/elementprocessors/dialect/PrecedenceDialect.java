@@ -36,8 +36,8 @@ public class PrecedenceDialect extends AbstractProcessorDialect {
 
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new PrecedenceModifyLocalVariableModelProcessor(this, PREFIX));
-        processors.add(new PrecedenceModifyLocalVariableTagProcessor(this, PREFIX));
+        processors.add(new PrecedenceModifyLocalVariableModelProcessor(PREFIX));
+        processors.add(new PrecedenceModifyLocalVariableTagProcessor(PREFIX));
         return processors;
     }
 

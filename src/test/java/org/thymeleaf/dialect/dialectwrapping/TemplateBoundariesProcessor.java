@@ -17,27 +17,28 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.templateengine.features.interaction;
+package org.thymeleaf.dialect.dialectwrapping;
 
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.model.IComment;
-import org.thymeleaf.processor.comment.AbstractCommentProcessor;
-import org.thymeleaf.processor.comment.ICommentStructureHandler;
-import org.thymeleaf.standard.processor.StandardInliningTextProcessor;
+import org.thymeleaf.model.ITemplateEnd;
+import org.thymeleaf.model.ITemplateStart;
+import org.thymeleaf.processor.templateboundaries.AbstractTemplateBoundariesProcessor;
+import org.thymeleaf.processor.templateboundaries.ITemplateBoundariesStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class InteractionDialect01CommentProcessor extends AbstractCommentProcessor {
+public class TemplateBoundariesProcessor extends AbstractTemplateBoundariesProcessor {
 
-
-    public InteractionDialect01CommentProcessor(final TemplateMode templateMode) {
-        super(templateMode, StandardInliningTextProcessor.PRECEDENCE + 10); // We want this to happen AFTER inlining
+    public TemplateBoundariesProcessor() {
+        super(TemplateMode.HTML, 100);
     }
 
     @Override
-    protected void doProcess(
-            final ITemplateContext context, final IComment comment, final ICommentStructureHandler structureHandler) {
+    public void doProcessTemplateStart(final ITemplateContext context, final ITemplateStart templateStart, final ITemplateBoundariesStructureHandler structureHandler) {
 
-        comment.setContent("||" + comment.getContent() + "||");
+    }
+
+    @Override
+    public void doProcessTemplateEnd(final ITemplateContext context, final ITemplateEnd templateEnd, final ITemplateBoundariesStructureHandler structureHandler) {
 
     }
 

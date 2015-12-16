@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.templateengine.aggregation.dialect;
+package org.thymeleaf.dialect.dialectordering;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,19 +25,18 @@ import java.util.Set;
 import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
-public class Dialect02 extends AbstractProcessorDialect {
+public class Dialect03 extends AbstractProcessorDialect {
 
 
-    public Dialect02() {
-        super("Dialect02", null, 100);
+    public Dialect03() {
+        super("Dialect02", null, 90);
     }
 
 
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new Dialect02DivProcessor(dialectPrefix));
-        processors.add(new Dialect02Div2Processor(dialectPrefix));
-        processors.add(new Dialect02TextProcessor());
+        processors.add(new P3Processor(this, dialectPrefix));
+        processors.add(new Span3Processor(this, dialectPrefix));
         return processors;
     }
 

@@ -17,36 +17,39 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.templateengine.aggregation.dialect;
+package org.thymeleaf.dialect.dialectordering;
 
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.model.IModel;
-import org.thymeleaf.model.IModelFactory;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class Dialect02DivProcessor extends AbstractElementTagProcessor {
+public class Div1Processor extends AbstractElementTagProcessor {
 
+    private final IDialect dialect;
 
-    public Dialect02DivProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, "div", true, null, false, 100);
+    public Div1Processor(final IProcessorDialect dialect, final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, "div", true, null, false, 1100);
+        this.dialect = dialect;
     }
 
 
 
     @Override
     protected void doProcess(
-            final ITemplateContext processingContext, final IProcessableElementTag tag,
+            final ITemplateContext processingContext,
+            final IProcessableElementTag tag,
             final IElementTagStructureHandler structureHandler) {
 
-        final IModelFactory modelFactory = processingContext.getConfiguration().getModelFactory(processingContext.getTemplateMode());
+    }
 
-        final IModel markup = modelFactory.createModel();
-        markup.add(modelFactory.createText("[From Dialect 02]"));
-        structureHandler.insertImmediatelyAfter(markup, true);
 
+    @Override
+    public String toString() {
+        return "[(" + this.dialect.getClass().getSimpleName() + ")" + this.getClass().getSimpleName() + "]";
     }
 
 }

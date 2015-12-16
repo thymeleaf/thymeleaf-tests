@@ -22,7 +22,6 @@ package org.thymeleaf.templateresolver;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.util.CollectionUtils;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.cache.AlwaysValidCacheEntryValidity;
 import org.thymeleaf.cache.ICacheEntryValidity;

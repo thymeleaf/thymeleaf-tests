@@ -20,12 +20,10 @@
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
 import org.thymeleaf.processor.element.IElementModelStructureHandler;
-import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 import org.thymeleaf.templatemode.TemplateMode;
 
@@ -34,8 +32,8 @@ public class MarkupSetTextInlinerModelProcessor extends AbstractAttributeModelPr
     public static final String ATTR_NAME = "set-text-inliner";
 
 
-    public MarkupSetTextInlinerModelProcessor(final IProcessorDialect dialect, final String dialectPrefix) {
-        super(dialect, TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 600, true);
+    public MarkupSetTextInlinerModelProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, 600, true);
     }
 
 
@@ -46,7 +44,7 @@ public class MarkupSetTextInlinerModelProcessor extends AbstractAttributeModelPr
                              final AttributeName attributeName, final String attributeValue,
                              final IElementModelStructureHandler structureHandler) {
 
-        structureHandler.setInliner(new StandardTextInliner(context.getConfiguration(), new StandardDialect()));
+        structureHandler.setInliner(new StandardTextInliner(context.getConfiguration()));
 
     }
 
