@@ -20,7 +20,6 @@
 package org.thymeleaf.templateengine.features.interaction;
 
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.model.ICDATASection;
 import org.thymeleaf.processor.cdatasection.AbstractCDATASectionProcessor;
 import org.thymeleaf.processor.cdatasection.ICDATASectionStructureHandler;
@@ -30,8 +29,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 public class InteractionDialect01CDATASectionProcessor extends AbstractCDATASectionProcessor {
 
 
-    public InteractionDialect01CDATASectionProcessor(final IProcessorDialect dialect, final TemplateMode templateMode) {
-        super(dialect, templateMode, StandardInliningTextProcessor.PRECEDENCE + 10); // We want this to happen AFTER inlining
+    public InteractionDialect01CDATASectionProcessor(final TemplateMode templateMode) {
+        super(templateMode, StandardInliningTextProcessor.PRECEDENCE + 10); // We want this to happen AFTER inlining
     }
 
     @Override

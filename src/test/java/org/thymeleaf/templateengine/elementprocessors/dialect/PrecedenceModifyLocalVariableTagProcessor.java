@@ -20,7 +20,6 @@
 package org.thymeleaf.templateengine.elementprocessors.dialect;
 
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeTagProcessor;
@@ -33,8 +32,8 @@ public class PrecedenceModifyLocalVariableTagProcessor extends AbstractAttribute
     public static final String ATTR_NAME = "modify-local-variable-tag";
 
 
-    public PrecedenceModifyLocalVariableTagProcessor(final IProcessorDialect dialect, final String dialectPrefix) {
-        super(dialect, TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, StandardTextTagProcessor.PRECEDENCE, true);
+    public PrecedenceModifyLocalVariableTagProcessor(final String dialectPrefix) {
+        super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, StandardTextTagProcessor.PRECEDENCE, true);
     }
 
 
