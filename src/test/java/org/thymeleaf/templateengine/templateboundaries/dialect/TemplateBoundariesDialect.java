@@ -56,11 +56,11 @@ public class TemplateBoundariesDialect extends AbstractDialect implements IPostP
 
     public Set<IPostProcessor> getPostProcessors() {
         final Set<IPostProcessor> postProcessors = new HashSet<IPostProcessor>();
-        postProcessors.add(new PostProcessor(this, TemplateMode.HTML, BoundaryPostProcessor.class, 1000));
-        postProcessors.add(new PostProcessor(this, TemplateMode.XML, BoundaryPostProcessor.class, 1000));
-        postProcessors.add(new PostProcessor(this, TemplateMode.TEXT, BoundaryPostProcessor.class, 1000));
-        postProcessors.add(new PostProcessor(this, TemplateMode.CSS, BoundaryPostProcessor.class, 1000));
-        postProcessors.add(new PostProcessor(this, TemplateMode.JAVASCRIPT, BoundaryPostProcessor.class, 1000));
+        postProcessors.add(new PostProcessor(TemplateMode.HTML, BoundaryPostProcessor.class, 1000));
+        postProcessors.add(new PostProcessor(TemplateMode.XML, BoundaryPostProcessor.class, 1000));
+        postProcessors.add(new PostProcessor(TemplateMode.TEXT, BoundaryPostProcessor.class, 1000));
+        postProcessors.add(new PostProcessor(TemplateMode.CSS, BoundaryPostProcessor.class, 1000));
+        postProcessors.add(new PostProcessor(TemplateMode.JAVASCRIPT, BoundaryPostProcessor.class, 1000));
         return postProcessors;
     }
 
