@@ -340,5 +340,68 @@ public final class ElementDefinitionsTest {
 
 
 
-    
+    @Test
+    public void testEmptyPrefix() {
+
+        final ElementDefinitions elementDefinitions = new ElementDefinitions(Collections.EMPTY_MAP);
+
+        final ElementDefinition ed01 = elementDefinitions.forHTMLName("", "one");
+        final ElementDefinition ed02 = elementDefinitions.forXMLName("", "one");
+        final ElementDefinition ed03 = elementDefinitions.forTextName("", "one");
+        final ElementDefinition ed04 = elementDefinitions.forJavaScriptName("", "one");
+        final ElementDefinition ed05 = elementDefinitions.forCSSName("", "one");
+
+
+        Assert.assertEquals("{one}", ed01.getElementName().toString());
+        Assert.assertEquals("{one}", ed02.getElementName().toString());
+        Assert.assertEquals("{one}", ed03.getElementName().toString());
+        Assert.assertEquals("{one}", ed04.getElementName().toString());
+        Assert.assertEquals("{one}", ed05.getElementName().toString());
+
+    }
+
+
+
+    @Test
+    public void testNullPrefix() {
+
+        final ElementDefinitions elementDefinitions = new ElementDefinitions(Collections.EMPTY_MAP);
+
+        final ElementDefinition ed01 = elementDefinitions.forHTMLName(null, "one");
+        final ElementDefinition ed02 = elementDefinitions.forXMLName(null, "one");
+        final ElementDefinition ed03 = elementDefinitions.forTextName(null, "one");
+        final ElementDefinition ed04 = elementDefinitions.forJavaScriptName(null, "one");
+        final ElementDefinition ed05 = elementDefinitions.forCSSName(null, "one");
+
+
+        Assert.assertEquals("{one}", ed01.getElementName().toString());
+        Assert.assertEquals("{one}", ed02.getElementName().toString());
+        Assert.assertEquals("{one}", ed03.getElementName().toString());
+        Assert.assertEquals("{one}", ed04.getElementName().toString());
+        Assert.assertEquals("{one}", ed05.getElementName().toString());
+
+    }
+
+
+
+    @Test
+    public void testWhitespacePrefix() {
+
+        final ElementDefinitions elementDefinitions = new ElementDefinitions(Collections.EMPTY_MAP);
+
+        final ElementDefinition ed01 = elementDefinitions.forHTMLName(" ", "one");
+        final ElementDefinition ed02 = elementDefinitions.forXMLName(" ", "one");
+        final ElementDefinition ed03 = elementDefinitions.forTextName(" ", "one");
+        final ElementDefinition ed04 = elementDefinitions.forJavaScriptName(" ", "one");
+        final ElementDefinition ed05 = elementDefinitions.forCSSName(" ", "one");
+
+
+        Assert.assertEquals("{one}", ed01.getElementName().toString());
+        Assert.assertEquals("{one}", ed02.getElementName().toString());
+        Assert.assertEquals("{one}", ed03.getElementName().toString());
+        Assert.assertEquals("{one}", ed04.getElementName().toString());
+        Assert.assertEquals("{one}", ed05.getElementName().toString());
+
+    }
+
 }
