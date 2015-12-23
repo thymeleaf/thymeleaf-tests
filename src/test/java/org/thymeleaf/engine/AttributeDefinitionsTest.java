@@ -420,5 +420,71 @@ public final class AttributeDefinitionsTest {
 
 
 
+    @Test
+    public void testEmptyPrefix() {
+
+        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions(Collections.EMPTY_MAP);
+
+        final AttributeDefinition ad01 = attributeDefinitions.forHTMLName("", "one");
+        final AttributeDefinition ad02 = attributeDefinitions.forXMLName("", "one");
+        final AttributeDefinition ad03 = attributeDefinitions.forTextName("", "one");
+        final AttributeDefinition ad04 = attributeDefinitions.forJavaScriptName("", "one");
+        final AttributeDefinition ad05 = attributeDefinitions.forCSSName("", "one");
+
+
+        Assert.assertEquals("{one}", ad01.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad02.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad03.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad04.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad05.getAttributeName().toString());
+
+    }
+
+
+
+    @Test
+    public void testNullPrefix() {
+
+        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions(Collections.EMPTY_MAP);
+
+        final AttributeDefinition ad01 = attributeDefinitions.forHTMLName(null, "one");
+        final AttributeDefinition ad02 = attributeDefinitions.forXMLName(null, "one");
+        final AttributeDefinition ad03 = attributeDefinitions.forTextName(null, "one");
+        final AttributeDefinition ad04 = attributeDefinitions.forJavaScriptName(null, "one");
+        final AttributeDefinition ad05 = attributeDefinitions.forCSSName(null, "one");
+
+
+        Assert.assertEquals("{one}", ad01.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad02.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad03.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad04.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad05.getAttributeName().toString());
+
+    }
+
+
+
+    @Test
+    public void testWhitespacePrefix() {
+
+        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions(Collections.EMPTY_MAP);
+
+        final AttributeDefinition ad01 = attributeDefinitions.forHTMLName(" ", "one");
+        final AttributeDefinition ad02 = attributeDefinitions.forXMLName(" ", "one");
+        final AttributeDefinition ad03 = attributeDefinitions.forTextName(" ", "one");
+        final AttributeDefinition ad04 = attributeDefinitions.forJavaScriptName(" ", "one");
+        final AttributeDefinition ad05 = attributeDefinitions.forCSSName(" ", "one");
+
+
+        Assert.assertEquals("{one}", ad01.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad02.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad03.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad04.getAttributeName().toString());
+        Assert.assertEquals("{one}", ad05.getAttributeName().toString());
+
+    }
+
+
+
     
 }
