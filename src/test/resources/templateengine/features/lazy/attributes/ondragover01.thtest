@@ -1,0 +1,12 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = new org.thymeleaf.templateengine.features.lazy.ValueLazyContextVariable('one!')
+# ------------------------------------------------------------
+%INPUT
+<div th:ondragover="${one}">..</div>
+<div ondragover="old" th:ondragover="${one}">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div ondragover="one!">..</div>
+<div ondragover="one!">..</div>
