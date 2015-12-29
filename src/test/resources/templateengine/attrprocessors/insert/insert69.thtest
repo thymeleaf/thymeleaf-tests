@@ -5,10 +5,10 @@
 # ------------------------------------------------------------
 %INPUT[frag]
 <div th:fragment="f" class="a">
-    <img src="something.png"></img>
+    <img src="something.png"></p>
 </div>
 # ------------------------------------------------------------
 %OUTPUT
 <div><div class="a">
-    <img src="something.png"></img>
+    <img src="something.png"></p>
 </div></div>
