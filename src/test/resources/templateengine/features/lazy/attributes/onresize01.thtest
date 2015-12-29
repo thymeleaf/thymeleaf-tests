@@ -1,0 +1,12 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+one = new org.thymeleaf.templateengine.features.lazy.ValueLazyContextVariable('one!')
+# ------------------------------------------------------------
+%INPUT
+<div th:onresize="${one}">..</div>
+<div onresize="old" th:onresize="${one}">..</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div onresize="one!">..</div>
+<div onresize="one!">..</div>
