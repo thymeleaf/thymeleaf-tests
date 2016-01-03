@@ -28,10 +28,10 @@ import org.junit.Test;
 import org.thymeleaf.util.StringUtils;
 
 
-public class ModelExpressionTest {
+public class FragmentExpressionTest {
 
 
-    public ModelExpressionTest() {
+    public FragmentExpressionTest() {
         super();
     }
 
@@ -76,11 +76,11 @@ public class ModelExpressionTest {
             final String templateExpression, final String fragmentExpression, final String parametersExpression) {
 
         doCheckFragmentSelection(
-                ModelExpression.parseModelExpressionContent(fragmentSelectionSpec), templateExpression, fragmentExpression, parametersExpression);
+                FragmentExpression.parseFragmentExpressionContent(fragmentSelectionSpec), templateExpression, fragmentExpression, parametersExpression);
         doCheckFragmentSelection(
-                ModelExpression.parseModelExpression("~{" + fragmentSelectionSpec + "}"), templateExpression, fragmentExpression, parametersExpression);
+                FragmentExpression.parseFragmentExpression("~{" + fragmentSelectionSpec + "}"), templateExpression, fragmentExpression, parametersExpression);
         doCheckFragmentSelection(
-                ModelExpression.parseModelExpression("  ~{  " + fragmentSelectionSpec + "\n  }"), templateExpression, fragmentExpression, parametersExpression);
+                FragmentExpression.parseFragmentExpression("  ~{  " + fragmentSelectionSpec + "\n  }"), templateExpression, fragmentExpression, parametersExpression);
 
     }
 
@@ -88,7 +88,7 @@ public class ModelExpressionTest {
 
 
     private static void doCheckFragmentSelection(
-            final ModelExpression modelExpression, final String templateExpression, final String fragmentExpression, final String parametersExpression) {
+            final FragmentExpression modelExpression, final String templateExpression, final String fragmentExpression, final String parametersExpression) {
 
         final IStandardExpression parsedTemplateExpression = modelExpression.getTemplateName();
         final IStandardExpression parsedFragmentExpression = modelExpression.getFragmentSelector();
