@@ -230,7 +230,15 @@ public class ExpressionTest extends TestCase {
         test("${'x' + size}", "xSize is 5");
         test("${size + 'y'}", "Size is 5y");
         test("${'x' + size + 'y'}", "xSize is 5y");
-    
+
+        test("~{::body}", "&lt;body&gt;&lt;span th:text=&quot;~{::body}&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;");
+        test("~{::span/text()}", "PLACEHOLDER");
+        test("~{whatever}", "&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;span th:text=&quot;whatever&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;&lt;/html&gt;");
+        test("~{whatever::body}", "&lt;body&gt;&lt;span th:text=&quot;whatever&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;");
+        test("~{whatever::body(92)}", "&lt;body&gt;&lt;span th:text=&quot;whatever&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;");
+        test("~{::body(92)}", "&lt;body&gt;&lt;span th:text=&quot;~{::body(92)}&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;");
+        test("~{::doctype()}", "&lt;!DOCTYPE html&gt;");
+
     }
 
     

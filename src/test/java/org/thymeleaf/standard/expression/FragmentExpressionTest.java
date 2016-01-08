@@ -19,13 +19,8 @@
  */
 package org.thymeleaf.standard.expression;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.util.StringUtils;
 
 
 public class FragmentExpressionTest {
@@ -107,25 +102,5 @@ public class FragmentExpressionTest {
 
     }
 
-
-    @Test
-    public void testAssignationSequenceNamed() throws Exception {
-        checkVariableNamesSpec("a,b", false);
-        checkVariableNamesSpec("_arg0,b", false);
-        checkVariableNamesSpec("_arg0,_arg1", true);
-    }
-
-
-
-
-    private static void checkVariableNamesSpec(final String variableNamesSpec, final boolean synth) {
-
-        final Set<String> variableNames =
-                new HashSet<String>(Arrays.asList(StringUtils.split(variableNamesSpec, ",")));
-        final boolean computedNamed = FragmentSelectionUtils.parameterNamesAreSynthetic(variableNames);
-
-        Assert.assertEquals(Boolean.valueOf(synth), Boolean.valueOf(computedNamed));
-
-    }
 
 }
