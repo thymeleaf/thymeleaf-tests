@@ -78,6 +78,7 @@ public class FragmentInsertionExpressionTest {
         checkExpression("folder/template (title='one',body=~{that})", false);
         checkExpression("folder/template (title=(~{some}))", false);
         checkExpression("folder/template (title=('one'),body=(~{that}))", false);
+        checkExpression("folder/template (title=('one'))", false);
         checkExpression("folder/template (body=~{(that)})", false);
         checkExpression("folder/template\n (body=~{(that)})", false);
         checkExpression("~{folder/template :: f (~{some})}", true);
@@ -89,9 +90,9 @@ public class FragmentInsertionExpressionTest {
 
     private static void checkExpression(final String expression, final boolean result) {
         if (result) {
-            Assert.assertTrue(AbstractStandardFragmentInsertionTagProcessor.shouldParseAsCompleteStandardExpression(expression));
+            Assert.assertTrue(AbstractStandardFragmentInsertionTagProcessor.isCompleteStandardExpressionForSure(expression));
         } else {
-            Assert.assertFalse(AbstractStandardFragmentInsertionTagProcessor.shouldParseAsCompleteStandardExpression(expression));
+            Assert.assertFalse(AbstractStandardFragmentInsertionTagProcessor.isCompleteStandardExpressionForSure(expression));
         }
     }
 
