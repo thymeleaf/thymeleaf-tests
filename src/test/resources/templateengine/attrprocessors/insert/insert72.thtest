@@ -1,6 +1,7 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %INPUT
+<title>main</title>
 <span th:insert="fragg">...</span>
 # ------------------------------------------------------------
 %INPUT[fragg]
@@ -8,11 +9,13 @@
 <div th:insert="frag::f (title=~{:://title})">...</div>
 # ------------------------------------------------------------
 %INPUT[frag]
+<title>inner</title>
 <div th:fragment="f" class="a">
     <div th:insert="${title}"></div>
 </div>
 # ------------------------------------------------------------
 %OUTPUT
+<title>main</title>
 <span><title>hey</title>
 <div><div class="a">
     <div><title>hey</title></div>
