@@ -4,18 +4,16 @@
 atext = 'Lorem ipsum blah blah'
 # ------------------------------------------------------------
 %INPUT
-<div class="one" th:include="frag">
-  <p>Some text over here</p>
+<div class="one" th:insert-if="frag :: [//b[@class='now']]">
+  <p>Some text over here: <span th:text="${i}">i</span></p>
 </div>
 # ------------------------------------------------------------
 %INPUT[frag]
-<div>
-  This is a text <b>with some parts in bold</b> and a text: <span th:text="${atext}">bluh bluh</span>.
-</div>
+<p>
+  This is a text <b>with some parts in bold</b> and a text: <b class="now" th:text="${atext}">bluh bluh</b>.
+</p>
 # ------------------------------------------------------------
 %OUTPUT
-<div class="one"><div>
-	  This is a text <b>with some parts in bold</b> and a text: <span>Lorem ipsum blah blah</span>.
-</div></div>
+<div class="one"><b class="now">Lorem ipsum blah blah</b></div>
 
 
