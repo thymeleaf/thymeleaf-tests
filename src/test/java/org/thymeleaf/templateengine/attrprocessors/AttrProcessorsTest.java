@@ -98,6 +98,16 @@ public class AttrProcessorsTest {
     }
 
     @Test
+    public void testInsertIf() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/attrprocessors/insertif");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+    @Test
     public void testSubstituteby() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
@@ -112,6 +122,16 @@ public class AttrProcessorsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.execute("classpath:templateengine/attrprocessors/replace");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+    @Test
+    public void testReplaceIf() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.execute("classpath:templateengine/attrprocessors/replaceif");
 
         Assert.assertTrue(executor.isAllOK());
 
