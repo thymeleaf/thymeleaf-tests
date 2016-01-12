@@ -4,18 +4,18 @@
 atext = 'Lorem ipsum blah blah'
 # ------------------------------------------------------------
 %INPUT
-<div class="one" th:include="frag">
+<div class="one" th:replace-if="frag">
   <p>Some text over here</p>
 </div>
 # ------------------------------------------------------------
 %INPUT[frag]
-<div>
+<p>
   This is a text <b>with some parts in bold</b> and a text: <span th:text="${atext}">bluh bluh</span>.
-</div>
+</p>
 # ------------------------------------------------------------
 %OUTPUT
-<div class="one"><div>
-	  This is a text <b>with some parts in bold</b> and a text: <span>Lorem ipsum blah blah</span>.
-</div></div>
+<p>
+  This is a text <b>with some parts in bold</b> and a text: <span>Lorem ipsum blah blah</span>.
+</p>
 
 
