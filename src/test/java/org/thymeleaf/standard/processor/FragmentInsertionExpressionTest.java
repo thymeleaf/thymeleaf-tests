@@ -34,55 +34,58 @@ public class FragmentInsertionExpressionTest {
 
     @Test
     public void testFragmentExpressionSelection() throws Exception {
-        checkExpression("template", false);
-        checkExpression("template::f", false);
-        checkExpression("template::frag", false);
-        checkExpression("template :: frag", false);
-        checkExpression("  template :: frag   ", false);
-        checkExpression("   :: frag   ", false);
-        checkExpression("::frag   ", false);
-        checkExpression("::frag", false);
-        checkExpression("this::frag", false);
-        checkExpression(" this   ::frag", false);
-        checkExpression(" this   :: frag", false);
-        checkExpression(" ${lala slatr} + 'ele'   :: 'index_' + 2 * 2", false);
-        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + 2 * 2)", false);
-        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + (2 * 2)) (somePar)", false);
-        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + (2 * 2)) (a='something')", false);
-        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + (2 * 2)) (a='something',b=4123)", false);
-        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + (2 * 2)) (a=('something'),b=4123)", false);
-        checkExpression(" ${lala slatr} + ('ele')   :: ('index_' + (2 * 2)) (a=('something'),b=4123)", false);
-        checkExpression(" ${lala slatr} + ('ele')   :: ('index_' + (2 * 2)) (a=('something' + 23),b=4123)", false);
-        checkExpression(" ${lala slatr}+'ele'   :: ('index_'+(2*2)) (a=('something'+23),b=4123)", false);
-        checkExpression(" ${lala slatr}+'ele'   :: ('index_'+(2*2)) (${name}=('something'+23),b=4123)", false);
-        checkExpression(" ${lala slatr}+'ele'   :: ('index_'+(2*2)) ((${name} + 0)=('something'+23),b=4123)", false);
-        checkExpression("C:\\Program Files\\apps\\templates\\WEB-INF\\temp.html", false);
-        checkExpression("C:\\Program Files\\apps\\templates\\WEB-INF\\temp.html :: 'fragment number one'", false);
-        checkExpression("/home/user/apps/templates/WEB-INF/temp.html :: 'fragment number one'", false);
-        checkExpression("home/user :: 'fragment number one'", false);
-        checkExpression("${something}", false);
-        checkExpression("${this} :: ${that}", false);
-        checkExpression("~{whatever}", true);
-        checkExpression("${cond} ? ~{this} : ~{that}", true);
-        checkExpression("${something} :: /div", false);
-        checkExpression("template :: f (~{some})", false);
-        checkExpression("folder/template :: f (~{some})", false);
-        checkExpression("folder/template :: f (~{some})", false);
-        checkExpression("~folder/template :: f (~{some})", false);
-        checkExpression("~/folder/template :: f (~{some})", false);
-        checkExpression("${~{impossible}} :: f (~{some})", false);
-        checkExpression("'~{impossible}' :: f (~{some})", false);
-        checkExpression("folder/template (title=~{some})", false);
-        checkExpression("(~{some})", true);
-        checkExpression("(${cond}) ? (~{this}) : (~{that})", true);
-        checkExpression("folder/template (title='one',body=~{that})", false);
-        checkExpression("folder/template (title=(~{some}))", false);
-        checkExpression("folder/template (title=('one'),body=(~{that}))", false);
-        checkExpression("folder/template (title=('one'))", false);
-        checkExpression("folder/template (body=~{(that)})", false);
-        checkExpression("folder/template\n (body=~{(that)})", false);
-        checkExpression("~{folder/template :: f (~{some})}", true);
-        checkExpression("     ~{folder/template :: f (~{some})}   ", true);
+        checkExpression("template", true);
+        checkExpression("template::f", true);
+        checkExpression("template::frag", true);
+        checkExpression("template :: frag", true);
+        checkExpression("  template :: frag   ", true);
+        checkExpression("   :: frag   ", true);
+        checkExpression("::frag   ", true);
+        checkExpression("::frag", true);
+        checkExpression("this::frag", true);
+        checkExpression(" this   ::frag", true);
+        checkExpression(" this   :: frag", true);
+        checkExpression(" ${lala slatr} + 'ele'   :: 'index_' + 2 * 2", true);
+        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + 2 * 2)", true);
+        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + (2 * 2)) (somePar)", true);
+        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + (2 * 2)) (a='something')", true);
+        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + (2 * 2)) (a='something',b=4123)", true);
+        checkExpression(" ${lala slatr} + 'ele'   :: ('index_' + (2 * 2)) (a=('something'),b=4123)", true);
+        checkExpression(" ${lala slatr} + ('ele')   :: ('index_' + (2 * 2)) (a=('something'),b=4123)", true);
+        checkExpression(" ${lala slatr} + ('ele')   :: ('index_' + (2 * 2)) (a=('something' + 23),b=4123)", true);
+        checkExpression(" ${lala slatr}+'ele'   :: ('index_'+(2*2)) (a=('something'+23),b=4123)", true);
+        checkExpression(" ${lala slatr}+'ele'   :: ('index_'+(2*2)) (${name}=('something'+23),b=4123)", true);
+        checkExpression(" ${lala slatr}+'ele'   :: ('index_'+(2*2)) ((${name} + 0)=('something'+23),b=4123)", true);
+        checkExpression("C:\\Program Files\\apps\\templates\\WEB-INF\\temp.html", true);
+        checkExpression("C:\\Program Files\\apps\\templates\\WEB-INF\\temp.html :: 'fragment number one'", true);
+        checkExpression("/home/user/apps/templates/WEB-INF/temp.html :: 'fragment number one'", true);
+        checkExpression("home/user :: 'fragment number one'", true);
+        checkExpression("${something}", true);
+        checkExpression("${this} :: ${that}", true);
+        checkExpression("~{whatever}", false);
+        checkExpression("${cond} ? ~{this} : ~{that}", false);
+        checkExpression("${something} :: /div", true);
+        checkExpression("template :: f (~{some})", true);
+        checkExpression("folder/template :: f (~{some})", true);
+        checkExpression("folder/template :: f (~{some})", true);
+        checkExpression("~folder/template :: f (~{some})", true);
+        checkExpression("~/folder/template :: f (~{some})", true);
+        checkExpression("${~{impossible}} :: f (~{some})", true);
+        checkExpression("'~{impossible}' :: f (~{some})", true);
+        checkExpression("folder/template (title=~{some})", true);
+        checkExpression("(~{some})", false);
+        checkExpression("(${cond}) ? (~{this}) : (~{that})", false);
+        checkExpression("folder/template (title='one',body=~{that})", true);
+        checkExpression("folder/template (title=(~{some}))", true);
+        checkExpression("folder/template (title=('one'),body=(~{that}))", true);
+        checkExpression("folder/template (title=('one'))", true);
+        checkExpression("folder/template (body=~{(that)})", true);
+        checkExpression("folder/template\n (body=~{(that)})", true);
+        checkExpression("~{folder/template :: f (~{some})}", false);
+        checkExpression("     ~{folder/template :: f (~{some})}   ", false);
+        // We could think that in this case a "true" should be returned, but actually the expression below is completely
+        // invalid because we cannot call a template without fragment specification using synthetic parameters.
+        checkExpression("folder/template (~{some})", false);
     }
 
 
@@ -90,9 +93,9 @@ public class FragmentInsertionExpressionTest {
 
     private static void checkExpression(final String expression, final boolean result) {
         if (result) {
-            Assert.assertTrue(AbstractStandardFragmentInsertionTagProcessor.isCompleteStandardExpressionForSure(expression));
+            Assert.assertTrue(AbstractStandardFragmentInsertionTagProcessor.shouldBeWrappedAsFragmentExpression(expression));
         } else {
-            Assert.assertFalse(AbstractStandardFragmentInsertionTagProcessor.isCompleteStandardExpressionForSure(expression));
+            Assert.assertFalse(AbstractStandardFragmentInsertionTagProcessor.shouldBeWrappedAsFragmentExpression(expression));
         }
     }
 
