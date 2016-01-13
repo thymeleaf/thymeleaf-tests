@@ -6,5 +6,5 @@
 %INPUT[frag]
 <span th:insert="~{fraggo}">...</span>
 # ------------------------------------------------------------
-%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*)?Invalid fragment specification(.*?)
+%EXCEPTION org.thymeleaf.exceptions.TemplateInputException
+%EXCEPTION_MESSAGE_PATTERN (.*)?Error resolving(.*?)
