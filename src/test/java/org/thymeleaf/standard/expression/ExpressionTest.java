@@ -238,6 +238,16 @@ public class ExpressionTest extends TestCase {
         test("~{whatever::body(92)}", "&lt;body&gt;&lt;span th:text=&quot;whatever&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;");
         test("~{::body(92)}", "&lt;body&gt;&lt;span th:text=&quot;~{::body(92)}&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;");
         test("~{::doctype()}", "&lt;!DOCTYPE html&gt;");
+        test("~", "(NOOP)");
+        test("${true} ? ~", "(NOOP)");
+        test("${false} ? ~", "");
+        test("${'this'} ?: ~", "this");
+        test("${null} ?: ~", "(NOOP)");
+        test("${true} ? ${'this'} : ~", "this");
+        test("${false} ? ${'this'} : ~", "(NOOP)");
+        test("pepito~", "pepito~");
+        test("pep~ito~", "pep~ito~");
+        test("~pep~ito~", "~pep~ito~");
 
     }
 
