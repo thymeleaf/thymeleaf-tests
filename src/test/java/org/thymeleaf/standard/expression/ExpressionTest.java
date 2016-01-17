@@ -238,16 +238,16 @@ public class ExpressionTest extends TestCase {
         test("~{whatever::body(92)}", "&lt;body&gt;&lt;span th:text=&quot;whatever&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;");
         test("~{::body(92)}", "&lt;body&gt;&lt;span th:text=&quot;~{::body(92)}&quot;&gt;PLACEHOLDER&lt;/span&gt;&lt;/body&gt;");
         test("~{::doctype()}", "&lt;!DOCTYPE html&gt;");
-        test("~", "PLACEHOLDER");
-        test("${true} ? ~", "PLACEHOLDER");
-        test("${false} ? ~", "");
-        test("${'this'} ?: ~", "this");
-        test("${null} ?: ~", "PLACEHOLDER");
-        test("${true} ? ${'this'} : ~", "this");
-        test("${false} ? ${'this'} : ~", "PLACEHOLDER");
-        test("pepito~", "pepito~");
-        test("pep~ito~", "pep~ito~");
-        test("~pep~ito~", "~pep~ito~");
+        test("_", "PLACEHOLDER");
+        test("${true} ? _", "PLACEHOLDER");
+        test("${false} ? _", "");
+        test("${'this'} ?: _", "this");
+        test("${null} ?: _", "PLACEHOLDER");
+        test("${true} ? ${'this'} : _", "this");
+        test("${false} ? ${'this'} : _", "PLACEHOLDER");
+        test("pepito_", "pepito_");
+        test("pep_ito_", "pep_ito_");
+        test("_pep_ito_", "_pep_ito_");
 
     }
 
