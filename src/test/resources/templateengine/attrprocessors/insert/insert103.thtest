@@ -1,14 +1,11 @@
-#
-# We are going to test here what happens when the inserted template does not exist...
-#
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %INPUT
 ...
-<div th:replace-if="whatever :: it">,,,</div>
+<div th:insert="~{whatever :: it} ?: ~{}">,,,</div>
 ...
 # ------------------------------------------------------------
 %OUTPUT
 ...
-<div>,,,</div>
+<div></div>
 ...
