@@ -1,7 +1,7 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %INPUT
-<span th:replace="~{fraggo} ? ~ : ~{f}">...</span>
+<span th:replace="~{fraggo} ? _ : ~{f}">...</span>
 # ------------------------------------------------------------
 %INPUT[fraggo]
 a
