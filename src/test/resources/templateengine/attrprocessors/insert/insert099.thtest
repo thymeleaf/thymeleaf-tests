@@ -1,7 +1,7 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %INPUT
-<head th:insert="basic_template :: header(~,~)">
+<head th:insert="basic_template :: header(_,_)">
 
   <title>Some wonderful page</title>
 
