@@ -15,6 +15,7 @@ one = 'one!'
 <div abbr="old" th:abbr="${null}">..</div>
 <div abbr="old" th:abbr="''">..</div>
 <div abbr="old" th:abbr>..</div>
+<div abbr="old" th:abbr="_">..</div>
 # ------------------------------------------------------------
 %OUTPUT
 <div abbr="one!">..</div>
@@ -28,3 +29,4 @@ one = 'one!'
 <div>..</div>
 <div>..</div>
 <div>..</div>
+<div abbr="old">..</div>
