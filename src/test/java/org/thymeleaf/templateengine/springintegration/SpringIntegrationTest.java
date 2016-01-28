@@ -194,4 +194,21 @@ public class SpringIntegrationTest {
 
 
 
+    @Test
+    public void testRequestUrlsExpOobject() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:templateengine/springintegration/requestdata/urlsexpobject");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
 }
