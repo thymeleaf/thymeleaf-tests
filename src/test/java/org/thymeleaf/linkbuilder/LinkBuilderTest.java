@@ -72,7 +72,46 @@ public class LinkBuilderTest {
 
     }
 
-    
+
+
+    @Test
+    public void testLinkBuilderWithECFactory01() throws Exception {
+
+        final Context ctx = new Context();
+        ctx.setVariable("one", "This is one");
+
+        final TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(new StringTemplateResolver());
+        templateEngine.setLinkBuilder(new TestLinkBuilder());
+        templateEngine.setEngineContextFactory(new TestEngineContextFactory());
+        final String result = templateEngine.process("<a th:href='@{/something}'>", ctx);
+
+        final String expected = "<a href='[ENGINE: /fromthebuilder/something]'>";
+
+        Assert.assertEquals(expected,result);
+
+    }
+
+
+
+    @Test
+    public void testLinkBuilderSpringWithECFactory01() throws Exception {
+
+        final Context ctx = new Context();
+        ctx.setVariable("one", "This is one");
+
+        final TemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(new StringTemplateResolver());
+        templateEngine.setLinkBuilder(new TestLinkBuilder());
+        templateEngine.setEngineContextFactory(new TestEngineContextFactory());
+        final String result = templateEngine.process("<a th:href='@{/something}'>", ctx);
+
+        final String expected = "<a href='[ENGINE: /fromthebuilder/something]'>";
+
+        Assert.assertEquals(expected,result);
+
+    }
+
     
     
 }

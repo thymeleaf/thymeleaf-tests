@@ -19,27 +19,30 @@
  */
 package org.thymeleaf.linkbuilder;
 
+import java.util.Locale;
 import java.util.Map;
 
+import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.EngineContext;
 import org.thymeleaf.context.IExpressionContext;
+import org.thymeleaf.engine.TemplateData;
 
 
-public class TestLinkBuilder extends StandardLinkBuilder {
+public class TestEngineContext extends EngineContext {
 
-    public TestLinkBuilder() {
-        super();
+    private final String linkPrefix;
+
+    public TestEngineContext(
+            final IEngineConfiguration configuration, final TemplateData templateData,
+            final Map<String, Object> templateResolutionAttributes, final Locale locale,
+            final Map<String, Object> variables, final String linkPrefix) {
+        super(configuration, templateData, templateResolutionAttributes, locale, variables);
+        this.linkPrefix = linkPrefix;
     }
 
-    @Override
-    protected String processLink(final IExpressionContext context, final String link) {
-        if (context instanceof TestEngineContext) {
-            return "[" + ((TestEngineContext) context).getLinkPrefix() + link + "]";
-        }
-        return "[" + link + "]";
+
+    public String getLinkPrefix() {
+        return this.linkPrefix;
     }
 
-    @Override
-    protected String computeContextPath(final IExpressionContext context, final String base, final Map<String, Object> parameters) {
-        return "/fromthebuilder";
-    }
 }
