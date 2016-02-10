@@ -30,6 +30,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.EngineContext;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 import org.thymeleaf.templatemode.TemplateMode;
