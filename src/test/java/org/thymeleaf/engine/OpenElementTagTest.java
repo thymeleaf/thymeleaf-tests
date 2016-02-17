@@ -183,7 +183,7 @@ public final class OpenElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.HTML, handler);
+        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.HTML, false, handler);
 
         return handler.tag;
 
@@ -197,7 +197,7 @@ public final class OpenElementTagTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
 
-        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.XML, handler);
+        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.XML, false, handler);
 
         return handler.tag;
 
