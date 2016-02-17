@@ -1374,7 +1374,7 @@ public final class ElementAttributesTest {
 
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, "test", "test", null, new StringTemplateResource(input), TemplateMode.HTML, handler);
+        HTML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, "test", "test", null, new StringTemplateResource(input), TemplateMode.HTML, false, handler);
 
         return handler.elementAttributes;
 
@@ -1387,7 +1387,7 @@ public final class ElementAttributesTest {
 
         final ElementAttributeObtentionTemplateHandler handler = new ElementAttributeObtentionTemplateHandler();
 
-        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, "test", "test", null, new StringTemplateResource(input), TemplateMode.XML, handler);
+        XML_PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, "test", "test", null, new StringTemplateResource(input), TemplateMode.XML, false, handler);
 
         return handler.elementAttributes;
 

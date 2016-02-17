@@ -122,7 +122,7 @@ public class HtmlBlockSelectorMarkupHandlerTest extends TestCase {
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
 
-        parser.parseStandalone(templateEngineContext, templateName, templateName, blockSelectors, new StringTemplateResource(input), TemplateMode.HTML, handler);
+        parser.parseStandalone(templateEngineContext, templateName, templateName, blockSelectors, new StringTemplateResource(input), TemplateMode.HTML, false, handler);
 
         assertEquals("Test failed for file: " + templateName, output, writer.toString());
 

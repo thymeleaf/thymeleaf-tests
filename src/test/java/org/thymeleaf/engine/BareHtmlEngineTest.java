@@ -94,7 +94,7 @@ public final class BareHtmlEngineTest {
         final StringWriter writer = new StringWriter();
         final ITemplateHandler handler = new OutputTemplateHandler(writer);
 
-        PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName,  blockSelectors, new StringTemplateResource(input), TemplateMode.HTML, handler);
+        PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, templateName, templateName,  blockSelectors, new StringTemplateResource(input), TemplateMode.HTML, false, handler);
 
         Assert.assertEquals("Test failed for file: " + templateName, output, writer.toString());
 
