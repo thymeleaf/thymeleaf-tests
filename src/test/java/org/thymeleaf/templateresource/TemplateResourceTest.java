@@ -82,6 +82,7 @@ public final class TemplateResourceTest {
         // The following result might be weird, but the passed path will never exist as it should have been 'cleaned' first
         Assert.assertEquals(".", TemplateResourceUtils.computeBaseName("../something/else/more.html/.."));
         Assert.assertEquals("more_es", TemplateResourceUtils.computeBaseName("something/else/more.html/../../more_es.properties"));
+        Assert.assertEquals("more", TemplateResourceUtils.computeBaseName("more.html"));
 
     }
 
@@ -139,6 +140,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("more", (new ServletContextTemplateResource(servletContext, "../something/else/more.html/", null)).getBaseName());
         Assert.assertEquals("else", (new ServletContextTemplateResource(servletContext, "../something/else/more.html/..", null)).getBaseName());
         Assert.assertEquals("more_es", (new ServletContextTemplateResource(servletContext, "something/else/more.html/../../more_es.properties", null)).getBaseName());
+        Assert.assertEquals("more", (new ServletContextTemplateResource(servletContext, "more.html", null)).getBaseName());
 
     }
 
@@ -196,6 +198,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("more", (new ClassLoaderTemplateResource(classLoader, "../something/else/more.html/", null)).getBaseName());
         Assert.assertEquals("else", (new ClassLoaderTemplateResource(classLoader, "../something/else/more.html/..", null)).getBaseName());
         Assert.assertEquals("more_es", (new ClassLoaderTemplateResource(classLoader, "something/else/more.html/../../more_es.properties", null)).getBaseName());
+        Assert.assertEquals("more", (new ClassLoaderTemplateResource(classLoader, "more.html", null)).getBaseName());
 
     }
 
@@ -251,6 +254,7 @@ public final class TemplateResourceTest {
         Assert.assertEquals("more", (new FileTemplateResource("../something/else/more.html/", null)).getBaseName());
         Assert.assertEquals("else", (new FileTemplateResource("../something/else/more.html/..", null)).getBaseName());
         Assert.assertEquals("more_es", (new FileTemplateResource("something/else/more.html/../../more_es.properties", null)).getBaseName());
+        Assert.assertEquals("more", (new FileTemplateResource("more.html", null)).getBaseName());
 
     }
 
