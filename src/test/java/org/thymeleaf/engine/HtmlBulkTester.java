@@ -79,7 +79,7 @@ public class HtmlBulkTester {
 
             System.out.print("[PARSING]");
 
-            PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, fileInTestFolderName, fileInTestFolderName, null, new FileTemplateResource(fileInTestFolder, "UTF-8"), TemplateMode.HTML, handler);
+            PARSER.parseStandalone(TEMPLATE_ENGINE_CONFIGURATION, fileInTestFolderName, fileInTestFolderName, null, new FileTemplateResource(fileInTestFolder, "UTF-8"), TemplateMode.HTML, false, handler);
 
             // Input stream will be closed by parser
             testOutputWriter.close();
