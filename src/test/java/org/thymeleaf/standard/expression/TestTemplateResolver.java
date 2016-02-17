@@ -72,6 +72,7 @@ public class TestTemplateResolver implements ITemplateResolver {
                         templateResource,
                         true, // For the sake of these tests, considering resource existence verified is fine
                         TemplateMode.HTML,
+                        false,
                         new NonCacheableCacheEntryValidity());
 
         return templateResolution;

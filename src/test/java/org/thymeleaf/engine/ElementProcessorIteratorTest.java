@@ -358,7 +358,7 @@ public final class ElementProcessorIteratorTest {
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
         final IEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
 
-        HTML_PARSER.parseStandalone(templateEngineContext, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.HTML, handler);
+        HTML_PARSER.parseStandalone(templateEngineContext, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.HTML, false, handler);
 
         return handler;
 
@@ -377,7 +377,7 @@ public final class ElementProcessorIteratorTest {
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
         final IEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
 
-        XML_PARSER.parseStandalone(templateEngineContext, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.XML, handler);
+        XML_PARSER.parseStandalone(templateEngineContext, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.XML, false, handler);
 
         return handler;
 
