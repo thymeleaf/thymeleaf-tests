@@ -19,18 +19,19 @@
  */
 package org.thymeleaf.templateparser.decoupled.gtvg;
 
-import java.util.Calendar;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import org.thymeleaf.context.IContext;
 import org.thymeleaf.context.IExpressionContext;
 import org.thymeleaf.linkbuilder.StandardLinkBuilder;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;
 import org.thymeleaf.util.ClassLoaderUtils;
+import org.thymeleaf.util.DateUtils;
 
 
 public class DecoupledGTVGTest {
@@ -40,12 +41,36 @@ public class DecoupledGTVGTest {
     public DecoupledGTVGTest() {
         super();
     }
-    
 
 
-    
+
+
     @Test
-    public void testDecoupledGTVG() throws Exception {
+    public void testGTVGHome() throws Exception {
+
+        final Context ctx = new Context();
+        ctx.setVariable("user", new User("John", "Apricot", "Antarctica", null));
+        ctx.setVariable("today", DateUtils.create(2016, 02, 18));
+
+        test("home", "templateparser/decoupled/gtvg/result/home.html", ctx);
+
+    }
+
+
+
+    @Test
+    public void testGTVGSubscribe() throws Exception {
+
+        test("subscribe", "templateparser/decoupled/gtvg/result/subscribe.html", new Context());
+
+    }
+
+
+
+
+
+
+    private static void test(final String templateName, final String expectedResultLocation, final IContext context) throws Exception {
 
 
         final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
@@ -66,18 +91,12 @@ public class DecoupledGTVGTest {
         });
 
 
-
-        final Context ctx = new Context();
-        ctx.setVariable("user", new User("John", "Apricot", "Antarctica", null));
-        ctx.setVariable("today", Calendar.getInstance());
-
-
-        final String result = templateEngine.process("home", ctx);
-
+        final String result = templateEngine.process(templateName, context);
+        System.out.println(result);
 
         final String expected =
                 ResourceUtils.read(
-                        ClassLoaderUtils.getClassLoader(DecoupledGTVGTest.class).getResourceAsStream("templateparser/decoupled/gtvg/result/home.html"),
+                        ClassLoaderUtils.getClassLoader(DecoupledGTVGTest.class).getResourceAsStream(expectedResultLocation),
                         "ISO-8859-1",
                         true);
 
@@ -85,10 +104,6 @@ public class DecoupledGTVGTest {
 
 
     }
-
-
-
-
 
 
 
