@@ -28,7 +28,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateparser.markup.decoupled.DecoupledTemplateLogicUtils;
-import org.thymeleaf.templateparser.markup.decoupled.DecoupledTemplateMetadata;
+import org.thymeleaf.templateparser.markup.decoupled.DecoupledTemplateLogic;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolution;
 import org.thymeleaf.templateresource.ITemplateResource;
@@ -99,11 +99,11 @@ public class ParsingDecoupled01Test {
         final TemplateResolution templateResolution = templateResolver.resolveTemplate(configuration, null, decoupledTemplate, null);
         final ITemplateResource templateResource = templateResolution.getTemplateResource();
 
-        final DecoupledTemplateMetadata decoupledTemplateMetadata =
-                DecoupledTemplateLogicUtils.computeDecoupledTemplateMetadata(
+        final DecoupledTemplateLogic decoupledTemplateLogic =
+                DecoupledTemplateLogicUtils.computeDecoupledTemplateLogic(
                         configuration, null, decoupledTemplate, null, templateResource, templateMode, (templateMode == TemplateMode.HTML? htmlParser : xmlParser));
 
-        Assert.assertEquals(expectedResult, decoupledTemplateMetadata.toString());
+        Assert.assertEquals(expectedResult, decoupledTemplateLogic.toString());
 
     }
 
