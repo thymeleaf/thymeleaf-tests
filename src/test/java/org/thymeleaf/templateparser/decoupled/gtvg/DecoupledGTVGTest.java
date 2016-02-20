@@ -92,7 +92,6 @@ public class DecoupledGTVGTest {
 
 
         final String result = templateEngine.process(templateName, context);
-        System.out.println(result);
 
         final String expected =
                 ResourceUtils.read(
