@@ -26,6 +26,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  *
@@ -261,10 +262,11 @@ public class StringUtilsTest {
         String result = StringUtils.substring(s, 2);
         assertEquals(expResult, result);
     }
-    @Test(expected= IllegalArgumentException.class)
+    @Test
     public void testSubstring3() {
         Object s = null;
-        StringUtils.substring(s, 2);
+        String result = StringUtils.substring(s, 2);
+        assertNull(result);
     }
     @Test(expected= IllegalArgumentException.class)
     public void testSubstring4() {
