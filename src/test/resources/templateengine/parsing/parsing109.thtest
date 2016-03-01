@@ -5,6 +5,8 @@ one = 'a value'
 # ------------------------------------------------------------
 %INPUT
 <span th:text="${one}">...</span >
+<span th:text="${one}">...</span   >
 # ------------------------------------------------------------
 %OUTPUT
 <span>a value</span >
+<span>a value</span   >
