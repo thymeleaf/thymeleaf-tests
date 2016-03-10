@@ -42,6 +42,7 @@ public class MarkupDialect extends AbstractProcessorDialect {
         processors.add(new MarkupReplaceBodyElementModelProcessor(PREFIX));
         processors.add(new MarkupAddLocalVariableModelProcessor(PREFIX));
         processors.add(new MarkupSetTextInlinerModelProcessor(PREFIX));
+        processors.add(new MarkupDoNothingModelProcessor(PREFIX));
         return processors;
     }
 
