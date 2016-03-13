@@ -226,6 +226,16 @@ public class ExpressionTest extends TestCase {
         test("@{~/xx/yy(login=${logins})}", "/xx/yy?login=loceania&amp;login=meurope&amp;login=jafrica&amp;login=pamerica");
         test("@{~/xx/yy(login=${loginsArray})}", "/xx/yy?login=loceania&amp;login=meurope&amp;login=jafrica&amp;login=pamerica");
         test("@{~/xx/yy(a[0]=${pamerica.name},a[0]=${pamerica.name})}", "/xx/yy?a%5B0%5D=Petronila%20America&amp;a%5B0%5D=Petronila%20America");
+        test("@{~/xx/yy/{name}(name=${pamerica.name})}", "/xx/yy/Petronila%20America");
+        test("@{~/xx/{name}/yy(name=${pamerica.name})}", "/xx/Petronila%20America/yy");
+        test("@{~/xx/{name}(name=#{sum})}", "/xx/1+1=2");
+        test("@{~/xx(name=#{sum})}", "/xx?name=1%2B1%3D2");
+        test("@{~/xx/{name}/yy?(name=${pamerica.name})}", "/xx/Petronila%20America/yy?");
+        test("@{~/xx/{/name}/yy(name=${pamerica.name})}", "/xx/Petronila%20America/yy");
+        test("@{~/xx/{date}(date=#{dateForPath})}", "/xx/10/10/1976");
+        test("@{~/xx/{/date}(date=#{dateForPath})}", "/xx/10%2F10%2F1976");
+        test("@{~/xx/{/date1}/yy/{date2}(date1=#{dateForPath},date2=#{dateForPath})}", "/xx/10%2F10%2F1976/yy/10/10/1976");
+        test("@{~/xx/{/date}(date=#{dateForPath},date2=#{dateForPath})}", "/xx/10%2F10%2F1976?date2=10/10/1976");
         test("${size}", "Size is 5");
         test("${'x' + size}", "xSize is 5");
         test("${size + 'y'}", "Size is 5y");
@@ -333,6 +343,8 @@ public class ExpressionTest extends TestCase {
         props.put("title.user.meurope", "User {0} works for the {1} department");
         props.put("priority.basic", "3");
         props.put("company.yearfounded", "1976");
+        props.put("dateForPath", "10/10/1976");
+        props.put("sum", "1+1=2");
         
         
         this.templateEngine.setMessageResolver(new TestMessageResolver(props));
