@@ -48,7 +48,7 @@ public class MarkupPrintAfterElementModelProcessor extends AbstractAttributeMode
 
         final String markupStr = HtmlEscape.escapeHtml4Xml(model.toString().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
 
-        final IModelFactory modelFactory = context.getConfiguration().getModelFactory(getTemplateMode());
+        final IModelFactory modelFactory = context.getModelFactory();
 
         final IProcessableElementTag newTag = modelFactory.setAttribute((IProcessableElementTag) model.get(0), "aggafter", markupStr);
 
