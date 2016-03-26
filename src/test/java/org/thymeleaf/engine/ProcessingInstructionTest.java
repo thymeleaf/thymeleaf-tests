@@ -21,8 +21,6 @@ package org.thymeleaf.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.text.ITextRepository;
-import org.thymeleaf.text.TextRepositories;
 
 
 public final class ProcessingInstructionTest {
@@ -30,8 +28,6 @@ public final class ProcessingInstructionTest {
 
     @Test
     public void test() {
-
-        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
 
         final String procInstr1 = "<?something someother and other and other?>";
         final String procInstr2 = "<?anything-else someother and other and other?>";
@@ -46,8 +42,7 @@ public final class ProcessingInstructionTest {
         final String content3 = null;
 
 
-        final ProcessingInstruction d1 = new ProcessingInstruction(textRepository);
-        d1.reset(
+        ProcessingInstruction d1 = new ProcessingInstruction(
                 procInstr1,
                 target1,
                 content1,
@@ -60,12 +55,11 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(11, d1.getLine());
         Assert.assertEquals(4, d1.getCol());
 
-        d1.reset(
+        d1 = new ProcessingInstruction(
                 procInstr1,
                 target1,
                 content1,
-                "template", 10, 3
-        );
+                "template", 10, 3);
 
         Assert.assertSame(procInstr1, d1.getProcessingInstruction());
         Assert.assertSame(target1, d1.getTarget());
@@ -74,7 +68,9 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(10, d1.getLine());
         Assert.assertEquals(3, d1.getCol());
 
-        d1.setTarget(target2);
+        d1 = new ProcessingInstruction(
+                target2,
+                d1.getContent());
 
         Assert.assertEquals(procInstr2, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
@@ -83,7 +79,9 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
-        d1.setContent(content2);
+        d1 = new ProcessingInstruction(
+                d1.getTarget(),
+                content2);
 
         Assert.assertEquals(procInstr3, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
@@ -92,7 +90,9 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
-        d1.setContent(content3);
+        d1 = new ProcessingInstruction(
+                d1.getTarget(),
+                content3);
 
         Assert.assertEquals(procInstr4, d1.getProcessingInstruction());
         Assert.assertSame(target2, d1.getTarget());
@@ -103,9 +103,8 @@ public final class ProcessingInstructionTest {
 
 
 
-        final ProcessingInstruction d2 =
+        ProcessingInstruction d2 =
                 new ProcessingInstruction(
-                    textRepository,
                     target1,
                     content1);
 
@@ -117,9 +116,8 @@ public final class ProcessingInstructionTest {
         Assert.assertEquals(-1, d2.getCol());
 
 
-        final ProcessingInstruction d3 =
+        ProcessingInstruction d3 =
                 new ProcessingInstruction(
-                        textRepository,
                         target2,
                         null);
 
