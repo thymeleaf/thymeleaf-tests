@@ -19,11 +19,13 @@
  */
 package org.thymeleaf.templateengine.prepostprocessors.dialect;
 
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.engine.AbstractTemplateHandler;
 import org.thymeleaf.model.ICDATASection;
 import org.thymeleaf.model.ICloseElementTag;
 import org.thymeleaf.model.IComment;
 import org.thymeleaf.model.IDocType;
+import org.thymeleaf.model.IModelFactory;
 import org.thymeleaf.model.IOpenElementTag;
 import org.thymeleaf.model.IProcessingInstruction;
 import org.thymeleaf.model.IStandaloneElementTag;
@@ -43,18 +45,28 @@ public class Dialect01PreProcessor extends AbstractTemplateHandler {
     private int docTypes = 0;
     private int xmlDeclarations = 0;
 
+    private IModelFactory modelFactory;
 
-    
+
     public Dialect01PreProcessor() {
         super();
     }
 
 
+
+
+    @Override
+    public void setContext(final ITemplateContext context) {
+        super.setContext(context);
+        this.modelFactory = context.getConfiguration().getModelFactory(context.getTemplateMode());
+    }
+
+
+
     @Override
     public void handleProcessingInstruction(final IProcessingInstruction processingInstruction) {
         final String content = nullToEmpty(processingInstruction.getContent());
-        processingInstruction.setContent(content + "(pre:" + this.processingInstructions++ + ")");
-        super.handleProcessingInstruction(processingInstruction);
+        super.handleProcessingInstruction(this.modelFactory.createProcessingInstruction(processingInstruction.getTarget(), content + "(pre:" + this.processingInstructions++ + ")"));
     }
 
     @Override
@@ -65,49 +77,42 @@ public class Dialect01PreProcessor extends AbstractTemplateHandler {
 
     @Override
     public void handleOpenElement(final IOpenElementTag openElementTag) {
-        openElementTag.getAttributes().setAttribute("pre", "" + this.openElementTags++);
-        super.handleOpenElement(openElementTag);
+        super.handleOpenElement(this.modelFactory.setAttribute(openElementTag, "pre", "" + this.openElementTags++));
     }
 
     @Override
     public void handleStandaloneElement(final IStandaloneElementTag standaloneElementTag) {
-        standaloneElementTag.getAttributes().setAttribute("pre", "" + this.standaloneElementTags++);
-        super.handleStandaloneElement(standaloneElementTag);
+        super.handleStandaloneElement(this.modelFactory.setAttribute(standaloneElementTag, "pre", "" + this.standaloneElementTags++));
     }
 
     @Override
     public void handleText(final IText text) {
         final String t = nullToEmpty(text.getText());
-        text.setText(t + "(pre:" + this.texts++ + ")");
-        super.handleText(text);
+        super.handleText(this.modelFactory.createText(t + "(pre:" + this.texts++ + ")"));
     }
 
     @Override
     public void handleComment(final IComment comment) {
         final String c = nullToEmpty(comment.getContent());
-        comment.setContent(c + "(pre:" + this.comments++ + ")");
-        super.handleComment(comment);
+        super.handleComment(this.modelFactory.createComment(c + "(pre:" + this.comments++ + ")"));
     }
 
     @Override
     public void handleCDATASection(final ICDATASection cdataSection) {
         final String c = nullToEmpty(cdataSection.getContent());
-        cdataSection.setContent(c + "(pre:" + this.cdataSections++ + ")");
-        super.handleCDATASection(cdataSection);
+        super.handleCDATASection(this.modelFactory.createCDATASection(c + "(pre:" + this.cdataSections++ + ")"));
     }
 
     @Override
     public void handleDocType(final IDocType docType) {
         final String is = nullToEmpty(docType.getInternalSubset());
-        docType.setInternalSubset(is + "(pre:" + this.docTypes++ + ")");
-        super.handleDocType(docType);
+        super.handleDocType(this.modelFactory.createDocType(docType.getKeyword(), docType.getElementName(), docType.getPublicId(), docType.getSystemId(), is + "(pre:" + this.docTypes++ + ")"));
     }
 
     @Override
     public void handleXMLDeclaration(final IXMLDeclaration xmlDeclaration) {
         final String is = nullToEmpty(xmlDeclaration.getEncoding());
-        xmlDeclaration.setEncoding(is + "(pre:" + this.xmlDeclarations++ + ")");
-        super.handleXMLDeclaration(xmlDeclaration);
+        super.handleXMLDeclaration(this.modelFactory.createXMLDeclaration(xmlDeclaration.getVersion(), is + "(pre:" + this.xmlDeclarations++ + ")", xmlDeclaration.getStandalone()));
     }
 
     @Override

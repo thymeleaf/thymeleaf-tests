@@ -39,7 +39,7 @@ public class Dialect01TextProcessor extends AbstractTextProcessor {
     protected void doProcess(
             final ITemplateContext processingContext, final IText text, final ITextStructureHandler structureHandler) {
 
-        text.setText(text.getText() + "[01]");
+        structureHandler.setText(text.getText() + "[01]");
 
     }
 

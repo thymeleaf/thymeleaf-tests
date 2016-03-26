@@ -37,7 +37,7 @@ public class InteractionDialect01CDATASectionProcessor extends AbstractCDATASect
     protected void doProcess(
             final ITemplateContext context, final ICDATASection cdataSection, final ICDATASectionStructureHandler structureHandler) {
 
-        cdataSection.setContent("||" + cdataSection.getContent() + "||");
+        structureHandler.setContent("||" + cdataSection.getContent() + "||");
 
     }
 

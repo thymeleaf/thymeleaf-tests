@@ -22,6 +22,7 @@ package org.thymeleaf.templateengine.elementprocessors.dialect;
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IModel;
+import org.thymeleaf.model.IModelFactory;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
 import org.thymeleaf.processor.element.IElementModelStructureHandler;
@@ -46,7 +47,12 @@ public class MarkupPrintAfterElementModelProcessor extends AbstractAttributeMode
                              final IElementModelStructureHandler structureHandler) {
 
         final String markupStr = HtmlEscape.escapeHtml4Xml(model.toString().replaceAll("\\r\\n|\\r|\\n", "\\\\n"));
-        ((IProcessableElementTag) model.get(0)).getAttributes().setAttribute("aggafter", markupStr);
+
+        final IModelFactory modelFactory = context.getConfiguration().getModelFactory(getTemplateMode());
+
+        final IProcessableElementTag newTag = modelFactory.setAttribute((IProcessableElementTag) model.get(0), "aggafter", markupStr);
+
+        model.replace(0, newTag);
 
     }
 
