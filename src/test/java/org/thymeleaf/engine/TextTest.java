@@ -24,11 +24,8 @@ import java.io.Writer;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.model.IModelVisitor;
 import org.thymeleaf.model.IText;
-import org.thymeleaf.text.ITextRepository;
-import org.thymeleaf.text.TextRepositories;
 
 
 public final class TextTest {
@@ -37,12 +34,7 @@ public final class TextTest {
     @Test
     public void test() {
 
-        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
-
-        final char[] buf1 = "hello".toCharArray();
-
-        final Text c1 = new Text(textRepository);
-        c1.reset(buf1, 0, 5, "template", 10, 3);
+        Text c1 = new Text("hello", "template", 10, 3);
         Assert.assertEquals("hello", extractText(c1));
         final String c1all = c1.getText();
         Assert.assertEquals("hello", c1all);
@@ -52,36 +44,11 @@ public final class TextTest {
         Assert.assertEquals(3, c1.getCol());
 
         final String c1c0 = " something\nhere ";
-        c1.setText(c1c0);
+        c1 = new Text(c1c0);
         Assert.assertSame(c1c0, c1.getText());
-        Assert.assertSame(textRepository.getText(" something\nhere "), c1.getText());
         Assert.assertNull(c1.getTemplateName());
         Assert.assertEquals(-1, c1.getLine());
         Assert.assertEquals(-1, c1.getCol());
-
-        final String c1c2 = "hey!";
-        c1.setText(c1c2);
-        final String c1c2_2 = c1.getText();
-        Assert.assertSame(c1c2, c1c2_2);
-        Assert.assertSame(c1c2, c1.getText());
-
-        c1.reset(c1c0.toCharArray(), 0, c1c0.length(), "template", 11, 4);
-        final String c1c3_2 = c1.getText();
-        Assert.assertEquals(c1c0, c1c3_2);
-        Assert.assertSame(c1c3_2, c1.getText());
-        Assert.assertEquals("template", c1.getTemplateName());
-        Assert.assertEquals(11, c1.getLine());
-        Assert.assertEquals(4, c1.getCol());
-
-
-        final String c2c1 = "hello";
-        final Text c2 = new Text(textRepository, c2c1);
-        final String c2cs1_2 = c2.getText();
-        Assert.assertEquals(c2c1, c2cs1_2);
-        Assert.assertSame(c2cs1_2, c2.getText());
-        Assert.assertNull(c2.getTemplateName());
-        Assert.assertEquals(-1, c2.getLine());
-        Assert.assertEquals(-1, c2.getCol());
 
     }
 
@@ -89,19 +56,13 @@ public final class TextTest {
     @Test
     public void testSubsection() {
 
-        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
-
-        Text c1 = new Text(textRepository);
-
-        c1.setText("something");
+        Text c1 = new Text("something");
 
         Assert.assertEquals("thing", c1.subSequence(4, 9));
         Assert.assertEquals("some", c1.subSequence(0, 4));
 
 
-        c1 = new Text(textRepository);
-
-        c1.reset("something".toCharArray(), 0, 9, "test", 1, 1);
+        c1 = new Text("something", "test", 1, 1);
 
         Assert.assertEquals("thing", c1.subSequence(4, 9));
         Assert.assertEquals("some", c1.subSequence(0, 4));
@@ -169,11 +130,7 @@ public final class TextTest {
 
     private static void testFlags(final String text, final boolean whitespace, final boolean inlineable) {
 
-        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
-
-        Text t1 = new Text(textRepository);
-        t1.reset(text.toCharArray(), 0, text.length(), "test", 1, 1);
-        t1.computeContentFlags();
+        Text t1 = new Text(text);
 
         if (whitespace) {
             Assert.assertTrue(t1.isWhitespace());
@@ -186,9 +143,7 @@ public final class TextTest {
             Assert.assertFalse(t1.isInlineable());
         }
 
-        t1 = new Text(textRepository);
-        t1.reset(("----[[...]]" + text + "[[...]]----").toCharArray(), 11, text.length(), "test", 1, 1);
-        t1.computeContentFlags();
+        t1 = new Text(text, "test", 1, 1);
 
         if (whitespace) {
             Assert.assertTrue(t1.isWhitespace());
@@ -201,100 +156,7 @@ public final class TextTest {
             Assert.assertFalse(t1.isInlineable());
         }
 
-        t1 = new Text(textRepository);
-        t1.reset(("----" + text + "----").toCharArray(), 4, text.length(), "test", 1, 1);
-        t1.computeContentFlags();
-
-        if (whitespace) {
-            Assert.assertTrue(t1.isWhitespace());
-        } else {
-            Assert.assertFalse(t1.isWhitespace());
-        }
-        if (inlineable) {
-            Assert.assertTrue(t1.isInlineable());
-        } else {
-            Assert.assertFalse(t1.isInlineable());
-        }
-
-        t1.setText(text);
-        t1.computeContentFlags();
-
-        if (whitespace) {
-            Assert.assertTrue(t1.isWhitespace());
-        } else {
-            Assert.assertFalse(t1.isWhitespace());
-        }
-        if (inlineable) {
-            Assert.assertTrue(t1.isInlineable());
-        } else {
-            Assert.assertFalse(t1.isInlineable());
-        }
-
-        t1 = new Text(textRepository);
-        t1.reset(text.toCharArray(), 0, text.length(), "test", 1, 1);
-        t1.computeContentFlags();
-
-        Text t2 = t1.cloneEvent();
-
-        if (whitespace) {
-            Assert.assertTrue(t2.isWhitespace());
-        } else {
-            Assert.assertFalse(t2.isWhitespace());
-        }
-        if (inlineable) {
-            Assert.assertTrue(t2.isInlineable());
-        } else {
-            Assert.assertFalse(t2.isInlineable());
-        }
-
-        t1 = new Text(textRepository);
-        t1.setText(text);
-        t1.computeContentFlags();
-
-        t2 = t1.cloneEvent();
-
-        if (whitespace) {
-            Assert.assertTrue(t2.isWhitespace());
-        } else {
-            Assert.assertFalse(t2.isWhitespace());
-        }
-        if (inlineable) {
-            Assert.assertTrue(t2.isInlineable());
-        } else {
-            Assert.assertFalse(t2.isInlineable());
-        }
-
-        t1 = new Text(textRepository);
-        t1.reset(text.toCharArray(), 0, text.length(), "test", 1, 1);
-
-        if (whitespace) {
-            Assert.assertTrue(t1.isWhitespace());
-        } else {
-            Assert.assertFalse(t1.isWhitespace());
-        }
-        if (inlineable) {
-            Assert.assertTrue(t1.isInlineable());
-        } else {
-            Assert.assertFalse(t1.isInlineable());
-        }
-
-        t1 = new Text(textRepository);
-        t1.setText(text);
-
-        if (whitespace) {
-            Assert.assertTrue(t1.isWhitespace());
-        } else {
-            Assert.assertFalse(t1.isWhitespace());
-        }
-        if (inlineable) {
-            Assert.assertTrue(t1.isInlineable());
-        } else {
-            Assert.assertFalse(t1.isInlineable());
-        }
-
-
-        t1 = new Text(textRepository);
-        t1.setText(text);
+        t1 = new Text(text);
         // By using the wrappers we avoid the utils methods calling the engine implementations (which are already tested above)
         boolean bWhitespace1 = EngineEventUtils.isWhitespace(new TextWrapper(t1));
         boolean bInlineable1 = EngineEventUtils.isInlineable(new TextWrapper(t1));
@@ -321,32 +183,8 @@ public final class TextTest {
             this.delegate = delegate;
         }
 
-        public void resetTemplateEvent(final String templateName, final int line, final int col) {
-            delegate.resetTemplateEvent(templateName, line, col);
-        }
-
-        public boolean isWhitespace() {
-            return delegate.isWhitespace();
-        }
-
-        public void computeContentFlags() {
-            delegate.computeContentFlags();
-        }
-
-        public void resetAsCloneOf(final Text original) {
-            delegate.resetAsCloneOf(original);
-        }
-
-        public void resetAsCloneOfTemplateEvent(final AbstractTemplateEvent original) {
-            delegate.resetAsCloneOfTemplateEvent(original);
-        }
-
-        public static Text asEngineText(final IEngineConfiguration configuration, final IText text, final boolean cloneAlways) {
-            return Text.asEngineText(configuration, text, cloneAlways);
-        }
-
-        public boolean isInlineable() {
-            return delegate.isInlineable();
+        public static Text asEngineText(final IText text) {
+            return Text.asEngineText(text);
         }
 
         public String getText() {
@@ -365,24 +203,12 @@ public final class TextTest {
             return delegate.subSequence(start, end);
         }
 
-        public void reset(final char[] buffer, final int offset, final int len, final String templateName, final int line, final int col) {
-            delegate.reset(buffer, offset, len, templateName, line, col);
-        }
-
-        public void setText(final CharSequence text) {
-            delegate.setText(text);
-        }
-
         public void accept(final IModelVisitor visitor) {
             delegate.accept(visitor);
         }
 
         public void write(final Writer writer) throws IOException {
             delegate.write(writer);
-        }
-
-        public Text cloneEvent() {
-            return delegate.cloneEvent();
         }
 
         public String getTemplateName() {

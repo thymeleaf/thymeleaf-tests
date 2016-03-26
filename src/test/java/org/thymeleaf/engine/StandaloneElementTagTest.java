@@ -19,10 +19,13 @@
  */
 package org.thymeleaf.engine;
 
+import java.util.Collections;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
+import org.thymeleaf.model.AttributeValueQuotes;
 import org.thymeleaf.model.IStandaloneElementTag;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
@@ -42,7 +45,9 @@ public final class StandaloneElementTagTest {
     @Test
     public void testHtmlStandaloneElementAttrManagement() {
 
-        IStandaloneElementTag tag;
+        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions(Collections.EMPTY_MAP);
+
+        StandaloneElementTag tag;
 
         tag = computeHtmlTag("<input>");
         Assert.assertEquals("<input>", tag.toString());
@@ -52,39 +57,39 @@ public final class StandaloneElementTagTest {
 
         tag = computeHtmlTag("<input type=\"text\"   value='hello!!!'>");
         Assert.assertEquals("<input type=\"text\"   value='hello!!!'>", tag.toString());
-        tag.getAttributes().removeAttribute("type");
+        tag = tag.removeAttribute("type");
         Assert.assertEquals("<input value='hello!!!'>", tag.toString());
-        tag.getAttributes().removeAttribute("value");
+        tag = tag.removeAttribute("value");
         Assert.assertEquals("<input>", tag.toString());
 
         tag = computeHtmlTag("<input type=\"text\"   value='hello!!!'    >");
         Assert.assertEquals("<input type=\"text\"   value='hello!!!'    >", tag.toString());
-        tag.getAttributes().removeAttribute(null, "type");
+        tag = tag.removeAttribute(null, "type");
         Assert.assertEquals("<input value='hello!!!'    >", tag.toString());
-        tag.getAttributes().removeAttribute(null, "value");
+        tag = tag.removeAttribute(null, "value");
         Assert.assertEquals("<input    >", tag.toString());
 
         tag = computeHtmlTag("<input type=\"text\"   value='hello!!!'    ba >");
         Assert.assertEquals("<input type=\"text\"   value='hello!!!'    ba >", tag.toString());
-        tag.getAttributes().setAttribute("value", "bye! :(");
+        tag = tag.setAttribute(attributeDefinitions, null, "value", "bye! :(", null);
         Assert.assertEquals("<input type=\"text\"   value='bye! :('    ba >", tag.toString());
-        tag.getAttributes().setAttribute("type", "one");
+        tag = tag.setAttribute(attributeDefinitions, null, "type", "one", null);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba >", tag.toString());
-        tag.getAttributes().setAttribute("ba", "two");
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "two", null);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba=\"two\" >", tag.toString());
-        tag.getAttributes().setAttribute("ba", "three", ElementAttributes.ValueQuotes.SINGLE);
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "three", AttributeValueQuotes.SINGLE);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba='three' >", tag.toString());
-        tag.getAttributes().setAttribute("ba", "four", ElementAttributes.ValueQuotes.NONE);
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "four", AttributeValueQuotes.NONE);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba=four >", tag.toString());
-        tag.getAttributes().setAttribute("ba", "five");
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "five", null);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba=five >", tag.toString());
-        tag.getAttributes().setAttribute("ba", null);
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", null, null);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba >", tag.toString());
-        tag.getAttributes().setAttribute("ba", "six");
-        Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba=six >", tag.toString());
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "six", null);
+        Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba=\"six\" >", tag.toString());
 
         tag = computeHtmlTag("<input type=\"text\"   value='hello!!!'    ba=twenty >");
-        tag.getAttributes().setAttribute("ba", "thirty");
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "thirty", null);
         Assert.assertEquals("<input type=\"text\"   value='hello!!!'    ba=thirty >", tag.toString());
 
         tag = computeHtmlTag("<input type=\"text\"   value='hello!!!'    ba=twenty ><p id='one'/>");
@@ -98,7 +103,9 @@ public final class StandaloneElementTagTest {
     @Test
     public void testXmlStandaloneElementAttrManagement() {
 
-        IStandaloneElementTag tag;
+        final AttributeDefinitions attributeDefinitions = new AttributeDefinitions(Collections.EMPTY_MAP);
+
+        StandaloneElementTag tag;
 
         tag = computeXmlTag("<input/>");
         Assert.assertEquals("<input/>", tag.toString());
@@ -108,60 +115,60 @@ public final class StandaloneElementTagTest {
 
         tag = computeXmlTag("<input type=\"text\"   value='hello!!!'/>");
         Assert.assertEquals("<input type=\"text\"   value='hello!!!'/>", tag.toString());
-        tag.getAttributes().removeAttribute("type");
+        tag = tag.removeAttribute("type");
         Assert.assertEquals("<input value='hello!!!'/>", tag.toString());
-        tag.getAttributes().removeAttribute("value");
+        tag = tag.removeAttribute("value");
         Assert.assertEquals("<input/>", tag.toString());
 
         tag = computeXmlTag("<input type=\"text\"   value='hello!!!'    />");
         Assert.assertEquals("<input type=\"text\"   value='hello!!!'    />", tag.toString());
-        tag.getAttributes().removeAttribute(null, "type");
+        tag = tag.removeAttribute(null, "type");
         Assert.assertEquals("<input value='hello!!!'    />", tag.toString());
-        tag.getAttributes().removeAttribute(null, "value");
+        tag = tag.removeAttribute(null, "value");
         Assert.assertEquals("<input    />", tag.toString());
 
         tag = computeXmlTag("<input th:type=\"text\"   th:value='hello!!!'    />");
         Assert.assertEquals("<input th:type=\"text\"   th:value='hello!!!'    />", tag.toString());
-        tag.getAttributes().removeAttribute("th", "type");
+        tag = tag.removeAttribute("th", "type");
         Assert.assertEquals("<input th:value='hello!!!'    />", tag.toString());
-        tag.getAttributes().removeAttribute("th", "value");
+        tag = tag.removeAttribute("th", "value");
         Assert.assertEquals("<input    />", tag.toString());
 
         tag = computeXmlTag("<input type=\"text\"   value='hello!!!'    ba='' />");
         Assert.assertEquals("<input type=\"text\"   value='hello!!!'    ba='' />", tag.toString());
-        tag.getAttributes().setAttribute("value", "bye! :(");
+        tag = tag.setAttribute(attributeDefinitions, null, "value", "bye! :(", null);
         Assert.assertEquals("<input type=\"text\"   value='bye! :('    ba='' />", tag.toString());
-        tag.getAttributes().setAttribute("type", "one");
+        tag = tag.setAttribute(attributeDefinitions, null, "type", "one", null);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba='' />", tag.toString());
-        tag.getAttributes().setAttribute("ba", "two");
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "two", null);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba='two' />", tag.toString());
-        tag.getAttributes().setAttribute("ba", "three", ElementAttributes.ValueQuotes.SINGLE);
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "three", AttributeValueQuotes.SINGLE);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba='three' />", tag.toString());
 
         try {
-            tag.getAttributes().setAttribute("ba", "four", ElementAttributes.ValueQuotes.NONE);
+            tag = tag.setAttribute(attributeDefinitions, null, "ba", "four", AttributeValueQuotes.NONE);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            tag.getAttributes().setAttribute("ba", null, ElementAttributes.ValueQuotes.NONE);
+            tag = tag.setAttribute(attributeDefinitions, null, "ba", null, AttributeValueQuotes.NONE);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
         try {
-            tag.getAttributes().setAttribute("ba", null);
+            tag = tag.setAttribute(attributeDefinitions, null, "ba", null, null);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
 
-        tag.getAttributes().setAttribute("ba", "five");
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "five", null);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba='five' />", tag.toString());
-                tag.getAttributes().setAttribute("ba", "six");
+        tag = tag.setAttribute(attributeDefinitions, null, "ba", "six", null);
         Assert.assertEquals("<input type=\"one\"   value='bye! :('    ba='six' />", tag.toString());
 
         tag = computeXmlTag("<input type=\"text\"   value='hello!!!'    ba='twenty' /><meta id='one' />");
@@ -178,18 +185,18 @@ public final class StandaloneElementTagTest {
     @Test
     public void testHtmlStandaloneElementPropertyManagement() {
 
-        IStandaloneElementTag tag;
+        StandaloneElementTag tag;
         final ElementDefinitions elementDefinitions = TEMPLATE_ENGINE_CONFIGURATION.getElementDefinitions();
 
         tag = computeHtmlTag("<input>");
         Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
-        tag.setMinimized(true);
+        tag = new StandaloneElementTag(tag.templateMode, tag.elementDefinition, tag.elementCompleteName, tag.attributes, tag.synthetic, true, tag.templateName, tag.line, tag.col);
         Assert.assertEquals("<input/>", tag.toString());
         Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
 
         tag = computeHtmlTag("<input />");
         Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
-        tag.setMinimized(false);
+        tag = new StandaloneElementTag(tag.templateMode, tag.elementDefinition, tag.elementCompleteName, tag.attributes, tag.synthetic, false, tag.templateName, tag.line, tag.col);
         Assert.assertEquals("<input >", tag.toString());
         Assert.assertSame(elementDefinitions.forHTMLName("input"), tag.getElementDefinition());
 
@@ -205,13 +212,13 @@ public final class StandaloneElementTagTest {
     @Test
     public void testXmlStandaloneElementPropertyManagement() {
 
-        IStandaloneElementTag tag;
+        StandaloneElementTag tag;
         final ElementDefinitions elementDefinitions = TEMPLATE_ENGINE_CONFIGURATION.getElementDefinitions();
 
         tag = computeXmlTag("<input/>");
         Assert.assertSame(elementDefinitions.forXMLName("input"), tag.getElementDefinition());
         try {
-            tag.setMinimized(false); // XML standalone elements cannot be un-minimized
+            tag = new StandaloneElementTag(tag.templateMode, tag.elementDefinition, tag.elementCompleteName, tag.attributes, tag.synthetic, false, tag.templateName, tag.line, tag.col);
             Assert.assertTrue(false);
         } catch (final IllegalArgumentException e) {
             Assert.assertTrue(true);
@@ -222,7 +229,7 @@ public final class StandaloneElementTagTest {
 
 
 
-    private static IStandaloneElementTag computeHtmlTag(final String input) {
+    private static StandaloneElementTag computeHtmlTag(final String input) {
 
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
@@ -236,7 +243,7 @@ public final class StandaloneElementTagTest {
 
 
 
-    private static IStandaloneElementTag computeXmlTag(final String input) {
+    private static StandaloneElementTag computeXmlTag(final String input) {
 
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
@@ -253,12 +260,12 @@ public final class StandaloneElementTagTest {
     private static class TagObtentionTemplateHandler extends AbstractTemplateHandler {
 
 
-        IStandaloneElementTag tag;
+        StandaloneElementTag tag;
 
 
         @Override
         public void handleStandaloneElement(final IStandaloneElementTag standaloneElementTag) {
-            this.tag = standaloneElementTag.cloneEvent();
+            this.tag = StandaloneElementTag.asEngineStandaloneElementTag(standaloneElementTag);
         }
 
     }

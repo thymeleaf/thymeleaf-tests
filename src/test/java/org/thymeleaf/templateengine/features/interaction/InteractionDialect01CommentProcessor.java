@@ -37,7 +37,7 @@ public class InteractionDialect01CommentProcessor extends AbstractCommentProcess
     protected void doProcess(
             final ITemplateContext context, final IComment comment, final ICommentStructureHandler structureHandler) {
 
-        comment.setContent("||" + comment.getContent() + "||");
+        structureHandler.setContent("||" + comment.getContent() + "||");
 
     }
 

@@ -25,6 +25,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
+import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.dialect.IProcessorDialect;
@@ -71,11 +72,12 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-15-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-10-null-{th:src,data-th-src}", iterator.next(tag).toString());
         Assert.assertEquals("N-ELEMENT-15-null-{th:one,data-th-one}", iterator.next(tag).toString());
         Assert.assertNull(iterator.next(tag));
@@ -92,11 +94,12 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-7-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-7-null-{th:one,data-th-one}", iterator.next(tag).toString());
         Assert.assertEquals("N-ELEMENT-10-null-{th:src,data-th-src}", iterator.next(tag).toString());
         Assert.assertNull(iterator.next(tag));
@@ -113,11 +116,12 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
         Assert.assertEquals("N-ELEMENT-10-null-{th:src,data-th-src}", iterator.next(tag).toString());
         Assert.assertNull(iterator.next(tag));
@@ -134,10 +138,11 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
         Assert.assertEquals("N-ELEMENT-10-null-{th:src,data-th-src}", iterator.next(tag).toString());
@@ -156,9 +161,9 @@ public final class ElementProcessorIteratorTest {
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
-        tag.getAttributes().removeAttribute("th:src");
+        tag = tag.removeAttribute("th:src");
         Assert.assertNull(iterator.next(tag));
 
     }
@@ -173,11 +178,12 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
-        tag.getAttributes().removeAttribute("th:src");
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.removeAttribute("th:src");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
         Assert.assertNull(iterator.next(tag));
 
@@ -193,12 +199,13 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
-        tag.getAttributes().removeAttribute("data-th-src");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
+        tag = tag.removeAttribute("data-th-src");
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
         Assert.assertNull(iterator.next(tag));
 
@@ -214,13 +221,14 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
-        tag.getAttributes().removeAttribute("th:src");
+        tag = tag.removeAttribute("th:src");
         Assert.assertNull(iterator.next(tag));
 
     }
@@ -237,13 +245,14 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
-        tag.getAttributes().removeAttribute("th:src");
+        tag = tag.removeAttribute("th:src");
         Assert.assertNull(iterator.next(tag));
 
     }
@@ -258,13 +267,14 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
-        tag.getAttributes().removeAttribute("th:src");
+        tag = tag.removeAttribute("th:src");
         Assert.assertNull(iterator.next(tag));
 
     }
@@ -281,13 +291,14 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-null-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-null-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
-        tag.getAttributes().removeAttribute("th:src");
+        tag = tag.removeAttribute("th:src");
         Assert.assertNull(iterator.next(tag));
 
     }
@@ -302,13 +313,14 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-*a-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><p th:src='uuuh'><a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-{a}-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
-        tag.getAttributes().removeAttribute("th:src");
+        tag = tag.removeAttribute("th:src");
         Assert.assertNull(iterator.next(tag));
 
     }
@@ -325,19 +337,17 @@ public final class ElementProcessorIteratorTest {
                         "N-ELEMENT-10-null-src,N-ELEMENT-5-*a-src,N-ELEMENT-2-null-one");
 
         final TagObtentionTemplateHandler handler = computeHtmlTag("<div class='one'><p th:src='uuuh'><a th:src='hello'>", dialect);
+        final AttributeDefinitions attributeDefinitions = handler.attributeDefinitions;
         final ElementProcessorIterator iterator = handler.iter;
-        final OpenElementTag tag = handler.tag;
+        OpenElementTag tag = handler.tag;
 
         Assert.assertEquals("N-ELEMENT-5-{a}-{th:src,data-th-src}", iterator.next(tag).toString());
-        tag.getAttributes().setAttribute("th:one", "somevalue");
+        tag = tag.setAttribute(attributeDefinitions, null, "th:one", "somevalue", null);
         Assert.assertEquals("N-ELEMENT-2-null-{th:one,data-th-one}", iterator.next(tag).toString());
-        tag.getAttributes().removeAttribute("th:src");
+        tag = tag.removeAttribute("th:src");
         Assert.assertNull(iterator.next(tag));
 
     }
-
-
-
 
 
 
@@ -357,6 +367,7 @@ public final class ElementProcessorIteratorTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
         final IEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
+        handler.attributeDefinitions = templateEngineContext.getAttributeDefinitions();
 
         HTML_PARSER.parseStandalone(templateEngineContext, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.HTML, false, handler);
 
@@ -376,6 +387,7 @@ public final class ElementProcessorIteratorTest {
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
         final IEngineConfiguration templateEngineContext = TestTemplateEngineConfigurationBuilder.build(dialects);
+        handler.attributeDefinitions = templateEngineContext.getAttributeDefinitions();
 
         XML_PARSER.parseStandalone(templateEngineContext, templateName, templateName, null, new StringTemplateResource(input), TemplateMode.XML, false, handler);
 
@@ -388,6 +400,7 @@ public final class ElementProcessorIteratorTest {
 
     private static class TagObtentionTemplateHandler extends AbstractTemplateHandler {
 
+        AttributeDefinitions attributeDefinitions;
         OpenElementTag tag;
         ElementProcessorIterator iter = new ElementProcessorIterator();
 
@@ -395,6 +408,11 @@ public final class ElementProcessorIteratorTest {
             super();
         }
 
+        @Override
+        public void setContext(final ITemplateContext context) {
+            super.setContext(context);
+            this.attributeDefinitions = context.getConfiguration().getAttributeDefinitions();
+        }
 
         @Override
         public void handleOpenElement(final IOpenElementTag openElementTag) {

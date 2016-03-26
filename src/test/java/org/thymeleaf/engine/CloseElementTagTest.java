@@ -39,7 +39,7 @@ public final class CloseElementTagTest {
 
 
 
-    private static ICloseElementTag computeHtmlTag(final String input) {
+    private static CloseElementTag computeHtmlTag(final String input) {
 
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
@@ -53,7 +53,7 @@ public final class CloseElementTagTest {
 
 
 
-    private static ICloseElementTag computeXmlTag(final String input) {
+    private static CloseElementTag computeXmlTag(final String input) {
 
         final String templateName = "test";
         final TagObtentionTemplateHandler handler = new TagObtentionTemplateHandler();
@@ -70,12 +70,12 @@ public final class CloseElementTagTest {
     private static class TagObtentionTemplateHandler extends AbstractTemplateHandler {
 
 
-        ICloseElementTag tag;
+        CloseElementTag tag;
 
 
         @Override
         public void handleCloseElement(final ICloseElementTag closeElementTag) {
-            this.tag = closeElementTag.cloneEvent();
+            this.tag = CloseElementTag.asEngineCloseElementTag(closeElementTag);
         }
 
     }
