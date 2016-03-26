@@ -36,7 +36,7 @@ public class Dialect02TextProcessor extends AbstractTextProcessor {
     @Override
     protected void doProcess(
             final ITemplateContext processingContext, final IText text, final ITextStructureHandler structureHandler) {
-        text.setText(text.getText() + "[02]");
+        structureHandler.setText(text.getText() + "[02]");
     }
 
 

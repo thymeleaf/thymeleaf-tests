@@ -21,8 +21,6 @@ package org.thymeleaf.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.text.ITextRepository;
-import org.thymeleaf.text.TextRepositories;
 
 
 public final class XmlDeclarationTest {
@@ -30,8 +28,6 @@ public final class XmlDeclarationTest {
 
     @Test
     public void test() {
-
-        final ITextRepository textRepository = TextRepositories.createLimitedSizeCacheRepository();
 
         final String keyword = XMLDeclaration.DEFAULT_KEYWORD;
 
@@ -50,15 +46,14 @@ public final class XmlDeclarationTest {
         final String standaloneyes = "yes";
 
 
-        final XMLDeclaration d1 = new XMLDeclaration(textRepository);
-        d1.reset(
-                xmlDeclar1utfno,
-                keyword,
-                version1,
-                encodingUtf,
-                standaloneno,
-                "template", 11, 4
-        );
+        XMLDeclaration d1 =
+                new XMLDeclaration(
+                    xmlDeclar1utfno,
+                    keyword,
+                    version1,
+                    encodingUtf,
+                    standaloneno,
+                    "template", 11, 4);
 
         Assert.assertSame(xmlDeclar1utfno, d1.getXmlDeclaration());
         Assert.assertSame(keyword, d1.getKeyword());
@@ -69,14 +64,13 @@ public final class XmlDeclarationTest {
         Assert.assertEquals(11, d1.getLine());
         Assert.assertEquals(4, d1.getCol());
 
-        d1.reset(
-                xmlDeclar1utfno,
-                keyword,
-                version1,
-                encodingUtf,
-                standaloneno,
-                "template", 10, 3
-        );
+        d1 = new XMLDeclaration(
+                    xmlDeclar1utfno,
+                    keyword,
+                    version1,
+                    encodingUtf,
+                    standaloneno,
+                    "template", 10, 3);
 
         Assert.assertSame(xmlDeclar1utfno, d1.getXmlDeclaration());
         Assert.assertSame(keyword, d1.getKeyword());
@@ -87,7 +81,11 @@ public final class XmlDeclarationTest {
         Assert.assertEquals(10, d1.getLine());
         Assert.assertEquals(3, d1.getCol());
 
-        d1.setStandalone(null);
+        d1 = new XMLDeclaration(
+                d1.getKeyword(),
+                d1.getVersion(),
+                d1.getEncoding(),
+                null);
 
         Assert.assertEquals(xmlDeclar1utf, d1.getXmlDeclaration());
         Assert.assertSame(keyword, d1.getKeyword());
@@ -98,7 +96,11 @@ public final class XmlDeclarationTest {
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
-        d1.setEncoding(null);
+        d1 = new XMLDeclaration(
+                d1.getKeyword(),
+                d1.getVersion(),
+                null,
+                d1.getStandalone());
 
         Assert.assertEquals(xmlDeclar1, d1.getXmlDeclaration());
         Assert.assertSame(keyword, d1.getKeyword());
@@ -109,9 +111,11 @@ public final class XmlDeclarationTest {
         Assert.assertEquals(-1, d1.getLine());
         Assert.assertEquals(-1, d1.getCol());
 
-        d1.setVersion(version11);
-        d1.setEncoding(encodingIso);
-        d1.setStandalone(standaloneyes);
+        d1 = new XMLDeclaration(
+                d1.getKeyword(),
+                version11,
+                encodingIso,
+                standaloneyes);
 
         Assert.assertEquals(xmlDeclar11isoyes, d1.getXmlDeclaration());
         Assert.assertSame(keyword, d1.getKeyword());
@@ -124,12 +128,11 @@ public final class XmlDeclarationTest {
 
 
 
-        final XMLDeclaration d2 =
-                new XMLDeclaration(
-                    textRepository,
-                    version1,
-                    encodingIso,
-                    standaloneno);
+        XMLDeclaration d2 = new XMLDeclaration(
+                XMLDeclaration.DEFAULT_KEYWORD,
+                version1,
+                encodingIso,
+                standaloneno);
 
         Assert.assertEquals(xmlDeclar1isono, d2.getXmlDeclaration());
         Assert.assertSame(version1, d2.getVersion());
@@ -140,12 +143,12 @@ public final class XmlDeclarationTest {
         Assert.assertEquals(-1, d2.getCol());
 
 
-        final XMLDeclaration d3 =
-                new XMLDeclaration(
-                        textRepository,
-                        version1,
-                        null,
-                        null);
+
+        XMLDeclaration d3 = new XMLDeclaration(
+                XMLDeclaration.DEFAULT_KEYWORD,
+                version1,
+                null,
+                null);
 
         Assert.assertEquals(xmlDeclar1, d3.getXmlDeclaration());
         Assert.assertSame(version1, d3.getVersion());
