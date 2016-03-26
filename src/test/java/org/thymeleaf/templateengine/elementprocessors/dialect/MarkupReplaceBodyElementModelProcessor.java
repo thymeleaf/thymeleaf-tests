@@ -45,7 +45,7 @@ public class MarkupReplaceBodyElementModelProcessor extends AbstractAttributeMod
                              final AttributeName attributeName, final String attributeValue,
                              final IElementModelStructureHandler structureHandler) {
 
-        final IModel replacementMarkup = context.getConfiguration().getModelFactory(context.getTemplateMode()).parse(context.getTemplateData(), REPLACEMENT);
+        final IModel replacementMarkup = context.getModelFactory().parse(context.getTemplateData(), REPLACEMENT);
 
 
         for (int i = model.size() - 2; i > 0; i--) {
