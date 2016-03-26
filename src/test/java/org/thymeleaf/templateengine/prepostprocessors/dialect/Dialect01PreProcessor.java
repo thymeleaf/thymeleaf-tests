@@ -58,7 +58,7 @@ public class Dialect01PreProcessor extends AbstractTemplateHandler {
     @Override
     public void setContext(final ITemplateContext context) {
         super.setContext(context);
-        this.modelFactory = context.getConfiguration().getModelFactory(context.getTemplateMode());
+        this.modelFactory = context.getModelFactory();
     }
 
 

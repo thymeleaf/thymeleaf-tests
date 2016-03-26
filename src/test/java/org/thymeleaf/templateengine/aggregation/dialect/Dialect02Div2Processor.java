@@ -42,7 +42,7 @@ public class Dialect02Div2Processor extends AbstractElementTagProcessor {
             final IProcessableElementTag tag,
             final IElementTagStructureHandler structureHandler) {
 
-        final IModelFactory modelFactory = processingContext.getConfiguration().getModelFactory(processingContext.getTemplateMode());
+        final IModelFactory modelFactory = processingContext.getModelFactory();
 
         final IModel markup = modelFactory.createModel();
         markup.add(modelFactory.createText("[From Dialect 02-2]"));
