@@ -67,5 +67,18 @@ public class ContextTest {
 
     }
 
+    @Test
+    public void testContextVarTest07() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(
+                Arrays.asList(new IDialect[] { new StandardDialect(), new ContextVarTestDialect()}));
+        executor.setProcessingContextBuilder(new WebProcessingContextBuilder());
+        executor.execute("classpath:templateengine/context/vartest/vartest07.thtest");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
     
 }

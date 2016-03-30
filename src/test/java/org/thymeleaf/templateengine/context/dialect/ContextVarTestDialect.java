@@ -25,6 +25,7 @@ import java.util.Set;
 import org.thymeleaf.dialect.AbstractDialect;
 import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
+import org.thymeleaf.standard.StandardDialect;
 
 public class ContextVarTestDialect extends AbstractDialect implements IProcessorDialect {
 
@@ -40,7 +41,7 @@ public class ContextVarTestDialect extends AbstractDialect implements IProcessor
 
 
     public int getDialectProcessorPrecedence() {
-        return 100;
+        return StandardDialect.PROCESSOR_PRECEDENCE;
     }
 
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
