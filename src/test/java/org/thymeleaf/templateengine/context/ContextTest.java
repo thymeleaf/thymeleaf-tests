@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.context.dialect.ContextDialect;
+import org.thymeleaf.templateengine.context.dialect.ContextVarTestDialect;
 import org.thymeleaf.testing.templateengine.context.web.WebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
@@ -36,22 +37,35 @@ public class ContextTest {
     public ContextTest() {
         super();
     }
-    
-    
-    
-    
+
+
+
+
     @Test
-    public void testContext() throws Exception {
+    public void testContextBase() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(
                 Arrays.asList(new IDialect[] { new StandardDialect(), new ContextDialect()}));
         executor.setProcessingContextBuilder(new WebProcessingContextBuilder());
-        executor.execute("classpath:templateengine/context");
-        
+        executor.execute("classpath:templateengine/context/base");
+
         Assert.assertTrue(executor.isAllOK());
-        
+
     }
-    
+
+    @Test
+    public void testContextVarTest() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(
+                Arrays.asList(new IDialect[] { new StandardDialect(), new ContextVarTestDialect()}));
+        executor.setProcessingContextBuilder(new WebProcessingContextBuilder());
+        executor.execute("classpath:templateengine/context/vartest");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
     
 }
