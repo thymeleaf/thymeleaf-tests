@@ -10,5 +10,5 @@ items = { 'een', 'twee', 'drei' }
 <span ctxvar:writevar>...</span>
 # ------------------------------------------------------------
 %OUTPUT
-<div><ctx id="een" var2="one"><span>one</span></ctx><ctx id="twee" var2="one"><span>one</span></ctx><ctx id="drei" var2="one"><span>one</span></ctx><span></span></div>
+<div><div id="een" var2="one"><span>one</span></div><div id="twee" var2="one"><span>one</span></div><div id="drei" var2="one"><span>one</span></div><span></span></div>
 
