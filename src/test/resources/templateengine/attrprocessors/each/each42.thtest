@@ -1,7 +1,5 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
-%EXACT_MATCH true
-# ------------------------------------------------------------
 %INPUT
 <table th:remove="all-but-first">
   <tr th:each="num : ${#numbers.sequence(1,5)}">
