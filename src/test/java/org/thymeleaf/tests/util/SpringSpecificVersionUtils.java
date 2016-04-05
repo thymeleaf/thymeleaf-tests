@@ -19,8 +19,11 @@
  */
 package org.thymeleaf.tests.util;
 
+import java.lang.reflect.Method;
+
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.exceptions.ConfigurationException;
+import org.thymeleaf.exceptions.TemplateProcessingException;
 import org.thymeleaf.testing.templateengine.util.SpringVersionUtils;
 import org.thymeleaf.util.ClassLoaderUtils;
 
@@ -66,13 +69,35 @@ public final class SpringSpecificVersionUtils {
 
 
     public static IDialect createSpringStandardDialectInstance() {
+        return createSpringStandardDialectInstance(false);
+    }
+
+
+
+    public static IDialect createSpringStandardDialectInstance(final boolean compiledSpEL) {
         if (dialectClass == null) {
             throw new ConfigurationException(
                     "Cannot create instance of SpringStandardDialect. The testing system was not able to determine " +
-                    "that the Spring version being used is a supported one.");
+                            "that the Spring version being used is a supported one.");
         }
         try {
-            return dialectClass.newInstance();
+            final IDialect dialect = dialectClass.newInstance();
+
+            if (!compiledSpEL) {
+                return dialect;
+            }
+
+            try {
+                final Method enableSpELMethod = dialect.getClass().getMethod("setEnableSpringELCompiler", new Class[] { boolean.class });
+                enableSpELMethod.invoke(dialect, true);
+                return dialect;
+            } catch (final NoSuchMethodException e) {
+                if (!SPRING3_STANDARD_DIALECT_CLASS.equals(dialectClass.getName())) {
+                    throw new TemplateProcessingException("Could not activate SpEL Compiler in SpringStandardDialect for Spring >= v4");
+                }
+                return dialect;
+            }
+
         } catch (final Exception e) {
             throw new ConfigurationException("Cannot create instance of SpringStandardDialect", e);
         }
