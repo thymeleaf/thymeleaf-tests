@@ -24,6 +24,7 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.spring4.dialect.SpringStandardDialect;
 import org.thymeleaf.templateengine.springintegration.context.ErrorsSpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.templateengine.springintegration.context.SpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
@@ -37,10 +38,10 @@ public class SpringIntegrationTest {
     public SpringIntegrationTest() {
         super();
     }
-    
-    
-    
-    
+
+
+
+
     @Test
     public void testForm() throws Exception {
 
@@ -48,9 +49,23 @@ public class SpringIntegrationTest {
         executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
         executor.execute("classpath:templateengine/springintegration/form");
-        
+
         Assert.assertTrue(executor.isAllOK());
-        
+
+    }
+
+
+
+    @Test
+    public void testFormCompiledSpEL() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.execute("classpath:templateengine/springintegration/form");
+
+        Assert.assertTrue(executor.isAllOK());
+
     }
 
 
@@ -61,6 +76,20 @@ public class SpringIntegrationTest {
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:templateengine/springintegration/errors");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testErrorsCompiledSpEL() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
         executor.execute("classpath:templateengine/springintegration/errors");
 
         Assert.assertTrue(executor.isAllOK());
@@ -85,11 +114,40 @@ public class SpringIntegrationTest {
 
 
     @Test
+    public void testBeansCompiledSpEL() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(
+                new SpringIntegrationWebProcessingContextBuilder("classpath:templateengine/springintegration/applicationContext-beans.xml"));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.execute("classpath:templateengine/springintegration/beans");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
     public void testExpression() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:templateengine/springintegration/expression");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testExpressionCompiledSpEL() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
         executor.execute("classpath:templateengine/springintegration/expression");
 
         Assert.assertTrue(executor.isAllOK());
@@ -112,6 +170,23 @@ public class SpringIntegrationTest {
 
     }
 
+
+    @Test
+    public void testMvcCompiledSpEL() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/mvc/applicationContext.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.execute("classpath:templateengine/springintegration/mvc");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
     @Test
     public void testXmlNs() throws Exception {
 
@@ -121,6 +196,22 @@ public class SpringIntegrationTest {
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:templateengine/springintegration/xmlns");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testXmlNsCompiledSpEL() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation(null);
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
         executor.execute("classpath:templateengine/springintegration/xmlns");
 
         Assert.assertTrue(executor.isAllOK());
@@ -145,6 +236,22 @@ public class SpringIntegrationTest {
 
 
     @Test
+    public void testRequestDataFormWithCompiledSpEL() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.execute("classpath:templateengine/springintegration/requestdata/formwith");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
     public void testRequestDataFormWithout() throws Exception {
 
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
@@ -153,6 +260,22 @@ public class SpringIntegrationTest {
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:templateengine/springintegration/requestdata/formwithout");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testRequestDataFormWithoutCompiledSpEL() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
         executor.execute("classpath:templateengine/springintegration/requestdata/formwithout");
 
         Assert.assertTrue(executor.isAllOK());
@@ -177,6 +300,23 @@ public class SpringIntegrationTest {
     }
 
 
+
+    @Test
+    public void testRequestDataUrlsWithCompiledSpEL() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.execute("classpath:templateengine/springintegration/requestdata/urlswith");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
     @Test
     public void testRequestDataUrlsWithout() throws Exception {
 
@@ -186,6 +326,22 @@ public class SpringIntegrationTest {
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:templateengine/springintegration/requestdata/urlswithout");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testRequestDataUrlsWithoutCompiledSpEL() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
         executor.execute("classpath:templateengine/springintegration/requestdata/urlswithout");
 
         Assert.assertTrue(executor.isAllOK());
@@ -203,6 +359,23 @@ public class SpringIntegrationTest {
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.execute("classpath:templateengine/springintegration/requestdata/urlsexpobject");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testRequestUrlsExpOobjectCompiledSpEL() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
         executor.execute("classpath:templateengine/springintegration/requestdata/urlsexpobject");
 
         Assert.assertTrue(executor.isAllOK());
