@@ -1,0 +1,46 @@
+%EXTENDS ../springintegration.common
+# ------------------------------------------------------------
+%CONTEXT
+one = #{ 'this' : 'that' }
+# ------------------------------------------------------------
+%INPUT
+<div th:text="${one}">...</div>
+<div th:text="${one.getClass().getName()}">...</div>
+
+<div th:text="${one}">...</div>
+<div th:text="${one.getClass().getName()}">...</div>
+
+<div th:text="${one}">...</div>
+<div th:text="${one.getClass().getName()}">...</div>
+
+<div th:text="${one}">...</div>
+<div th:text="${one.getClass().getName()}">...</div>
+
+<div th:text="${one}">...</div>
+<div th:text="${one.getClass().getName()}">...</div>
+
+<div th:text="${#request.setAttribute('one', 'a value')}">...</div>
+
+<div th:text="${one}">...</div>
+<div th:text="${one.getClass().getName()}">...</div>
+# ------------------------------------------------------------
+%OUTPUT
+<div>{this=that}</div>
+<div>java.util.LinkedHashMap</div>
+
+<div>{this=that}</div>
+<div>java.util.LinkedHashMap</div>
+
+<div>{this=that}</div>
+<div>java.util.LinkedHashMap</div>
+
+<div>{this=that}</div>
+<div>java.util.LinkedHashMap</div>
+
+<div>{this=that}</div>
+<div>java.util.LinkedHashMap</div>
+
+<div></div>
+
+<div>a value</div>
+<div>java.lang.String</div>
