@@ -1397,6 +1397,43 @@ public final class EngineContextTest {
     }
 
 
+    @Test
+    public void test10() {
+
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
+
+        final EngineContext vm = new EngineContext(configuration, templateData1, null, LOCALE, null);
+
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
+
+        vm.setVariable("one", null);
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
+
+        vm.setVariable("one", "a value");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+
+        vm.increaseLevel();
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+
+        vm.setVariable("one", null);
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
+
+        vm.decreaseLevel();
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+
+    }
     
     private static Set<String> createSet(final String... elements) {
         final Set<String> result = new LinkedHashSet<String>();
