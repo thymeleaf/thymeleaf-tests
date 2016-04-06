@@ -1964,6 +1964,61 @@ public final class WebEngineContextTest {
     }
 
 
+    @Test
+    public void test14() {
+
+        final IEngineConfiguration configuration = TestTemplateEngineConfigurationBuilder.build();
+        final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
+
+        final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
+        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final HttpServletRequest mockRequest =
+                TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
+        final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
+
+        final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
+        final ServletContext mockServletContext =
+                TestMockServletUtil.createServletContext(servletContextAttributes);
+
+        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+
+        /*
+         * Note WebEngineContext works in a different way to EngineContext because it is based on the
+         * HttpServletRequest, and the request considers setting an attribute to null the exact same thing as
+         * removing it.
+         */
+
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
+
+        vm.setVariable("one", null);
+
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
+
+        vm.setVariable("one", "a value");
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+
+        vm.increaseLevel();
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+
+        vm.setVariable("one", null);
+
+        Assert.assertFalse(vm.containsVariable("one"));
+        Assert.assertNull(vm.getVariable("one"));
+
+        vm.decreaseLevel();
+
+        Assert.assertTrue(vm.containsVariable("one"));
+        Assert.assertEquals("a value", vm.getVariable("one"));
+
+    }
+
+
 
 
     private static boolean enumerationContains(final Enumeration<String> enumeration, final String value) {
