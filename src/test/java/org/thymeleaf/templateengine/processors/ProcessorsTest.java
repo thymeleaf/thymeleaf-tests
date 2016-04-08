@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
+import org.thymeleaf.templateengine.processors.dialects.remove.RemoveDialect;
 import org.thymeleaf.templateengine.processors.dialects.replacewithnonprocessable.ReplaceWithNonProcessableDialect;
 import org.thymeleaf.templateengine.processors.dialects.replacewithprocessable.ReplaceWithProcessableDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
@@ -61,6 +62,18 @@ public class ProcessorsTest {
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new ReplaceWithNonProcessableDialect()}));
         executor.execute("classpath:templateengine/processors/replacewithnonprocessable");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testRemove() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new RemoveDialect()}));
+        executor.execute("classpath:templateengine/processors/remove");
 
         Assert.assertTrue(executor.isAllOK());
 
