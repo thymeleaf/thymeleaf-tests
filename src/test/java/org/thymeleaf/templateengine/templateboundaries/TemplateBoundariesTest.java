@@ -19,31 +19,56 @@
  */
 package org.thymeleaf.templateengine.templateboundaries;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.templateboundaries.dialect.TemplateBoundariesDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
+@RunWith(Parameterized.class)
 public class TemplateBoundariesTest {
 
 
-    public TemplateBoundariesTest() {
+    private final int throttleStep;
+
+
+    public TemplateBoundariesTest(final Integer throttleStep) {
         super();
+        this.throttleStep = throttleStep.intValue();
     }
-    
-    
-    
-    
+
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> parameters() {
+
+        final int[] throttleSteps = new int[] { Integer.MAX_VALUE, 1000, 100, 11, 9, 5, 1};
+
+        final List<Object[]> params = new ArrayList<Object[]>();
+        for (int i = 0; i < throttleSteps.length; i++) {
+            params.add(new Object[] { Integer.valueOf(i) });
+        }
+        return params;
+
+    }
+
+
+
+
     @Test
     public void testAttrProcessor() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new TemplateBoundariesDialect()}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors");
         
         Assert.assertTrue(executor.isAllOK());
@@ -55,6 +80,7 @@ public class TemplateBoundariesTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new TemplateBoundariesDialect()}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/conditionalcomments");
         
         Assert.assertTrue(executor.isAllOK());
@@ -67,6 +93,7 @@ public class TemplateBoundariesTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new TemplateBoundariesDialect()}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/gtvg_html5");
 
         Assert.assertTrue(executor.isAllOK());
@@ -79,6 +106,7 @@ public class TemplateBoundariesTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new TemplateBoundariesDialect()}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/gtvg_xhtml");
 
         Assert.assertTrue(executor.isAllOK());
