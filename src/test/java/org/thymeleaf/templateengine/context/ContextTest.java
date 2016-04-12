@@ -19,10 +19,15 @@
  */
 package org.thymeleaf.templateengine.context;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.context.dialect.ContextDialect;
@@ -31,11 +36,30 @@ import org.thymeleaf.testing.templateengine.context.web.WebProcessingContextBuil
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
+@RunWith(Parameterized.class)
 public class ContextTest {
 
 
-    public ContextTest() {
+    private final int throttleStep;
+
+
+    public ContextTest(final Integer throttleStep) {
         super();
+        this.throttleStep = throttleStep.intValue();
+    }
+
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> parameters() {
+
+        final int[] throttleSteps = new int[] { Integer.MAX_VALUE, 1000, 100, 11, 9, 5, 1};
+
+        final List<Object[]> params = new ArrayList<Object[]>();
+        for (int i = 0; i < throttleSteps.length; i++) {
+            params.add(new Object[] { Integer.valueOf(i) });
+        }
+        return params;
+
     }
 
 
@@ -48,6 +72,7 @@ public class ContextTest {
         executor.setDialects(
                 Arrays.asList(new IDialect[] { new StandardDialect(), new ContextDialect()}));
         executor.setProcessingContextBuilder(new WebProcessingContextBuilder());
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/context/base");
 
         Assert.assertTrue(executor.isAllOK());
@@ -61,20 +86,8 @@ public class ContextTest {
         executor.setDialects(
                 Arrays.asList(new IDialect[] { new StandardDialect(), new ContextVarTestDialect()}));
         executor.setProcessingContextBuilder(new WebProcessingContextBuilder());
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/context/vartest");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-    @Test
-    public void testContextVarTest07() throws Exception {
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setDialects(
-                Arrays.asList(new IDialect[] { new StandardDialect(), new ContextVarTestDialect()}));
-        executor.setProcessingContextBuilder(new WebProcessingContextBuilder());
-        executor.execute("classpath:templateengine/context/vartest/vartest07.thtest");
 
         Assert.assertTrue(executor.isAllOK());
 

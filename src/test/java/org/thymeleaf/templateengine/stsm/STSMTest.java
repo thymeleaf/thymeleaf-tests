@@ -19,10 +19,15 @@
  */
 package org.thymeleaf.templateengine.stsm;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.templateengine.stsm.context.STSMWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
@@ -30,22 +35,42 @@ import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 
 
+@RunWith(Parameterized.class)
 public class STSMTest {
-    
-    
-    public STSMTest() {
+
+
+    private final int throttleStep;
+
+
+    public STSMTest(final Integer throttleStep) {
         super();
+        this.throttleStep = throttleStep.intValue();
     }
-    
-    
-    
-    
+
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> parameters() {
+
+        final int[] throttleSteps = new int[] { Integer.MAX_VALUE, 1000, 100, 11, 9, 5, 1};
+
+        final List<Object[]> params = new ArrayList<Object[]>();
+        for (int i = 0; i < throttleSteps.length; i++) {
+            params.add(new Object[] { Integer.valueOf(i) });
+        }
+        return params;
+
+    }
+
+
+
+
     @Test
     public void testSTSMWithoutIntegratedConversion() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(new STSMWebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/stsm");
         
         Assert.assertTrue(executor.isAllOK());
@@ -62,6 +87,7 @@ public class STSMTest {
         final TestExecutor executor = new TestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/stsm");
 
         Assert.assertTrue(executor.isAllOK());

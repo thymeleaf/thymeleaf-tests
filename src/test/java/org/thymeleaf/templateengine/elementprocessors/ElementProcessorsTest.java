@@ -19,10 +19,15 @@
  */
 package org.thymeleaf.templateengine.elementprocessors;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.elementprocessors.dialect.MarkupDialect;
@@ -30,14 +35,31 @@ import org.thymeleaf.templateengine.elementprocessors.dialect.PrecedenceDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
+@RunWith(Parameterized.class)
 public class ElementProcessorsTest {
 
 
-    public ElementProcessorsTest() {
+    private final int throttleStep;
+
+
+    public ElementProcessorsTest(final Integer throttleStep) {
         super();
+        this.throttleStep = throttleStep.intValue();
     }
 
 
+    @Parameterized.Parameters
+    public static Collection<Object[]> parameters() {
+
+        final int[] throttleSteps = new int[] { Integer.MAX_VALUE, 1000, 100, 11, 9, 5, 1};
+
+        final List<Object[]> params = new ArrayList<Object[]>();
+        for (int i = 0; i < throttleSteps.length; i++) {
+            params.add(new Object[] { Integer.valueOf(i) });
+        }
+        return params;
+
+    }
 
 
 
@@ -46,6 +68,7 @@ public class ElementProcessorsTest {
     public void testBlock() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/block");
 
         Assert.assertTrue(executor.isAllOK());
@@ -59,6 +82,7 @@ public class ElementProcessorsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new MarkupDialect()}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/markup");
 
         Assert.assertTrue(executor.isAllOK());
@@ -72,6 +96,7 @@ public class ElementProcessorsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE - 1)}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencemodelbefore");
 
         Assert.assertTrue(executor.isAllOK());
@@ -85,6 +110,7 @@ public class ElementProcessorsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE)}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencemodelsame");
 
         Assert.assertTrue(executor.isAllOK());
@@ -98,6 +124,7 @@ public class ElementProcessorsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE + 1)}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencemodelafter");
 
         Assert.assertTrue(executor.isAllOK());
@@ -111,6 +138,7 @@ public class ElementProcessorsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE - 1)}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencetagbefore");
 
         Assert.assertTrue(executor.isAllOK());
@@ -124,6 +152,7 @@ public class ElementProcessorsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE)}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencetagsame");
 
         Assert.assertTrue(executor.isAllOK());
@@ -137,6 +166,7 @@ public class ElementProcessorsTest {
 
         final TestExecutor executor = new TestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE + 1)}));
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencetagafter");
 
         Assert.assertTrue(executor.isAllOK());
