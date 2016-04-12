@@ -19,28 +19,54 @@
  */
 package org.thymeleaf.templateengine.attrprocessors;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
 
 
-
+@RunWith(Parameterized.class)
 public class AttrProcessorsTest {
+
+
+
+    private final int throttleStep;
+
     
-    
-    public AttrProcessorsTest() {
+    public AttrProcessorsTest(final Integer throttleStep) {
         super();
+        this.throttleStep = throttleStep.intValue();
     }
     
-    
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> parameters() {
+
+        final int[] throttleSteps = new int[] { Integer.MAX_VALUE, 1000, 100, 11, 9, 5, 1};
+
+        final List<Object[]> params = new ArrayList<Object[]>();
+        for (int i = 0; i < throttleSteps.length; i++) {
+            params.add(new Object[] { Integer.valueOf(i) });
+        }
+        return params;
+
+    }
+
     
     
     @Test
     public void testRemove() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/remove");
         
         Assert.assertTrue(executor.isAllOK());
@@ -51,8 +77,9 @@ public class AttrProcessorsTest {
     public void testIf() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/if");
-        
+
         Assert.assertTrue(executor.isAllOK());
         
     }
@@ -61,6 +88,7 @@ public class AttrProcessorsTest {
     public void testUnless() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/unless");
         
         Assert.assertTrue(executor.isAllOK());
@@ -71,6 +99,7 @@ public class AttrProcessorsTest {
     public void testInline() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/inline");
         
         Assert.assertTrue(executor.isAllOK());
@@ -81,6 +110,7 @@ public class AttrProcessorsTest {
     public void testInclude() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/include");
 
         Assert.assertTrue(executor.isAllOK());
@@ -91,6 +121,7 @@ public class AttrProcessorsTest {
     public void testInsert() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/insert");
 
         Assert.assertTrue(executor.isAllOK());
@@ -101,6 +132,7 @@ public class AttrProcessorsTest {
     public void testSubstituteby() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/substituteby");
 
         Assert.assertTrue(executor.isAllOK());
@@ -111,16 +143,18 @@ public class AttrProcessorsTest {
     public void testReplace() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/replace");
 
         Assert.assertTrue(executor.isAllOK());
 
     }
 
-    @Test
-    public void testEach() throws Exception {
+    @Theory
+    public void testEach(final int throttleStep) throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/each");
         
         Assert.assertTrue(executor.isAllOK());
@@ -131,6 +165,7 @@ public class AttrProcessorsTest {
     public void testObject() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/object");
         
         Assert.assertTrue(executor.isAllOK());
@@ -141,6 +176,7 @@ public class AttrProcessorsTest {
     public void testAttr() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/attr");
         
         Assert.assertTrue(executor.isAllOK());
@@ -151,6 +187,7 @@ public class AttrProcessorsTest {
     public void testSimpleValue() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/simplevalue");
         
         Assert.assertTrue(executor.isAllOK());
@@ -162,6 +199,7 @@ public class AttrProcessorsTest {
     public void testDoubleValue() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/doublevalue");
         
         Assert.assertTrue(executor.isAllOK());
@@ -173,6 +211,7 @@ public class AttrProcessorsTest {
     public void testAppendPrepend() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/appendprepend");
         
         Assert.assertTrue(executor.isAllOK());
@@ -184,6 +223,7 @@ public class AttrProcessorsTest {
     public void testFixedValue() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/fixedvalue");
         
         Assert.assertTrue(executor.isAllOK());
@@ -195,6 +235,7 @@ public class AttrProcessorsTest {
     public void testSwitch() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/switch");
 
         Assert.assertTrue(executor.isAllOK());
@@ -206,6 +247,7 @@ public class AttrProcessorsTest {
     public void testWith() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/with");
 
         Assert.assertTrue(executor.isAllOK());
@@ -216,6 +258,7 @@ public class AttrProcessorsTest {
     public void testDOMEvent() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/domevent");
 
         Assert.assertTrue(executor.isAllOK());
@@ -226,6 +269,7 @@ public class AttrProcessorsTest {
     public void testAssert() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/assert");
 
         Assert.assertTrue(executor.isAllOK());
@@ -236,6 +280,7 @@ public class AttrProcessorsTest {
     public void testDefault() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/default");
 
         Assert.assertTrue(executor.isAllOK());
