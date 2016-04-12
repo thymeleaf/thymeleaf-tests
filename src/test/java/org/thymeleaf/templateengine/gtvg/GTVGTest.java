@@ -19,26 +19,54 @@
  */
 package org.thymeleaf.templateengine.gtvg;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
 
 
 
 
+@RunWith(Parameterized.class)
 public class GTVGTest {
-    
-    
-    public GTVGTest() {
+
+
+    private final int throttleStep;
+
+
+    public GTVGTest(final Integer throttleStep) {
         super();
+        this.throttleStep = throttleStep.intValue();
     }
-    
-    
+
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> parameters() {
+
+        final int[] throttleSteps = new int[] { Integer.MAX_VALUE, 1000, 100, 11, 9, 5, 1};
+
+        final List<Object[]> params = new ArrayList<Object[]>();
+        for (int i = 0; i < throttleSteps.length; i++) {
+            params.add(new Object[] { Integer.valueOf(i) });
+        }
+        return params;
+
+    }
+
+
+
+
     @Test
     public void testGTVGHTML5() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/gtvg_html5");
         
         Assert.assertTrue(executor.isAllOK());
@@ -50,6 +78,7 @@ public class GTVGTest {
     public void testGTVGXHTML() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/gtvg_xhtml");
 
         Assert.assertTrue(executor.isAllOK());
