@@ -239,26 +239,6 @@ public class SpringIntegrationTest {
 
 
     @Test
-<<<<<<< HEAD
-=======
-    public void testXmlNsCompiledSpEL() throws Exception {
-
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation(null);
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/springintegration/xmlns");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
-    @Test
->>>>>>> 835dca0... Parameterized several tests in order to include throttling with several step sizes
     public void testRequestDataFormWith() throws Exception {
 
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
@@ -276,26 +256,6 @@ public class SpringIntegrationTest {
 
 
     @Test
-<<<<<<< HEAD
-=======
-    public void testRequestDataFormWithCompiledSpEL() throws Exception {
-
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/springintegration/requestdata/formwith");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
-    @Test
->>>>>>> 835dca0... Parameterized several tests in order to include throttling with several step sizes
     public void testRequestDataFormWithout() throws Exception {
 
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
@@ -312,26 +272,6 @@ public class SpringIntegrationTest {
     }
 
 
-<<<<<<< HEAD
-=======
-    @Test
-    public void testRequestDataFormWithoutCompiledSpEL() throws Exception {
-
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/springintegration/requestdata/formwithout");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
->>>>>>> 835dca0... Parameterized several tests in order to include throttling with several step sizes
 
     @Test
     public void testRequestDataUrlsWith() throws Exception {
@@ -350,27 +290,6 @@ public class SpringIntegrationTest {
     }
 
 
-<<<<<<< HEAD
-=======
-
-    @Test
-    public void testRequestDataUrlsWithCompiledSpEL() throws Exception {
-
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/springintegration/requestdata/urlswith");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
->>>>>>> 835dca0... Parameterized several tests in order to include throttling with several step sizes
     @Test
     public void testRequestDataUrlsWithout() throws Exception {
 
@@ -389,27 +308,6 @@ public class SpringIntegrationTest {
 
 
     @Test
-<<<<<<< HEAD
-=======
-    public void testRequestDataUrlsWithoutCompiledSpEL() throws Exception {
-
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/springintegration/requestdata/urlswithout");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
-
-    @Test
->>>>>>> 835dca0... Parameterized several tests in order to include throttling with several step sizes
     public void testRequestUrlsExpOobject() throws Exception {
 
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
@@ -427,25 +325,4 @@ public class SpringIntegrationTest {
 
 
 
-<<<<<<< HEAD
-=======
-    @Test
-    public void testRequestUrlsExpOobjectCompiledSpEL() throws Exception {
-
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
-        contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/springintegration/requestdata/urlsexpobject");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
-
->>>>>>> 835dca0... Parameterized several tests in order to include throttling with several step sizes
 }
