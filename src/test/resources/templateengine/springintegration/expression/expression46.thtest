@@ -21,19 +21,5 @@ two = new org.thymeleaf.templateengine.features.expression.ExpContainer2()
   <span th:text="*{value}">...</span>
 </div>
 # ------------------------------------------------------------
-%OUTPUT
-<div>
-  <span>Container1 - value</span>
-  <span>Container1 - value</span>
-  <span>Container1 - value</span>
-  <span>Container1 - value</span>
-  <span>Container1 - value</span>
-</div>
-
-<div>
-  <span>1979</span>
-  <span>1979</span>
-  <span>1979</span>
-  <span>1979</span>
-  <span>1979</span>
-</div>
+# This is actually expected in versions of Spring < 4.1.8
+%EXCEPTION java.lang.ClassCastException
