@@ -12,5 +12,6 @@ formBean01_01.text = '4&lt;&nbsp;6'
 %OUTPUT
 <form>
   <input type="text" id="text" name="text" value="4&amp;lt;&amp;nbsp;6" />
-  <textarea id="text" name="text">4&amp;lt;&amp;nbsp;6</textarea>
+  <textarea id="text" name="text">
+4&amp;lt;&amp;nbsp;6</textarea>
 </form>
