@@ -39,11 +39,13 @@ public class AttrProcessorsTest {
 
 
     private final int throttleStep;
+    private final TestExecutor.ThrottleType throttleType;
 
     
-    public AttrProcessorsTest(final Integer throttleStep) {
+    public AttrProcessorsTest(final Integer throttleStep, final TestExecutor.ThrottleType throttleType) {
         super();
         this.throttleStep = throttleStep.intValue();
+        this.throttleType = throttleType;
     }
     
 
@@ -54,7 +56,8 @@ public class AttrProcessorsTest {
 
         final List<Object[]> params = new ArrayList<Object[]>();
         for (int i = 0; i < throttleSteps.length; i++) {
-            params.add(new Object[] { Integer.valueOf(i) });
+            params.add(new Object[] { Integer.valueOf(i), TestExecutor.ThrottleType.CHARS});
+            params.add(new Object[] { Integer.valueOf(i), TestExecutor.ThrottleType.BYTES});
         }
         return params;
 
