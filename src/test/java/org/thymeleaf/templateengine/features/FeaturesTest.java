@@ -31,6 +31,7 @@ import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.aggregation.dialect.Dialect01;
+import org.thymeleaf.templateengine.features.elementstack.ElementStackDialect;
 import org.thymeleaf.templateengine.features.interaction.InteractionDialect01;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 
@@ -256,6 +257,19 @@ public class FeaturesTest {
         final TestExecutor executor = new TestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/lazy");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testElementStack() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new ElementStackDialect()}));
+        executor.setThrottleStep(this.throttleStep);
+        executor.execute("classpath:templateengine/features/elementstack");
 
         Assert.assertTrue(executor.isAllOK());
 
