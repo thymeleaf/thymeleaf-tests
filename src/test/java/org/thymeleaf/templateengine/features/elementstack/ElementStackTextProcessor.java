@@ -50,7 +50,7 @@ public class ElementStackTextProcessor extends AbstractTextProcessor {
             stringBuilder.append(stackTag.getElementCompleteName());
             for (final IAttribute attribute : stackTag.getAllAttributes()) {
                 stringBuilder.append(" ");
-                stringBuilder.append(attribute.getCompleteName());
+                stringBuilder.append(attribute.getAttributeCompleteName());
             }
         }
 
