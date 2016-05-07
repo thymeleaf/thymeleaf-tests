@@ -28,7 +28,6 @@ import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.unbescape.html.HtmlEscape;
-import org.unbescape.html.HtmlEscapeLevel;
 
 public class ElementStackAttrProcessor extends AbstractElementTagProcessor {
 
@@ -53,7 +52,7 @@ public class ElementStackAttrProcessor extends AbstractElementTagProcessor {
             stringBuilder.append(stackTag.getElementCompleteName());
             for (final IAttribute attribute : stackTag.getAllAttributes()) {
                 stringBuilder.append(" ");
-                stringBuilder.append(attribute.getCompleteName());
+                stringBuilder.append(attribute.getAttributeCompleteName());
             }
         }
 
