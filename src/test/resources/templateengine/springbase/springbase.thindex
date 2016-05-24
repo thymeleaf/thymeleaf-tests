@@ -165,6 +165,7 @@
 ../features/expression/expression42.thtest
 ../features/expression/expression43.thtest
 ../features/expression/expression44.thtest
+../features/expression/expression60.thtest
 ../features/link
 ../features/text
 ../parsing/parsing07.thtest
