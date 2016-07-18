@@ -38,6 +38,9 @@ public class NoOpDialect extends AbstractProcessorDialect {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
         processors.add(new NoOpModelProcessor(dialectPrefix));
         processors.add(new NoOpAttributeTagProcessor(dialectPrefix));
+        processors.add(new NoOp2ModelProcessor(dialectPrefix));
+        processors.add(new NoOp2AttributeTagProcessor(dialectPrefix));
+        processors.add(new NoOpTextProcessor());
         return processors;
     }
 
