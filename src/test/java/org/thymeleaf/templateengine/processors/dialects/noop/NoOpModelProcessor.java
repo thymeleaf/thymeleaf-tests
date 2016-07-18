@@ -37,9 +37,8 @@ public class NoOpModelProcessor extends AbstractElementModelProcessor {
 
     @Override
     protected void doProcess(final ITemplateContext context, final IModel model, final IElementModelStructureHandler structureHandler) {
-
         // Nothing to do, that's the idea. Neither to do anything, nor to change the tag in any way
-
+        structureHandler.setLocalVariable("noop-model", Boolean.TRUE);
     }
 
 }
