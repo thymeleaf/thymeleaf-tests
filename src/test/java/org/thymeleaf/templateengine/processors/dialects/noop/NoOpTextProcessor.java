@@ -20,25 +20,29 @@
 package org.thymeleaf.templateengine.processors.dialects.noop;
 
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.engine.AttributeName;
-import org.thymeleaf.model.IProcessableElementTag;
-import org.thymeleaf.processor.element.AbstractAttributeTagProcessor;
-import org.thymeleaf.processor.element.IElementTagStructureHandler;
+import org.thymeleaf.model.IText;
+import org.thymeleaf.processor.text.AbstractTextProcessor;
+import org.thymeleaf.processor.text.ITextStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class NoOpAttributeTagProcessor extends AbstractAttributeTagProcessor {
+public class NoOpTextProcessor extends AbstractTextProcessor {
 
-    private static final int PRECEDENCE = 1000;
+    private static final int PRECEDENCE = 1100;
 
 
-    public NoOpAttributeTagProcessor(final String dialectPrefix) {
-        super(TemplateMode.HTML, dialectPrefix, null, false, "noop", true, PRECEDENCE, false);
+    public NoOpTextProcessor() {
+        super(TemplateMode.HTML, PRECEDENCE);
     }
 
     @Override
-    protected void doProcess(final ITemplateContext context, final IProcessableElementTag tag, final AttributeName attributeName, final String attributeValue, final IElementTagStructureHandler structureHandler) {
-        // Nothing to do, that's the idea. Neither to do anything, nor to change the tag in any way
-        structureHandler.setLocalVariable("noop-tag", Boolean.TRUE);
+    protected void doProcess(final ITemplateContext context, final IText text, final ITextStructureHandler structureHandler) {
+        if (text.getText().equals("...")) {
+            return;
+        }
+        final Boolean var = (Boolean) (context.containsVariable("noop-tag")? context.getVariable("noop-tag") : context.getVariable("noop-model"));
+        if (var == null || !var.booleanValue()) {
+            throw new RuntimeException("Local variable has not reached from one no-op operator to the body text");
+        }
+        structureHandler.setText("processed!");
     }
-
 }
