@@ -30,6 +30,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
+import org.thymeleaf.templateengine.processors.dialects.noop.NoOpDialect;
 import org.thymeleaf.templateengine.processors.dialects.remove.RemoveDialect;
 import org.thymeleaf.templateengine.processors.dialects.replacewithnonprocessable.ReplaceWithNonProcessableDialect;
 import org.thymeleaf.templateengine.processors.dialects.replacewithprocessable.ReplaceWithProcessableDialect;
@@ -98,6 +99,19 @@ public class ProcessorsTest {
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new RemoveDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/processors/remove");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testNoOp() throws Exception {
+
+        final TestExecutor executor = new TestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new NoOpDialect()}));
+        executor.setThrottleStep(this.throttleStep);
+        executor.execute("classpath:templateengine/processors/noop");
 
         Assert.assertTrue(executor.isAllOK());
 
