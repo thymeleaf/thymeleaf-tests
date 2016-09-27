@@ -29,4 +29,4 @@ param.b = 244
 "\/request04"
 "\/testing\/request04"
 "http:\/\/testing-server\/testing\/request04"
-"a=Hello%2C+World%21&b=12&b=244"
+"a=Hello%2C+World%21\\u0026b=12\\u0026b=244"
