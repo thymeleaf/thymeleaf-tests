@@ -19,14 +19,14 @@ param.b = 244
 [# th:text="${#request.queryString} ?: '[null]'"]some text[/]
 # ------------------------------------------------------------
 %OUTPUT
-"text/html"
+"text\/html"
 "GET"
-"HTTP/1.1"
+"HTTP\/1.1"
 "http"
 "testing-server"
 80
-"/testing"
-"/request04"
-"/testing/request04"
-"http://testing-server/testing/request04"
+"\/testing"
+"\/request04"
+"\/testing\/request04"
+"http:\/\/testing-server\/testing\/request04"
 "a=Hello%2C+World%21&b=12&b=244"
