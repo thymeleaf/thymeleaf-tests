@@ -14,7 +14,7 @@ foo = 'fooo!'
 %OUTPUT
 <script>
     /* <![CDATA[ */
-            fooUrl:"/fooservice/foo/",
-            barUrl:"/barservice/bar/"
+            fooUrl:"\/fooservice\/foo\/",
+            barUrl:"\/barservice\/bar\/"
     /* ]]> */
 </script>
