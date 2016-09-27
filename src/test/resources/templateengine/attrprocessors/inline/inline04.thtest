@@ -28,19 +28,19 @@ foo = http://www.thymeleaf.org/download.html
 <script> 
     objArray: {
         obj1:{
-            attr11: "http://www.thymeleaf.org/download.html",
-            attr12: "http://www.thymeleaf.org/download.html",
-            attr13: "http://www.thymeleaf.org/download.html"
+            attr11: "http:\/\/www.thymeleaf.org\/download.html",
+            attr12: "http:\/\/www.thymeleaf.org\/download.html",
+            attr13: "http:\/\/www.thymeleaf.org\/download.html"
         },
         obj2:{
-            attr21: "http://www.thymeleaf.org/download.html",
-            attr22: "http://www.thymeleaf.org/download.html",
-            attr23: "http://www.thymeleaf.org/download.html"// some comment here
+            attr21: "http:\/\/www.thymeleaf.org\/download.html",
+            attr22: "http:\/\/www.thymeleaf.org\/download.html",
+            attr23: "http:\/\/www.thymeleaf.org\/download.html"// some comment here
         },
         obj3:{
-            attr11: "http://www.thymeleaf.org/download.html",
-            attr12: "http://www.thymeleaf.org/download.html",
-            attr13: "http://www.thymeleaf.org/download.html"
+            attr11: "http:\/\/www.thymeleaf.org\/download.html",
+            attr12: "http:\/\/www.thymeleaf.org\/download.html",
+            attr13: "http:\/\/www.thymeleaf.org\/download.html"
         }
     }
 </script> 
