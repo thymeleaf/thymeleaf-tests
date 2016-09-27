@@ -11,6 +11,6 @@ foo = 'fooo&aacute;&lt;!'
 # ------------------------------------------------------------
 %OUTPUT
 <script> 
-    var foo1 = "fooo&aacute;&lt;!";
+    var foo1 = "fooo\\u0026aacute;\\u0026lt;!";
     var foo2 = "&aacute;&lt;";
 </script>
