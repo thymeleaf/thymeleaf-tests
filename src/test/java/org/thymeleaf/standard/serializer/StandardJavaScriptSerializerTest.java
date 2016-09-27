@@ -23,6 +23,7 @@ import java.io.StringWriter;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.thymeleaf.templatemode.TemplateMode;
 
 /**
  *
@@ -31,6 +32,7 @@ import org.junit.Test;
  */
 public class StandardJavaScriptSerializerTest {
 
+    private static final String VALUE0 = "</script>&#22;";
 
 
     public static enum SimpleEnum {
@@ -64,7 +66,7 @@ public class StandardJavaScriptSerializerTest {
 
 
     @Test
-    public void testPrintTestEnumDefault() {
+    public void testPrintTestEnumDefaultJS01() {
 
         final IStandardJavaScriptSerializer serializer = new StandardJavaScriptSerializer(false);
 
@@ -76,7 +78,7 @@ public class StandardJavaScriptSerializerTest {
 
 
     @Test
-    public void testPrintTestEnumJackson() {
+    public void testPrintTestEnumJacksonJS01() {
 
         final IStandardJavaScriptSerializer serializer = new StandardJavaScriptSerializer(true);
 
@@ -88,7 +90,7 @@ public class StandardJavaScriptSerializerTest {
 
 
     @Test
-    public void testPrintAnonymousEnumDefault() {
+    public void testPrintAnonymousEnumDefaultJS01() {
 
         final IStandardJavaScriptSerializer serializer = new StandardJavaScriptSerializer(false);
 
@@ -100,7 +102,7 @@ public class StandardJavaScriptSerializerTest {
 
 
     @Test
-    public void testPrintAnonymousEnumJackson() {
+    public void testPrintAnonymousEnumJacksonJS01() {
 
         final IStandardJavaScriptSerializer serializer = new StandardJavaScriptSerializer(true);
 
@@ -109,6 +111,58 @@ public class StandardJavaScriptSerializerTest {
         Assert.assertEquals("\"FIRST\"", stringWriter.toString());
 
     }
+
+
+
+
+    @Test
+    public void testPrintTestEnumDefaultJS02() {
+
+        final IStandardJavaScriptSerializer serializer = new StandardJavaScriptSerializer(false);
+
+        final StringWriter stringWriter = new StringWriter();
+        serializer.serializeValue(VALUE0, stringWriter);
+        Assert.assertEquals("\"<\\/script>\\u0026#22;\"", stringWriter.toString());
+
+    }
+
+
+    @Test
+    public void testPrintTestEnumJacksonJS02() {
+
+        final IStandardJavaScriptSerializer serializer = new StandardJavaScriptSerializer(true);
+
+        final StringWriter stringWriter = new StringWriter();
+        serializer.serializeValue(VALUE0, stringWriter);
+        Assert.assertEquals("\"<\\/script>\\u0026#22;\"", stringWriter.toString());
+
+    }
+
+
+    @Test
+    public void testPrintAnonymousEnumDefaultJS02() {
+
+        final IStandardJavaScriptSerializer serializer = new StandardJavaScriptSerializer(false);
+
+        final StringWriter stringWriter = new StringWriter();
+        serializer.serializeValue(VALUE0, stringWriter);
+        Assert.assertEquals("\"<\\/script>\\u0026#22;\"", stringWriter.toString());
+
+    }
+
+
+    @Test
+    public void testPrintAnonymousEnumJacksonJS02() {
+
+        final IStandardJavaScriptSerializer serializer = new StandardJavaScriptSerializer(true);
+
+        final StringWriter stringWriter = new StringWriter();
+        serializer.serializeValue(VALUE0, stringWriter);
+        Assert.assertEquals("\"<\\/script>\\u0026#22;\"", stringWriter.toString());
+
+    }
+
+
 
 
 }

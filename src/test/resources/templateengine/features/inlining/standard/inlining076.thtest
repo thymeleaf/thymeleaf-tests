@@ -10,4 +10,4 @@ var = 10
 # We are testing here that in JAVASCRIPT mode that &gt; will
 # NOT be unescaped because JAVASCRIPT unescape is performed,
 # and that won't modify a &gt;
-"10 is &gt; '9'"
+"10 is \\u0026gt; '9'"

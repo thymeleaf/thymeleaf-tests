@@ -9,5 +9,5 @@ var2 = 'something & "something"'
 /*[[${var2}]]*/
 # ------------------------------------------------------------
 %OUTPUT
-"something & 'something'"
-"something & \"something\""
+"something \\u0026 'something'"
+"something \\u0026 \"something\""
