@@ -108,7 +108,7 @@
     <springframework.version>4.2.5.RELEASE</springframework.version>
     <thymeleaf.version>3.0.3-SNAPSHOT</thymeleaf.version>
     <thymeleaf-testing.version>3.0.2-SNAPSHOT</thymeleaf-testing.version>
-    <thymeleaf-extras-springsecurity4.version>3.0.1-SNAPSHOT</thymeleaf-extras-springsecurity4.version>
+    <thymeleaf-extras-springsecurity4.version>3.0.2-SNAPSHOT</thymeleaf-extras-springsecurity4.version>
     <springsecurity.version>4.0.4.RELEASE</springsecurity.version>
     <mockito.version>1.9.5</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
