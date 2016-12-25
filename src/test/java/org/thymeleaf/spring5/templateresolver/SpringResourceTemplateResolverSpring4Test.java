@@ -42,10 +42,10 @@ public final class SpringResourceTemplateResolverSpring4Test {
         final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         final IEngineConfiguration configuration = templateEngine.getConfiguration();
 
-        final String templateLocation = "spring4/templateresolver/test.html";
+        final String templateLocation = "spring5/templateresolver/test.html";
 
         final ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:spring4/templateresolver/applicationContext.xml");
+                new ClassPathXmlApplicationContext("classpath:spring5/templateresolver/applicationContext.xml");
 
         final SpringResourceTemplateResolver resolver =
                 (SpringResourceTemplateResolver) context.getBean("springResourceTemplateResolver");
