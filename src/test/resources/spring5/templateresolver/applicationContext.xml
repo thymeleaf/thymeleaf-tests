@@ -14,7 +14,7 @@
     <!-- THYMELEAF TEMPLATE RESOLVER -->
     <!--                             -->
     <bean id="springResourceTemplateResolver"
-          class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+          class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
       <property name="templateMode" value="HTML" />
     </bean>
 

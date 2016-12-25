@@ -33,13 +33,23 @@ public final class SpringSpecificVersionUtils {
 
     private static final String SPRING3_STANDARD_DIALECT_CLASS = "org.thymeleaf.spring3.dialect.SpringStandardDialect";
     private static final String SPRING4_STANDARD_DIALECT_CLASS = "org.thymeleaf.spring4.dialect.SpringStandardDialect";
+    private static final String SPRING5_STANDARD_DIALECT_CLASS = "org.thymeleaf.spring5.dialect.SpringStandardDialect";
 
 
     static {
 
         final ClassLoader classLoader = ClassLoaderUtils.getClassLoader(SpringSpecificVersionUtils.class);
 
-        if (SpringVersionUtils.isSpring40AtLeast()) {
+        if (SpringVersionUtils.isSpring50AtLeast()) {
+            try {
+                dialectClass =
+                        (Class<? extends IDialect>) Class.forName(SPRING4_STANDARD_DIALECT_CLASS, true, classLoader);
+            } catch (final Exception e) {
+                throw new ConfigurationException(
+                        "Environment has been detected to be at least Spring 4, but thymeleaf could not initialize a " +
+                                "SpringStandardDialect class \"" + SPRING4_STANDARD_DIALECT_CLASS + "\"", e);
+            }
+        } else if (SpringVersionUtils.isSpring40AtLeast()) {
             try {
                 dialectClass =
                         (Class<? extends IDialect>) Class.forName(SPRING4_STANDARD_DIALECT_CLASS, true, classLoader);
