@@ -17,7 +17,7 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.spring4.view;
+package org.thymeleaf.spring5.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

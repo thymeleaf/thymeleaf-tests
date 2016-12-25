@@ -17,14 +17,14 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.spring4.templateresolver;
+package org.thymeleaf.spring5.templateresolver;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.thymeleaf.IEngineConfiguration;
-import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.TemplateResolution;
 import org.thymeleaf.templateresource.ITemplateResource;
