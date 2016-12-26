@@ -37,7 +37,7 @@ import reactor.core.publisher.Flux;
 public final class ReactiveDataDriven01Test {
 
 
-    private static final String TEMPLATE_PATH_BASE = "org/thymeleaf/spring5/reactive/datadriven/";
+    private static final String TEMPLATE_PATH_BASE = "spring5/reactive/datadriven/";
 
     private static SpringWebReactiveTemplateEngine templateEngine;
     private static DataBufferFactory bufferFactory;
@@ -70,7 +70,7 @@ public final class ReactiveDataDriven01Test {
         final Publisher<DataBuffer> stream =
                 templateEngine.processStream("datadriven01", null, ctx1, bufferFactory, charset);
 
-        final List<String> strs = Flux.from(stream).map(DataBufferTestUtils::asString).collectList().block();
+        final List<String> strs = Flux.from(stream).map((buffer) -> DataBufferTestUtils.asString(buffer, charset)).collectList().block();
 
         System.out.println(strs);
 

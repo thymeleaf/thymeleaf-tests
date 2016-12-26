@@ -19,17 +19,24 @@
  */
 package org.thymeleaf.spring5.reactive;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.thymeleaf.exceptions.TemplateProcessingException;
 
 public final class DataBufferTestUtils {
 
 
 
-    public static String asString(final DataBuffer dataBuffer) {
-        final ByteBuffer byteBuf = dataBuffer.asByteBuffer();
-        return byteBuf.toString();
+    public static String asString(final DataBuffer dataBuffer, final Charset charset) {
+        try {
+            return IOUtils.toString(dataBuffer.asInputStream(), charset.displayName());
+        } catch (final IOException e) {
+            throw new TemplateProcessingException("Error converting databuffer to string", e);
+        }
     }
 
 
