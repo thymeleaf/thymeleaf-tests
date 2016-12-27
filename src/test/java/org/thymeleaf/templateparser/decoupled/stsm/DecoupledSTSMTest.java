@@ -51,6 +51,7 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.engine.TestMockServletUtil;
 import org.thymeleaf.linkbuilder.StandardLinkBuilder;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.context.mvc.SpringWebMvcThymeleafRequestContext;
 import org.thymeleaf.spring5.naming.SpringContextVariableNames;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;
@@ -182,6 +183,7 @@ public class DecoupledSTSMTest {
                 new RequestContext(mockRequest, mockResponse, mockServletContext, vars);
         vars.put(AbstractTemplateView.SPRING_MACRO_REQUEST_CONTEXT_ATTRIBUTE, requestContext);
         vars.put(SpringContextVariableNames.SPRING_REQUEST_CONTEXT, requestContext);
+        vars.put(SpringContextVariableNames.THYMELEAF_REQUEST_CONTEXT, new SpringWebMvcThymeleafRequestContext(requestContext, mockRequest));
 
 
         final List<String> variableNames = new ArrayList<String>(vars.keySet());
