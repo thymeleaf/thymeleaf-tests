@@ -19,9 +19,13 @@
  */
 package org.thymeleaf.spring5.reactive.datadriven;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
@@ -29,15 +33,16 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.thymeleaf.context.Context;
+import org.thymeleaf.exceptions.TemplateProcessingException;
 import org.thymeleaf.spring5.SpringWebReactiveTemplateEngine;
-import org.thymeleaf.spring5.reactive.DataBufferTestUtils;
+import org.thymeleaf.spring5.reactive.ReactiveTestUtils;
+import org.thymeleaf.spring5.reactive.data.Album;
+import org.thymeleaf.spring5.reactive.data.AlbumRepository;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.util.ClassLoaderUtils;
 import reactor.core.publisher.Flux;
 
 public final class ReactiveDataDriven01Test {
-
-
-    private static final String TEMPLATE_PATH_BASE = "spring5/reactive/datadriven/";
 
     private static SpringWebReactiveTemplateEngine templateEngine;
     private static DataBufferFactory bufferFactory;
@@ -48,7 +53,7 @@ public final class ReactiveDataDriven01Test {
     public static void initTemplateEngine() {
 
         final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix(TEMPLATE_PATH_BASE);
+        templateResolver.setPrefix(ReactiveTestUtils.TEMPLATE_PATH_BASE);
         templateResolver.setSuffix(".html");
 
         templateEngine = new SpringWebReactiveTemplateEngine();
@@ -62,17 +67,50 @@ public final class ReactiveDataDriven01Test {
 
 
 
+
     @Test
-    public void testDataDriven01() throws Exception {
+    public void testDataDriven01_01() throws Exception {
 
         final Context ctx1 = new Context();
 
-        final Publisher<DataBuffer> stream =
-                templateEngine.processStream("datadriven01", null, ctx1, bufferFactory, charset);
+        final Publisher<DataBuffer> resultStream =
+                templateEngine.processStream("datadriven/datadriven01", null, ctx1, bufferFactory, charset);
 
-        final List<String> strs = Flux.from(stream).map((buffer) -> DataBufferTestUtils.asString(buffer, charset)).collectList().block();
+        final List<String> resultStrs =
+                Flux.from(resultStream).map((buffer) -> ReactiveTestUtils.bufferAsString(buffer, charset)).collectList().block();
 
-        System.out.println(strs);
+        final List<String> normalizedResultStrs = ReactiveTestUtils.normalizeResults(resultStrs);
+        Assert.assertEquals(1, normalizedResultStrs.size());
+
+        final String expected =
+                ReactiveTestUtils.readExpectedNormalizedResults("datadriven/datadriven01-01", charset);
+
+        Assert.assertEquals(expected, normalizedResultStrs.get(0));
+
+    }
+
+
+    @Test
+    public void testDataDriven01_02() throws Exception {
+
+        final List<Album> albums = AlbumRepository.findAllAlbums();
+
+        final Context ctx1 = new Context();
+        ctx1.setVariable("albums", albums);
+
+        final Publisher<DataBuffer> resultStream =
+                templateEngine.processStream("datadriven/datadriven01", null, ctx1, bufferFactory, charset);
+
+        final List<String> resultStrs =
+                Flux.from(resultStream).map((buffer) -> ReactiveTestUtils.bufferAsString(buffer, charset)).collectList().block();
+
+        final List<String> normalizedResultStrs = ReactiveTestUtils.normalizeResults(resultStrs);
+        Assert.assertEquals(1, normalizedResultStrs.size());
+
+        final String expected =
+                ReactiveTestUtils.readExpectedNormalizedResults("datadriven/datadriven01-02", charset);
+
+        Assert.assertEquals(expected, normalizedResultStrs.get(0));
 
     }
 

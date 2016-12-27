@@ -17,34 +17,32 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.spring5.reactive;
+package org.thymeleaf.spring5.reactive.data;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
+public final class Album {
 
-import org.apache.commons.io.IOUtils;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.thymeleaf.exceptions.TemplateProcessingException;
-
-public final class DataBufferTestUtils {
+    private final int id;
+    private final String name;
 
 
-
-    public static String asString(final DataBuffer dataBuffer, final Charset charset) {
-        try {
-            return IOUtils.toString(dataBuffer.asInputStream(), charset.displayName());
-        } catch (final IOException e) {
-            throw new TemplateProcessingException("Error converting databuffer to string", e);
-        }
-    }
-
-
-
-
-    private DataBufferTestUtils() {
+    public Album(final int id, final String name) {
         super();
+        this.id = id;
+        this.name = name;
     }
 
-    
+    public int getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
+
 }
