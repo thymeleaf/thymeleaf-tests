@@ -17,40 +17,29 @@
  * 
  * =============================================================================
  */
-package org.thymeleaf.spring5.reactive.data;
+package org.thymeleaf.spring5.reactive.messagesource;
 
-public final class Album {
+import java.util.Locale;
 
-    private int id;
-    private String name;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceResolvable;
+import org.springframework.context.NoSuchMessageException;
+
+public final class TestingMessageSource implements MessageSource {
 
 
-    public Album(final int id, final String name) {
-        super();
-        this.id = id;
-        this.name = name;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setId(final int id) {
-        this.id = id;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
+    @Override
+    public String getMessage(final String code, final Object[] args, final String defaultMessage, final Locale locale) {
+        return code;
     }
 
     @Override
-    public String toString() {
-        return this.name;
+    public String getMessage(final String code, final Object[] args, final Locale locale) throws NoSuchMessageException {
+        return code;
     }
 
-
+    @Override
+    public String getMessage(final MessageSourceResolvable resolvable, final Locale locale) throws NoSuchMessageException {
+        return resolvable.getDefaultMessage();
+    }
 }

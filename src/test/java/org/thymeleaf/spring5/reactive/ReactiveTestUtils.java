@@ -22,12 +22,23 @@ package org.thymeleaf.spring5.reactive;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.web.reactive.result.view.RequestContext;
+import org.springframework.web.reactive.result.view.RequestDataValueProcessor;
+import org.springframework.web.server.ServerWebExchange;
+import org.thymeleaf.context.ILazyContextVariable;
 import org.thymeleaf.exceptions.TemplateProcessingException;
+import org.thymeleaf.spring5.context.reactive.ISpringWebReactiveContext;
+import org.thymeleaf.spring5.context.reactive.ReactiveLazyContextVariable;
+import org.thymeleaf.spring5.context.reactive.SpringWebReactiveThymeleafRequestContext;
+import org.thymeleaf.spring5.naming.SpringContextVariableNames;
+import org.thymeleaf.spring5.reactive.context.TestingSpringWebReactiveContext;
+import org.thymeleaf.spring5.reactive.exchange.TestingServerWebExchange;
+import org.thymeleaf.spring5.reactive.messagesource.TestingMessageSource;
 import org.thymeleaf.util.ClassLoaderUtils;
 
 public final class ReactiveTestUtils {
@@ -82,9 +93,65 @@ public final class ReactiveTestUtils {
 
 
 
+    public static ISpringWebReactiveContext buildReactiveContext(final Map<String,Object> model) {
+        return buildReactiveContext(model, null);
+    }
+
+    public static ISpringWebReactiveContext buildReactiveContext(
+            final Map<String,Object> model, final RequestDataValueProcessor requestDataValueProcessor) {
+
+        final ServerWebExchange exchange =
+                new TestingServerWebExchange("reactive07", Collections.emptyMap(), Collections.emptyMap(), Collections.emptyMap());
+
+        final TestingMessageSource testingMessageSource = new TestingMessageSource();
+
+        final RequestContext requestContext = new RequestContext(exchange, model, testingMessageSource, requestDataValueProcessor);
+
+        final SpringWebReactiveThymeleafRequestContext thymeleafRequestContext =
+                new SpringWebReactiveThymeleafRequestContext(requestContext, exchange);
+
+        model.put(SpringContextVariableNames.SPRING_REQUEST_CONTEXT, requestContext);
+        model.put(SpringContextVariableNames.THYMELEAF_REQUEST_CONTEXT, thymeleafRequestContext);
+
+
+        final TestingSpringWebReactiveContext context = new TestingSpringWebReactiveContext(exchange);
+        context.setVariables(model);
+
+        return context;
+
+    }
+
+
+
+
 
     private ReactiveTestUtils() {
         super();
+    }
+
+
+
+    static class InstrumentedReactiveLazyContextVariable implements ILazyContextVariable<Object> {
+
+        private final ReactiveLazyContextVariable lazyContextVariable;
+        private boolean initialized = false;
+
+        InstrumentedReactiveLazyContextVariable(final Object target) {
+            super();
+            this.lazyContextVariable = new ReactiveLazyContextVariable(target);
+        }
+
+
+        boolean isInitialized() {
+            return this.initialized;
+        }
+
+        @Override
+        public Object getValue() {
+            this.initialized = true;
+            return this.lazyContextVariable.getValue();
+        }
+
     }
 
     
