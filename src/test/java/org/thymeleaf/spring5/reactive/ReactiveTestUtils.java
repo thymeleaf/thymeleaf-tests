@@ -83,17 +83,6 @@ public final class ReactiveTestUtils {
 
 
 
-    public static List<String> normalizeResults(final List<String> results) {
-        final List<String> normalizedResults = new ArrayList<>();
-        for (final String result : results) {
-            normalizedResults.add(normalizeResult(result));
-        }
-        return normalizedResults;
-    }
-
-
-
-
     private ReactiveTestUtils() {
         super();
     }
