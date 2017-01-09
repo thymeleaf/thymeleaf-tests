@@ -493,7 +493,7 @@ public class TextParserTest extends TestCase {
 
         try {
 
-            final TextParser parser = new TextParser(2, bufferSize, processComments, true, "th");
+            final TextParser parser = new TextParser(2, bufferSize, processComments, true);
 
             // TEST WITH TRACING HANDLER AND READER
             {
