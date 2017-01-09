@@ -4,7 +4,7 @@
 one = 'a value'
 # ------------------------------------------------------------
 %INPUT
-<div th:inline="javascript"><![CDATA[something is [(${one})], and something isn't]]></div>
+<div th:inline="javascript"><![CDATA[something is [(${one})], and something is not]]></div>
 # ------------------------------------------------------------
 %OUTPUT
-<div><![CDATA[||||something is a value, and something isn't||||]]></div>
+<div><![CDATA[||||something is a value, and something is not||||]]></div>
