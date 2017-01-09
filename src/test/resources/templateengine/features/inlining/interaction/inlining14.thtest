@@ -4,7 +4,7 @@
 one = 'a value'
 # ------------------------------------------------------------
 %INPUT
-<div th:inline="javascript"><!--something is [[${one}]], and something isn't--></div>
+<div th:inline="javascript"><!--something is [[${one}]], and something is not--></div>
 # ------------------------------------------------------------
 %OUTPUT
-<div><!--||||something is "a value", and something isn't||||--></div>
+<div><!--||||something is "a value", and something is not||||--></div>
