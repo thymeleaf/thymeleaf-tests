@@ -241,11 +241,16 @@ public class TextParserTest extends TestCase {
                 "[#li a=\"a [# 0]\"]Hello[/li]",
                 "[OES(li){1,1}A(a){1,6}(=){1,7}(\"a [# 0]\"){1,8}OEE(li){1,17}T(Hello){1,18}CES(li){1,23}CEE(li){1,27}]");
         testDoc(
-                "Hello, [#p]lal'a[/p]",
-                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(lal'a){1,12}CES(p){1,17}CEE(p){1,20}]");
+                "Hello, [#p]lal$a[/p]",
+                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(lal$a){1,12}CES(p){1,17}CEE(p){1,20}]");
         testDoc(
                 "Hello, [#p]l'al'a[/p]",
-                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(l'al'a){1,12}CES(p){1,18}CEE(p){1,21}]");
+                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(l){1,12}T('al'){1,13}T(a){1,17}CES(p){1,18}CEE(p){1,21}]",
+                Boolean.TRUE);
+        testDoc(
+                "Hello, [#p]l'al'a[/p]",
+                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(l'al'a){1,12}CES(p){1,18}CEE(p){1,21}]",
+                Boolean.FALSE);
         testDoc(
                 "Hello, [#br th:text =   'll'a=2/]",
                 "[T(Hello, ){1,1}SES(br){1,8}A(th:text){1,13}( =   ){1,20}('ll'){1,25}A(a){1,29}(=){1,30}(2){1,31}SEE(br){1,32}]");
@@ -269,7 +274,8 @@ public class TextParserTest extends TestCase {
                         "la \n&aacute; lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hhjh" +
                         "kljasdl kjaslkj asjqq9k fiuh 23kj hdfkjh assdflkjh lkjh fdfa\nsdfkjlh dfs" +
                         "llkd8u u \nhkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9))sad l\nkjsalkja aslk" +
-                        "la &aacute;\n lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hh\njh){1,1}]");
+                        "la &aacute;\n lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hh\njh){1,1}]",
+                Boolean.FALSE);
         testDoc(
                 "kl\njasdl kjaslkj asjqq9\nk fiuh 23kj hdfkjh assd\nflkjh lkjh fdfasdfkjlh dfs" +
                         "llk\nd8u u hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9\n))sad lkjsalkja aslk" +
@@ -390,26 +396,32 @@ public class TextParserTest extends TestCase {
                         "hkkj asyu 4lk vl jhksajhd889p3rk sl a, alkj a9))sad l\n" +
                         "kjsalkja aslkla &aacute;\n" +
                         " lasd &amp; aiass da & asdll . asi ua&$\" khj askjh 1 kh ak hh\n" +
-                        "jh){22,46}]");
+                        "jh){22,46}]",
+                Boolean.FALSE);
         testDoc(
                 "[#div class \n\n= \n'lala'li=\nlla][/div]",
                 "[OES(div){1,1}A(class){1,7}( \n" +
                         "\n" +
                         "= \n" +
                         "){1,12}('lala'){4,1}A(li){4,7}(=\n" +
-                        "){4,9}(lla){5,1}OEE(div){5,4}CES(div){5,5}CEE(div){5,10}]");
+                        "){4,9}(lla){5,1}OEE(div){5,4}CES(div){5,5}CEE(div){5,10}]",
+                Boolean.FALSE);
 
 
         System.out.println("TOTAL Test executions: " + totalTestExecutions);
         
         
     }
-    
-    
-    
+
+
+
     static void testDocError(final String input, final String outputBreakDown, final int errorLine, final int errorCol) {
+        testDocError(input, outputBreakDown, errorLine, errorCol, null);
+    }
+
+    static void testDocError(final String input, final String outputBreakDown, final int errorLine, final int errorCol, final Boolean processComments) {
         try {
-            testDoc(input, outputBreakDown);
+            testDoc(input, outputBreakDown, processComments);
             throw new ComparisonFailure(null, "exception", "no exception");
             
         } catch (final TextParseException e) {
@@ -426,39 +438,59 @@ public class TextParserTest extends TestCase {
         }
     }
 
-    
+
+
+
     static void testDoc(final String input, final String output) throws TextParseException {
-        testDoc(input.toCharArray(), output, 0, input.length());
+        testDoc(input.toCharArray(), output, 0, input.length(), null);
     }
-    
+
     static void testDoc(String input, final String output, final int offset, final int len) throws TextParseException {
-        testDoc(input.toCharArray(), output, offset, len);
+        testDoc(input.toCharArray(), output, offset, len, null);
     }
 
 
     static void testDoc(final String input, final String outputCommentsProcessed, final String outputCommentsUnprocessed) throws TextParseException {
-        testDoc(input.toCharArray(), outputCommentsProcessed, outputCommentsUnprocessed, 0, input.length());
+        testDoc(input.toCharArray(), outputCommentsProcessed, outputCommentsUnprocessed, 0, input.length(), null);
     }
 
     static void testDoc(String input, final String outputCommentsProcessed, final String outputCommentsUnprocessed, final int offset, final int len) throws TextParseException {
-        testDoc(input.toCharArray(), outputCommentsProcessed, outputCommentsUnprocessed, offset, len);
+        testDoc(input.toCharArray(), outputCommentsProcessed, outputCommentsUnprocessed, offset, len, null);
+    }
+
+
+    static void testDoc(final String input, final String output, final Boolean processComments) throws TextParseException {
+        testDoc(input.toCharArray(), output, 0, input.length(), processComments);
+    }
+    
+    static void testDoc(String input, final String output, final int offset, final int len, final Boolean processComments) throws TextParseException {
+        testDoc(input.toCharArray(), output, offset, len, processComments);
+    }
+
+
+    static void testDoc(final String input, final String outputCommentsProcessed, final String outputCommentsUnprocessed, final Boolean processComments) throws TextParseException {
+        testDoc(input.toCharArray(), outputCommentsProcessed, outputCommentsUnprocessed, 0, input.length(), processComments);
+    }
+
+    static void testDoc(String input, final String outputCommentsProcessed, final String outputCommentsUnprocessed, final int offset, final int len, final Boolean processComments) throws TextParseException {
+        testDoc(input.toCharArray(), outputCommentsProcessed, outputCommentsUnprocessed, offset, len, processComments);
     }
 
     
     
     
     static void testDoc(final char[] input, final String output,
-            final int offset, final int len) throws TextParseException {
-        testDoc(input, output, output, offset, len);
+            final int offset, final int len, final Boolean processComments) throws TextParseException {
+        testDoc(input, output, output, offset, len, processComments);
     }
 
 
     static void testDoc(final char[] input, final String outputCommentsProcessed, final String outputCommentsUnprocessed,
-                        final int offset, final int len) throws TextParseException {
+                        final int offset, final int len, final Boolean processComments) throws TextParseException {
 
         final int maxBufferSize = 16384;
         for (int bufferSize = 1; bufferSize <= maxBufferSize; bufferSize++) {
-            testDoc(input, outputCommentsProcessed, outputCommentsUnprocessed, offset, len, bufferSize);
+            testDoc(input, outputCommentsProcessed, outputCommentsUnprocessed, offset, len, bufferSize, processComments);
         }
 
     }
@@ -467,19 +499,23 @@ public class TextParserTest extends TestCase {
     static void testDoc(
             final char[] input,
             final String output,
-            final int offset, final int len, final int bufferSize)
+            final int offset, final int len, final int bufferSize, final Boolean processComments)
             throws TextParseException {
-        testDoc(input, output, output, offset, len, bufferSize);
+        testDoc(input, output, output, offset, len, bufferSize, processComments);
     }
 
 
     static void testDoc(
             final char[] input,
             final String outputCommentsProcessed, final String outputCommentsUnprocessed,
-            final int offset, final int len, final int bufferSize)
+            final int offset, final int len, final int bufferSize, final Boolean processComments)
             throws TextParseException {
-        testDoc(input, outputCommentsProcessed, offset, len, bufferSize, true);
-        testDoc(input, outputCommentsUnprocessed, offset, len, bufferSize, false);
+        if (processComments == null || processComments.booleanValue()) {
+            testDoc(input, outputCommentsProcessed, offset, len, bufferSize, true);
+        }
+        if (processComments == null || !processComments.booleanValue()) {
+            testDoc(input, outputCommentsUnprocessed, offset, len, bufferSize, false);
+        }
     }
 
 
