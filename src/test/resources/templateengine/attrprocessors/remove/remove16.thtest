@@ -4,7 +4,7 @@
 test = {  }
 # ------------------------------------------------------------
 %INPUT
-<ul th:remove="all-but-first">
+<ul>
   <li th:each="o : ${test}" th:text="${o}">...</li>
   <li>NOT SHOWN</li>
   <li>NOT SHOWN EITHER</li>
@@ -12,4 +12,6 @@ test = {  }
 # ------------------------------------------------------------
 %OUTPUT
 <ul>
+  <li>NOT SHOWN</li>
+  <li>NOT SHOWN EITHER</li>
 </ul>
