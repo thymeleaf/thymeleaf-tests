@@ -85,6 +85,11 @@ public final class TestingServerHttpResponse implements ServerHttpResponse {
     }
 
     @Override
+    public boolean isCommitted() {
+        return false;
+    }
+
+    @Override
     public Mono<Void> writeWith(final Publisher<? extends DataBuffer> publisher) {
         throw new UnsupportedOperationException();
     }

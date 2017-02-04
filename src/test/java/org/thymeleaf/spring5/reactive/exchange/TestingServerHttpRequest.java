@@ -19,10 +19,12 @@
  */
 package org.thymeleaf.spring5.reactive.exchange;
 
+import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpCookie;
@@ -74,6 +76,11 @@ public final class TestingServerHttpRequest implements ServerHttpRequest {
     @Override
     public MultiValueMap<String, HttpCookie> getCookies() {
         return this.cookies;
+    }
+
+    @Override
+    public Optional<InetSocketAddress> getRemoteAddress() {
+        return Optional.empty();
     }
 
     @Override
