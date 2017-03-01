@@ -26,7 +26,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.web.reactive.result.view.RequestDataValueProcessor;
 import org.springframework.web.server.ServerWebExchange;
-import org.thymeleaf.spring5.context.reactive.ISpringWebReactiveContext;
+import org.thymeleaf.spring5.context.webflux.ISpringWebFluxContext;
 import org.thymeleaf.spring5.reactive.data.Album;
 
 public final class Spring5Reactive09Test extends AbstractSpring5ReactiveTest {
@@ -41,7 +41,7 @@ public final class Spring5Reactive09Test extends AbstractSpring5ReactiveTest {
         final Map<String, Object> model = new HashMap<String, Object>();
         model.put("album", album);
 
-        final ISpringWebReactiveContext context =
+        final ISpringWebFluxContext context =
                 ReactiveTestUtils.buildReactiveContext(model, new TestingRequestDataValueProcessor());
 
         testTemplate("reactive09", null, context, "reactive09-01");
@@ -57,7 +57,7 @@ public final class Spring5Reactive09Test extends AbstractSpring5ReactiveTest {
         final Map<String, Object> model = new HashMap<String, Object>();
         model.put("album", album);
 
-        final ISpringWebReactiveContext context =
+        final ISpringWebFluxContext context =
                 ReactiveTestUtils.buildReactiveContext(model, new TestingRequestDataValueProcessor());
 
         testTemplate("reactive09", null, context, "reactive09-02");

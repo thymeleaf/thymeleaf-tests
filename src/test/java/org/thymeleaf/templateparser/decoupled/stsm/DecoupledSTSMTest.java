@@ -51,7 +51,7 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.engine.TestMockServletUtil;
 import org.thymeleaf.linkbuilder.StandardLinkBuilder;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.context.mvc.SpringWebMvcThymeleafRequestContext;
+import org.thymeleaf.spring5.context.webmvc.SpringWebMvcThymeleafRequestContext;
 import org.thymeleaf.spring5.naming.SpringContextVariableNames;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;

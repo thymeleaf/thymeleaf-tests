@@ -24,15 +24,15 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
 import org.thymeleaf.context.AbstractContext;
-import org.thymeleaf.spring5.context.reactive.ISpringWebReactiveContext;
+import org.thymeleaf.spring5.context.webflux.ISpringWebFluxContext;
 import reactor.core.publisher.Mono;
 
-public final class TestingSpringWebReactiveContext extends AbstractContext implements ISpringWebReactiveContext {
+public final class TestingSpringWebFluxContext extends AbstractContext implements ISpringWebFluxContext {
 
     private final ServerWebExchange exchange;
 
 
-    public TestingSpringWebReactiveContext(final ServerWebExchange exchange) {
+    public TestingSpringWebFluxContext(final ServerWebExchange exchange) {
         super();
         this.exchange = exchange;
     }

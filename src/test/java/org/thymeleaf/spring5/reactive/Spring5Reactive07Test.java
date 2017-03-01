@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.thymeleaf.spring5.context.reactive.ISpringWebReactiveContext;
+import org.thymeleaf.spring5.context.webflux.ISpringWebFluxContext;
 import org.thymeleaf.spring5.reactive.data.Album;
 
 public final class Spring5Reactive07Test extends AbstractSpring5ReactiveTest {
@@ -38,7 +38,7 @@ public final class Spring5Reactive07Test extends AbstractSpring5ReactiveTest {
         final Map<String, Object> model = new HashMap<String, Object>();
         model.put("album", album);
 
-        final ISpringWebReactiveContext context = ReactiveTestUtils.buildReactiveContext(model);
+        final ISpringWebFluxContext context = ReactiveTestUtils.buildReactiveContext(model);
 
         testTemplate("reactive07", null, context, "reactive07-01");
 
@@ -53,7 +53,7 @@ public final class Spring5Reactive07Test extends AbstractSpring5ReactiveTest {
         final Map<String, Object> model = new HashMap<String, Object>();
         model.put("album", album);
 
-        final ISpringWebReactiveContext context = ReactiveTestUtils.buildReactiveContext(model);
+        final ISpringWebFluxContext context = ReactiveTestUtils.buildReactiveContext(model);
 
         testTemplate("reactive07", null, context, "reactive07-02");
 

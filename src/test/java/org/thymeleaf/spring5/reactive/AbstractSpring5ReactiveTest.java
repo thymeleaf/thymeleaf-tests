@@ -32,14 +32,14 @@ import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.thymeleaf.context.IContext;
 import org.thymeleaf.exceptions.TemplateProcessingException;
-import org.thymeleaf.spring5.SpringWebReactiveTemplateEngine;
-import org.thymeleaf.spring5.context.reactive.IReactiveDataDriverContextVariable;
+import org.thymeleaf.spring5.SpringWebFluxTemplateEngine;
+import org.thymeleaf.spring5.context.webflux.IReactiveDataDriverContextVariable;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import reactor.core.publisher.Flux;
 
 public abstract class AbstractSpring5ReactiveTest {
 
-    private static SpringWebReactiveTemplateEngine templateEngine;
+    private static SpringWebFluxTemplateEngine templateEngine;
     private static DataBufferFactory bufferFactory;
     private static Charset charset;
 
@@ -82,7 +82,7 @@ public abstract class AbstractSpring5ReactiveTest {
         templateResolver.setPrefix(ReactiveTestUtils.TEMPLATE_PATH_BASE);
         templateResolver.setSuffix(".html");
 
-        templateEngine = new SpringWebReactiveTemplateEngine();
+        templateEngine = new SpringWebFluxTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
 
         bufferFactory = new DefaultDataBufferFactory();
