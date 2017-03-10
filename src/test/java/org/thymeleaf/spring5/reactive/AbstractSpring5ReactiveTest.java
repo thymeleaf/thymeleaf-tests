@@ -30,6 +30,7 @@ import org.reactivestreams.Publisher;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
+import org.springframework.http.MediaType;
 import org.thymeleaf.context.IContext;
 import org.thymeleaf.exceptions.TemplateProcessingException;
 import org.thymeleaf.spring5.SpringWebFluxTemplateEngine;
@@ -41,6 +42,7 @@ public abstract class AbstractSpring5ReactiveTest {
 
     private static SpringWebFluxTemplateEngine templateEngine;
     private static DataBufferFactory bufferFactory;
+    private static MediaType mediaType;
     private static Charset charset;
 
     // This array will contain the chunk sizes we will consider interesting for our tests
@@ -87,6 +89,7 @@ public abstract class AbstractSpring5ReactiveTest {
 
         bufferFactory = new DefaultDataBufferFactory();
 
+        mediaType = MediaType.TEXT_HTML;
         charset = Charset.forName("UTF-8");
 
     }
@@ -113,7 +116,7 @@ public abstract class AbstractSpring5ReactiveTest {
         List<DataBuffer> resultBuffers = null;
         try {
             final Publisher<DataBuffer> resultStream =
-                    templateEngine.processStream(template, markupSelectors, context, bufferFactory, charset, responseMaxChunkSizeBytes);
+                    templateEngine.processStream(template, markupSelectors, context, bufferFactory, mediaType, charset, responseMaxChunkSizeBytes);
 
             resultBuffers = Flux.from(resultStream).collectList().block();
         } catch (final Exception e) {
