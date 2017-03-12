@@ -110,7 +110,8 @@ public final class SSEOutputStreamTest {
             orig[i] = text[i].getBytes(charset);
         }
 
-        final SSEOutputStream sseOutputStreamResult = new SSEOutputStream(baosResult, charset);
+        final SSEOutputStream sseOutputStreamResult = new SSEOutputStream(charset);
+        sseOutputStreamResult.setBufferOutputStream(baosResult);
         for (int i = 0; i < orig.length; i++) {
             sseOutputStreamResult.startEvent(id, event);
             sseOutputStreamResult.write(orig[i]);
@@ -125,7 +126,8 @@ public final class SSEOutputStreamTest {
 
         {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final SSEOutputStream sseOutputStream = new SSEOutputStream(baos, charset);
+            final SSEOutputStream sseOutputStream = new SSEOutputStream(charset);
+            sseOutputStream.setBufferOutputStream(baos);
             for (int i = 0; i < orig.length; i++) {
                 sseOutputStream.startEvent(id, event);
                 for (int j = 0; j < orig[i].length; j++) {
@@ -140,7 +142,8 @@ public final class SSEOutputStreamTest {
 
         {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final SSEOutputStream sseOutputStream = new SSEOutputStream(baos, charset);
+            final SSEOutputStream sseOutputStream = new SSEOutputStream(charset);
+            sseOutputStream.setBufferOutputStream(baos);
             for (int i = 0; i < orig.length; i++) {
                 sseOutputStream.startEvent(id, event);
                 for (int j = 0; j < orig[i].length; j++) {
@@ -155,7 +158,8 @@ public final class SSEOutputStreamTest {
 
         {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final SSEOutputStream sseOutputStream = new SSEOutputStream(baos, charset);
+            final SSEOutputStream sseOutputStream = new SSEOutputStream(charset);
+            sseOutputStream.setBufferOutputStream(baos);
             for (int i = 0; i < orig.length; i++) {
                 sseOutputStream.startEvent(id, event);
                 for (int j = 0; j < orig[i].length;) {
@@ -176,7 +180,8 @@ public final class SSEOutputStreamTest {
 
         {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final SSEOutputStream sseOutputStream = new SSEOutputStream(baos, charset);
+            final SSEOutputStream sseOutputStream = new SSEOutputStream(charset);
+            sseOutputStream.setBufferOutputStream(baos);
             for (int i = 0; i < orig.length; i++) {
                 sseOutputStream.startEvent(id, event);
                 for (int j = 0; j < orig[i].length;) {
@@ -197,7 +202,8 @@ public final class SSEOutputStreamTest {
 
         {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final SSEOutputStream sseOutputStream = new SSEOutputStream(baos, charset);
+            final SSEOutputStream sseOutputStream = new SSEOutputStream(charset);
+            sseOutputStream.setBufferOutputStream(baos);
             for (int i = 0; i < orig.length; i++) {
                 sseOutputStream.startEvent(id, event);
                 for (int j = 0; j < orig[i].length;) {
@@ -218,7 +224,8 @@ public final class SSEOutputStreamTest {
 
         {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            final SSEOutputStream sseOutputStream = new SSEOutputStream(baos, charset);
+            final SSEOutputStream sseOutputStream = new SSEOutputStream(charset);
+            sseOutputStream.setBufferOutputStream(baos);
             for (int i = 0; i < orig.length; i++) {
                 sseOutputStream.startEvent(id, event);
                 for (int j = 0; j < orig[i].length;) {
