@@ -42,7 +42,8 @@ public abstract class AbstractSpring5ReactiveTest {
 
     private static SpringWebFluxTemplateEngine templateEngine;
     private static DataBufferFactory bufferFactory;
-    private static MediaType mediaType;
+    private static MediaType htmlMediaType;
+    private static MediaType sseMediaType;
     private static Charset charset;
 
     // This array will contain the chunk sizes we will consider interesting for our tests
@@ -89,7 +90,8 @@ public abstract class AbstractSpring5ReactiveTest {
 
         bufferFactory = new DefaultDataBufferFactory();
 
-        mediaType = MediaType.TEXT_HTML;
+        htmlMediaType = MediaType.TEXT_HTML;
+        sseMediaType = MediaType.TEXT_EVENT_STREAM;
         charset = Charset.forName("UTF-8");
 
     }
@@ -101,22 +103,30 @@ public abstract class AbstractSpring5ReactiveTest {
     protected static void testTemplate(
             final String template, final Set<String> markupSelectors, final IContext context,
             final String result) throws Exception {
+        testTemplate(template, markupSelectors, context, result, false);
+    }
+
+    protected static void testTemplate(
+            final String template, final Set<String> markupSelectors, final IContext context,
+            final String result, final boolean sse) throws Exception {
         for (final int templateResponseChunkSize : testResponseChunkSizes) {
-            testTemplate(template, markupSelectors, context, result, templateResponseChunkSize);
+            testTemplate(template, markupSelectors, context, result, sse, templateResponseChunkSize);
         }
     }
 
     private static void testTemplate(
             final String template, final Set<String> markupSelectors, final IContext context,
-            final String result, final int responseMaxChunkSizeBytes) throws Exception {
+            final String result, final boolean sse, final int responseMaxChunkSizeBytes) throws Exception {
 
         final String dataDriverVariableName = detectDataDriver(context);
         final boolean isDataDriven = dataDriverVariableName != null;
 
         List<DataBuffer> resultBuffers = null;
         try {
+
             final Publisher<DataBuffer> resultStream =
-                    templateEngine.processStream(template, markupSelectors, context, bufferFactory, mediaType, charset, responseMaxChunkSizeBytes);
+                    templateEngine.processStream(template, markupSelectors, context, bufferFactory,
+                    (sse? sseMediaType : htmlMediaType), charset, responseMaxChunkSizeBytes);
 
             resultBuffers = Flux.from(resultStream).collectList().block();
         } catch (final Exception e) {
