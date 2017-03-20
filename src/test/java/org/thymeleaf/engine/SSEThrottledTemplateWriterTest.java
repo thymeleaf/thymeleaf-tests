@@ -72,11 +72,11 @@ public final class SSEThrottledTemplateWriterTest {
                 for (int k = 0; k < events.length; k++) {
 
                     final StringBuilder prefixBuilder = new StringBuilder();
-                    if (ids[j] != null) {
-                        prefixBuilder.append("id: " + ids[j] + "\n");
-                    }
                     if (events[k] != null) {
                         prefixBuilder.append("event: " + events[k] + "\n");
+                    }
+                    if (ids[j] != null) {
+                        prefixBuilder.append("id: " + ids[j] + "\n");
                     }
                     final String prefix = prefixBuilder.toString();
 
