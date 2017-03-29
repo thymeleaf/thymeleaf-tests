@@ -245,7 +245,7 @@ public class TextParserTest extends TestCase {
                 "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(lal$a){1,12}CES(p){1,17}CEE(p){1,20}]");
         testDoc(
                 "Hello, [#p]l'al'a[/p]",
-                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(l){1,12}T('al'){1,13}T(a){1,17}CES(p){1,18}CEE(p){1,21}]",
+                "[T(Hello, ){1,1}OES(p){1,8}OEE(p){1,11}T(l'al'a){1,12}CES(p){1,18}CEE(p){1,21}]",
                 Boolean.TRUE);
         testDoc(
                 "Hello, [#p]l'al'a[/p]",
