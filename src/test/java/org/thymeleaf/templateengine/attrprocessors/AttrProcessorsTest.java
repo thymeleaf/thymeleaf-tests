@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
@@ -153,11 +152,11 @@ public class AttrProcessorsTest {
 
     }
 
-    @Theory
-    public void testEach(final int throttleStep) throws Exception {
+    @Test
+    public void testEach() throws Exception {
 
         final TestExecutor executor = new TestExecutor();
-        executor.setThrottleStep(throttleStep);
+        executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/each");
         
         Assert.assertTrue(executor.isAllOK());
