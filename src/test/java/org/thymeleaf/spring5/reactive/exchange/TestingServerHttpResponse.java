@@ -19,6 +19,8 @@
  */
 package org.thymeleaf.spring5.reactive.exchange;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -32,6 +34,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public final class TestingServerHttpResponse implements ServerHttpResponse {
@@ -39,6 +42,7 @@ public final class TestingServerHttpResponse implements ServerHttpResponse {
     private final HttpHeaders headers;
     private final DataBufferFactory bufferFactory;
     private final MultiValueMap<String, ResponseCookie> cookies;
+    private final List<DataBuffer> writtenOutput = new ArrayList<>();
 
 
     public TestingServerHttpResponse() {
@@ -91,12 +95,12 @@ public final class TestingServerHttpResponse implements ServerHttpResponse {
 
     @Override
     public Mono<Void> writeWith(final Publisher<? extends DataBuffer> publisher) {
-        throw new UnsupportedOperationException();
+        return Flux.from(publisher).map(buffer -> this.writtenOutput.add(buffer)).then();
     }
 
     @Override
     public Mono<Void> writeAndFlushWith(final Publisher<? extends Publisher<? extends DataBuffer>> publisher) {
-        throw new UnsupportedOperationException();
+        return Flux.from(publisher).concatMap(p2 -> Flux.from(p2).map(buffer -> this.writtenOutput.add(buffer))).then();
     }
 
     @Override
@@ -107,6 +111,11 @@ public final class TestingServerHttpResponse implements ServerHttpResponse {
     @Override
     public HttpHeaders getHeaders() {
         return this.headers;
+    }
+
+
+    public List<DataBuffer> getWrittenOutput() {
+        return this.writtenOutput;
     }
 
 }
