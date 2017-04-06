@@ -135,7 +135,7 @@
     <springsecurity.version>4.0.4.RELEASE</springsecurity.version>
     <mockito.version>1.9.5</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
-    <jackson.version>2.6.3</jackson.version>
+    <jackson.version>2.9.0.pr2</jackson.version>
   </properties>
 
   
