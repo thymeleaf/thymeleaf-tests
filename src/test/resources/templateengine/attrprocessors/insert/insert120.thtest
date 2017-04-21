@@ -1,14 +1,14 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %INPUT
-<header th:insert="frag :: header(~{ :: .breadcrumb})">
+<header th:insert="frag :: header/content()(breadcrumb=~{ :: .breadcrumb})">
     <ol class="breadcrumb container">
         <li><a href="#">Home</a></li>
         <li><a href="#" th:href="@{/task}">Tasks</a></li>
     </ol>
 </header>
 %INPUT[frag]
-<div th:fragment="header(breadcrumb)">
+<div th:fragment="header">
     <ol class="breadcrumb container" th:replace="${breadcrumb}">
         <li><a href="#">Home</a></li>
     </ol>
@@ -16,10 +16,8 @@
 # ------------------------------------------------------------
 %OUTPUT
 <header>
-    <div>
         <ol class="breadcrumb container">
             <li><a href="#">Home</a></li>
             <li><a href="/testing/task">Tasks</a></li>
         </ol>
-    </div>
 </header>
