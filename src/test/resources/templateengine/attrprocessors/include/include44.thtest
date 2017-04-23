@@ -16,4 +16,4 @@ name = 'John Apricot'
 
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*?)Cross\-template\-mode(.*?)
+%EXCEPTION_MESSAGE_PATTERN (.*)?synthetic(.*)?

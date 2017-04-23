@@ -15,7 +15,5 @@
   <title>My App: [[${title}]]</title>
 </head>
 # ------------------------------------------------------------
-%OUTPUT
-<head>
-  <title>My App: </title>
-</head>
+%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
+%EXCEPTION_MESSAGE_PATTERN (.*)?synthetic(.*)?

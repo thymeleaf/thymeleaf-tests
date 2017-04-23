@@ -14,7 +14,5 @@ name = 'John Apricot'
 %INPUT[frag]
 Hello [[${thename}]]!
 # ------------------------------------------------------------
-%OUTPUT
-...
-<div>Hello !</div>
-...
+%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
+%EXCEPTION_MESSAGE_PATTERN (.*)?synthetic(.*)?
