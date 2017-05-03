@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.util.MultiValueMap;
@@ -88,8 +89,8 @@ public final class TestingServerWebExchange implements ServerWebExchange {
     }
 
     @Override
-    public Mono<MultiValueMap<String, String>> getRequestParams() {
-        return Mono.just(this.request.getQueryParams());
+    public Mono<MultiValueMap<String, Part>> getMultipartData() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
