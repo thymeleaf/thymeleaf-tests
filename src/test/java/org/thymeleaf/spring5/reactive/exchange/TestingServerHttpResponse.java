@@ -69,6 +69,11 @@ public final class TestingServerHttpResponse implements ServerHttpResponse {
     }
 
     @Override
+    public void addCookie(final ResponseCookie cookie) {
+        this.cookies.add(cookie.getName(), cookie);
+    }
+
+    @Override
     public String encodeUrl(final String s) {
         return "[" + s + "]";
     }

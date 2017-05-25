@@ -79,13 +79,18 @@ public final class TestingServerHttpRequest implements ServerHttpRequest {
     }
 
     @Override
-    public Optional<InetSocketAddress> getRemoteAddress() {
-        return Optional.empty();
+    public InetSocketAddress getRemoteAddress() {
+        return null;
     }
 
     @Override
     public HttpMethod getMethod() {
         return HttpMethod.GET;
+    }
+
+    @Override
+    public String getMethodValue() {
+        return HttpMethod.GET.name();
     }
 
     @Override
