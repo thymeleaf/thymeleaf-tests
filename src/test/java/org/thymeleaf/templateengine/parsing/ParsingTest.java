@@ -73,17 +73,5 @@ public class ParsingTest {
 
     }
 
-
-    @Test
-    public void testParsing132() throws Exception {
-
-        final TestExecutor executor = new TestExecutor();
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/parsing/parsing132.thtest");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
     
 }
