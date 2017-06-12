@@ -1,10 +1,9 @@
 # Use docker-based build environment (instead of openvz)
 sudo: false
 
-# Select JDKs >= Java 6 for testing
+# Select JDKs >= Java 7 for testing
 language: java
 jdk:
-  - openjdk6
   - openjdk7
   - oraclejdk7
   - oraclejdk8
