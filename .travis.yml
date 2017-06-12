@@ -4,11 +4,11 @@ sudo: false
 # Select JDKs >= Java 6 for testing
 language: java
 jdk:
-  - openjdk6
-  - openjdk7
-  - oraclejdk7
+#  - openjdk6
+#  - openjdk7
+#  - oraclejdk7
   - oraclejdk8
 
 # Test execution
 install: true
-script: "mvn -e clean compile test"
+script: "mvn -e -q clean compile test"
