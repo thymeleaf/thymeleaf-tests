@@ -32,6 +32,7 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -70,7 +71,7 @@ public class SpringBaseTest {
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
         executor.setThrottleStep(this.throttleStep);
@@ -88,7 +89,7 @@ public class SpringBaseTest {
         final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance() }));
         executor.setThrottleStep(this.throttleStep);

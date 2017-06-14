@@ -34,9 +34,7 @@ import org.thymeleaf.templateengine.aggregation.dialect.Dialect01;
 import org.thymeleaf.templateengine.features.elementstack.ElementStackDialect;
 import org.thymeleaf.templateengine.features.interaction.InteractionDialect01;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-
-
-
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -71,7 +69,7 @@ public class FeaturesTest {
     @Test
     public void testText() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/text");
 
@@ -84,7 +82,7 @@ public class FeaturesTest {
     @Test
     public void testLink() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/link");
         
@@ -96,7 +94,7 @@ public class FeaturesTest {
     @Test
     public void testUtil() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/util");
         
@@ -108,7 +106,7 @@ public class FeaturesTest {
     @Test
     public void testExpression() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/expression");
 
@@ -120,7 +118,7 @@ public class FeaturesTest {
     @Test
     public void testMessages() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/messages");
         
@@ -132,7 +130,7 @@ public class FeaturesTest {
     @Test
     public void testRequest() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/request");
 
@@ -144,7 +142,7 @@ public class FeaturesTest {
     @Test
     public void testResponse() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/response");
 
@@ -156,7 +154,7 @@ public class FeaturesTest {
     @Test
     public void testServletContext() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/servletcontext");
 
@@ -168,7 +166,7 @@ public class FeaturesTest {
     @Test
     public void testSession() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/session");
 
@@ -180,7 +178,7 @@ public class FeaturesTest {
     @Test
     public void testNormalization() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/normalization");
 
@@ -192,7 +190,7 @@ public class FeaturesTest {
     @Test
     public void testExecInfo() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/execinfo");
 
@@ -204,7 +202,7 @@ public class FeaturesTest {
     @Test
     public void testAccessRestrictions() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/accessrestrictions");
 
@@ -216,7 +214,7 @@ public class FeaturesTest {
     @Test
     public void testInliningStandard() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/inlining/standard");
 
@@ -228,7 +226,7 @@ public class FeaturesTest {
     @Test
     public void testInliningNoStandard() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new Dialect01()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/inlining/nostandard");
@@ -241,7 +239,7 @@ public class FeaturesTest {
     @Test
     public void testInliningInteraction() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new InteractionDialect01()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/inlining/interaction");
@@ -254,7 +252,7 @@ public class FeaturesTest {
     @Test
     public void testLazy() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/lazy");
 
@@ -266,7 +264,7 @@ public class FeaturesTest {
     @Test
     public void testElementStack() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new ElementStackDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/features/elementstack");

@@ -22,6 +22,7 @@ package org.thymeleaf.templateengine.dataprefix.block;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class DataPrefixElementProcessorsTest {
@@ -39,7 +40,7 @@ public class DataPrefixElementProcessorsTest {
     @Test
     public void testBlock() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/elementprocessors/block");
 
         Assert.assertTrue(executor.isAllOK());
