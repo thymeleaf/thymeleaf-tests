@@ -22,6 +22,7 @@ package org.thymeleaf.templateengine.dataprefix.features;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class DataPrefixFeaturesTest {
@@ -37,7 +38,7 @@ public class DataPrefixFeaturesTest {
     @Test
     public void testText() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/features/text");
 
         Assert.assertTrue(executor.isAllOK());
@@ -49,7 +50,7 @@ public class DataPrefixFeaturesTest {
     @Test
     public void testLink() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/features/link");
 
         Assert.assertTrue(executor.isAllOK());
@@ -60,7 +61,7 @@ public class DataPrefixFeaturesTest {
     @Test
     public void testUtil() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/features/util");
 
         Assert.assertTrue(executor.isAllOK());
@@ -71,7 +72,7 @@ public class DataPrefixFeaturesTest {
     @Test
     public void testExpression() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/features/expression");
 
         Assert.assertTrue(executor.isAllOK());
@@ -82,7 +83,7 @@ public class DataPrefixFeaturesTest {
     @Test
     public void testMessages() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/features/messages");
 
         Assert.assertTrue(executor.isAllOK());
@@ -93,7 +94,7 @@ public class DataPrefixFeaturesTest {
     @Test
     public void testRequest() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/features/request");
 
         Assert.assertTrue(executor.isAllOK());
@@ -104,7 +105,7 @@ public class DataPrefixFeaturesTest {
     @Test
     public void testNormalization() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/features/normalization");
 
         Assert.assertTrue(executor.isAllOK());
