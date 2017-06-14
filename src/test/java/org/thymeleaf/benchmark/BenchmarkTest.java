@@ -22,6 +22,7 @@ package org.thymeleaf.benchmark;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class BenchmarkTest {
@@ -37,7 +38,7 @@ public class BenchmarkTest {
     @Test
     public void testBenchmark() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setReporter(new BenchmarkTestReporter());
         executor.execute("classpath:benchmark/benchmark.thindex");
 

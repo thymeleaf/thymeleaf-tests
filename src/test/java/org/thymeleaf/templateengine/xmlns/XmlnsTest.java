@@ -22,6 +22,7 @@ package org.thymeleaf.templateengine.xmlns;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class XmlnsTest {
@@ -37,7 +38,7 @@ public class XmlnsTest {
     @Test
     public void testXmlns() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/xmlns");
         
         Assert.assertTrue(executor.isAllOK());

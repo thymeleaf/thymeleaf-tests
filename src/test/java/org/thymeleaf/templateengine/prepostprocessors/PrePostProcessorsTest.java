@@ -32,6 +32,7 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.prepostprocessors.dialect.Dialect01;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -66,7 +67,7 @@ public class PrePostProcessorsTest {
     @Test
     public void testPrePostProcessors() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(
                 Arrays.asList(new IDialect[] { new StandardDialect(),  new Dialect01()}));
         executor.setThrottleStep(this.throttleStep);
