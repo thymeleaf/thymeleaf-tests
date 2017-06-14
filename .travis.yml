@@ -8,4 +8,4 @@ jdk:
 
 # Test execution
 install: true
-script: "mvn -e -q clean compile test > /dev/null"
+script: "mvn -e -q clean compile test"
