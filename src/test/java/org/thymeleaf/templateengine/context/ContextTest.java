@@ -34,6 +34,7 @@ import org.thymeleaf.templateengine.context.dialect.ContextDialect;
 import org.thymeleaf.templateengine.context.dialect.ContextVarTestDialect;
 import org.thymeleaf.testing.templateengine.context.web.WebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -68,7 +69,7 @@ public class ContextTest {
     @Test
     public void testContextBase() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(
                 Arrays.asList(new IDialect[] { new StandardDialect(), new ContextDialect()}));
         executor.setProcessingContextBuilder(new WebProcessingContextBuilder());
@@ -82,7 +83,7 @@ public class ContextTest {
     @Test
     public void testContextVarTest() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(
                 Arrays.asList(new IDialect[] { new StandardDialect(), new ContextVarTestDialect()}));
         executor.setProcessingContextBuilder(new WebProcessingContextBuilder());

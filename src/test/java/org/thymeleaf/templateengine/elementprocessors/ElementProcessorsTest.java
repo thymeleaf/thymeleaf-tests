@@ -33,6 +33,7 @@ import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.elementprocessors.dialect.MarkupDialect;
 import org.thymeleaf.templateengine.elementprocessors.dialect.PrecedenceDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -67,7 +68,7 @@ public class ElementProcessorsTest {
     @Test
     public void testBlock() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/block");
 
@@ -80,7 +81,7 @@ public class ElementProcessorsTest {
     @Test
     public void testElementMarkupProcessors() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new MarkupDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/markup");
@@ -94,7 +95,7 @@ public class ElementProcessorsTest {
     @Test
     public void testDialectPrecedenceModelBefore() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE - 1)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencemodelbefore");
@@ -108,7 +109,7 @@ public class ElementProcessorsTest {
     @Test
     public void testDialectPrecedenceModelSame() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencemodelsame");
@@ -122,7 +123,7 @@ public class ElementProcessorsTest {
     @Test
     public void testDialectPrecedenceModelAfter() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE + 1)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencemodelafter");
@@ -136,7 +137,7 @@ public class ElementProcessorsTest {
     @Test
     public void testDialectPrecedenceTagBefore() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE - 1)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencetagbefore");
@@ -150,7 +151,7 @@ public class ElementProcessorsTest {
     @Test
     public void testDialectPrecedenceTagSame() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencetagsame");
@@ -164,7 +165,7 @@ public class ElementProcessorsTest {
     @Test
     public void testDialectPrecedenceTagAfter() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new PrecedenceDialect(StandardDialect.PROCESSOR_PRECEDENCE + 1)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/elementprocessors/precedencetagafter");

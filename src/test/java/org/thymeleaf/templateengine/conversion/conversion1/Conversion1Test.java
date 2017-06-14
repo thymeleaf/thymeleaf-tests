@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class Conversion1Test {
@@ -43,7 +44,7 @@ public class Conversion1Test {
     @Test
     public void testConversion() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new ConversionTestDialect1()}));
 
         executor.execute("classpath:templateengine/conversion/conversion1");

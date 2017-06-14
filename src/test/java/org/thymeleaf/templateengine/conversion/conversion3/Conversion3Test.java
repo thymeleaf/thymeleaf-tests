@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class Conversion3Test {
@@ -44,7 +45,7 @@ public class Conversion3Test {
     @Test
     public void testConversion() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new Conversion3WebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[]{SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
 

@@ -32,6 +32,7 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.templateboundaries.dialect.TemplateBoundariesDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -66,7 +67,7 @@ public class TemplateBoundariesTest {
     @Test
     public void testAttrProcessor() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new TemplateBoundariesDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors");
@@ -78,7 +79,7 @@ public class TemplateBoundariesTest {
     @Test
     public void testConditionalComments() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new TemplateBoundariesDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/conditionalcomments");
@@ -91,7 +92,7 @@ public class TemplateBoundariesTest {
     @Test
     public void testGTVGHTML5() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new TemplateBoundariesDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/gtvg_html5");
@@ -104,7 +105,7 @@ public class TemplateBoundariesTest {
     @Test
     public void testGTVGXHTML() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new TemplateBoundariesDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/gtvg_xhtml");

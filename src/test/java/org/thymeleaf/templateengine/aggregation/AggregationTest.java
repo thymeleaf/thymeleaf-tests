@@ -33,6 +33,7 @@ import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templateengine.aggregation.dialect.Dialect01;
 import org.thymeleaf.templateengine.aggregation.dialect.Dialect02;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -67,7 +68,7 @@ public class AggregationTest {
     @Test
     public void testContext() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(
                 Arrays.asList(new IDialect[] { new StandardDialect(), new Dialect01(), new Dialect02()}));
         executor.setThrottleStep(this.throttleStep);
