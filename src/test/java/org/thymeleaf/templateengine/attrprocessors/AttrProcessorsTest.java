@@ -28,8 +28,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-
-
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -67,7 +66,7 @@ public class AttrProcessorsTest {
     @Test
     public void testRemove() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/remove");
         
@@ -78,7 +77,7 @@ public class AttrProcessorsTest {
     @Test
     public void testIf() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/if");
 
@@ -89,7 +88,7 @@ public class AttrProcessorsTest {
     @Test
     public void testUnless() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/unless");
         
@@ -100,7 +99,7 @@ public class AttrProcessorsTest {
     @Test
     public void testInline() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/inline");
         
@@ -111,7 +110,7 @@ public class AttrProcessorsTest {
     @Test
     public void testInclude() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/include");
 
@@ -122,7 +121,7 @@ public class AttrProcessorsTest {
     @Test
     public void testInsert() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/insert");
 
@@ -133,7 +132,7 @@ public class AttrProcessorsTest {
     @Test
     public void testSubstituteby() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/substituteby");
 
@@ -144,7 +143,7 @@ public class AttrProcessorsTest {
     @Test
     public void testReplace() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/replace");
 
@@ -155,7 +154,7 @@ public class AttrProcessorsTest {
     @Test
     public void testEach() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/each");
         
@@ -166,7 +165,7 @@ public class AttrProcessorsTest {
     @Test
     public void testObject() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/object");
         
@@ -177,7 +176,7 @@ public class AttrProcessorsTest {
     @Test
     public void testAttr() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/attr");
         
@@ -188,7 +187,7 @@ public class AttrProcessorsTest {
     @Test
     public void testSimpleValue() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/simplevalue");
         
@@ -200,7 +199,7 @@ public class AttrProcessorsTest {
     @Test
     public void testDoubleValue() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/doublevalue");
         
@@ -212,7 +211,7 @@ public class AttrProcessorsTest {
     @Test
     public void testAppendPrepend() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/appendprepend");
         
@@ -224,7 +223,7 @@ public class AttrProcessorsTest {
     @Test
     public void testFixedValue() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/fixedvalue");
         
@@ -236,7 +235,7 @@ public class AttrProcessorsTest {
     @Test
     public void testSwitch() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/switch");
 
@@ -248,7 +247,7 @@ public class AttrProcessorsTest {
     @Test
     public void testWith() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/with");
 
@@ -259,7 +258,7 @@ public class AttrProcessorsTest {
     @Test
     public void testDOMEvent() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/domevent");
 
@@ -270,7 +269,7 @@ public class AttrProcessorsTest {
     @Test
     public void testAssert() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/assert");
 
@@ -281,7 +280,7 @@ public class AttrProcessorsTest {
     @Test
     public void testDefault() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/attrprocessors/default");
 

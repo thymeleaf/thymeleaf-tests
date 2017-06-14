@@ -28,9 +28,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-
-
-
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -65,7 +63,7 @@ public class ParsingTest {
     @Test
     public void testParsing() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/parsing");
 
