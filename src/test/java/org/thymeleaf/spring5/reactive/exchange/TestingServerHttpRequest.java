@@ -24,12 +24,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.server.reactive.PathSegment;
+import org.springframework.http.server.reactive.PathSegmentContainer;
+import org.springframework.http.server.reactive.RequestPath;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -64,8 +66,40 @@ public final class TestingServerHttpRequest implements ServerHttpRequest {
 
 
     @Override
-    public String getContextPath() {
-        return this.contextPath;
+    public RequestPath getPath() {
+
+        return new RequestPath() {
+            @Override
+            public PathSegmentContainer contextPath() {
+                return new PathSegmentContainer() {
+                    @Override
+                    public String value() {
+                        return TestingServerHttpRequest.this.contextPath;
+                    }
+
+                    @Override
+                    public List<PathSegment> pathSegments() {
+                        throw new UnsupportedOperationException();
+                    }
+                };
+            }
+
+            @Override
+            public PathSegmentContainer pathWithinApplication() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public String value() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public List<PathSegment> pathSegments() {
+                throw new UnsupportedOperationException();
+            }
+        };
+
     }
 
     @Override

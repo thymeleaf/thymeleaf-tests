@@ -22,9 +22,12 @@ package org.thymeleaf.spring5.reactive.exchange;
 import java.security.Principal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.context.i18n.LocaleContext;
+import org.springframework.context.i18n.SimpleLocaleContext;
 import org.springframework.http.codec.multipart.Part;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -91,6 +94,11 @@ public final class TestingServerWebExchange implements ServerWebExchange {
     @Override
     public Mono<MultiValueMap<String, Part>> getMultipartData() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public LocaleContext getLocaleContext() {
+        return new SimpleLocaleContext(Locale.US);
     }
 
     @Override
