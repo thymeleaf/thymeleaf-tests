@@ -22,6 +22,7 @@ package org.thymeleaf.templateengine.domselector;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class DOMSelectorTest {
@@ -37,7 +38,7 @@ public class DOMSelectorTest {
     @Test
     public void testDOMSelector() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/domselector");
         
         Assert.assertTrue(executor.isAllOK());

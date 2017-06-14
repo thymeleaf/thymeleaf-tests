@@ -35,6 +35,7 @@ import org.thymeleaf.templateengine.processors.dialects.remove.RemoveDialect;
 import org.thymeleaf.templateengine.processors.dialects.replacewithnonprocessable.ReplaceWithNonProcessableDialect;
 import org.thymeleaf.templateengine.processors.dialects.replacewithprocessable.ReplaceWithProcessableDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 @RunWith(Parameterized.class)
@@ -69,7 +70,7 @@ public class ProcessorsTest {
     @Test
     public void testReplaceWithProcessable() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new ReplaceWithProcessableDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/processors/replacewithprocessable");
@@ -82,7 +83,7 @@ public class ProcessorsTest {
     @Test
     public void testReplaceWithNonProcessable() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new ReplaceWithNonProcessableDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/processors/replacewithnonprocessable");
@@ -95,7 +96,7 @@ public class ProcessorsTest {
     @Test
     public void testRemove() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new RemoveDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/processors/remove");
@@ -108,7 +109,7 @@ public class ProcessorsTest {
     @Test
     public void testNoOp() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new NoOpDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/processors/noop");

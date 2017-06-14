@@ -27,6 +27,7 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.templateengine.dataprefix.stsm.context.STSMWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class DataPrefixSTSMTest {
@@ -42,7 +43,7 @@ public class DataPrefixSTSMTest {
     @Test
     public void testSTSM() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new STSMWebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
         executor.execute("classpath:templateengine/dataprefix/stsm");

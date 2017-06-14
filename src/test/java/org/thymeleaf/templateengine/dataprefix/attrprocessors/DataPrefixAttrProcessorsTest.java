@@ -22,6 +22,7 @@ package org.thymeleaf.templateengine.dataprefix.attrprocessors;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
 public class DataPrefixAttrProcessorsTest {
@@ -39,7 +40,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testRemove() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/remove");
 
         Assert.assertTrue(executor.isAllOK());
@@ -49,7 +50,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testIf() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/if");
 
         Assert.assertTrue(executor.isAllOK());
@@ -59,7 +60,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testUnless() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/unless");
 
         Assert.assertTrue(executor.isAllOK());
@@ -69,7 +70,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testInline() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/inline");
 
         Assert.assertTrue(executor.isAllOK());
@@ -79,7 +80,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testInclude() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/include");
 
         Assert.assertTrue(executor.isAllOK());
@@ -89,7 +90,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testSubstituteby() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/substituteby");
 
         Assert.assertTrue(executor.isAllOK());
@@ -99,7 +100,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testReplace() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/replace");
 
         Assert.assertTrue(executor.isAllOK());
@@ -109,7 +110,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testEach() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/each");
 
         Assert.assertTrue(executor.isAllOK());
@@ -119,7 +120,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testObject() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/object");
 
         Assert.assertTrue(executor.isAllOK());
@@ -129,7 +130,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testAttr() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/attr");
 
         Assert.assertTrue(executor.isAllOK());
@@ -139,7 +140,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testSimpleValue() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/simplevalue");
 
         Assert.assertTrue(executor.isAllOK());
@@ -150,7 +151,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testDoubleValue() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/doublevalue");
 
         Assert.assertTrue(executor.isAllOK());
@@ -161,7 +162,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testAppendPrepend() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/appendprepend");
 
         Assert.assertTrue(executor.isAllOK());
@@ -172,7 +173,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testFixedValue() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/fixedvalue");
 
         Assert.assertTrue(executor.isAllOK());
@@ -183,7 +184,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testSwitch() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/switch");
 
         Assert.assertTrue(executor.isAllOK());
@@ -194,7 +195,7 @@ public class DataPrefixAttrProcessorsTest {
     @Test
     public void testWith() throws Exception {
 
-        final TestExecutor executor = new TestExecutor();
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.execute("classpath:templateengine/dataprefix/attrprocessors/with");
 
         Assert.assertTrue(executor.isAllOK());
