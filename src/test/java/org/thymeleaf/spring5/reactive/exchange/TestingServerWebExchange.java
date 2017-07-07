@@ -24,7 +24,6 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.SimpleLocaleContext;
@@ -72,8 +71,8 @@ public final class TestingServerWebExchange implements ServerWebExchange {
     }
 
     @Override
-    public <T> Optional<T> getAttribute(final String s) {
-        return Optional.ofNullable((T)this.attributes.get(s));
+    public <T> T getAttribute(final String s) {
+        return (T)this.attributes.get(s);
     }
 
     @Override

@@ -22,7 +22,6 @@ package org.thymeleaf.spring5.reactive.exchange;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
@@ -49,8 +48,8 @@ public final class TestingWebSession implements WebSession {
     }
 
     @Override
-    public <T> Optional<T> getAttribute(final String s) {
-        return Optional.ofNullable((T)this.attributes.get(s));
+    public <T> T getAttribute(final String s) {
+        return (T) this.attributes.get(s);
     }
 
     @Override
