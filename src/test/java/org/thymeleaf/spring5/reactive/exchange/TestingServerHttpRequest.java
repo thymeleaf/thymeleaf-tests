@@ -68,7 +68,7 @@ public final class TestingServerHttpRequest implements ServerHttpRequest {
     public RequestPath getPath() {
 
         try {
-            return RequestPath.create(new URI("http://localhost/testing"), TestingServerHttpRequest.this.contextPath, Charset.forName("UTF-8"));
+            return RequestPath.parse(new URI("http://localhost/testing"), TestingServerHttpRequest.this.contextPath);
         } catch (final URISyntaxException e) {
             throw new RuntimeException(e);
         }
