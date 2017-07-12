@@ -6,4 +6,6 @@
 <p th:each="n : ${#numbers.sequence(2, 7, -1)}">[[${n}]]</p>
 ..
 # ------------------------------------------------------------
-%EXCEPTION java.lang.IllegalArgumentException
+%OUTPUT
+..
+..
