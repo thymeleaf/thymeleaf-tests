@@ -48,7 +48,8 @@ public class ThymeleafReactiveViewTest {
 
         final SpringWebFluxTemplateEngine templateEngine = new SpringWebFluxTemplateEngine();
         final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix("spring5/");
+        templateResolver.setPrefix("spring5/view/");
+        templateResolver.setSuffix(".html");
         templateEngine.setTemplateResolver(templateResolver);
 
         final ThymeleafReactiveViewResolver resolver = new ThymeleafReactiveViewResolver();
@@ -63,7 +64,7 @@ public class ThymeleafReactiveViewTest {
         model.put("one", "one");
         final TestingServerWebExchange exchange = new TestingServerWebExchange("/testing", new HashMap<>(), new HashMap<>(), new HashMap<>());
 
-        view.map(v -> v.render(model, MediaType.TEXT_HTML, exchange)).block();
+        view.flatMap(v -> v.render(model, MediaType.TEXT_HTML, exchange)).block();
 
     }
 
