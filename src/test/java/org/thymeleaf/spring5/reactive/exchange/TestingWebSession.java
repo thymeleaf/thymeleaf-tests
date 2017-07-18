@@ -63,6 +63,11 @@ public final class TestingWebSession implements WebSession {
     }
 
     @Override
+    public Mono<Void> changeSessionId() {
+        return Mono.empty();
+    }
+
+    @Override
     public Mono<Void> save() {
         throw new UnsupportedOperationException();
     }
