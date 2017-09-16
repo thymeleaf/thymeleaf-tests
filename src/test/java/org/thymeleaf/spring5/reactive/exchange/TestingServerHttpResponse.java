@@ -21,7 +21,6 @@ package org.thymeleaf.spring5.reactive.exchange;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.reactivestreams.Publisher;
@@ -71,16 +70,6 @@ public final class TestingServerHttpResponse implements ServerHttpResponse {
     @Override
     public void addCookie(final ResponseCookie cookie) {
         this.cookies.add(cookie.getName(), cookie);
-    }
-
-    @Override
-    public String encodeUrl(final String s) {
-        return "[" + s + "]";
-    }
-
-    @Override
-    public void registerUrlEncoder(final Function<String, String> function) {
-        throw new UnsupportedOperationException();
     }
 
     @Override

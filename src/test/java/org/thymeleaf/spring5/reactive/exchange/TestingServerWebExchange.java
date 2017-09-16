@@ -24,6 +24,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.SimpleLocaleContext;
@@ -98,6 +99,16 @@ public final class TestingServerWebExchange implements ServerWebExchange {
     @Override
     public LocaleContext getLocaleContext() {
         return new SimpleLocaleContext(Locale.US);
+    }
+
+    @Override
+    public String transformUrl(final String s) {
+        return "[" + s + "]";
+    }
+
+    @Override
+    public void addUrlTransformer(final Function<String, String> function) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
