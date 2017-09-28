@@ -1,14 +1,9 @@
-%TEMPLATE_MODE TEXT
+%TEMPLATE_MODE JAVASCRIPT
 # ------------------------------------------------------------
 %INPUT
-Some text/*[-
-over
-and over
-and over
-and over
-
-and oooooover.... here...
-...and here
+...
+/*[+ This is a comment
+...
 # ------------------------------------------------------------
 %EXCEPTION java.io.IOException
 %EXCEPTION_MESSAGE_PATTERN Unfinished block structure(.*?)
