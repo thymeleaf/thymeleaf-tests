@@ -51,23 +51,17 @@ public final class ParserLevelCommentTextReaderTest {
     public void test02() throws Exception {
 
         testMessage("/* hello */", "/* hello */");
-        testMessage("/* /*[- hello -]]*/ */", "/* ");
         testMessage("/* /*[- hello -]]*/ -]*/", "/* ");
         testMessage("/* /*[- hello -]]*/ -]*/ */", "/*  */");
         testMessage("/* /*[[- hello -]]*/ -]*/ */", "/* /*[[- hello -]]*/ -]*/ */");
-        testMessage("/* /*[[- hello -]]*/ -]*/ /*[- */", "/* /*[[- hello -]]*/ -]*/ ");
         testMessage("/* /*[[- hello -]]*/ -]*/ /*[- -]*/*/", "/* /*[[- hello -]]*/ -]*/ */");
         testMessage("/* /*[[--- hello ---]]*/ -]*/ */", "/* /*[[--- hello ---]]*/ -]*/ */");
-        testMessage("/* /*[[--- hello ---]]*/ -]*/ /*[- */", "/* /*[[--- hello ---]]*/ -]*/ ");
         testMessage("/* /*[[--- hello ---]]*/ -]*/ /*[- -]*/*/", "/* /*[[--- hello ---]]*/ -]*/ */");
         testMessage("hello", "hello");
-        testMessage("/*[- hello -]***/", "");
         testMessage("/*[- hello -]***/ -]*/", "");
         testMessage("/*[- hello -]***/ -]*/", "");
         testMessage("/***[- hello -]***/ -]*/", "/***[- hello -]***/ -]*/");
         testMessage("/***[- hello -]***/ -]*/ */", "/***[- hello -]***/ -]*/ */");
-        testMessage("/***[- hello -]***/ -]*/ /*[-", "/***[- hello -]***/ -]*/ ");
-        testMessage("/***[- hello -]***/ -]*/ /*[- */", "/***[- hello -]***/ -]*/ ");
         testMessage("/***[- hello -]***/ -]*/ /*[- -]*/*/", "/***[- hello -]***/ -]*/ */");
         testMessage("/***[- hello -]***/ -]*/ /*[- -]*/", "/***[- hello -]***/ -]*/ ");
 
