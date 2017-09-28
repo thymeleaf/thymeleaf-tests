@@ -69,6 +69,22 @@ public final class TestingWebSession implements WebSession {
     }
 
     @Override
+    public <T> T getRequiredAttribute(final String name) {
+        if (this.attributes.containsKey(name)) {
+            return (T) this.attributes.get(name);
+        }
+        throw new IllegalArgumentException("name required attribute not present");
+    }
+
+    @Override
+    public <T> T getAttributeOrDefault(final String name, final T defaultValue) {
+        if (this.attributes.containsKey(name)) {
+            return (T) this.attributes.get(name);
+        }
+        return defaultValue;
+    }
+
+    @Override
     public void start() {
         // Nothing to be done
     }
@@ -81,6 +97,12 @@ public final class TestingWebSession implements WebSession {
     @Override
     public Mono<Void> changeSessionId() {
         return Mono.empty();
+    }
+
+    @Override
+    public Mono<Void> invalidate() {
+        // Nothing to be done
+        return null;
     }
 
     @Override
