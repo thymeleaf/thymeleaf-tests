@@ -111,7 +111,7 @@ public final class SSEThrottledTemplateWriterTest {
         sseOutputStreamResult.setOutput(baosResult, charset, Integer.MAX_VALUE);
         sseOutputStreamResult.allow(Integer.MAX_VALUE);
         for (int i = 0; i < orig.length; i++) {
-            sseOutputStreamResult.startEvent(id.toCharArray(), event.toCharArray());
+            sseOutputStreamResult.startEvent((id == null? null : id.toCharArray()), (event == null? null : event.toCharArray()));
             sseOutputStreamResult.write(orig[i]);
             sseOutputStreamResult.endEvent();
         }
@@ -132,7 +132,7 @@ public final class SSEThrottledTemplateWriterTest {
             sseOutputStream.setOutput(baos, charset, Integer.MAX_VALUE);
             sseOutputStream.allow(Integer.MAX_VALUE);
             for (int i = 0; i < orig.length; i++) {
-                sseOutputStream.startEvent(id.toCharArray(), event.toCharArray());
+                sseOutputStream.startEvent((id == null? null : id.toCharArray()), (event == null? null : event.toCharArray()));
                 for (int j = 0; j < orig[i].length; j++) {
                     sseOutputStream.write(orig[i][j]);
                 }
@@ -153,7 +153,7 @@ public final class SSEThrottledTemplateWriterTest {
             sseOutputStream.setOutput(baos, charset, Integer.MAX_VALUE);
             sseOutputStream.allow(Integer.MAX_VALUE);
             for (int i = 0; i < orig.length; i++) {
-                sseOutputStream.startEvent(id.toCharArray(), event.toCharArray());
+                sseOutputStream.startEvent((id == null? null : id.toCharArray()), (event == null? null : event.toCharArray()));
                 for (int j = 0; j < orig[i].length; j++) {
                     sseOutputStream.write(orig[i], j, 1);
                 }
@@ -174,7 +174,7 @@ public final class SSEThrottledTemplateWriterTest {
             sseOutputStream.setOutput(baos, charset, Integer.MAX_VALUE);
             sseOutputStream.allow(Integer.MAX_VALUE);
             for (int i = 0; i < orig.length; i++) {
-                sseOutputStream.startEvent(id.toCharArray(), event.toCharArray());
+                sseOutputStream.startEvent((id == null? null : id.toCharArray()), (event == null? null : event.toCharArray()));
                 for (int j = 0; j < orig[i].length;) {
                     if (j + 1 < orig[i].length) {
                         sseOutputStream.write(orig[i], j, 2);
@@ -201,7 +201,7 @@ public final class SSEThrottledTemplateWriterTest {
             sseOutputStream.setOutput(baos, charset, Integer.MAX_VALUE);
             sseOutputStream.allow(Integer.MAX_VALUE);
             for (int i = 0; i < orig.length; i++) {
-                sseOutputStream.startEvent(id.toCharArray(), event.toCharArray());
+                sseOutputStream.startEvent((id == null? null : id.toCharArray()), (event == null? null : event.toCharArray()));
                 for (int j = 0; j < orig[i].length;) {
                     if (j + 2 < orig[i].length) {
                         sseOutputStream.write(orig[i], j, 3);
@@ -228,7 +228,7 @@ public final class SSEThrottledTemplateWriterTest {
             sseOutputStream.setOutput(baos, charset, Integer.MAX_VALUE);
             sseOutputStream.allow(Integer.MAX_VALUE);
             for (int i = 0; i < orig.length; i++) {
-                sseOutputStream.startEvent(id.toCharArray(), event.toCharArray());
+                sseOutputStream.startEvent((id == null? null : id.toCharArray()), (event == null? null : event.toCharArray()));
                 for (int j = 0; j < orig[i].length;) {
                     if (j + 7 < orig[i].length) {
                         sseOutputStream.write(orig[i], j, 7);
@@ -255,7 +255,7 @@ public final class SSEThrottledTemplateWriterTest {
             sseOutputStream.setOutput(baos, charset, Integer.MAX_VALUE);
             sseOutputStream.allow(Integer.MAX_VALUE);
             for (int i = 0; i < orig.length; i++) {
-                sseOutputStream.startEvent(id.toCharArray(), event.toCharArray());
+                sseOutputStream.startEvent((id == null? null : id.toCharArray()), (event == null? null : event.toCharArray()));
                 for (int j = 0; j < orig[i].length;) {
                     if (j + 11 < orig[i].length) {
                         sseOutputStream.write(orig[i], j, 11);
