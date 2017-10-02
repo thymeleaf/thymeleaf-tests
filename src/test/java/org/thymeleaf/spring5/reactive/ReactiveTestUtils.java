@@ -30,10 +30,8 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.web.reactive.result.view.RequestContext;
 import org.springframework.web.reactive.result.view.RequestDataValueProcessor;
 import org.springframework.web.server.ServerWebExchange;
-import org.thymeleaf.context.ILazyContextVariable;
 import org.thymeleaf.exceptions.TemplateProcessingException;
 import org.thymeleaf.spring5.context.webflux.ISpringWebFluxContext;
-import org.thymeleaf.spring5.context.webflux.ReactiveLazyContextVariable;
 import org.thymeleaf.spring5.context.webflux.SpringWebFluxThymeleafRequestContext;
 import org.thymeleaf.spring5.naming.SpringContextVariableNames;
 import org.thymeleaf.spring5.reactive.context.TestingSpringWebFluxContext;
@@ -131,28 +129,6 @@ public final class ReactiveTestUtils {
 
 
 
-    static class InstrumentedReactiveLazyContextVariable implements ILazyContextVariable<Object> {
-
-        private final ReactiveLazyContextVariable lazyContextVariable;
-        private boolean initialized = false;
-
-        InstrumentedReactiveLazyContextVariable(final Object target) {
-            super();
-            this.lazyContextVariable = new ReactiveLazyContextVariable(target);
-        }
-
-
-        boolean isInitialized() {
-            return this.initialized;
-        }
-
-        @Override
-        public Object getValue() {
-            this.initialized = true;
-            return this.lazyContextVariable.getValue();
-        }
-
-    }
 
     
 }

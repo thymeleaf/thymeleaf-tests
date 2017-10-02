@@ -21,7 +21,6 @@ package org.thymeleaf.spring5.reactive;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
@@ -108,23 +107,6 @@ public final class Spring5Reactive01Test extends AbstractSpring5ReactiveTest {
         ctx1.setVariable("albums", new ReactiveDataDriverContextVariable(Flux.fromIterable(albums), 100000));
 
         testTemplate("reactive01", null, ctx1, "reactive01-02");
-
-    }
-
-
-
-    @Test
-    public void testLazy() throws Exception {
-
-        final List<Album> albums = AlbumRepository.findAllAlbums();
-        final Flux<Album> albumStream = Flux.fromIterable(albums);
-        final ReactiveTestUtils.InstrumentedReactiveLazyContextVariable instrumentedStream = new ReactiveTestUtils.InstrumentedReactiveLazyContextVariable(albumStream);
-
-        final Context ctx1 = new Context();
-        ctx1.setVariable("albums", instrumentedStream);
-
-        testTemplate("reactive01", null, ctx1, "reactive01-02");
-        Assert.assertTrue("The lazy variable was expected to be initialized at this point", instrumentedStream.isInitialized());
 
     }
 
