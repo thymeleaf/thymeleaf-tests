@@ -110,4 +110,18 @@ public class ScriptInlineTest {
 
 
     }
+
+
+	@Test
+	public void test2dArray() throws Exception {
+
+		testInlineResult(
+				"   var array = [ [1, 2], [3, 4] ];",
+				"   var array = [ [1, 2], [3, 4] ];");
+
+		testInlineResult(
+				"   var array = [[1, 2], [3, 4]];",
+				"   var array = [[1, 2], [3, 4]];");
+
+	}
 }
