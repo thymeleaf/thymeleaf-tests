@@ -2,6 +2,11 @@
 ../attrprocessors/appendprepend
 ../attrprocessors/attr
 ../attrprocessors/doublevalue
+../attrprocessors/domevent/onclick01.thtest
+../attrprocessors/domevent/onclick02.thtest
+../attrprocessors/domevent/onclick03.thtest
+../attrprocessors/domevent/onclick04.thtest
+../attrprocessors/domevent/onclick05.thtest
 ../attrprocessors/each/each01.thtest
 ../attrprocessors/each/each02.thtest
 ../attrprocessors/each/each03.thtest
