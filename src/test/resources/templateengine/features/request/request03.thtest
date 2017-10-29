@@ -18,15 +18,5 @@ param.b = 244
 [# th:text="${#request.requestURL}"]some text[/]
 [# th:text="${#request.queryString} ?: '[null]'"]some text[/]
 # ------------------------------------------------------------
-%OUTPUT
-text/html
-GET
-HTTP/1.1
-http
-testing-server
-80
-/testing
-/request03
-/testing/request03
-http://testing-server/testing/request03
-a=Hello%2C+World%21&amp;b=12&amp;b=244
+%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
+%EXCEPTION_MESSAGE_PATTERN (.*)\Qforbidden in this context\E(.*)
