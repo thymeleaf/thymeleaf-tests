@@ -1,10 +1,10 @@
 %TEMPLATE_MODE TEXT
 # ------------------------------------------------------------
 %CONTEXT
-param.something = 'hello'
+param.one='One'
 # ------------------------------------------------------------
 %INPUT
-[[${param.something[0]}]]
+[[${param.one}]]
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
 %EXCEPTION_MESSAGE_PATTERN (.*)\Qforbidden in this context\E(.*)
