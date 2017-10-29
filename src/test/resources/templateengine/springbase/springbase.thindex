@@ -126,6 +126,7 @@
 ../dataprefix/features/text/text15.thtest
 ../domselector
 ../elementprocessors/block
+../features/accessrestrictions
 ../features/expression/numbers
 ../features/expression/expression01.thtest
 ../features/expression/expression02.thtest
