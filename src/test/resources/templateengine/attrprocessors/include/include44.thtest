@@ -1,0 +1,14 @@
+%TEMPLATE_MODE HTML5
+# ------------------------------------------------------------
+%CONTEXT
+param.one = 'one.html'
+# ------------------------------------------------------------
+%INPUT
+<header th:include="${param.one[0]}">...</header>
+%INPUT[one.html]
+<div th:fragment="header">
+    <div th:text="${var}">...</div>
+</div>
+# ------------------------------------------------------------
+%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
+%EXCEPTION_MESSAGE_PATTERN (.*)\Qforbidden in this context\E(.*)
