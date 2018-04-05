@@ -34,6 +34,7 @@ import org.thymeleaf.templateengine.processors.dialects.noop.NoOpDialect;
 import org.thymeleaf.templateengine.processors.dialects.remove.RemoveDialect;
 import org.thymeleaf.templateengine.processors.dialects.replacewithnonprocessable.ReplaceWithNonProcessableDialect;
 import org.thymeleaf.templateengine.processors.dialects.replacewithprocessable.ReplaceWithProcessableDialect;
+import org.thymeleaf.templateengine.processors.dialects.surround.SurroundDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.TestExecutorFactory;
 
@@ -113,6 +114,19 @@ public class ProcessorsTest {
         executor.setDialects(Arrays.asList(new IDialect[]{new StandardDialect(), new NoOpDialect()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/processors/noop");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
+    public void testSurround() throws Exception {
+
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
+        executor.setDialects(Arrays.asList(new IDialect[]{new SurroundDialect()}));
+        executor.setThrottleStep(this.throttleStep);
+        executor.execute("classpath:templateengine/processors/surround");
 
         Assert.assertTrue(executor.isAllOK());
 
