@@ -31,6 +31,7 @@ import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.templateengine.springintegration.context.ErrorsSpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.templateengine.springintegration.context.SpringIntegrationWebProcessingContextBuilder;
+import org.thymeleaf.templateengine.springintegration.dialect.binding.BindingDialect;
 import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
@@ -102,9 +103,27 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/errors");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testBindingDialect() throws Exception {
+
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
+        executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(
+                Arrays.asList(new IDialect[] {
+                        SpringSpecificVersionUtils.createSpringStandardDialectInstance(),
+                        new BindingDialect() }));
+        executor.setThrottleStep(this.throttleStep);
+        executor.execute("classpath:templateengine/springintegration/bindingdialect");
 
         Assert.assertTrue(executor.isAllOK());
 
@@ -120,6 +139,24 @@ public class SpringIntegrationTest {
         executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/errors");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
+    public void testBindingDialectCompiledSpEL() throws Exception {
+
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
+        executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(
+                Arrays.asList(new IDialect[] {
+                        SpringSpecificVersionUtils.createSpringStandardDialectInstance(true),
+                        new BindingDialect() }));
+        executor.setThrottleStep(this.throttleStep);
+        executor.execute("classpath:templateengine/springintegration/bindingdialect");
 
         Assert.assertTrue(executor.isAllOK());
 
