@@ -99,6 +99,21 @@ public class SpringIntegrationTest {
 
 
     @Test
+    public void testHiddenMarkers() throws Exception {
+
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
+        executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(false, true)}));
+        executor.setThrottleStep(this.throttleStep);
+        executor.execute("classpath:templateengine/springintegration/hiddenmarkers");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+
+    @Test
     public void testErrors() throws Exception {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
