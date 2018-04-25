@@ -88,7 +88,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/form");
 
@@ -103,7 +103,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/errors");
 
@@ -136,7 +136,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/errors");
 
@@ -153,7 +153,7 @@ public class SpringIntegrationTest {
         executor.setProcessingContextBuilder(new ErrorsSpringIntegrationWebProcessingContextBuilder());
         executor.setDialects(
                 Arrays.asList(new IDialect[] {
-                        SpringSpecificVersionUtils.createSpringStandardDialectInstance(true),
+                        SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false),
                         new BindingDialect() }));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/bindingdialect");
@@ -186,7 +186,7 @@ public class SpringIntegrationTest {
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(
                 new SpringIntegrationWebProcessingContextBuilder("classpath:templateengine/springintegration/applicationContext-beans.xml"));
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/beans");
 
@@ -216,7 +216,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new SpringIntegrationWebProcessingContextBuilder());
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/expression");
 
@@ -250,7 +250,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/mvc");
 
@@ -284,7 +284,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/xmlns");
 
@@ -318,7 +318,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/requestdata/formwith");
 
@@ -352,7 +352,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/requestdata/formwithout");
 
@@ -388,7 +388,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/requestdata/urlswith");
 
@@ -422,7 +422,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/requestdata/urlswithout");
 
@@ -458,7 +458,7 @@ public class SpringIntegrationTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true)}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(true, false)}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springintegration/requestdata/urlsexpobject");
 
