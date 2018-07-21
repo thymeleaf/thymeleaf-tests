@@ -1,26 +1,46 @@
 %TEMPLATE_MODE HTML5
 # ------------------------------------------------------------
 %CONTEXT
-one = 'one!'
+one = 2
 # ------------------------------------------------------------
 %INPUT
-<div th:onpause="${one}">..</div>
 <div th:onpause="'hello'">..</div>
-<div th:onpause="${null}">..</div>
-<div th:onpause="''">..</div>
+<div th:onpause="${one}">..</div>
+<div th:onpause="${2+3}">..</div>
+<div th:onpause="${true}">..</div>
+<div th:onpause="${false}">..</div>
+<div th:onpause="*{one}">..</div>
+<div th:onpause="*{2+3}">..</div>
+<div th:onpause="*{true}">..</div>
+<div th:onpause="*{false}">..</div>
 
-<div onpause="old" th:onpause="${one}">..</div>
 <div onpause="old" th:onpause="'hello'">..</div>
-<div onpause="old" th:onpause="${null}">..</div>
-<div onpause="old" th:onpause="''">..</div>
+<div onpause="old" th:onpause="${one}">..</div>
+<div onpause="old" th:onpause="${2+3}">..</div>
+<div onpause="old" th:onpause="${true}">..</div>
+<div onpause="old" th:onpause="${false}">..</div>
+<div onpause="old" th:onpause="*{one}">..</div>
+<div onpause="old" th:onpause="*{2+3}">..</div>
+<div onpause="old" th:onpause="*{true}">..</div>
+<div onpause="old" th:onpause="*{false}">..</div>
 # ------------------------------------------------------------
 %OUTPUT
-<div onpause="one!">..</div>
 <div onpause="hello">..</div>
-<div>..</div>
-<div>..</div>
+<div onpause="2">..</div>
+<div onpause="5">..</div>
+<div onpause="true">..</div>
+<div onpause="false">..</div>
+<div onpause="2">..</div>
+<div onpause="5">..</div>
+<div onpause="true">..</div>
+<div onpause="false">..</div>
 
-<div onpause="one!">..</div>
 <div onpause="hello">..</div>
-<div>..</div>
-<div>..</div>
+<div onpause="2">..</div>
+<div onpause="5">..</div>
+<div onpause="true">..</div>
+<div onpause="false">..</div>
+<div onpause="2">..</div>
+<div onpause="5">..</div>
+<div onpause="true">..</div>
+<div onpause="false">..</div>
