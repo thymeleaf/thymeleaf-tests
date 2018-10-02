@@ -128,11 +128,11 @@
 
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-    <springframework.version>5.0.0.RELEASE</springframework.version>
+    <springframework.version>5.1.0.RELEASE</springframework.version>
     <thymeleaf.version>3.0.10-SNAPSHOT</thymeleaf.version>
     <thymeleaf-testing.version>3.0.4-SNAPSHOT</thymeleaf-testing.version>
-    <thymeleaf-extras-springsecurity4.version>3.0.3-SNAPSHOT</thymeleaf-extras-springsecurity4.version>
-    <springsecurity.version>5.0.8.RELEASE</springsecurity.version>
+    <thymeleaf-extras-springsecurity5.version>3.0.3-SNAPSHOT</thymeleaf-extras-springsecurity5.version>
+    <springsecurity.version>5.1.0.RELEASE</springsecurity.version>
     <mockito.version>1.9.5</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
     <jackson.version>2.9.0.pr2</jackson.version>
@@ -293,8 +293,8 @@
     
     <dependency>
       <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-      <version>${thymeleaf-extras-springsecurity4.version}</version>
+      <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+      <version>${thymeleaf-extras-springsecurity5.version}</version>
       <scope>compile</scope>
     </dependency>
 

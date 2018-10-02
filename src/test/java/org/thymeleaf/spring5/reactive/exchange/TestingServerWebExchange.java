@@ -26,6 +26,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.SimpleLocaleContext;
 import org.springframework.http.codec.multipart.Part;
@@ -77,6 +78,16 @@ public final class TestingServerWebExchange implements ServerWebExchange {
     }
 
     @Override
+    public <T> T getRequiredAttribute(final String name) {
+        return null;
+    }
+
+    @Override
+    public <T> T getAttributeOrDefault(final String name, final T defaultValue) {
+        return null;
+    }
+
+    @Override
     public Mono<WebSession> getSession() {
         return Mono.just(this.session);
     }
@@ -102,6 +113,11 @@ public final class TestingServerWebExchange implements ServerWebExchange {
     }
 
     @Override
+    public ApplicationContext getApplicationContext() {
+        return null;
+    }
+
+    @Override
     public String transformUrl(final String s) {
         return "[" + s + "]";
     }
@@ -109,6 +125,16 @@ public final class TestingServerWebExchange implements ServerWebExchange {
     @Override
     public void addUrlTransformer(final Function<String, String> function) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public String getLogPrefix() {
+        return null;
+    }
+
+    @Override
+    public Builder mutate() {
+        return null;
     }
 
     @Override

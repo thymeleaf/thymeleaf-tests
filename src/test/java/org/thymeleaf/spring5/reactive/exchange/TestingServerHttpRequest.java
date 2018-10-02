@@ -31,6 +31,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.server.RequestPath;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.SslInfo;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import reactor.core.publisher.Flux;
@@ -62,6 +63,20 @@ public final class TestingServerHttpRequest implements ServerHttpRequest {
     }
 
 
+    @Override
+    public String getId() {
+        return null;
+    }
+
+    @Override
+    public SslInfo getSslInfo() {
+        return null;
+    }
+
+    @Override
+    public Builder mutate() {
+        return null;
+    }
 
     @Override
     public RequestPath getPath() {
