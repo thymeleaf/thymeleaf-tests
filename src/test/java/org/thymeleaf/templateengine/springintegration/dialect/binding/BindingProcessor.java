@@ -19,13 +19,13 @@
  */
 package org.thymeleaf.templateengine.springintegration.dialect.binding;
 
+import org.springframework.web.servlet.support.BindStatus;
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
-import org.thymeleaf.spring5.context.IThymeleafBindStatus;
-import org.thymeleaf.spring5.util.FieldUtils;
+import org.thymeleaf.spring3.util.FieldUtils;
 import org.thymeleaf.templatemode.TemplateMode;
 
 public class BindingProcessor extends AbstractAttributeTagProcessor {
@@ -44,7 +44,7 @@ public class BindingProcessor extends AbstractAttributeTagProcessor {
             final String attributeValue, final IElementTagStructureHandler structureHandler) {
 
 
-        final IThymeleafBindStatus bindStatus =
+        final BindStatus bindStatus =
                 FieldUtils.getBindStatus(context, true, attributeValue);
 
         if (bindStatus.isError()) {
