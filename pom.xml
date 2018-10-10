@@ -129,7 +129,7 @@
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
     <springframework.version>5.1.0.RELEASE</springframework.version>
-    <thymeleaf.version>3.0.10-SNAPSHOT</thymeleaf.version>
+    <thymeleaf.version>3.0.11-SNAPSHOT</thymeleaf.version>
     <thymeleaf-testing.version>3.0.5-SNAPSHOT</thymeleaf-testing.version>
     <thymeleaf-extras-springsecurity5.version>3.0.3-SNAPSHOT</thymeleaf-extras-springsecurity5.version>
     <springsecurity.version>5.1.0.RELEASE</springsecurity.version>
