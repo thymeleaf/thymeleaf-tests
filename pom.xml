@@ -127,8 +127,10 @@
 
 
   <properties>
-    <maven.compile.source>6</maven.compile.source>
-    <maven.compile.target>6</maven.compile.target>
+    <java.version>6</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
     <project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
     <springframework.version>4.1.8.RELEASE</springframework.version>
     <thymeleaf.version>3.0.12-SNAPSHOT</thymeleaf.version>
@@ -183,10 +185,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
-        <configuration>
-          <source>${maven.compile.source}</source>
-          <target>${maven.compile.target}</target>
-        </configuration>
       </plugin>
       
       <plugin>
