@@ -6,7 +6,7 @@ This repository contains a set of tests designed for thymeleaf maintenance. Test
 
 Tests under the `org.thymeleaf.engine` package are designed for use with the **thymeleaf-testing library**.
 
-All tests and are launched using JUnit. The JUnit test classes are contained at several folders, depending on the thymelaef version they refer to (activated with the corresponding profile):
+All tests and are launched using JUnit. The JUnit test classes are contained at several folders, depending on the thymeleaf version they refer to (activated with the corresponding profile):
 
    * `src/test-common/java` contains tests executed for all thymeleaf versions.
    * `src/test-20/java` for thymeleaf 2.0.x
