@@ -151,6 +151,12 @@ public class VersionUtilsTest {
         testIsAtLeast(true, "2.3.4-SNAPSHOT", 1, 8, 9);
         testIsAtLeast(true, "un", 0, 0, 0);
         testIsAtLeast(false, "un", 0, 0, 1);
+
+        final VersionUtils.VersionSpec vs = VersionUtils.parseVersion("2.3.4.RELEASE");
+        Assert.assertTrue(vs.isAtLeast(2));
+        Assert.assertTrue(vs.isAtLeast(2, 3));
+        Assert.assertFalse(vs.isAtLeast(3));
+        Assert.assertFalse(vs.isAtLeast(2, 4));
     }
 
 
