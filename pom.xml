@@ -132,6 +132,8 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
+    <project.build.resourcesEncoding>UTF-8</project.build.resourcesEncoding>
+    <project.build.propertiesEncoding>ISO-8859-1</project.build.propertiesEncoding>
     <springframework.version>3.1.0.RELEASE</springframework.version>
     <thymeleaf.version>3.0.12-SNAPSHOT</thymeleaf.version>
     <thymeleaf-testing.version>3.0.5-SNAPSHOT</thymeleaf-testing.version>
@@ -191,6 +193,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.2.0</version>
+        <configuration>
+          <encoding>${project.build.resourcesEncoding}</encoding>
+          <propertiesEncoding>${project.build.propertiesEncoding}</propertiesEncoding>
+        </configuration>
       </plugin>
 
       <plugin>
