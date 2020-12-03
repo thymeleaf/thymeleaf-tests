@@ -1,0 +1,33 @@
+%EXTENDS numbers.common
+# ------------------------------------------------------------
+# NOTE This test will fail with JDK 15+, or even earlier if
+#      https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8243162
+#      is backported to JDK 11 LTS and therefore the selection
+#      of fa (farsi) as locale starts meaning also the use of
+#      Eastern Arabic-Hindu numerals.
+#      Given the standard way of executing Thymeleaf tests is
+#      currently JDK11, numerals used in the test are still
+#      Arabic (Western) so that the test passes. But this will
+#      have to be changed to use Eastern Arabic-Hindu numerals
+#      once the standard JDK version used for executing tests
+#      includes the fix for the bug above.
+# ------------------------------------------------------------
+%CONTEXT
+locale = 'fa'
+# ------------------------------------------------------------
+%INPUT
+<p th:text="${#numbers.formatDecimal(one, 5, 'DEFAULT', 4, 'DEFAULT')}">...</p>
+<p th:text="${#numbers.formatDecimal(two, 5, 'DEFAULT', 4, 'DEFAULT')}">...</p>
+<p th:text="${#numbers.formatDecimal(three, 5, 'DEFAULT', 4, 'DEFAULT')}">...</p>
+<p th:text="${#numbers.formatDecimal(four, 5, 'DEFAULT', 4, 'DEFAULT')}">...</p>
+<p th:text="${#numbers.formatDecimal(five, 5, 'DEFAULT', 4, 'DEFAULT')}">...</p>
+<p th:text="${#numbers.formatDecimal(six, 5, 'DEFAULT', 4, 'DEFAULT')}">...</p>
+# ------------------------------------------------------------
+%OUTPUT
+<p>00,123.0000</p>
+<p>25,412,315,412,312,412,312,545,213.0000</p>
+<p>00,000.1240</p>
+<p>00,000.1244</p>
+<p>25,412,315,412,312,412,312,545,213.1244</p>
+<p>-00,000.3570</p>
+
