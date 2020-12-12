@@ -100,5 +100,23 @@ public class SpringBaseTest {
 
     }
 
+
+    @Test
+    public void testSpringBaseInstanceStaticRestrictions() throws Exception {
+
+        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        contextBuilder.setApplicationContextConfigLocation(null);
+
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
+        executor.setProcessingContextBuilder(contextBuilder);
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance() }));
+        executor.setThrottleStep(this.throttleStep);
+        executor.execute("classpath:templateengine/springbase/instancestaticrestrictions");
+
+        Assert.assertTrue(executor.isAllOK());
+
+
+    }
+
     
 }
