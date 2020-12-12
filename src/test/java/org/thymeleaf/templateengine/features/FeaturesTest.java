@@ -212,6 +212,18 @@ public class FeaturesTest {
 
 
     @Test
+    public void testInstanceStaticRestrictions() throws Exception {
+
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
+        executor.setThrottleStep(this.throttleStep);
+        executor.execute("classpath:templateengine/features/instancestaticrestrictions");
+
+        Assert.assertTrue(executor.isAllOK());
+
+    }
+
+
+    @Test
     public void testInliningStandard() throws Exception {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
