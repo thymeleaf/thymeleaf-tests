@@ -128,14 +128,14 @@
 
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-    <thymeleaf.version>3.0.11-SNAPSHOT</thymeleaf.version>
-    <thymeleaf-testing.version>3.0.5-SNAPSHOT</thymeleaf-testing.version>
-    <thymeleaf-extras-springsecurity3.version>3.0.2-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
     <springframework.version>4.1.8.RELEASE</springframework.version>
-    <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
+    <thymeleaf.version>3.0.12-SNAPSHOT</thymeleaf.version>
+    <thymeleaf-testing.version>3.0.5-SNAPSHOT</thymeleaf-testing.version>
+    <thymeleaf-extras-springsecurity3.version>3.0.5-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
+    <springsecurity.version>4.0.4.RELEASE</springsecurity.version>
     <mockito.version>1.9.5</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
-    <jackson.version>2.6.3</jackson.version>
+    <jackson.version>2.9.7</jackson.version>
   </properties>
 
   
