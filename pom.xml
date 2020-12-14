@@ -138,7 +138,7 @@
     <thymeleaf.version>3.0.12-SNAPSHOT</thymeleaf.version>
     <thymeleaf-testing.version>3.0.5-SNAPSHOT</thymeleaf-testing.version>
     <thymeleaf-extras-springsecurity3.version>3.0.5-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
-    <springsecurity.version>4.0.4.RELEASE</springsecurity.version>
+    <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
     <mockito.version>1.9.5</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
     <jackson.version>2.11.3</jackson.version>
