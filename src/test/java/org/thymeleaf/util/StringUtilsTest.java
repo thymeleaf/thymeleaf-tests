@@ -25,8 +25,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
+import static org.thymeleaf.util.StringUtils.*;
 
 /**
  *
@@ -277,6 +277,25 @@ public class StringUtilsTest {
     public void testSubstring5() {
         Object s = "abcdef";
         StringUtils.substring(s, 7);
+    }
+
+    @Test
+    public void testPack() {
+        assertNull(pack(null));
+        assertEquals("", pack(""));
+        assertEquals("", pack(" "));
+        assertEquals("", pack("  "));
+        assertEquals("", pack("    \n "));
+        final String a00 = "abc";
+        assertSame(a00, pack(a00));
+        assertEquals("abc", pack("   abc  "));
+        assertEquals("abc", pack("   AbC  "));
+        assertEquals("abc", pack("   a   b   c  "));
+        assertEquals("abc", pack("   a   b   \nc\n  "));
+        assertEquals("a23b(%&__c", pack("   a23   b   (\n%\t& __\nc\n  "));
+        final String a01 = "a23b(%&__c";
+        assertSame(a01, pack(a01));
+        assertEquals("a23b(%&__c", pack("   A23   B   (\n%\t& __\nC\n  "));
     }
 
 }
