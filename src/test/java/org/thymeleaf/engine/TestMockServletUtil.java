@@ -19,8 +19,6 @@
  */
 package org.thymeleaf.engine;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -41,6 +39,7 @@ import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.unbescape.uri.UriEscape;
 
 
 public final class TestMockServletUtil {
@@ -52,7 +51,7 @@ public final class TestMockServletUtil {
     public static HttpServletRequest createHttpServletRequest(
             final String path,
             final HttpSession session, final Map<String,Object> attributes,
-            final Map<String,Object[]> parameters, final Locale locale) {
+            final Map<String,String[]> parameters, final Locale locale) {
 
         final String mimeType = "text/html";
         final String characterEncoding = "UTF-8";
@@ -62,7 +61,7 @@ public final class TestMockServletUtil {
         final String scheme = "http";
         final int port = 80;
         final String serverName = "thymeleaf";
-        final String servletPath = "/" + path;
+        final String servletPath = "/" + UriEscape.escapeUriPath(path);
         final String requestURI = contextName + servletPath;
         final String requestURL = scheme + "://" + serverName + requestURI;
         final String queryString = buildQueryString(parameters);
@@ -153,17 +152,17 @@ public final class TestMockServletUtil {
 
 
 
-    private static String buildQueryString(final Map<String,Object[]> parameters) {
+    private static String buildQueryString(final Map<String,String[]> parameters) {
 
         if (parameters == null || parameters.size() == 0) {
             return null;
         }
 
         final StringBuilder strBuilder = new StringBuilder();
-        for (final Map.Entry<String,Object[]> parameterEntry : parameters.entrySet()) {
+        for (final Map.Entry<String,String[]> parameterEntry : parameters.entrySet()) {
 
             final String parameterName = parameterEntry.getKey();
-            final Object[] parameterValues = parameterEntry.getValue();
+            final String[] parameterValues = parameterEntry.getValue();
 
             if (parameterValues == null || parameterValues.length == 0) {
                 if (strBuilder.length() > 0) {
@@ -173,19 +172,14 @@ public final class TestMockServletUtil {
                 continue;
             }
 
-            for (final Object parameterValue : parameterValues) {
+            for (final String parameterValue : parameterValues) {
                 if (strBuilder.length() > 0) {
                     strBuilder.append('&');
                 }
                 strBuilder.append(parameterName);
                 if (parameterValue != null) {
                     strBuilder.append("=");
-                    try {
-                        strBuilder.append(URLEncoder.encode(parameterValue.toString(), "UTF-8"));
-                    } catch (final UnsupportedEncodingException e) {
-                        // Should never happen, UTF-8 just exists.
-                        throw new RuntimeException(e);
-                    }
+                    strBuilder.append(UriEscape.escapeUriQueryParam(parameterValue, "UTF-8"));
                 }
             }
 
@@ -309,9 +303,9 @@ public final class TestMockServletUtil {
 
     private static class GetParameterValuesAnswer implements Answer<String[]> {
 
-        private final Map<String,Object[]> values;
+        private final Map<String,String[]> values;
 
-        public GetParameterValuesAnswer(final Map<String,Object[]> values) {
+        public GetParameterValuesAnswer(final Map<String,String[]> values) {
             super();
             this.values = values;
         }
@@ -336,9 +330,9 @@ public final class TestMockServletUtil {
 
     private static class GetParameterAnswer implements Answer<String> {
 
-        private final Map<String,Object[]> values;
+        private final Map<String,String[]> values;
 
-        public GetParameterAnswer(final Map<String,Object[]> values) {
+        public GetParameterAnswer(final Map<String,String[]> values) {
             super();
             this.values = values;
         }
@@ -359,16 +353,16 @@ public final class TestMockServletUtil {
 
     private static class GetParameterMapAnswer implements Answer<Map<String,String[]>> {
 
-        private final Map<String,Object[]> values;
+        private final Map<String,String[]> values;
 
-        public GetParameterMapAnswer(final Map<String,Object[]> values) {
+        public GetParameterMapAnswer(final Map<String,String[]> values) {
             super();
             this.values = values;
         }
 
         public Map<String,String[]> answer(final InvocationOnMock invocation) throws Throwable {
             final Map<String,String[]> parameterMap = new HashMap<String, String[]>();
-            for (final Map.Entry<String,Object[]> valueEntry : this.values.entrySet()) {
+            for (final Map.Entry<String,String[]> valueEntry : this.values.entrySet()) {
                 final String parameterName = valueEntry.getKey();
                 final Object[] parameterValues = valueEntry.getValue();
                 if (parameterValues == null) {

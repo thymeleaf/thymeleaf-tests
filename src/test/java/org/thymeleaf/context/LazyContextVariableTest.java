@@ -170,7 +170,7 @@ public class LazyContextVariableTest {
     @Test
     public void testLazyContextVariable05() throws Exception {
 
-        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, Object[]>(), Locale.US);
+        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, String[]>(), Locale.US);
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
@@ -201,7 +201,7 @@ public class LazyContextVariableTest {
     @Test
     public void testLazyContextVariable06() throws Exception {
 
-        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, Object[]>(), Locale.US);
+        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, String[]>(), Locale.US);
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
@@ -232,7 +232,7 @@ public class LazyContextVariableTest {
     @Test
     public void testLazyContextVariable07() throws Exception {
 
-        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, Object[]>(), Locale.US);
+        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, String[]>(), Locale.US);
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
@@ -263,7 +263,7 @@ public class LazyContextVariableTest {
     @Test
     public void testLazyContextVariable08() throws Exception {
 
-        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, Object[]>(), Locale.US);
+        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, String[]>(), Locale.US);
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
@@ -297,7 +297,7 @@ public class LazyContextVariableTest {
         final Map<String, Object> sessionAttrs = new HashMap<String, Object>();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
         final HttpSession session = TestMockServletUtil.createHttpSession(servletContext, sessionAttrs);
-        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", session, new HashMap<String, Object>(), new HashMap<String, Object[]>(), Locale.US);
+        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", session, new HashMap<String, Object>(), new HashMap<String, String[]>(), Locale.US);
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
 
         final WebContext contextTrue = new WebContext(request, response, servletContext, Locale.US);
@@ -327,7 +327,7 @@ public class LazyContextVariableTest {
 
         final Map<String, Object> servletContextAttrs = new HashMap<String, Object>();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(servletContextAttrs);
-        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, Object[]>(), Locale.US);
+        final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, String[]>(), Locale.US);
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
 
         final WebContext contextTrue = new WebContext(request, response, servletContext, Locale.US);
