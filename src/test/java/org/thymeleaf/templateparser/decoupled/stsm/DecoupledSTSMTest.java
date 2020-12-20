@@ -155,7 +155,7 @@ public class DecoupledSTSMTest {
 
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, Locale.US);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
