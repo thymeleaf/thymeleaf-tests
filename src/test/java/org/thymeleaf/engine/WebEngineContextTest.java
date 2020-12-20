@@ -55,7 +55,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -228,7 +228,7 @@ public final class WebEngineContextTest {
         starting.put("ten", "tieen");
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -278,7 +278,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -558,7 +558,7 @@ public final class WebEngineContextTest {
         starting.put("ten", "tieen");
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -696,7 +696,7 @@ public final class WebEngineContextTest {
         starting.put("ten", "tieen");
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -810,7 +810,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -923,7 +923,7 @@ public final class WebEngineContextTest {
         starting.put("ten", "tieen");
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -988,7 +988,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -1185,7 +1185,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -1295,7 +1295,7 @@ public final class WebEngineContextTest {
         starting.put("ten", "tieen");
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -1371,7 +1371,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -1600,7 +1600,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -1654,7 +1654,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData4 = TestTemplateDataConfigurationBuilder.build("test04", TemplateMode.TEXT);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
@@ -1971,7 +1971,7 @@ public final class WebEngineContextTest {
         final TemplateData templateData1 = TestTemplateDataConfigurationBuilder.build("test01", TemplateMode.HTML);
 
         final Map<String,Object> requestAttributes = new LinkedHashMap<String, Object>();
-        final Map<String,Object[]> requestParameters = new LinkedHashMap<String, Object[]>();
+        final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
         final HttpServletRequest mockRequest =
                 TestMockServletUtil.createHttpServletRequest("WebVariablesMap", null, requestAttributes, requestParameters, LOCALE);
         final HttpServletResponse mockResponse = TestMockServletUtil.createHttpServletResponse();
