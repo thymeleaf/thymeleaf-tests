@@ -18,6 +18,7 @@
                 <user name="jim" password="demo" authorities="ROLE_ADMIN" />
                 <user name="bob" password="demo" authorities="ROLE_USER" />
                 <user name="ted" password="demo" authorities="ROLE_USER, ROLE_ADMIN" />
+                <user name="&lt;script&gt;alert(1)&lt;/script&gt;" password="demo" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
