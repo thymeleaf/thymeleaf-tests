@@ -50,6 +50,7 @@ public final class SpringRequestUtilsTest {
         assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e","p0","${lala} :: le//")));
         checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e","p0","${lala}_le//"));
 
+        checkViewNameNotInRequest("${lala} :: le", mockRequest("a/elala::le//", "p0", "%example%"));
     }
 
 
