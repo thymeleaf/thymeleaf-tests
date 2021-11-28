@@ -135,7 +135,7 @@
     <project.build.resourcesEncoding>UTF-8</project.build.resourcesEncoding>
     <project.build.propertiesEncoding>ISO-8859-1</project.build.propertiesEncoding>
     <springframework.version>3.0.7.RELEASE</springframework.version>
-    <thymeleaf.version>3.0.12-SNAPSHOT</thymeleaf.version>
+    <thymeleaf.version>3.0.13-SNAPSHOT</thymeleaf.version>
     <thymeleaf-testing.version>3.0.5-SNAPSHOT</thymeleaf-testing.version>
     <thymeleaf-extras-springsecurity3.version>3.0.5-SNAPSHOT</thymeleaf-extras-springsecurity3.version>
     <springsecurity.version>3.1.4.RELEASE</springsecurity.version>
