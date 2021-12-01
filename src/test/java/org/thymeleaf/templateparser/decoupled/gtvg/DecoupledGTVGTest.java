@@ -19,6 +19,7 @@
  */
 package org.thymeleaf.templateparser.decoupled.gtvg;
 
+import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -51,6 +52,7 @@ public class DecoupledGTVGTest {
         final Context ctx = new Context();
         ctx.setVariable("user", new User("John", "Apricot", "Antarctica", null));
         ctx.setVariable("today", DateUtils.create(2016, 02, 18));
+        ctx.setLocale(Locale.US);
 
         test("home", "templateparser/decoupled/gtvg/result/home.html", ctx);
 
