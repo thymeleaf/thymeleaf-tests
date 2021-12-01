@@ -135,11 +135,11 @@
     <project.build.resourcesEncoding>UTF-8</project.build.resourcesEncoding>
     <project.build.propertiesEncoding>ISO-8859-1</project.build.propertiesEncoding>
     <springframework.version>5.1.0.RELEASE</springframework.version>
-    <thymeleaf.version>3.0.14-SNAPSHOT</thymeleaf.version>
-    <thymeleaf-testing.version>3.0.5-SNAPSHOT</thymeleaf-testing.version>
+    <thymeleaf.version>4.0.0-SNAPSHOT</thymeleaf.version>
+    <thymeleaf-testing.version>4.0.0-SNAPSHOT</thymeleaf-testing.version>
     <thymeleaf-extras-springsecurity5.version>3.0.5-SNAPSHOT</thymeleaf-extras-springsecurity5.version>
     <springsecurity.version>5.1.0.RELEASE</springsecurity.version>
-    <mockito.version>1.9.5</mockito.version>
+    <mockito.version>4.1.0</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
     <jackson.version>2.11.3</jackson.version>
     <junit.version>4.13.1</junit.version>
@@ -281,12 +281,14 @@
       <scope>compile</scope>
     </dependency>
 
+    <!--
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring5</artifactId>
       <version>${thymeleaf.version}</version>
       <scope>compile</scope>
     </dependency>
+    -->
 
     <dependency>
       <groupId>org.thymeleaf</groupId>
@@ -294,13 +296,15 @@
       <version>${thymeleaf-testing.version}</version>
       <scope>compile</scope>
     </dependency>
-    
+
+    <!--
     <dependency>
       <groupId>org.thymeleaf.extras</groupId>
       <artifactId>thymeleaf-extras-springsecurity5</artifactId>
       <version>${thymeleaf-extras-springsecurity5.version}</version>
       <scope>compile</scope>
     </dependency>
+    -->
 
     <dependency>
       <groupId>net.sourceforge.nekohtml</groupId>
