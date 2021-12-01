@@ -39,16 +39,19 @@ public final class SpringRequestUtilsTest {
     @Test
     public void testCheckViewNameNotInRequest() {
 
-        assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("lala", mockRequest("alala")));
-        assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("lala :: le", mockRequest("a/elala::le//")));
-        assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("lala :: le", mockRequest("a/elala :: le//")));
+        checkViewNameNotInRequest("lala", mockRequest("alala"));
+        checkViewNameNotInRequest("lala :: le", mockRequest("a/elala::le//"));
+        checkViewNameNotInRequest("lala :: le", mockRequest("a/elala :: le//"));
         checkViewNameNotInRequest("${lala} :: le", mockRequest("a/elala::le//"));
         checkViewNameNotInRequest("${lala} :: le", mockRequest("a/elala :: le//"));
         assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e${lala}::le//")));
         assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e${lala} :: le//")));
-        checkViewNameNotInRequest("${lala} :: le (a=23)", mockRequest("a/e${lala} :: le//"));
-        assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e","p0","${lala} :: le//")));
+        assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e${x} :: le//")));
+        assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("${lala} :: le (a=23)", mockRequest("a/e${lala} :: le//")));
+        checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e","p0","${lala} :: le//"));
+        assertThrows(TemplateProcessingException.class, () -> checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e","p0","${lala} :: le")));
         checkViewNameNotInRequest("${lala} :: le", mockRequest("a/e","p0","${lala}_le//"));
+        checkViewNameNotInRequest("${lala}::le", mockRequest("a/e","p0","${lili}::le"));
 
     }
 
