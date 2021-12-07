@@ -205,7 +205,7 @@
         <version>2.22.2</version>
         <configuration>
           <!-- Travis build workaround -->
-          <argLine>-Xms1024m -Xmx4096m</argLine>
+          <argLine>-Xms1024m -Xmx3072m</argLine>
         </configuration>
       </plugin>
 
