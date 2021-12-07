@@ -1,11 +1,7 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
-%CONTEXT
-param.a='something'
-# ------------------------------------------------------------
 %INPUT
-<p th:text="${param['a']}">NOT ALLOWED</p>
-<p th:utext="${param['a']}">NOT ALLOWED</p>
+<p th:utext="${T( org.thymeleaf.TemplateEngine).TIMER_LOGGER_NAME}">NOT ALLOWED</p>
 # ------------------------------------------------------------
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
 %EXCEPTION_MESSAGE_PATTERN (.*)\Qforbidden in this context\E(.*)
