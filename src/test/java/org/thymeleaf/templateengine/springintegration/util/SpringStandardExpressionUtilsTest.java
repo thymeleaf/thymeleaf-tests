@@ -29,62 +29,62 @@ public final class SpringStandardExpressionUtilsTest {
 
 
     @Test
-    public void testcontainsSpELInstantiationOrStatic() {
+    public void testcontainsSpELInstantiationOrStaticOrParam() {
 
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abcnew"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abcnew "));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc3new "));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc_new "));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc$new "));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc-new "));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc new "));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc.new "));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc newnew"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abcnew ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc new ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc new w ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc new w ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc (new )w ewnew"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc (new)w ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("abc +new )w ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("new "));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("new "));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("newnew"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("new ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("new w ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("new w ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("(new )w ewnew"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("(new)w ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("+new )w ewnew"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("!new )w ewnew"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abcnew"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abcnew "));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc3new "));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc_new "));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc$new "));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc-new "));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc new "));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc.new "));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc newnew"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abcnew ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc new ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc new w ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc new w ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc (new )w ewnew"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc (new)w ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("abc +new )w ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("new "));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("new "));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("newnew"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("new ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("new w ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("new w ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("(new )w ewnew"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("(new)w ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("+new )w ewnew"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("!new )w ewnew"));
 
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T()"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T(a)"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T(a.b.SomeClass)"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T(a.b.SomenewClass)"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T(a.b.Some Class)"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T(a.b.Some newClass)"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T(a.b.Some new Class)"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T(a.b.Some newClass)new"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("T(a.b.Some newClass)new "));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("newT(a.b.Some newClass)new"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("aT(a.b.Some newClass)a"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.Some newClass) a"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic(" aT(a.b.Some newClass)a "));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a-T(a.b.SomeClass)a"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("aT(a.b.SomeClass)a"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.SomeClass) a"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic(" aT(a.b.SomeClass)a "));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic(" a T(a.b.SomeClass)a "));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.SomeClass) a T(a.b.Some Class)"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.Some Class) a T(a.b.SomeClass)"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.Some Class) a T(a.b.Some Class)"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.SomeClass) )"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.SomeClass))"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.Some(Class) )"));
-        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.Some)Class) )"));
-        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStatic("a T(a.b.Som(e)Class) )"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T()"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T(a)"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T(a.b.SomeClass)"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T(a.b.SomenewClass)"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T(a.b.Some Class)"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T(a.b.Some newClass)"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T(a.b.Some new Class)"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T(a.b.Some newClass)new"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("T(a.b.Some newClass)new "));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("newT(a.b.Some newClass)new"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("aT(a.b.Some newClass)a"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.Some newClass) a"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam(" aT(a.b.Some newClass)a "));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a-T(a.b.SomeClass)a"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("aT(a.b.SomeClass)a"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.SomeClass) a"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam(" aT(a.b.SomeClass)a "));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam(" a T(a.b.SomeClass)a "));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.SomeClass) a T(a.b.Some Class)"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.Some Class) a T(a.b.SomeClass)"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.Some Class) a T(a.b.Some Class)"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.SomeClass) )"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.SomeClass))"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.Some(Class) )"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.Some)Class) )"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.Som(e)Class) )"));
 
     }
 
