@@ -29,7 +29,7 @@ import org.thymeleaf.engine.TestMockServletUtil;
 import org.thymeleaf.exceptions.TemplateProcessingException;
 
 import static org.junit.Assert.*;
-import static org.thymeleaf.spring5.util.SpringRequestUtils.*;
+import static org.thymeleaf.spring4.util.SpringRequestUtils.*;
 
 
 public final class SpringRequestUtilsTest {
