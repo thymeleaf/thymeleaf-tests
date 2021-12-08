@@ -47,57 +47,65 @@ public final class StandardExpressionUtilsTest {
 
 
     @Test
-    public void testContainsOGNLInstantiationOrStatic() {
+    public void testcontainsOGNLInstantiationOrStaticOrParam() {
 
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abcnew"));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abcnew "));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc3new "));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc_new "));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc$new "));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc-new "));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc new "));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc.new "));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc newnew"));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abcnew ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc new ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc new w ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc new w ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc (new )w ewnew"));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc (new)w ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("abc +new )w ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("new "));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("new "));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("newnew"));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("new ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("new w ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("new w ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("(new )w ewnew"));
-        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStatic("(new)w ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("+new )w ewnew"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("!new )w ewnew"));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abcnew"));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abcnew "));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc3new "));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc_new "));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc$new "));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc-new "));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc new "));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc.new "));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc newnew"));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abcnew ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc new ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc new w ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc new w ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc (new )w ewnew"));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc (new)w ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("abc +new )w ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("new "));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("new "));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("newnew"));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("new ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("new w ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("new w ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("(new )w ewnew"));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("(new)w ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("+new )w ewnew"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("!new )w ewnew"));
 
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@a@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@a.b.SomeClass@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@a.b.SomenewClass@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@a.b.Some Class@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@a.b.Some newClass@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@a.b.Some new Class@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@a.b.Some newClass@new"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("@a.b.Some newClass@new "));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("new@a.b.Some newClass@new"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a@a.b.Some newClass@a"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a @a.b.Some newClass@ a"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic(" a@a.b.Some newClass@a "));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a@a.b.SomeClass@a"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a @a.b.SomeClass@ a"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic(" a@a.b.SomeClass@a "));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a @a.b.SomeClass@ a @a.b.Some Class@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a @a.b.Some Class@ a @a.b.SomeClass@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a @a.b.Some Class@ a @a.b.Some Class@"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a @a.b.SomeClass@ @"));
-        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStatic("a @a.b.SomeClass@@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@a@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@a.b.SomeClass@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@a.b.SomenewClass@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@a.b.Some Class@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@a.b.Some newClass@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@a.b.Some new Class@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@a.b.Some newClass@new"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("@a.b.Some newClass@new "));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("new@a.b.Some newClass@new"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a@a.b.Some newClass@a"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a @a.b.Some newClass@ a"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam(" a@a.b.Some newClass@a "));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a@a.b.SomeClass@a"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a @a.b.SomeClass@ a"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam(" a@a.b.SomeClass@a "));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a @a.b.SomeClass@ a @a.b.Some Class@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a @a.b.Some Class@ a @a.b.SomeClass@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a @a.b.Some Class@ a @a.b.Some Class@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a @a.b.SomeClass@ @"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a @a.b.SomeClass@@"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("a @  a.b.SomeClass@@"));
+
+
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("param.a"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam(" param.a"));
+        Assert.assertTrue(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam(" param['a']"));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam("_param['a']"));
+        Assert.assertFalse(StandardExpressionUtils.containsOGNLInstantiationOrStaticOrParam(" param_a"));
 
     }
 

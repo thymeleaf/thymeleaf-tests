@@ -86,6 +86,13 @@ public final class SpringStandardExpressionUtilsTest {
         Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.Some)Class) )"));
         Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("a T(a.b.Som(e)Class) )"));
 
+
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("param.a"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam(" param.a"));
+        Assert.assertTrue(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam(" param['a']"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam("_param['a']"));
+        Assert.assertFalse(SpringStandardExpressionUtils.containsSpELInstantiationOrStaticOrParam(" param_a"));
+
     }
 
 }
