@@ -134,11 +134,11 @@
     <project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
     <project.build.resourcesEncoding>UTF-8</project.build.resourcesEncoding>
     <project.build.propertiesEncoding>ISO-8859-1</project.build.propertiesEncoding>
-    <springframework.version>4.2.5.RELEASE</springframework.version>
     <thymeleaf.version>3.0.14-SNAPSHOT</thymeleaf.version>
     <thymeleaf-testing.version>3.0.5-SNAPSHOT</thymeleaf-testing.version>
     <thymeleaf-extras-springsecurity4.version>3.0.5-SNAPSHOT</thymeleaf-extras-springsecurity4.version>
     <springsecurity.version>4.0.4.RELEASE</springsecurity.version>
+    <springframework.version>4.2.5.RELEASE</springframework.version>
     <mockito.version>1.9.5</mockito.version>
     <nekohtml.version>1.9.21</nekohtml.version>
     <jackson.version>2.11.3</jackson.version>
