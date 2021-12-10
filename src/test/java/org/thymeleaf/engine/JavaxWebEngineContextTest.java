@@ -1,20 +1,20 @@
 /*
  * =============================================================================
- * 
+ *
  *   Copyright (c) 2011-2016, The THYMELEAF team (http://www.thymeleaf.org)
- * 
+ *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
- * 
+ *
  *       http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *   Unless required by applicable law or agreed to in writing, software
  *   distributed under the License is distributed on an "AS IS" BASIS,
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- * 
+ *
  * =============================================================================
  */
 package org.thymeleaf.engine;
@@ -36,12 +36,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
-import org.thymeleaf.context.WebEngineContext;
+import org.thymeleaf.context.JavaxWebEngineContext;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 import org.thymeleaf.templatemode.TemplateMode;
 
 
-public final class WebEngineContextTest {
+public final class JavaxWebEngineContextTest {
 
 
     private static final Locale LOCALE = Locale.US;
@@ -64,7 +64,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -237,7 +237,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
@@ -287,7 +287,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -567,7 +567,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
@@ -705,7 +705,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertTrue(vm.containsVariable("one"));
         Assert.assertTrue(vm.containsVariable("ten"));
@@ -819,7 +819,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -932,7 +932,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals("{0:{one=ha, ten=tieen}(test01)}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=ha, ten=tieen}(test01)", vm.toString());
@@ -997,7 +997,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -1194,7 +1194,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
 
@@ -1304,7 +1304,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, starting);
 
         Assert.assertEquals("{0:{one=ha, ten=tieen}(test01)}[0]", vm.getStringRepresentationByLevel());
         Assert.assertEquals("{one=ha, ten=tieen}(test01)", vm.toString());
@@ -1380,7 +1380,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a value");
         Assert.assertFalse(vm.hasSelectionTarget());
@@ -1609,7 +1609,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         vm.setVariable("one", "a val1");
 
@@ -1663,7 +1663,7 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         Assert.assertEquals(TemplateMode.HTML, vm.getTemplateMode());
         Assert.assertSame(templateData1, vm.getTemplateData());
@@ -1980,10 +1980,10 @@ public final class WebEngineContextTest {
         final ServletContext mockServletContext =
                 TestMockServletUtil.createServletContext(servletContextAttributes);
 
-        final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
+        final JavaxWebEngineContext vm = new JavaxWebEngineContext(configuration, templateData1, null, mockRequest, mockResponse, mockServletContext, LOCALE, null);
 
         /*
-         * Note WebEngineContext works in a different way to EngineContext because it is based on the
+         * Note JavaxWebEngineContext works in a different way to EngineContext because it is based on the
          * HttpServletRequest, and the request considers setting an attribute to null the exact same thing as
          * removing it.
          */

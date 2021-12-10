@@ -174,13 +174,13 @@ public class LazyContextVariableTest {
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
-        final WebContext contextTrue = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextTrue = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextTrue.setVariable("doit", "true");
         final Lazy lazyTrue = new Lazy();
         contextTrue.setVariable("lazz", lazyTrue);
 
 
-        final WebContext contextFalse = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextFalse = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextFalse.setVariable("doit", "false");
         final Lazy lazyFalse = new Lazy();
         contextFalse.setVariable("lazz", lazyFalse);
@@ -205,13 +205,13 @@ public class LazyContextVariableTest {
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
-        final WebContext contextTrue = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextTrue = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextTrue.setVariable("doit", "true");
         final Lazy lazyTrue = new Lazy();
         contextTrue.setVariable("lazz", lazyTrue);
 
 
-        final WebContext contextFalse = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextFalse = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextFalse.setVariable("doit", "false");
         final Lazy lazyFalse = new Lazy();
         contextFalse.setVariable("lazz", lazyFalse);
@@ -236,13 +236,13 @@ public class LazyContextVariableTest {
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
-        final WebContext contextTrue = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextTrue = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextTrue.setVariable("doit", "true");
         final Lazy lazyTrue = new Lazy();
         contextTrue.setVariable("lazz", lazyTrue);
 
 
-        final WebContext contextFalse = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextFalse = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextFalse.setVariable("doit", "false");
         final Lazy lazyFalse = new Lazy();
         contextFalse.setVariable("lazz", lazyFalse);
@@ -267,13 +267,13 @@ public class LazyContextVariableTest {
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
         final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
 
-        final WebContext contextTrue = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextTrue = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextTrue.setVariable("doit", "true");
         final Lazy lazyTrue = new Lazy();
         contextTrue.setVariable("lazz", lazyTrue);
 
 
-        final WebContext contextFalse = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextFalse = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextFalse.setVariable("doit", "false");
         final Lazy lazyFalse = new Lazy();
         contextFalse.setVariable("lazz", lazyFalse);
@@ -300,7 +300,7 @@ public class LazyContextVariableTest {
         final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", session, new HashMap<String, Object>(), new HashMap<String, String[]>(), Locale.US);
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
 
-        final WebContext contextTrue = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextTrue = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextTrue.setVariable("doit", "true");
         final Lazy lazyTrue = new Lazy();
         sessionAttrs.put("lazz", lazyTrue);
@@ -309,7 +309,7 @@ public class LazyContextVariableTest {
         Assert.assertEquals("<Hello there!>", TEMPLATE_ENGINE.process(TEMPLATE_SPEC9, contextTrue));
         Assert.assertTrue(lazyTrue.initialized);
 
-        final WebContext contextFalse = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextFalse = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextFalse.setVariable("doit", "false");
         final Lazy lazyFalse = new Lazy();
         sessionAttrs.put("lazz", lazyFalse);
@@ -330,7 +330,7 @@ public class LazyContextVariableTest {
         final HttpServletRequest request = TestMockServletUtil.createHttpServletRequest("/something", null, new HashMap<String, Object>(), new HashMap<String, String[]>(), Locale.US);
         final HttpServletResponse response = TestMockServletUtil.createHttpServletResponse();
 
-        final WebContext contextTrue = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextTrue = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextTrue.setVariable("doit", "true");
         final Lazy lazyTrue = new Lazy();
         servletContextAttrs.put("lazz", lazyTrue);
@@ -339,7 +339,7 @@ public class LazyContextVariableTest {
         Assert.assertEquals("<Hello there!>", TEMPLATE_ENGINE.process(TEMPLATE_SPEC10, contextTrue));
         Assert.assertTrue(lazyTrue.initialized);
 
-        final WebContext contextFalse = new WebContext(request, response, servletContext, Locale.US);
+        final JavaxWebContext contextFalse = new JavaxWebContext(request, response, servletContext, Locale.US);
         contextFalse.setVariable("doit", "false");
         final Lazy lazyFalse = new Lazy();
         servletContextAttrs.put("lazz", lazyFalse);

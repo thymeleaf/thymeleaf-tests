@@ -47,7 +47,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.RequestContext;
 import org.springframework.web.servlet.view.AbstractTemplateView;
 import org.thymeleaf.context.IExpressionContext;
-import org.thymeleaf.context.WebContext;
+import org.thymeleaf.context.JavaxWebContext;
 import org.thymeleaf.engine.TestMockServletUtil;
 import org.thymeleaf.linkbuilder.StandardLinkBuilder;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -203,7 +203,7 @@ public class DecoupledSTSMTest {
 
 
 
-        final WebContext ctx = new WebContext(mockRequest, mockResponse, mockServletContext, Locale.US);
+        final JavaxWebContext ctx = new JavaxWebContext(mockRequest, mockResponse, mockServletContext, Locale.US);
         for (final Map.Entry<String,Object> entry : vars.entrySet()) {
             ctx.setVariable(entry.getKey(), entry.getValue());
         }

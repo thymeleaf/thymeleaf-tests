@@ -21,7 +21,7 @@ package org.thymeleaf.templateengine.context.dialect;
 
 import org.thymeleaf.context.IEngineContext;
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.context.IWebContext;
+import org.thymeleaf.context.IJavaxWebContext;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
@@ -42,7 +42,7 @@ public class AddContextVariableElementProcessor extends AbstractElementTagProces
             final IProcessableElementTag tag,
             final IElementTagStructureHandler structureHandler) {
 
-        final IWebContext webContext = (IWebContext) processingContext;
+        final IJavaxWebContext webContext = (IJavaxWebContext) processingContext;
         final IEngineContext engineContext = (IEngineContext) webContext;
 
         engineContext.setVariable("newvar0", "LocalVariablesNewVar0");
