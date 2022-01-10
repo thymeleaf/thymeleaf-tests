@@ -1,4 +1,4 @@
-ç%TEMPLATE_MODE HTML
+%TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %CONTEXT
 varlist = new org.thymeleaf.templateengine.features.lazy.ListLazyContextVariable()

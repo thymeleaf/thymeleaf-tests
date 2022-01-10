@@ -1,4 +1,4 @@
-ç%TEMPLATE_MODE HTML
+%TEMPLATE_MODE HTML
 # ------------------------------------------------------------
 %CONTEXT
 var1 = new org.thymeleaf.templateengine.features.lazy.ValueLazyContextVariable('hello')

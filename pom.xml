@@ -132,7 +132,6 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
 <!-- "maven.compiler.release" ommited so that tests can be compiled with JDK 8 -->
     <project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
-    <project.build.resourcesEncoding>UTF-8</project.build.resourcesEncoding>
     <project.build.propertiesEncoding>ISO-8859-1</project.build.propertiesEncoding>
     <thymeleaf.version>3.1.0-SNAPSHOT</thymeleaf.version>
     <thymeleaf-testing.version>3.1.0-SNAPSHOT</thymeleaf-testing.version>
@@ -193,7 +192,7 @@
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.2.0</version>
         <configuration>
-          <encoding>${project.build.resourcesEncoding}</encoding>
+          <encoding>${project.build.sourceEncoding}</encoding>
           <propertiesEncoding>${project.build.propertiesEncoding}</propertiesEncoding>
         </configuration>
       </plugin>
