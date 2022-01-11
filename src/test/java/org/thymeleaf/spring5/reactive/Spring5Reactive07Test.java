@@ -23,8 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.thymeleaf.spring5.context.webflux.ISpringWebFluxContext;
-import org.thymeleaf.spring5.reactive.data.Album;
+import org.thymeleaf.spring6.context.webflux.ISpringWebFluxContext;
+import org.thymeleaf.spring6.reactive.data.Album;
 
 public final class Spring5Reactive07Test extends AbstractSpring5ReactiveTest {
 

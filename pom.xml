@@ -138,6 +138,7 @@
     <thymeleaf-extras-springsecurity6.version>3.1.0-SNAPSHOT</thymeleaf-extras-springsecurity6.version>
     <springframework.version>6.0.0-SNAPSHOT</springframework.version>
     <springsecurity.version>6.0.0-SNAPSHOT</springsecurity.version>
+    <jakarta-servlet-api.version>5.0.0</jakarta-servlet-api.version>
     <mockito.version>4.1.0</mockito.version>
     <jackson.version>2.13.0</jackson.version>
     <junit.version>4.13.2</junit.version>
@@ -242,6 +243,14 @@
       <artifactId>thymeleaf-extras-springsecurity6</artifactId>
       <version>${thymeleaf-extras-springsecurity6.version}</version>
       <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>${jakarta-servlet-api.version}</version>
+      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
 
     <dependency>

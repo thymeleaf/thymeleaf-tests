@@ -31,12 +31,12 @@ import org.springframework.web.reactive.result.view.RequestContext;
 import org.springframework.web.reactive.result.view.RequestDataValueProcessor;
 import org.springframework.web.server.ServerWebExchange;
 import org.thymeleaf.exceptions.TemplateProcessingException;
-import org.thymeleaf.spring5.context.webflux.ISpringWebFluxContext;
-import org.thymeleaf.spring5.context.webflux.SpringWebFluxThymeleafRequestContext;
-import org.thymeleaf.spring5.naming.SpringContextVariableNames;
-import org.thymeleaf.spring5.reactive.context.TestingSpringWebFluxContext;
-import org.thymeleaf.spring5.reactive.exchange.TestingServerWebExchange;
-import org.thymeleaf.spring5.reactive.messagesource.TestingMessageSource;
+import org.thymeleaf.spring6.context.webflux.ISpringWebFluxContext;
+import org.thymeleaf.spring6.context.webflux.SpringWebFluxThymeleafRequestContext;
+import org.thymeleaf.spring6.naming.SpringContextVariableNames;
+import org.thymeleaf.spring6.reactive.context.TestingSpringWebFluxContext;
+import org.thymeleaf.spring6.reactive.exchange.TestingServerWebExchange;
+import org.thymeleaf.spring6.reactive.messagesource.TestingMessageSource;
 import org.thymeleaf.util.ClassLoaderUtils;
 
 public final class ReactiveTestUtils {

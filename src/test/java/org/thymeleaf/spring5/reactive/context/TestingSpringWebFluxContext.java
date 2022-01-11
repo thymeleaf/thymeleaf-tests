@@ -24,7 +24,7 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
 import org.thymeleaf.context.AbstractContext;
-import org.thymeleaf.spring5.context.webflux.ISpringWebFluxContext;
+import org.thymeleaf.spring6.context.webflux.ISpringWebFluxContext;
 import reactor.core.publisher.Mono;
 
 public final class TestingSpringWebFluxContext extends AbstractContext implements ISpringWebFluxContext {
