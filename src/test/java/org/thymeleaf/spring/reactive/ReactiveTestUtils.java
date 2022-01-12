@@ -102,8 +102,7 @@ public final class ReactiveTestUtils {
     public static IWebContext buildReactiveContext(
             final Map<String,Object> model, final RequestDataValueProcessor requestDataValueProcessor) {
 
-        final ServerWebExchange exchange =
-                new TestingServerWebExchange("reactive07", Collections.emptyMap(), Collections.emptyMap(), Collections.emptyMap());
+        final ServerWebExchange exchange = new TestingServerWebExchange("reactive07");
 
         final TestingMessageSource testingMessageSource = new TestingMessageSource();
 

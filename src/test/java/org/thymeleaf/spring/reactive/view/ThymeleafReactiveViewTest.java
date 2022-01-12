@@ -20,7 +20,6 @@
 package org.thymeleaf.spring.reactive.view;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -62,7 +61,7 @@ public class ThymeleafReactiveViewTest {
 
         final Map<String,Object> model = new ModelMap();
         model.put("one", "one");
-        final TestingServerWebExchange exchange = new TestingServerWebExchange("/testing", new HashMap<>(), new HashMap<>(), new HashMap<>());
+        final TestingServerWebExchange exchange = new TestingServerWebExchange("/testing");
 
         view.flatMap(v -> v.render(model, MediaType.TEXT_HTML, exchange)).block();
 

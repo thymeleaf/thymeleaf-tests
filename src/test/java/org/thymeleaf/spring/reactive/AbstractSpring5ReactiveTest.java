@@ -229,8 +229,7 @@ public abstract class AbstractSpring5ReactiveTest {
             model.put(variableName, context.getVariable(variableName));
         }
 
-        final ServerWebExchange serverWebExchange =
-                new TestingServerWebExchange("testing", Collections.emptyMap(), Collections.emptyMap(), Collections.emptyMap());
+        final ServerWebExchange serverWebExchange = new TestingServerWebExchange("testing");
 
         List<DataBuffer> resultBuffers = null;
         try {

@@ -21,6 +21,7 @@ package org.thymeleaf.spring.reactive.exchange;
 
 import java.security.Principal;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -55,6 +56,14 @@ public final class TestingServerWebExchange implements ServerWebExchange {
         this.attributes = requestAttributes;
     }
 
+
+    public TestingServerWebExchange(final String path) {
+        super();
+        this.request = new TestingServerHttpRequest(path, new HashMap<>());
+        this.response = new TestingServerHttpResponse();
+        this.session = new TestingWebSession(new HashMap<>());
+        this.attributes = new HashMap<>();
+    }
 
 
     @Override
@@ -94,7 +103,7 @@ public final class TestingServerWebExchange implements ServerWebExchange {
 
     @Override
     public <T extends Principal> Mono<T> getPrincipal() {
-        throw new UnsupportedOperationException();
+        return null;
     }
 
     @Override
