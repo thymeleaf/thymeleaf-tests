@@ -101,7 +101,7 @@ public abstract class AbstractSpring5ReactiveTest {
             throw new ExceptionInInitializerError(e);
         }
 
-        applicationContext = new ClassPathXmlApplicationContext("classpath:spring5/reactive/applicationContext.xml");
+        applicationContext = new ClassPathXmlApplicationContext("classpath:spring/reactive/applicationContext.xml");
 
     }
 

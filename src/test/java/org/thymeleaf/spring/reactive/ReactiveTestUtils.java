@@ -46,7 +46,7 @@ import org.thymeleaf.util.ClassLoaderUtils;
 public final class ReactiveTestUtils {
 
 
-    public static final String TEMPLATE_PATH_BASE = "spring5/reactive/";
+    public static final String TEMPLATE_PATH_BASE = "spring/reactive/";
 
 
 

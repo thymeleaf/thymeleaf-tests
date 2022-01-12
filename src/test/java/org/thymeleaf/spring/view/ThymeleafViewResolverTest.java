@@ -36,7 +36,7 @@ public class ThymeleafViewResolverTest {
     public void testConfigureViewBean() throws Exception {
 
         final ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:spring5/view/applicationContext.xml");
+                new ClassPathXmlApplicationContext("classpath:spring/view/applicationContext.xml");
 
         final ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setApplicationContext(context);
@@ -60,7 +60,7 @@ public class ThymeleafViewResolverTest {
     public void testConfigureViewNoBean() throws Exception {
 
         final ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:spring5/view/applicationContext.xml");
+                new ClassPathXmlApplicationContext("classpath:spring/view/applicationContext.xml");
 
         final ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setApplicationContext(context);
@@ -87,7 +87,7 @@ public class ThymeleafViewResolverTest {
     public void testConfigureViewConfiguringBean() throws Exception {
 
         final ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:spring5/view/applicationContext.xml");
+                new ClassPathXmlApplicationContext("classpath:spring/view/applicationContext.xml");
 
         final ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setApplicationContext(context);

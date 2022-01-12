@@ -43,11 +43,11 @@ public class ThymeleafReactiveViewTest {
     public void testSeveralConversionServices() throws Exception {
 
         final ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:spring5/view/applicationContextConversionService.xml");
+                new ClassPathXmlApplicationContext("classpath:spring/view/applicationContextConversionService.xml");
 
         final SpringWebFluxTemplateEngine templateEngine = new SpringWebFluxTemplateEngine();
         final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix("spring5/view/");
+        templateResolver.setPrefix("spring/view/");
         templateResolver.setSuffix(".html");
         templateEngine.setTemplateResolver(templateResolver);
 
