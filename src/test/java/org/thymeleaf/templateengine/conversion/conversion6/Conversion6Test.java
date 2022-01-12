@@ -24,8 +24,8 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
 
@@ -46,7 +46,7 @@ public class Conversion6Test {
     @Test
     public void testConversion() throws Exception {
 
-        final SpringWebProcessingContextBuilder processingContextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder processingContextBuilder = new SpringMVCWebProcessingContextBuilder();
         processingContextBuilder.setApplicationContextConfigLocation("classpath:templateengine/conversion/conversion6/applicationContext.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();

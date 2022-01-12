@@ -24,9 +24,9 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
-import org.thymeleaf.testing.templateengine.context.web.SpringSecurityWebProcessingContextBuilder;
+import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
+import org.thymeleaf.testing.templateengine.spring6.context.web.SpringSecurityMVCWebProcessingContextBuilder;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
 
@@ -44,8 +44,8 @@ public class DataPrefixSpringSecurityTest {
     @Test
     public void testSpringSecurity() throws Exception {
 
-        final SpringSecurityWebProcessingContextBuilder processingContextBuilder =
-                new SpringSecurityWebProcessingContextBuilder();
+        final SpringSecurityMVCWebProcessingContextBuilder processingContextBuilder =
+                new SpringSecurityMVCWebProcessingContextBuilder();
         processingContextBuilder.setApplicationContextConfigLocation(
                 "classpath:templateengine/dataprefix/springsecurity/applicationContext-security.xml");
         

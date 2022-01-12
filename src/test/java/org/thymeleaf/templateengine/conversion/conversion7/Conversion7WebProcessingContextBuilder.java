@@ -26,11 +26,11 @@ import java.util.Map;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.DataBinder;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.testable.ITest;
 
 
-public class Conversion7WebProcessingContextBuilder extends SpringWebProcessingContextBuilder {
+public class Conversion7WebProcessingContextBuilder extends SpringMVCWebProcessingContextBuilder {
 
 
 

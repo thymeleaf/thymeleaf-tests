@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.templateengine.stsm.context.STSMWebProcessingContextBuilder;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
@@ -82,7 +82,7 @@ public class STSMTest {
     @Test
     public void testSTSMWithIntegratedConversion() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/stsm/applicationContext.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();

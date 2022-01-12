@@ -20,14 +20,14 @@
 package org.thymeleaf.templateresource;
 
 import java.io.File;
-import java.util.HashMap;
 
-import javax.servlet.ServletContext;
-
+import jakarta.servlet.ServletContext;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.engine.TestMockServletUtil;
+import org.thymeleaf.testing.templateengine.util.JakartaServletMockUtils;
+import org.thymeleaf.web.IWebApplication;
+import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 
 public final class TemplateResourceTest {
@@ -90,57 +90,58 @@ public final class TemplateResourceTest {
     @Test
     public void testServletContextResource() throws Exception {
 
-        final ServletContext servletContext = TestMockServletUtil.createServletContext(new HashMap<String, Object>());
+        final ServletContext servletContext = JakartaServletMockUtils.buildServletContext().build();
+        final IWebApplication webApplication = JakartaServletWebApplication.buildApplication(servletContext);
 
-        Assert.assertEquals("/", (new JavaxContextTemplateResource(servletContext, "/", null)).getDescription());
-        Assert.assertEquals("/something", (new JavaxContextTemplateResource(servletContext, "something", null)).getDescription());
-        Assert.assertEquals("/something", (new JavaxContextTemplateResource(servletContext, "/something", null)).getDescription());
-        Assert.assertEquals("/something/else", (new JavaxContextTemplateResource(servletContext, "something/else", null)).getDescription());
-        Assert.assertEquals("/something/else", (new JavaxContextTemplateResource(servletContext, "//something//else", null)).getDescription());
-        Assert.assertEquals("/something/else", (new JavaxContextTemplateResource(servletContext, "//something//a//..//else", null)).getDescription());
-        Assert.assertEquals("/something/else/more", (new JavaxContextTemplateResource(servletContext, "something/else/more", null)).getDescription());
-        Assert.assertEquals("/something/else/more", (new JavaxContextTemplateResource(servletContext, "something/else//more", null)).getDescription());
-        Assert.assertEquals("/something/more", (new JavaxContextTemplateResource(servletContext, "something/else/../more", null)).getDescription());
-        Assert.assertEquals("/something/else/more", (new JavaxContextTemplateResource(servletContext, "something/else/./more", null)).getDescription());
-        Assert.assertEquals("/../something/else/more", (new JavaxContextTemplateResource(servletContext, "../something/else/./more", null)).getDescription());
-        Assert.assertEquals("/something/else/more", (new JavaxContextTemplateResource(servletContext, "./something/else/./more", null)).getDescription());
-        Assert.assertEquals("/something/else/more.html", (new JavaxContextTemplateResource(servletContext, "something/else/more.html", null)).getDescription());
-        Assert.assertEquals("/../something/else/more.html", (new JavaxContextTemplateResource(servletContext, "../something/else/more.html", null)).getDescription());
-        Assert.assertEquals("/../something/else", (new JavaxContextTemplateResource(servletContext, "../something/else/more.html/..", null)).getDescription());
-        Assert.assertEquals("/something/more_es.properties", (new JavaxContextTemplateResource(servletContext, "something/else/more.html/../../more_es.properties", null)).getDescription());
+        Assert.assertEquals("/", (new WebApplicationTemplateResource(webApplication, "/", null)).getDescription());
+        Assert.assertEquals("/something", (new WebApplicationTemplateResource(webApplication, "something", null)).getDescription());
+        Assert.assertEquals("/something", (new WebApplicationTemplateResource(webApplication, "/something", null)).getDescription());
+        Assert.assertEquals("/something/else", (new WebApplicationTemplateResource(webApplication, "something/else", null)).getDescription());
+        Assert.assertEquals("/something/else", (new WebApplicationTemplateResource(webApplication, "//something//else", null)).getDescription());
+        Assert.assertEquals("/something/else", (new WebApplicationTemplateResource(webApplication, "//something//a//..//else", null)).getDescription());
+        Assert.assertEquals("/something/else/more", (new WebApplicationTemplateResource(webApplication, "something/else/more", null)).getDescription());
+        Assert.assertEquals("/something/else/more", (new WebApplicationTemplateResource(webApplication, "something/else//more", null)).getDescription());
+        Assert.assertEquals("/something/more", (new WebApplicationTemplateResource(webApplication, "something/else/../more", null)).getDescription());
+        Assert.assertEquals("/something/else/more", (new WebApplicationTemplateResource(webApplication, "something/else/./more", null)).getDescription());
+        Assert.assertEquals("/../something/else/more", (new WebApplicationTemplateResource(webApplication, "../something/else/./more", null)).getDescription());
+        Assert.assertEquals("/something/else/more", (new WebApplicationTemplateResource(webApplication, "./something/else/./more", null)).getDescription());
+        Assert.assertEquals("/something/else/more.html", (new WebApplicationTemplateResource(webApplication, "something/else/more.html", null)).getDescription());
+        Assert.assertEquals("/../something/else/more.html", (new WebApplicationTemplateResource(webApplication, "../something/else/more.html", null)).getDescription());
+        Assert.assertEquals("/../something/else", (new WebApplicationTemplateResource(webApplication, "../something/else/more.html/..", null)).getDescription());
+        Assert.assertEquals("/something/more_es.properties", (new WebApplicationTemplateResource(webApplication, "something/else/more.html/../../more_es.properties", null)).getDescription());
 
-        Assert.assertEquals("/", (new JavaxContextTemplateResource(servletContext, "/", null).relative("/")).getDescription());
-        Assert.assertEquals("/something", (new JavaxContextTemplateResource(servletContext, "/", null).relative("something")).getDescription());
-        Assert.assertEquals("/", (new JavaxContextTemplateResource(servletContext, "/something", null).relative("/")).getDescription());
-        Assert.assertEquals("/", (new JavaxContextTemplateResource(servletContext, "something", null).relative("/")).getDescription());
-        Assert.assertEquals("/something/", (new JavaxContextTemplateResource(servletContext, "something/else", null).relative("/")).getDescription());
-        Assert.assertEquals("/something/else/", (new JavaxContextTemplateResource(servletContext, "something/else/more", null).relative("/")).getDescription());
-        Assert.assertEquals("/something/else/less", (new JavaxContextTemplateResource(servletContext, "something/else/more", null).relative("less")).getDescription());
-        Assert.assertEquals("/something/else/more/less", (new JavaxContextTemplateResource(servletContext, "something/else/more/", null).relative("less")).getDescription());
-        Assert.assertEquals("/something/else/more.properties", (new JavaxContextTemplateResource(servletContext, "something/else/more.html", null).relative("more.properties")).getDescription());
-        Assert.assertEquals("/something/else/more_es.properties", (new JavaxContextTemplateResource(servletContext, "something/else/more.html", null).relative("more_es.properties")).getDescription());
-        Assert.assertEquals("/something/more_es.properties", (new JavaxContextTemplateResource(servletContext, "something/else/more.html", null).relative("../more_es.properties")).getDescription());
-        Assert.assertEquals("/something/more_es.properties", (new JavaxContextTemplateResource(servletContext, "something/more/../else/more.html", null).relative("../more_es.properties")).getDescription());
-        Assert.assertEquals("/more_es.properties", (new JavaxContextTemplateResource(servletContext, "something/else/more.html", null).relative("../../more_es.properties")).getDescription());
+        Assert.assertEquals("/", (new WebApplicationTemplateResource(webApplication, "/", null).relative("/")).getDescription());
+        Assert.assertEquals("/something", (new WebApplicationTemplateResource(webApplication, "/", null).relative("something")).getDescription());
+        Assert.assertEquals("/", (new WebApplicationTemplateResource(webApplication, "/something", null).relative("/")).getDescription());
+        Assert.assertEquals("/", (new WebApplicationTemplateResource(webApplication, "something", null).relative("/")).getDescription());
+        Assert.assertEquals("/something/", (new WebApplicationTemplateResource(webApplication, "something/else", null).relative("/")).getDescription());
+        Assert.assertEquals("/something/else/", (new WebApplicationTemplateResource(webApplication, "something/else/more", null).relative("/")).getDescription());
+        Assert.assertEquals("/something/else/less", (new WebApplicationTemplateResource(webApplication, "something/else/more", null).relative("less")).getDescription());
+        Assert.assertEquals("/something/else/more/less", (new WebApplicationTemplateResource(webApplication, "something/else/more/", null).relative("less")).getDescription());
+        Assert.assertEquals("/something/else/more.properties", (new WebApplicationTemplateResource(webApplication, "something/else/more.html", null).relative("more.properties")).getDescription());
+        Assert.assertEquals("/something/else/more_es.properties", (new WebApplicationTemplateResource(webApplication, "something/else/more.html", null).relative("more_es.properties")).getDescription());
+        Assert.assertEquals("/something/more_es.properties", (new WebApplicationTemplateResource(webApplication, "something/else/more.html", null).relative("../more_es.properties")).getDescription());
+        Assert.assertEquals("/something/more_es.properties", (new WebApplicationTemplateResource(webApplication, "something/more/../else/more.html", null).relative("../more_es.properties")).getDescription());
+        Assert.assertEquals("/more_es.properties", (new WebApplicationTemplateResource(webApplication, "something/else/more.html", null).relative("../../more_es.properties")).getDescription());
 
-        Assert.assertNull((new JavaxContextTemplateResource(servletContext, "/", null)).getBaseName());
-        Assert.assertEquals("something", (new JavaxContextTemplateResource(servletContext, "something", null)).getBaseName());
-        Assert.assertEquals("something", (new JavaxContextTemplateResource(servletContext, "/something", null)).getBaseName());
-        Assert.assertEquals("else", (new JavaxContextTemplateResource(servletContext, "something/else", null)).getBaseName());
-        Assert.assertEquals("else", (new JavaxContextTemplateResource(servletContext, "//something//else", null)).getBaseName());
-        Assert.assertEquals("else", (new JavaxContextTemplateResource(servletContext, "//something//a//..//else", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "something/else/more", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "something/else//more", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "something/else/../more", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "something/else/./more", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "../something/else/./more", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "./something/else/./more", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "something/else/more.html", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "../something/else/more.html", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "../something/else/more.html/", null)).getBaseName());
-        Assert.assertEquals("else", (new JavaxContextTemplateResource(servletContext, "../something/else/more.html/..", null)).getBaseName());
-        Assert.assertEquals("more_es", (new JavaxContextTemplateResource(servletContext, "something/else/more.html/../../more_es.properties", null)).getBaseName());
-        Assert.assertEquals("more", (new JavaxContextTemplateResource(servletContext, "more.html", null)).getBaseName());
+        Assert.assertNull((new WebApplicationTemplateResource(webApplication, "/", null)).getBaseName());
+        Assert.assertEquals("something", (new WebApplicationTemplateResource(webApplication, "something", null)).getBaseName());
+        Assert.assertEquals("something", (new WebApplicationTemplateResource(webApplication, "/something", null)).getBaseName());
+        Assert.assertEquals("else", (new WebApplicationTemplateResource(webApplication, "something/else", null)).getBaseName());
+        Assert.assertEquals("else", (new WebApplicationTemplateResource(webApplication, "//something//else", null)).getBaseName());
+        Assert.assertEquals("else", (new WebApplicationTemplateResource(webApplication, "//something//a//..//else", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "something/else/more", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "something/else//more", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "something/else/../more", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "something/else/./more", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "../something/else/./more", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "./something/else/./more", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "something/else/more.html", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "../something/else/more.html", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "../something/else/more.html/", null)).getBaseName());
+        Assert.assertEquals("else", (new WebApplicationTemplateResource(webApplication, "../something/else/more.html/..", null)).getBaseName());
+        Assert.assertEquals("more_es", (new WebApplicationTemplateResource(webApplication, "something/else/more.html/../../more_es.properties", null)).getBaseName());
+        Assert.assertEquals("more", (new WebApplicationTemplateResource(webApplication, "more.html", null)).getBaseName());
 
     }
 

@@ -32,7 +32,7 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.templateengine.springintegration.context.ErrorsSpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.templateengine.springintegration.context.SpringIntegrationWebProcessingContextBuilder;
 import org.thymeleaf.templateengine.springintegration.dialect.binding.BindingDialect;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
@@ -243,7 +243,7 @@ public class SpringIntegrationTest {
     @Test
     public void testMvc() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/mvc/applicationContext.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -260,7 +260,7 @@ public class SpringIntegrationTest {
     @Test
     public void testMvcCompiledSpEL() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/mvc/applicationContext.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -277,7 +277,7 @@ public class SpringIntegrationTest {
     @Test
     public void testXmlNs() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -294,7 +294,7 @@ public class SpringIntegrationTest {
     @Test
     public void testXmlNsCompiledSpEL() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -311,7 +311,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestDataFormWith() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -328,7 +328,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestDataFormWithCompiledSpEL() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -345,7 +345,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestDataFormWithout() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -362,7 +362,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestDataFormWithoutCompiledSpEL() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -380,7 +380,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestDataUrlsWith() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -398,7 +398,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestDataUrlsWithCompiledSpEL() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -415,7 +415,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestDataUrlsWithout() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -432,7 +432,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestDataUrlsWithoutCompiledSpEL() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-without.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -450,7 +450,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestUrlsExpOobject() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -468,7 +468,7 @@ public class SpringIntegrationTest {
     @Test
     public void testRequestUrlsExpOobjectCompiledSpEL() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/springintegration/requestdata/applicationContext-with.xml");
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();

@@ -29,13 +29,13 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.DataBinder;
 import org.thymeleaf.templateengine.dataprefix.stsm.model.Variety;
 import org.thymeleaf.templateengine.dataprefix.stsm.model.repository.VarietyRepository;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.exception.TestEngineExecutionException;
 import org.thymeleaf.testing.templateengine.messages.ITestMessages;
+import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.testable.ITest;
 
 
-public class STSMWebProcessingContextBuilder extends SpringWebProcessingContextBuilder {
+public class STSMWebProcessingContextBuilder extends SpringMVCWebProcessingContextBuilder {
 
 
     

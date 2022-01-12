@@ -12,11 +12,11 @@
     <!--                               -->
     <!-- THYMELEAF VIEW RESOLVER TESTS -->
     <!--                               -->
-    <bean class="org.thymeleaf.spring5.view.TestThymeleafView" name="testview">
+    <bean class="org.thymeleaf.spring.view.TestThymeleafView" name="testview">
       <property name="something" value="view_value" />
     </bean>
 
-    <bean class="org.thymeleaf.spring5.view.TestThymeleafView$ViewBean">
+    <bean class="org.thymeleaf.spring.view.TestThymeleafView$ViewBean">
       <property name="value" value="bean_value" />
     </bean>
 

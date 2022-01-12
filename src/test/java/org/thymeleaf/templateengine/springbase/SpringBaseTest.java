@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.testing.templateengine.context.web.SpringWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
@@ -68,7 +68,7 @@ public class SpringBaseTest {
     @Test
     public void testSpringBase() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -86,7 +86,7 @@ public class SpringBaseTest {
     @Test
     public void testSpringBaseConditionalComments() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
@@ -104,7 +104,7 @@ public class SpringBaseTest {
     @Test
     public void testSpringBaseInstanceStaticRestrictions() throws Exception {
 
-        final SpringWebProcessingContextBuilder contextBuilder = new SpringWebProcessingContextBuilder();
+        final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();

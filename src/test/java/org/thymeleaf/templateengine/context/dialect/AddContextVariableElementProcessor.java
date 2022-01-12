@@ -21,11 +21,13 @@ package org.thymeleaf.templateengine.context.dialect;
 
 import org.thymeleaf.context.IEngineContext;
 import org.thymeleaf.context.ITemplateContext;
-import org.thymeleaf.context.IJavaxWebContext;
+import org.thymeleaf.context.IWebContext;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
+import org.thymeleaf.spring6.context.Contexts;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.web.IWebExchange;
 
 public class AddContextVariableElementProcessor extends AbstractElementTagProcessor {
 
@@ -42,20 +44,22 @@ public class AddContextVariableElementProcessor extends AbstractElementTagProces
             final IProcessableElementTag tag,
             final IElementTagStructureHandler structureHandler) {
 
-        final IJavaxWebContext webContext = (IJavaxWebContext) processingContext;
+        final IWebContext webContext = (IWebContext) processingContext;
         final IEngineContext engineContext = (IEngineContext) webContext;
+
+        final IWebExchange webExchange = Contexts.getWebExchange(webContext);
 
         engineContext.setVariable("newvar0", "LocalVariablesNewVar0");
         engineContext.setVariable("newvar1", "LocalVariablesNewVar1");
 
-        webContext.getRequest().setAttribute("newvar2", "RequestAttributesNewVar2");
-        webContext.getRequest().setAttribute("newvar3", "RequestAttributesNewVar3");
+        webExchange.setAttributeValue("newvar2", "RequestAttributesNewVar2");
+        webExchange.setAttributeValue("newvar3", "RequestAttributesNewVar3");
 
-        webContext.getServletContext().setAttribute("newvar4", "ApplicationAttributesNewVar4");
-        webContext.getServletContext().setAttribute("newvar5", "ApplicationAttributesNewVar5");
+        webExchange.getApplication().setAttributeValue("newvar4", "ApplicationAttributesNewVar4");
+        webExchange.getApplication().setAttributeValue("newvar5", "ApplicationAttributesNewVar5");
 
-        webContext.getSession().setAttribute("newvar6", "SessionAttributesNewVar6");
-        webContext.getSession().setAttribute("newvar7", "SessionAttributesNewVar7");
+        webExchange.getSession().setAttributeValue("newvar6", "SessionAttributesNewVar6");
+        webExchange.getSession().setAttributeValue("newvar7", "SessionAttributesNewVar7");
 
         structureHandler.setLocalVariable("one", "one");
         structureHandler.removeElement();
