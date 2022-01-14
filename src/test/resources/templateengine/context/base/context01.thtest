@@ -24,15 +24,6 @@ class = 'My class text'
 <p th:text="${session.newvar6}">Some text 1</p>
 <p th:text="${session.newvar7}">Some text 1</p>
 
-<p th:text="${application.newvar0}">Some text 1</p>
-<p th:text="${application.newvar1}">Some text 1</p>
-<p th:text="${application.newvar2}">Some text 1</p>
-<p th:text="${application.newvar3}">Some text 1</p>
-<p th:text="${application.newvar4}">Some text 1</p>
-<p th:text="${application.newvar5}">Some text 1</p>
-<p th:text="${application.newvar6}">Some text 1</p>
-<p th:text="${application.newvar7}">Some text 1</p>
-
 <p th:text="${#ctx.newvar0}">Some text 1</p>
 <p th:text="${#ctx.newvar1}">Some text 1</p>
 <p th:text="${#ctx.newvar2}">Some text 1</p>
@@ -64,42 +55,6 @@ class = 'My class text'
 <p th:text="${#ctx.response}">Some text 1</p>
 <p th:text="${#ctx.servletContext}">Some text 1</p>
 
-<p th:text="${#httpServletRequest.getAttribute('newvar0')}">Some text 1</p>
-<p th:text="${#httpServletRequest.getAttribute('newvar1')}">Some text 1</p>
-<p th:text="${#httpServletRequest.getAttribute('newvar2')}">Some text 1</p>
-<p th:text="${#httpServletRequest.getAttribute('newvar3')}">Some text 1</p>
-<p th:text="${#httpServletRequest.getAttribute('newvar4')}">Some text 1</p>
-<p th:text="${#httpServletRequest.getAttribute('newvar5')}">Some text 1</p>
-<p th:text="${#httpServletRequest.getAttribute('newvar6')}">Some text 1</p>
-<p th:text="${#httpServletRequest.getAttribute('newvar7')}">Some text 1</p>
-
-<p th:text="${#request.getAttribute('newvar0')}">Some text 1</p>
-<p th:text="${#request.getAttribute('newvar1')}">Some text 1</p>
-<p th:text="${#request.getAttribute('newvar2')}">Some text 1</p>
-<p th:text="${#request.getAttribute('newvar3')}">Some text 1</p>
-<p th:text="${#request.getAttribute('newvar4')}">Some text 1</p>
-<p th:text="${#request.getAttribute('newvar5')}">Some text 1</p>
-<p th:text="${#request.getAttribute('newvar6')}">Some text 1</p>
-<p th:text="${#request.getAttribute('newvar7')}">Some text 1</p>
-
-<p th:text="${#httpSession.getAttribute('newvar0')}">Some text 1</p>
-<p th:text="${#httpSession.getAttribute('newvar1')}">Some text 1</p>
-<p th:text="${#httpSession.getAttribute('newvar2')}">Some text 1</p>
-<p th:text="${#httpSession.getAttribute('newvar3')}">Some text 1</p>
-<p th:text="${#httpSession.getAttribute('newvar4')}">Some text 1</p>
-<p th:text="${#httpSession.getAttribute('newvar5')}">Some text 1</p>
-<p th:text="${#httpSession.getAttribute('newvar6')}">Some text 1</p>
-<p th:text="${#httpSession.getAttribute('newvar7')}">Some text 1</p>
-
-<p th:text="${#session.getAttribute('newvar0')}">Some text 1</p>
-<p th:text="${#session.getAttribute('newvar1')}">Some text 1</p>
-<p th:text="${#session.getAttribute('newvar2')}">Some text 1</p>
-<p th:text="${#session.getAttribute('newvar3')}">Some text 1</p>
-<p th:text="${#session.getAttribute('newvar4')}">Some text 1</p>
-<p th:text="${#session.getAttribute('newvar5')}">Some text 1</p>
-<p th:text="${#session.getAttribute('newvar6')}">Some text 1</p>
-<p th:text="${#session.getAttribute('newvar7')}">Some text 1</p>
-
 
 # ------------------------------------------------------------
 %OUTPUT
@@ -123,15 +78,6 @@ class = 'My class text'
 
 <p></p>
 <p></p>
-<p></p>
-<p></p>
-<p>ApplicationAttributesNewVar4</p>
-<p>ApplicationAttributesNewVar5</p>
-<p></p>
-<p></p>
-
-<p></p>
-<p></p>
 <p>RequestAttributesNewVar2</p>
 <p>RequestAttributesNewVar3</p>
 <p></p>
@@ -160,39 +106,3 @@ class = 'My class text'
 <p></p>
 <p></p>
 <p></p>
-
-<p></p>
-<p></p>
-<p>RequestAttributesNewVar2</p>
-<p>RequestAttributesNewVar3</p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-
-<p></p>
-<p></p>
-<p>RequestAttributesNewVar2</p>
-<p>RequestAttributesNewVar3</p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p>SessionAttributesNewVar6</p>
-<p>SessionAttributesNewVar7</p>
-
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p>SessionAttributesNewVar6</p>
-<p>SessionAttributesNewVar7</p>
