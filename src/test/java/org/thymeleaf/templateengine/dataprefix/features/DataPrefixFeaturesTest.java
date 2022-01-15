@@ -92,17 +92,6 @@ public class DataPrefixFeaturesTest {
 
 
     @Test
-    public void testRequest() throws Exception {
-
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.execute("classpath:templateengine/dataprefix/features/request");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
-    @Test
     public void testNormalization() throws Exception {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
