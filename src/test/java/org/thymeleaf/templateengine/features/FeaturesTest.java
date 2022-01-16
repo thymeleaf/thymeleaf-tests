@@ -128,30 +128,6 @@ public class FeaturesTest {
 
 
     @Test
-    public void testRequest() throws Exception {
-
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/features/request");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
-    @Test
-    public void testResponse() throws Exception {
-
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setThrottleStep(this.throttleStep);
-        executor.execute("classpath:templateengine/features/response");
-
-        Assert.assertTrue(executor.isAllOK());
-
-    }
-
-
-    @Test
     public void testServletContext() throws Exception {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();

@@ -1,7 +1,0 @@
-%TEMPLATE_MODE HTML5
-# ------------------------------------------------------------
-%INPUT
-<span th:text="${#response.encodeURL('someresponse')}">some text</span>
-# ------------------------------------------------------------
-%OUTPUT
-<span>someresponse</span>
