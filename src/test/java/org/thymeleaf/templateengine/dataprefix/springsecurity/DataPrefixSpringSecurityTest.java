@@ -27,7 +27,7 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.testing.templateengine.spring6.context.web.SpringSecurityMVCWebProcessingContextBuilder;
-import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
+import org.thymeleaf.util.SpringStandardDialectUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
@@ -52,7 +52,7 @@ public class DataPrefixSpringSecurityTest {
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(processingContextBuilder);
         executor.setDialects(
-                Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance(), new SpringSecurityDialect()}));
+                Arrays.asList(new IDialect[] { SpringStandardDialectUtils.createSpringStandardDialectInstance(), new SpringSecurityDialect()}));
         executor.execute("classpath:templateengine/dataprefix/springsecurity");
         
         Assert.assertTrue(executor.isAllOK());

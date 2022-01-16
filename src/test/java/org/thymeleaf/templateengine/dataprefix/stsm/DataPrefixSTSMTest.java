@@ -26,7 +26,7 @@ import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.templateengine.dataprefix.stsm.context.STSMWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
+import org.thymeleaf.util.SpringStandardDialectUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
@@ -45,7 +45,7 @@ public class DataPrefixSTSMTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new STSMWebProcessingContextBuilder());
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringStandardDialectUtils.createSpringStandardDialectInstance()}));
         executor.execute("classpath:templateengine/dataprefix/stsm");
         
         Assert.assertTrue(executor.isAllOK());

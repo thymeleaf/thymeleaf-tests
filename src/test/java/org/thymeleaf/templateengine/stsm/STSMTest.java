@@ -32,7 +32,7 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.templateengine.stsm.context.STSMWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-import org.thymeleaf.tests.util.SpringSpecificVersionUtils;
+import org.thymeleaf.util.SpringStandardDialectUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
 
 
@@ -70,7 +70,7 @@ public class STSMTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(new STSMWebProcessingContextBuilder());
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringStandardDialectUtils.createSpringStandardDialectInstance()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/stsm");
         
@@ -87,7 +87,7 @@ public class STSMTest {
 
         final TestExecutor executor = TestExecutorFactory.createTestExecutor();
         executor.setProcessingContextBuilder(contextBuilder);
-        executor.setDialects(Arrays.asList(new IDialect[] { SpringSpecificVersionUtils.createSpringStandardDialectInstance()}));
+        executor.setDialects(Arrays.asList(new IDialect[] { SpringStandardDialectUtils.createSpringStandardDialectInstance()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/stsm");
 
