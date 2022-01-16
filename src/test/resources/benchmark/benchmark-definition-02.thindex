@@ -1,12 +1,6 @@
 classpath:templateengine/features/expression/expression01.thtest
 classpath:templateengine/features/expression/expression02.thtest
 classpath:templateengine/features/expression/expression03.thtest
-classpath:templateengine/features/expression/expression05.thtest
-classpath:templateengine/features/expression/expression07.thtest
-classpath:templateengine/features/expression/expression10.thtest
-classpath:templateengine/features/expression/expression11.thtest
-classpath:templateengine/features/expression/expression14.thtest
-classpath:templateengine/features/expression/expression15.thtest
 classpath:templateengine/features/expression/expression16.thtest
 classpath:templateengine/features/expression/expression17.thtest
 classpath:templateengine/features/expression/expression18.thtest
@@ -33,8 +27,6 @@ classpath:templateengine/features/expression/strings/strings01.thtest
 classpath:templateengine/features/messages/messages01.thtest
 classpath:templateengine/features/messages/messages02.thtest
 classpath:templateengine/features/messages/messages03.thtest
-classpath:templateengine/features/request/request01.thtest
-classpath:templateengine/features/request/request02.thtest
 classpath:templateengine/features/text/text01.thtest
 classpath:templateengine/features/text/text02.thtest
 classpath:templateengine/features/text/text03.thtest
