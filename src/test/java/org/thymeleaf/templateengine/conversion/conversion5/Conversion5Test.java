@@ -45,8 +45,7 @@ public class Conversion5Test {
     @Test
     public void testConversion() throws Exception {
 
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setProcessingContextBuilder(new Conversion3WebProcessingContextBuilder());
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor(new Conversion3WebProcessingContextBuilder());
         executor.setDialects(Arrays.asList(new IDialect[]{new ConversionTestDialect5()}));
 
         executor.execute("classpath:templateengine/conversion/conversion5");

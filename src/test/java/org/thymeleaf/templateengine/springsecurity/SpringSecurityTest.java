@@ -27,8 +27,8 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.testing.templateengine.spring6.context.web.SpringSecurityMVCWebProcessingContextBuilder;
-import org.thymeleaf.util.SpringStandardDialectUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
+import org.thymeleaf.util.SpringStandardDialectUtils;
 
 
 public class SpringSecurityTest {
@@ -49,8 +49,7 @@ public class SpringSecurityTest {
         processingContextBuilder.setApplicationContextConfigLocation(
                 "classpath:templateengine/springsecurity/applicationContext-security.xml");
         
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setProcessingContextBuilder(processingContextBuilder);
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor(processingContextBuilder);
         executor.setDialects(
                 Arrays.asList(new IDialect[] { SpringStandardDialectUtils.createSpringStandardDialectInstance(), new SpringSecurityDialect()}));
         executor.execute("classpath:templateengine/springsecurity");

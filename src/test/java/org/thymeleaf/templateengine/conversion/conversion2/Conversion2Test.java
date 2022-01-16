@@ -26,8 +26,8 @@ import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
-import org.thymeleaf.util.SpringStandardDialectUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
+import org.thymeleaf.util.SpringStandardDialectUtils;
 
 
 public class Conversion2Test {
@@ -49,8 +49,7 @@ public class Conversion2Test {
         final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation("classpath:templateengine/conversion/conversion2/applicationContext.xml");
 
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[]{SpringStandardDialectUtils.createSpringStandardDialectInstance()}));
 
         executor.execute("classpath:templateengine/conversion/conversion2");

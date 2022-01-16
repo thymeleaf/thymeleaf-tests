@@ -20,6 +20,9 @@
 package org.thymeleaf.tests.util;
 
 
+import org.thymeleaf.testing.templateengine.context.IProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.context.web.JakartaServletTestWebExchangeBuilder;
+import org.thymeleaf.testing.templateengine.context.web.WebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.testing.templateengine.report.ITestReporter;
 import org.thymeleaf.tests.testreporter.MinimalConsoleTestReporter;
@@ -29,10 +32,14 @@ public final class TestExecutorFactory {
     private static final ITestReporter MINIMAL_TEST_REPORTER = new MinimalConsoleTestReporter();
 
 
-    public static TestExecutor createTestExecutor() {
-        final TestExecutor testExecutor = new TestExecutor();
+    public static TestExecutor createTestExecutor(final IProcessingContextBuilder processingContextBuilder) {
+        final TestExecutor testExecutor = new TestExecutor(processingContextBuilder);
         testExecutor.setReporter(MINIMAL_TEST_REPORTER);
         return testExecutor;
+    }
+
+    public static TestExecutor createTestExecutor() {
+        return createTestExecutor(new WebProcessingContextBuilder(JakartaServletTestWebExchangeBuilder.create()));
     }
 
 

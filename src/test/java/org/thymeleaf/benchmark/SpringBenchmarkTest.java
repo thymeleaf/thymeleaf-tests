@@ -26,8 +26,8 @@ import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
-import org.thymeleaf.util.SpringStandardDialectUtils;
 import org.thymeleaf.tests.util.TestExecutorFactory;
+import org.thymeleaf.util.SpringStandardDialectUtils;
 
 
 public class SpringBenchmarkTest {
@@ -47,8 +47,7 @@ public class SpringBenchmarkTest {
         contextBuilder.setApplicationContextConfigLocation(null);
         contextBuilder.setShareAppContextForAllTests(true);
 
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[]{SpringStandardDialectUtils.createSpringStandardDialectInstance()}));
         executor.setReporter(new BenchmarkTestReporter());
         executor.execute("classpath:benchmark/benchmark.thindex");

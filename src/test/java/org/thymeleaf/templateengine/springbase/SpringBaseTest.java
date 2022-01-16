@@ -29,10 +29,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-import org.thymeleaf.util.SpringStandardDialectUtils;
+import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.tests.util.TestExecutorFactory;
+import org.thymeleaf.util.SpringStandardDialectUtils;
 
 
 @RunWith(Parameterized.class)
@@ -71,8 +71,7 @@ public class SpringBaseTest {
         final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringStandardDialectUtils.createSpringStandardDialectInstance()}));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springbase/springbase.thindex");
@@ -89,8 +88,7 @@ public class SpringBaseTest {
         final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringStandardDialectUtils.createSpringStandardDialectInstance() }));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springbase/springbaseconditionalcomments.thindex");
@@ -107,8 +105,7 @@ public class SpringBaseTest {
         final SpringMVCWebProcessingContextBuilder contextBuilder = new SpringMVCWebProcessingContextBuilder();
         contextBuilder.setApplicationContextConfigLocation(null);
 
-        final TestExecutor executor = TestExecutorFactory.createTestExecutor();
-        executor.setProcessingContextBuilder(contextBuilder);
+        final TestExecutor executor = TestExecutorFactory.createTestExecutor(contextBuilder);
         executor.setDialects(Arrays.asList(new IDialect[] { SpringStandardDialectUtils.createSpringStandardDialectInstance() }));
         executor.setThrottleStep(this.throttleStep);
         executor.execute("classpath:templateengine/springbase/instancestaticrestrictions");
