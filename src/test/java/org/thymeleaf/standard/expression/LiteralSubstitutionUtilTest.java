@@ -62,15 +62,25 @@ public class LiteralSubstitutionUtilTest extends TestCase {
         test("|${one}${two}|", "${one} + '' + ${two}");
         test("|a \'one\' b|", "'a \\'one\\' b'");
         test("|a \\'one\\' b|", "'a \\\\\\'one\\\\\\' b'");
-
+        test("||", "||", false);
+        test("abc||", "abc||", false);
+        test("||abc", "||abc", false);
+        test("abc||abc", "abc||abc", false);
+        test("$||{one}", "$||{one}", false);
+        test("$| |{one}", "$' '{one}", false);
     }
 
 
 
+
     private void test(final String input, final String result) {
+        test(input, result, true);
+    }
+
+    private void test(final String input, final String result, final boolean checkSame) {
         final String output = LiteralSubstitutionUtil.performLiteralSubstitution(input);
         Assert.assertEquals(result, output);
-        if (output.equals(input)) {
+        if (checkSame && output.equals(input)) {
             Assert.assertTrue(input == output);
         }
     }
