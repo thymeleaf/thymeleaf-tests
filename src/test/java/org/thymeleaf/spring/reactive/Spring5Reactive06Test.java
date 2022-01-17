@@ -23,9 +23,9 @@ import java.util.List;
 
 import org.junit.Test;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring6.context.webflux.ReactiveDataDriverContextVariable;
 import org.thymeleaf.spring.reactive.data.Album;
 import org.thymeleaf.spring.reactive.data.AlbumRepository;
+import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
 import reactor.core.publisher.Flux;
 
 public final class Spring5Reactive06Test extends AbstractSpring5ReactiveTest {

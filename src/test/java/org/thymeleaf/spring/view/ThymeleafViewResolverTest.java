@@ -25,8 +25,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.servlet.View;
-import org.thymeleaf.spring6.view.ThymeleafViewResolver;
-import org.thymeleaf.spring6.view.ThymeleafViewResolverWrapper;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.spring5.view.ThymeleafViewResolverWrapper;
 
 public class ThymeleafViewResolverTest {
 

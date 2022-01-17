@@ -31,7 +31,7 @@ import org.junit.runners.Parameterized;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.templateengine.stsm.context.STSMWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.spring5.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.tests.util.TestExecutorFactory;
 import org.thymeleaf.util.SpringStandardDialectUtils;
 

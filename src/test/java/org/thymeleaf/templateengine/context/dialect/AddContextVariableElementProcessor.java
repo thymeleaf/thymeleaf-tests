@@ -25,7 +25,7 @@ import org.thymeleaf.context.IWebContext;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
-import org.thymeleaf.spring6.context.Contexts;
+import org.thymeleaf.spring5.context.Contexts;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.web.IWebExchange;
 

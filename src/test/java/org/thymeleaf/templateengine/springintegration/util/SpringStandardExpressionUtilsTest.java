@@ -21,7 +21,7 @@ package org.thymeleaf.templateengine.springintegration.util;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.thymeleaf.spring6.util.SpringStandardExpressionUtils;
+import org.thymeleaf.spring5.util.SpringStandardExpressionUtils;
 
 
 public final class SpringStandardExpressionUtilsTest {

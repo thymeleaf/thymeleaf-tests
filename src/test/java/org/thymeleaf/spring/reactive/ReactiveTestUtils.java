@@ -22,7 +22,6 @@ package org.thymeleaf.spring.reactive;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
 
@@ -37,10 +36,10 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.exceptions.TemplateProcessingException;
 import org.thymeleaf.spring.reactive.exchange.TestingServerWebExchange;
 import org.thymeleaf.spring.reactive.messagesource.TestingMessageSource;
-import org.thymeleaf.spring6.context.webflux.SpringWebFluxThymeleafRequestContext;
-import org.thymeleaf.spring6.naming.SpringContextVariableNames;
-import org.thymeleaf.spring6.web.webflux.ISpringWebFluxWebExchange;
-import org.thymeleaf.spring6.web.webflux.SpringWebFluxWebApplication;
+import org.thymeleaf.spring5.context.webflux.SpringWebFluxThymeleafRequestContext;
+import org.thymeleaf.spring5.naming.SpringContextVariableNames;
+import org.thymeleaf.spring5.web.webflux.ISpringWebFluxWebExchange;
+import org.thymeleaf.spring5.web.webflux.SpringWebFluxWebApplication;
 import org.thymeleaf.util.ClassLoaderUtils;
 
 public final class ReactiveTestUtils {

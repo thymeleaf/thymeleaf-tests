@@ -28,9 +28,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.IEngineConfiguration;
@@ -38,9 +39,9 @@ import org.thymeleaf.context.TestTemplateEngineConfigurationBuilder;
 import org.thymeleaf.context.WebEngineContext;
 import org.thymeleaf.standard.inline.StandardTextInliner;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.testing.templateengine.util.JakartaServletMockUtils;
+import org.thymeleaf.testing.templateengine.util.JavaxServletMockUtils;
 import org.thymeleaf.web.servlet.IServletWebExchange;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
+import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 
 public final class WebEngineContextTest {
@@ -61,17 +62,17 @@ public final class WebEngineContextTest {
         final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
         
         final ServletContext mockServletContext = 
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
         
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);
 
@@ -241,17 +242,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, starting);
 
@@ -298,17 +299,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);
@@ -586,17 +587,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, starting);
@@ -732,17 +733,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, starting);
@@ -854,17 +855,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);
@@ -975,17 +976,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, starting);
@@ -1048,17 +1049,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);
 
@@ -1252,17 +1253,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);
@@ -1370,17 +1371,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, starting);
@@ -1454,17 +1455,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);
@@ -1691,17 +1692,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);
@@ -1753,17 +1754,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);
@@ -2078,17 +2079,17 @@ public final class WebEngineContextTest {
         final Map<String,String[]> requestParameters = new LinkedHashMap<String, String[]>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(LOCALE)
                         .build();
-        final HttpServletResponse mockResponse = JakartaServletMockUtils.buildResponse().build();
+        final HttpServletResponse mockResponse = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
 
         final WebEngineContext vm = new WebEngineContext(configuration, templateData1, null, webExchange, LOCALE, null);

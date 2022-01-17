@@ -24,9 +24,9 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
-import org.thymeleaf.testing.templateengine.spring6.context.web.SpringSecurityMVCWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.spring5.context.web.SpringSecurityMVCWebProcessingContextBuilder;
 import org.thymeleaf.tests.util.TestExecutorFactory;
 import org.thymeleaf.util.SpringStandardDialectUtils;
 

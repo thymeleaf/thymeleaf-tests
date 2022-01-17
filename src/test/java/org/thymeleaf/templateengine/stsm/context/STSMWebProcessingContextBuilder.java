@@ -29,9 +29,9 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.DataBinder;
 import org.thymeleaf.templateengine.stsm.model.Variety;
 import org.thymeleaf.templateengine.stsm.model.repository.VarietyRepository;
-import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.exception.TestEngineExecutionException;
 import org.thymeleaf.testing.templateengine.messages.ITestMessages;
+import org.thymeleaf.testing.templateengine.spring5.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.testable.ITest;
 
 

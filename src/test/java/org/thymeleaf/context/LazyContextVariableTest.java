@@ -23,18 +23,19 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.TemplateSpec;
 import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.testing.templateengine.util.JakartaServletMockUtils;
+import org.thymeleaf.testing.templateengine.util.JavaxServletMockUtils;
 import org.thymeleaf.web.servlet.IServletWebExchange;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
+import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 public class LazyContextVariableTest {
 
@@ -171,13 +172,13 @@ public class LazyContextVariableTest {
     @Test
     public void testLazyContextVariable05() throws Exception {
 
-        final ServletContext servletContext = JakartaServletMockUtils.buildServletContext().build();
+        final ServletContext servletContext = JavaxServletMockUtils.buildServletContext().build();
         final HttpServletRequest request =
-                JakartaServletMockUtils.buildRequest(servletContext, "/something").build();
-        final HttpServletResponse response = JakartaServletMockUtils.buildResponse().build();
+                JavaxServletMockUtils.buildRequest(servletContext, "/something").build();
+        final HttpServletResponse response = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
+                JavaxServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
         
         final WebContext contextTrue = new WebContext(webExchange, Locale.US);
         contextTrue.setVariable("doit", "true");
@@ -206,13 +207,13 @@ public class LazyContextVariableTest {
     @Test
     public void testLazyContextVariable06() throws Exception {
 
-        final ServletContext servletContext = JakartaServletMockUtils.buildServletContext().build();
+        final ServletContext servletContext = JavaxServletMockUtils.buildServletContext().build();
         final HttpServletRequest request =
-                JakartaServletMockUtils.buildRequest(servletContext, "/something").build();
-        final HttpServletResponse response = JakartaServletMockUtils.buildResponse().build();
+                JavaxServletMockUtils.buildRequest(servletContext, "/something").build();
+        final HttpServletResponse response = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
+                JavaxServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
 
         final WebContext contextTrue = new WebContext(webExchange, Locale.US);
         contextTrue.setVariable("doit", "true");
@@ -241,13 +242,13 @@ public class LazyContextVariableTest {
     @Test
     public void testLazyContextVariable07() throws Exception {
 
-        final ServletContext servletContext = JakartaServletMockUtils.buildServletContext().build();
+        final ServletContext servletContext = JavaxServletMockUtils.buildServletContext().build();
         final HttpServletRequest request =
-                JakartaServletMockUtils.buildRequest(servletContext, "/something").build();
-        final HttpServletResponse response = JakartaServletMockUtils.buildResponse().build();
+                JavaxServletMockUtils.buildRequest(servletContext, "/something").build();
+        final HttpServletResponse response = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
+                JavaxServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
 
         final WebContext contextTrue = new WebContext(webExchange, Locale.US);
         contextTrue.setVariable("doit", "true");
@@ -276,13 +277,13 @@ public class LazyContextVariableTest {
     @Test
     public void testLazyContextVariable08() throws Exception {
 
-        final ServletContext servletContext = JakartaServletMockUtils.buildServletContext().build();
+        final ServletContext servletContext = JavaxServletMockUtils.buildServletContext().build();
         final HttpServletRequest request =
-                JakartaServletMockUtils.buildRequest(servletContext, "/something").build();
-        final HttpServletResponse response = JakartaServletMockUtils.buildResponse().build();
+                JavaxServletMockUtils.buildRequest(servletContext, "/something").build();
+        final HttpServletResponse response = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
+                JavaxServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
 
         final WebContext contextTrue = new WebContext(webExchange, Locale.US);
         contextTrue.setVariable("doit", "true");
@@ -312,14 +313,14 @@ public class LazyContextVariableTest {
     public void testLazyContextVariable09() throws Exception {
 
         final Map<String, Object> sessionAttrs = new HashMap<String, Object>();
-        final ServletContext servletContext = JakartaServletMockUtils.buildServletContext().build();
-        final HttpSession session = JakartaServletMockUtils.buildSession(servletContext).attributeMap(sessionAttrs).build();
+        final ServletContext servletContext = JavaxServletMockUtils.buildServletContext().build();
+        final HttpSession session = JavaxServletMockUtils.buildSession(servletContext).attributeMap(sessionAttrs).build();
         final HttpServletRequest request =
-                JakartaServletMockUtils.buildRequest(servletContext, "/something").session(session).build();
-        final HttpServletResponse response = JakartaServletMockUtils.buildResponse().build();
+                JavaxServletMockUtils.buildRequest(servletContext, "/something").session(session).build();
+        final HttpServletResponse response = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
+                JavaxServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
 
         final WebContext contextTrue = new WebContext(webExchange, Locale.US);
         contextTrue.setVariable("doit", "true");
@@ -347,13 +348,13 @@ public class LazyContextVariableTest {
     public void testLazyContextVariable10() throws Exception {
 
         final Map<String, Object> servletContextAttrs = new HashMap<String, Object>();
-        final ServletContext servletContext = JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttrs).build();
+        final ServletContext servletContext = JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttrs).build();
         final HttpServletRequest request =
-                JakartaServletMockUtils.buildRequest(servletContext, "/something").build();
-        final HttpServletResponse response = JakartaServletMockUtils.buildResponse().build();
+                JavaxServletMockUtils.buildRequest(servletContext, "/something").build();
+        final HttpServletResponse response = JavaxServletMockUtils.buildResponse().build();
 
         final IServletWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
+                JavaxServletWebApplication.buildApplication(servletContext).buildExchange(request, response);
 
         final WebContext contextTrue = new WebContext(webExchange, Locale.US);
         contextTrue.setVariable("doit", "true");

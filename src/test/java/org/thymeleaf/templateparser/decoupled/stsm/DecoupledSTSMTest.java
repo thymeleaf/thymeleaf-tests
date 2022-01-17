@@ -28,9 +28,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
@@ -48,16 +49,16 @@ import org.springframework.web.servlet.view.AbstractTemplateView;
 import org.thymeleaf.context.IExpressionContext;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.linkbuilder.StandardLinkBuilder;
-import org.thymeleaf.spring6.SpringTemplateEngine;
-import org.thymeleaf.spring6.context.webmvc.SpringWebMvcThymeleafRequestContext;
-import org.thymeleaf.spring6.naming.SpringContextVariableNames;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.context.webmvc.SpringWebMvcThymeleafRequestContext;
+import org.thymeleaf.spring5.naming.SpringContextVariableNames;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.thymeleaf.testing.templateengine.util.JakartaServletMockUtils;
+import org.thymeleaf.testing.templateengine.util.JavaxServletMockUtils;
 import org.thymeleaf.testing.templateengine.util.ResourceUtils;
 import org.thymeleaf.util.ClassLoaderUtils;
 import org.thymeleaf.util.DateUtils;
 import org.thymeleaf.web.IWebExchange;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
+import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 
 public class DecoupledSTSMTest {
@@ -160,18 +161,18 @@ public class DecoupledSTSMTest {
         final Map<String,Object> servletContextAttributes = new LinkedHashMap<String, Object>();
 
         final ServletContext mockServletContext =
-                JakartaServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
+                JavaxServletMockUtils.buildServletContext().attributeMap(servletContextAttributes).build();
         final HttpServletRequest mockRequest =
-                JakartaServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
+                JavaxServletMockUtils.buildRequest(mockServletContext, "WebVariablesMap")
                         .attributeMap(requestAttributes)
                         .parameterMap(requestParameters)
                         .locale(Locale.US)
                         .build();
         final HttpServletResponse mockResponse =
-                JakartaServletMockUtils.buildResponse().build();
+                JavaxServletMockUtils.buildResponse().build();
 
         final IWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
+                JavaxServletWebApplication.buildApplication(mockServletContext).buildExchange(mockRequest, mockResponse);
 
         final XmlWebApplicationContext appCtx = new XmlWebApplicationContext();
 

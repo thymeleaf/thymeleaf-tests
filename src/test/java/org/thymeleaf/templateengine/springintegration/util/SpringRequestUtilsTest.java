@@ -22,24 +22,25 @@ package org.thymeleaf.templateengine.springintegration.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Test;
 import org.thymeleaf.exceptions.TemplateProcessingException;
-import org.thymeleaf.testing.templateengine.util.JakartaServletMockUtils;
+import org.thymeleaf.testing.templateengine.util.JavaxServletMockUtils;
 import org.thymeleaf.web.IWebExchange;
 import org.thymeleaf.web.IWebRequest;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
+import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 import static org.junit.Assert.assertThrows;
-import static org.thymeleaf.spring6.util.SpringRequestUtils.checkViewNameNotInRequest;
+import static org.thymeleaf.spring5.util.SpringRequestUtils.checkViewNameNotInRequest;
 
 
 public final class SpringRequestUtilsTest {
 
-    private static final ServletContext SERVLET_CONTEXT = JakartaServletMockUtils.buildServletContext().build();
-    private static final HttpServletResponse HTTP_SERVLET_RESPONSE = JakartaServletMockUtils.buildResponse().build();
+    private static final ServletContext SERVLET_CONTEXT = JavaxServletMockUtils.buildServletContext().build();
+    private static final HttpServletResponse HTTP_SERVLET_RESPONSE = JavaxServletMockUtils.buildResponse().build();
 
 
     @Test
@@ -72,10 +73,10 @@ public final class SpringRequestUtilsTest {
         }
 
         final HttpServletRequest request =
-                JakartaServletMockUtils.buildRequest(SERVLET_CONTEXT, path).parameterMap(paramsMap).build();
+                JavaxServletMockUtils.buildRequest(SERVLET_CONTEXT, path).parameterMap(paramsMap).build();
 
         final IWebExchange webExchange =
-                JakartaServletWebApplication.buildApplication(SERVLET_CONTEXT)
+                JavaxServletWebApplication.buildApplication(SERVLET_CONTEXT)
                         .buildExchange(request, HTTP_SERVLET_RESPONSE);
 
         return webExchange.getRequest();

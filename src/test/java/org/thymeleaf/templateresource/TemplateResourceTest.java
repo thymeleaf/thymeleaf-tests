@@ -21,13 +21,14 @@ package org.thymeleaf.templateresource;
 
 import java.io.File;
 
-import jakarta.servlet.ServletContext;
+import javax.servlet.ServletContext;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.testing.templateengine.util.JakartaServletMockUtils;
+import org.thymeleaf.testing.templateengine.util.JavaxServletMockUtils;
 import org.thymeleaf.web.IWebApplication;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
+import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 
 public final class TemplateResourceTest {
@@ -90,8 +91,8 @@ public final class TemplateResourceTest {
     @Test
     public void testServletContextResource() throws Exception {
 
-        final ServletContext servletContext = JakartaServletMockUtils.buildServletContext().build();
-        final IWebApplication webApplication = JakartaServletWebApplication.buildApplication(servletContext);
+        final ServletContext servletContext = JavaxServletMockUtils.buildServletContext().build();
+        final IWebApplication webApplication = JavaxServletWebApplication.buildApplication(servletContext);
 
         Assert.assertEquals("/", (new WebApplicationTemplateResource(webApplication, "/", null)).getDescription());
         Assert.assertEquals("/something", (new WebApplicationTemplateResource(webApplication, "something", null)).getDescription());

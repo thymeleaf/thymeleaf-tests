@@ -21,7 +21,7 @@ package org.thymeleaf.tests.util;
 
 
 import org.thymeleaf.testing.templateengine.context.IProcessingContextBuilder;
-import org.thymeleaf.testing.templateengine.context.web.JakartaServletTestWebExchangeBuilder;
+import org.thymeleaf.testing.templateengine.context.web.JavaxServletTestWebExchangeBuilder;
 import org.thymeleaf.testing.templateengine.context.web.WebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.engine.TestExecutor;
 import org.thymeleaf.testing.templateengine.report.ITestReporter;
@@ -39,7 +39,7 @@ public final class TestExecutorFactory {
     }
 
     public static TestExecutor createTestExecutor() {
-        return createTestExecutor(new WebProcessingContextBuilder(JakartaServletTestWebExchangeBuilder.create()));
+        return createTestExecutor(new WebProcessingContextBuilder(JavaxServletTestWebExchangeBuilder.create()));
     }
 
 

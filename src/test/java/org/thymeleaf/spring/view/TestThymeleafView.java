@@ -20,7 +20,7 @@
 package org.thymeleaf.spring.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.thymeleaf.spring6.view.ThymeleafView;
+import org.thymeleaf.spring5.view.ThymeleafView;
 
 public class TestThymeleafView extends ThymeleafView {
 

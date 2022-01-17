@@ -22,7 +22,8 @@ package org.thymeleaf.templateengine.springintegration.requestdata.processor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.servlet.support.RequestDataValueProcessor;
 
 

@@ -31,7 +31,7 @@ import org.thymeleaf.templateengine.dataprefix.stsm.model.Variety;
 import org.thymeleaf.templateengine.dataprefix.stsm.model.repository.VarietyRepository;
 import org.thymeleaf.testing.templateengine.exception.TestEngineExecutionException;
 import org.thymeleaf.testing.templateengine.messages.ITestMessages;
-import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.spring5.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.testable.ITest;
 
 

@@ -20,7 +20,7 @@
 package org.thymeleaf.util;
 
 import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.spring6.dialect.SpringStandardDialect;
+import org.thymeleaf.spring5.dialect.SpringStandardDialect;
 
 public final class SpringStandardDialectUtils {
 

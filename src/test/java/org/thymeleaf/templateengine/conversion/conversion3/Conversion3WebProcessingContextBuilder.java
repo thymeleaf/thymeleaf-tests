@@ -23,7 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.validation.DataBinder;
-import org.thymeleaf.testing.templateengine.spring6.context.web.SpringMVCWebProcessingContextBuilder;
+import org.thymeleaf.testing.templateengine.spring5.context.web.SpringMVCWebProcessingContextBuilder;
 import org.thymeleaf.testing.templateengine.testable.ITest;
 
 

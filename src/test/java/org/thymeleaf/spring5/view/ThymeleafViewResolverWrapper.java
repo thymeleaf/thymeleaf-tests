@@ -18,7 +18,7 @@
  * =============================================================================
  */
 
-package org.thymeleaf.spring6.view;
+package org.thymeleaf.spring5.view;
 
 import java.util.Locale;
 
