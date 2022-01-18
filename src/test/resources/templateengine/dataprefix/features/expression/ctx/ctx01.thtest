@@ -2,9 +2,7 @@
 # ------------------------------------------------------------
 %INPUT
 <p data-th-text="${#ctx} ? 'ctx exists' : 'ctx does not exist'">...</p>
-<p data-th-text="${@org.thymeleaf.context.IContext@class.isAssignableFrom(#ctx.getClass())}">...</p>
 # ------------------------------------------------------------
 %OUTPUT
 <p>ctx exists</p>
-<p>true</p>
 
