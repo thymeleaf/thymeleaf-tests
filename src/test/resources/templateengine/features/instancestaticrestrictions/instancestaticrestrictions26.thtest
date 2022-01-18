@@ -3,5 +3,4 @@
 %INPUT
 <p th:text="${new String('a')}">NOT ALLOWED</p>
 # ------------------------------------------------------------
-%EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
-%EXCEPTION_MESSAGE_PATTERN (.*)\QType cannot be found\E(.*)
+%EXCEPTION java.lang.ClassNotFoundException
