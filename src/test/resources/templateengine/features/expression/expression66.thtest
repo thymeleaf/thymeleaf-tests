@@ -1,7 +1,11 @@
 %TEMPLATE_MODE HTML
 # ------------------------------------------------------------
-%INPUT
-<p th:text="${''.getClass().getClass().forName('java.lang.String').format('%s','aaa')}">NOT ALLOWED</p>
+%CONTEXT
+val0 = new java.io.ByteArrayInputStream("something".getBytes())
 # ------------------------------------------------------------
+%INPUT
+<span th:text="${val0.read()}">...</span>
+# ------------------------------------------------------------
+%OUTPUT
 %EXCEPTION org.thymeleaf.exceptions.TemplateProcessingException
 %EXCEPTION_MESSAGE_PATTERN (.*)\Qis forbidden\E(.*)

@@ -29,6 +29,7 @@ import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.util.LinkedMultiValueMap;
@@ -53,7 +54,7 @@ public final class TestingServerHttpResponse implements ServerHttpResponse {
 
 
     @Override
-    public boolean setStatusCode(final HttpStatus httpStatus) {
+    public boolean setStatusCode(final HttpStatusCode httpStatusCode) {
         throw new UnsupportedOperationException();
     }
 
