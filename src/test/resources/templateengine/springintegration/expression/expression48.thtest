@@ -1,4 +1,4 @@
-%TEMPLATE_MODE HTML
+%EXTENDS ../springintegration.common
 # ------------------------------------------------------------
 %CONTEXT
 val0 = @java.lang.Byte@valueOf('10')
