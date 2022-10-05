@@ -140,7 +140,7 @@
     <springsecurity.version>6.0.0-SNAPSHOT</springsecurity.version>
     <jakarta-servlet-api.version>5.0.0</jakarta-servlet-api.version>
     <mockito.version>4.1.0</mockito.version>
-    <jackson.version>2.13.0</jackson.version>
+    <jackson.version>2.13.2.1</jackson.version>
     <junit.version>4.13.2</junit.version>
   </properties>
 
