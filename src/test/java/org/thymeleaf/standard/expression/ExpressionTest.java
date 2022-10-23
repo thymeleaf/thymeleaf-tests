@@ -21,6 +21,7 @@ package org.thymeleaf.standard.expression;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -259,6 +260,8 @@ public class ExpressionTest extends TestCase {
         test("pep_ito_", "pep_ito_");
         test("_pep_ito_", "_pep_ito_");
 
+        test("${#numbers.formatCurrency(amount)}", "$1,234.56");
+        test("${#numbers.formatCurrency(amount, usd)}", "1.234,56 US$", this.contextES);
     }
 
     
@@ -330,6 +333,9 @@ public class ExpressionTest extends TestCase {
         objects.put("logins", logins);
         objects.put("loginsArray", logins.toArray(new String[logins.size()]));
         objects.put("size", "Size is 5");
+        objects.put("eur", Currency.getInstance("EUR"));
+        objects.put("usd", Currency.getInstance("USD"));
+        objects.put("amount", 1234.56d);
         
         this.contextES.setVariables(objects);
         this.contextEN.setVariables(objects);
